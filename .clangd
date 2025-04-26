@@ -1,0 +1,11 @@
+CompileFlags:
+  Add:
+    - -IC:/WinAVR-20100110/avr/include/
+    - -D__AVR_ATmega32__
+    - -DF_CPU=16000000L
+  CompilationDatabase: C:/Users/Osama/OneDrive/Desktop/genTest/avr
+If:
+  PathMatch: .*\.(c|cpp|h|hpp)$
+---
+Index:
+  Background: Build

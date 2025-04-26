@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "AVR",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/WinAVR-20100110/avr/include/"
+            ],
+            "defines": [
+                "__AVR_ATmega32__",
+                "F_CPU=16000000L"
+            ],
+            "compilerPath": "C:/WinAVR-20100110/bin/avr-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
