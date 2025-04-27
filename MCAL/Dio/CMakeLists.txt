@@ -8,12 +8,13 @@ file(GLOB_RECURSE ${DRIVER_NAME}_SOURCES
 )
 
 # Create driver library
-#add_library(${PROJECT_NAME} STATIC)
 
-target_sources(${PROJECT_NAME} PRIVATE ${${DRIVER_NAME}_SOURCES})
+add_library(${DRIVER_NAME} ${${DRIVER_NAME}_SOURCES})
+
+#target_sources(${PROJECT_NAME} PRIVATE ${${DRIVER_NAME}_SOURCES})
 
 # Include directories for this driver
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(${DRIVER_NAME} PUBLIC
     ${CMAKE_SOURCE_DIR}/Common
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/cfg

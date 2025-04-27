@@ -66,7 +66,7 @@ void Timer_Stop(TimerChan_t enuTimerCH);
   * Description: This function is used to return the value of the timer.
   * 							
   */
-//void Timer_GetValue(TimerChan_t enuTimerCH, uint16_t* u16Data);
+uint16_t Timer_GetValue(TimerChan_t enuTimerCH);
  
 
 #endif /* DIO_H */

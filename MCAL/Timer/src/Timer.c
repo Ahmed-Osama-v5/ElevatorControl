@@ -254,7 +254,7 @@ void Timer_Stop(TimerChan_t enuTimerCH)
     }
 }
 
-#if 0
+
  /**
   * Input:
   * 	Timer_CH_NO: The channel number of the timer needed to get its status.
@@ -265,6 +265,7 @@ void Timer_Stop(TimerChan_t enuTimerCH)
   * Description: This function is used to return if the flag of the timer is raised or not.
   *
   */
+  /*
  ERROR_STATUS Timer_GetStatus(uint8_t Timer_CH_NO, uint8_t* Data)
  {
      if(gsau8_initState[Timer_CH_NO] == INITIALIZED)
@@ -312,7 +313,7 @@ void Timer_Stop(TimerChan_t enuTimerCH)
      }
      return E_OK;
  }
- 
+ */
  /**
   * Input:
   * 	Timer_CH_NO: The channel number of the timer needed to get its value.
@@ -323,34 +324,26 @@ void Timer_Stop(TimerChan_t enuTimerCH)
   * Description: This function is used to return the value of the timer.
   *
   */
- ERROR_STATUS Timer_GetValue(uint8_t Timer_CH_NO, uint16_t* Data)
- {
-     if(gsau8_initState[Timer_CH_NO] == INITIALIZED)
-     {
-         *Data = 0;
-         switch (Timer_CH_NO)
-         {
-         case (TIMER_CH0):
-             *Data = TCNT0;
-             break;
-         case (TIMER_CH1):
-             *Data = TCNT1;
-             break;
-         case (TIMER_CH2):
-             *Data = TCNT2;
-             break;
-         default:
-             return E_NOK;
-             break;
-         }
-     }
-     else
-     {
-         return E_NOK;
-     }
-     return E_OK;
+uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
+{
+    uint16_t u16retVal = 0;
+    switch (enuTimerCH)
+    {
+    case (TIMER_CH0):
+        u16retVal = TCNT0;
+        break;
+    case (TIMER_CH1):
+        u16retVal = TCNT1;
+        break;
+    case (TIMER_CH2):
+        u16retVal = TCNT2;
+        break;
+    default:
+        u16retVal = TCNT1;
+        break;
+    }
+    return u16retVal;
  }
-#endif
  
  ISR(TIMER0_OVF_vect)
  {
