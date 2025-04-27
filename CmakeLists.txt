@@ -15,15 +15,44 @@ file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.h)
 
 string(REGEX REPLACE "build/[^;]+;?" "" SOURCES "${SOURCES}")
 
+#App
+add_subdirectory(App/ElevatorController)
+add_subdirectory(App/CallHandler)
+add_subdirectory(App/Diagnostics)
+add_subdirectory(App/LEDController)
+add_subdirectory(App/ModeManager)
+add_subdirectory(App/MotionController)
+
+#HAL
+add_subdirectory(HAL/Display)
+
+#MCAL
 add_subdirectory(MCAL/Dio)
+add_subdirectory(MCAL/Timer)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
 #target_link_libraries(${PROJECT_NAME}.elf PUBLIC Dio)
 target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/Common
+    ${CMAKE_SOURCE_DIR}/App/ElevatorController/includes
+    ${CMAKE_SOURCE_DIR}/App/ElevatorController/interfaces
+    ${CMAKE_SOURCE_DIR}/App/CallHandler/includes
+    ${CMAKE_SOURCE_DIR}/App/CallHandler/interfaces
+    ${CMAKE_SOURCE_DIR}/App/Diagnostics/includes
+    ${CMAKE_SOURCE_DIR}/App/Diagnostics/interfaces
+    ${CMAKE_SOURCE_DIR}/App/LEDController/includes
+    ${CMAKE_SOURCE_DIR}/App/LEDController/interfaces
+    ${CMAKE_SOURCE_DIR}/App/ModeManager/includes
+    ${CMAKE_SOURCE_DIR}/App/ModeManager/interfaces
+    ${CMAKE_SOURCE_DIR}/App/MotionController/includes
+    ${CMAKE_SOURCE_DIR}/App/MotionController/interfaces
+    ${CMAKE_SOURCE_DIR}/HAL/Display/includes
+    ${CMAKE_SOURCE_DIR}/HAL/Display/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/include
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/cfg
+    ${CMAKE_SOURCE_DIR}/MCAL/Timer/include
+    ${CMAKE_SOURCE_DIR}/MCAL/Timer/cfg
 )
 
 
@@ -31,7 +60,8 @@ message("${FLASH_FLAGS}")
 
 add_custom_target(flash ALL
     DEPENDS ${PROJECT_NAME}.elf
-    COMMAND avr-objcopy -j .txt -j .data -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex)
+    COMMAND avr-objcopy -j .txt -j .data -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
+    COMMAND avr-size -C --mcu=atmega32 ${PROJECT_NAME}.elf)
 
 add_custom_target(burn
     DEPENDS flash

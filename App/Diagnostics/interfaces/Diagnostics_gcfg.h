@@ -1,0 +1,7 @@
+#ifndef DIAGNOSTICS_GCFG_H
+#define DIAGNOSTICS_GCFG_H
+
+
+
+
+#endif // DIAGNOSTICS_GCFG_H

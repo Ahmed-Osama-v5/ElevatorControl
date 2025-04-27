@@ -9,6 +9,5 @@
         "--background-index",
         "--compile-commands-dir=.",
         "--query-driver=C:/WinAVR-20100110/bin/avr-gcc.exe",
-    ],
-    "makefile.makefilePath": "F:/SW/elevatorControl/build/Makefile"
+    ]
 }

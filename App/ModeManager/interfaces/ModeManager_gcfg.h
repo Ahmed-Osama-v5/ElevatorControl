@@ -1,0 +1,7 @@
+#ifndef MODE_MANAGER_GCFG_H
+#define MODE_MANAGER_GCFG_H
+
+
+
+
+#endif // MODE_MANAGER_GCFG_H
