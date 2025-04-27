@@ -32,7 +32,6 @@ add_subdirectory(MCAL/Timer)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
-#target_link_libraries(${PROJECT_NAME}.elf PUBLIC Dio)
 target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/Common
     ${CMAKE_SOURCE_DIR}/App/ElevatorController/includes
