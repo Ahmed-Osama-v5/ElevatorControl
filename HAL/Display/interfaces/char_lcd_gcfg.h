@@ -1,7 +1,7 @@
-#ifndef LED_CONTROLLER_GCFG_H
-#define LED_CONTROLLER_GCFG_H
+#ifndef CHAR_LCD_GCFG_H
+#define CHAR_LCD_GCFG_H
 
 
 
 
-#endif // LED_CONTROLLER_GCFG_H
+#endif // CHAR_LCD_GCFG_H

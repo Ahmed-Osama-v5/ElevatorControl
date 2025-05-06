@@ -25,6 +25,7 @@ add_subdirectory(App/MotionController)
 
 #HAL
 add_subdirectory(HAL/Display)
+add_subdirectory(HAL/SensorManager)
 
 #MCAL
 add_subdirectory(MCAL/Dio)
@@ -48,6 +49,8 @@ target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/App/MotionController/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/Display/includes
     ${CMAKE_SOURCE_DIR}/HAL/Display/interfaces
+    ${CMAKE_SOURCE_DIR}/HAL/SensorManager/includes
+    ${CMAKE_SOURCE_DIR}/HAL/SensorManager/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/include
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/cfg
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/include

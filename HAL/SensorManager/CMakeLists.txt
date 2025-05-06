@@ -1,9 +1,10 @@
-set(MODULE_NAME ModeManager)
+set(MODULE_NAME SensorManager)
 
 # Collect driver sources
 file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
     "src/*.c"
 )
+
 
 add_library(${MODULE_NAME} ${${MODULE_NAME}_SOURCES})
 
@@ -13,4 +14,4 @@ target_include_directories(${MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
 )
 
-target_link_libraries(${MODULE_NAME} PRIVATE Dio Timer)
+target_link_libraries(${MODULE_NAME} PUBLIC Dio Timer)
