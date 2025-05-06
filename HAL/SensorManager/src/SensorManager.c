@@ -152,5 +152,5 @@ Std_ReturnType_t SensorManager_stdReadAllSensors(void) {
 }
 
 static uint16_t u16GetTimeMs(void) {
-    Timer_GetValue(1);
+    return Timer_GetValue(1);
 }

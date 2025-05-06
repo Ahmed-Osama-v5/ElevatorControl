@@ -245,5 +245,5 @@ static void vidNotifyModeChange(ModeState_t enuNewMode) {
 }
 
 static uint16_t u16GetTimeMs(void) {
-    Timer_GetValue(1);
+    return Timer_GetValue(1);
 }
