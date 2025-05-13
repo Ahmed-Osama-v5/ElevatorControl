@@ -6,7 +6,6 @@
 #include "Timer.h"
 #include "CallHandler_gcfg.h"
 #include "LEDController_gcfg.h"
-#include "LEDController_lcfg.h"
 
 
 /* Function Declarations */

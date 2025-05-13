@@ -43,7 +43,7 @@ typedef enum {
  /**
   * @brief Configuration for a single pin
   */
-typedef struct Timer_cfg_s
+typedef struct
 {
     TimerChan_t enuTimerCH;
     TimerIntMode_t enumTimerIntMode;

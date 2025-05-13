@@ -5,6 +5,7 @@
 
 #include "ElevatorController.h"
 #include "ElevatorController_lcfg.h"
+#include "Timer.h"
 
 void ElevatorController_Init(void)
 {
@@ -14,6 +15,14 @@ void ElevatorController_Init(void)
 
     // Example initialization code (to be replaced with actual implementation)
     // Initialize hardware components, set initial states, etc.
+    Timer_cfg_t strTimer;
+    strTimer.enuTimerCH = SYSTEM_TIMER_CHANNEL;
+    strTimer.enumTimerIntMode = TIMER_INT_DISABLED;
+    strTimer.enuTimerPre = TIMER_PRESCALER_1024; // Example prescaler value
+    strTimer.CBK_Ptr = NULL; // No callback function for now
+    Timer_Init(&strTimer);
+
+    elevator_hal_vidTimer_start(1000); // Start the timer with a 1-second interval
 }
 
 // HAL initialization
@@ -118,12 +127,12 @@ void elevator_hal_vidDisplay_status(const uint8_t* cpu8Status)
 // Timer functions
 void elevator_hal_vidTimer_start(uint16_t u16Ms)
 {
-
+    Timer_Start(SYSTEM_TIMER_CHANNEL, u16Ms);
 }
 
 void elevator_hal_vidTimer_stop(void)
 {
-
+    Timer_Stop(SYSTEM_TIMER_CHANNEL);
 }
 
 boolean elevator_hal_bTimer_elapsed(void)

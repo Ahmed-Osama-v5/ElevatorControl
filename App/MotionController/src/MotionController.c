@@ -1,10 +1,11 @@
 
+#include "RelayManager_gcfg.h"
 #define MotionController_c
 
 #include "Std_Types.h"
 #include "MotionController.h"
 #include "MotionController_lcfg.h"
-#include "dio.h"
+#include "RelayManager.h"
 #include "Timer.h"
 #include "SensorManager.h"
 
@@ -29,23 +30,12 @@ static void vidUpdateCurrentFloor(void);
 static uint16_t u16GetTimeMs(void);
 
 /* Function Implementations */
-Std_ReturnType_t MotionController_Init(void)
+Std_ReturnType_t MotionController_stdInit(void)
 {
     Std_ReturnType_t stdRetVal = E_OK;
     
-    /* Initialize GPIO for relays */
-    
-    /* UP Relay */
-    DIO_Init(&strUpRelay);
-    
-    /* DOWN Relay */
-    DIO_Init(&strDnRelay);
-    
-    /* LS Relay */
-    DIO_Init(&strLsRelay);
-    
-    /* HS Relay */
-    DIO_Init(&strHsRelay);
+    /* Initialize Relays */
+    RelayManager_vidInit();
     
     /* Initialize status */
     strMotionStatus.enuCurrentState = MOTION_STATE_IDLE;
@@ -54,13 +44,10 @@ Std_ReturnType_t MotionController_Init(void)
     strMotionStatus.u16LastMotionTime = 0U;
     strMotionStatus.bInitialized = True;
     
-    /* Ensure all relays are disengaged at startup */
-    vidControlRelays(False, False, False, False);
-    
     return stdRetVal;
 }
 
-Std_ReturnType_t MotionController_SetTargetFloor(uint8_t u8Floor)
+Std_ReturnType_t MotionController_stdSetTargetFloor(uint8_t u8Floor)
 {
     if ((u8Floor == 0) || (u8Floor > cu8MAX_FLOOR) || !strMotionStatus.bInitialized)
     {
@@ -71,7 +58,7 @@ Std_ReturnType_t MotionController_SetTargetFloor(uint8_t u8Floor)
     return E_OK;
 }
 
-Std_ReturnType_t MotionController_ExecuteCommand(MotionCommand_t enuCommand)
+Std_ReturnType_t MotionController_stdExecuteCommand(MotionCommand_t enuCommand)
 {
     if (!strMotionStatus.bInitialized)
     {
@@ -112,7 +99,7 @@ Std_ReturnType_t MotionController_ExecuteCommand(MotionCommand_t enuCommand)
     return E_OK;
 }
 
-Std_ReturnType_t MotionController_Process(void)
+Std_ReturnType_t MotionController_stdProcess(void)
 {
     uint8_t u8SensorState;
     
@@ -128,7 +115,7 @@ Std_ReturnType_t MotionController_Process(void)
     if ((strMotionStatus.enuCurrentState != MOTION_STATE_IDLE) &&
         ((u16GetTimeMs() - strMotionStatus.u16LastMotionTime) > cu16MOTION_TIMEOUT_MS))
     {
-        MotionController_ExecuteCommand(MOTION_CMD_STOP);
+        MotionController_stdExecuteCommand(MOTION_CMD_STOP);
         strMotionStatus.enuCurrentState = MOTION_STATE_ERROR;
         return E_NOT_OK;
     }
@@ -148,7 +135,7 @@ Std_ReturnType_t MotionController_Process(void)
         case MOTION_STATE_MOVING_UP_LS:
             if (bIsFloorMarkReached())
             {
-                MotionController_ExecuteCommand(MOTION_CMD_STOP);
+                MotionController_stdExecuteCommand(MOTION_CMD_STOP);
             }
             break;
             
@@ -164,7 +151,7 @@ Std_ReturnType_t MotionController_Process(void)
         case MOTION_STATE_MOVING_DOWN_LS:
             if (bIsFloorMarkReached())
             {
-                MotionController_ExecuteCommand(MOTION_CMD_STOP);
+                MotionController_stdExecuteCommand(MOTION_CMD_STOP);
             }
             break;
             
@@ -177,10 +164,41 @@ Std_ReturnType_t MotionController_Process(void)
 
 static void vidControlRelays(boolean bUp, boolean bDown, boolean bLS, boolean bHS)
 {
-    DIO_WritePin(cenuUpRelayPort, cu8UP_RELAY_PIN, bUp ? cu8RELAY_ENGAGED : cu8RELAY_DISENGAGED);
-    DIO_WritePin(cenuDnRelayPort, cu8DN_RELAY_PIN, bDown ? cu8RELAY_ENGAGED : cu8RELAY_DISENGAGED);
-    DIO_WritePin(cenuLsRelayPort, cu8LS_RELAY_PIN, bLS ? cu8RELAY_ENGAGED : cu8RELAY_DISENGAGED);
-    DIO_WritePin(cenuHsRelayPort, cu8HS_RELAY_PIN, bHS ? cu8RELAY_ENGAGED : cu8RELAY_DISENGAGED);
+    if(bUp)
+    {
+        RelayManager_vidActivateRelay(RELAY_UP);
+    }
+    else
+    {
+        RelayManager_vidDeActivateRelay(RELAY_UP);
+    }
+
+    if(bDown)
+    {
+        RelayManager_vidActivateRelay(RELAY_DN);
+    }
+    else
+    {
+        RelayManager_vidDeActivateRelay(RELAY_DN);
+    }
+
+    if(bLS)
+    {
+        RelayManager_vidActivateRelay(RELAY_LS);
+    }
+    else
+    {
+        RelayManager_vidDeActivateRelay(RELAY_LS);
+    }
+
+    if(bHS)
+    {
+        RelayManager_vidActivateRelay(RELAY_HS);
+    }
+    else
+    {
+        RelayManager_vidDeActivateRelay(RELAY_HS);
+    }
 }
 
 static boolean bIsTargetFloorReached(void)

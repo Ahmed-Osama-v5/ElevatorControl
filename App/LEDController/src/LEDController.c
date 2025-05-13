@@ -73,11 +73,10 @@ static boolean bLED_ValidateId(uint8_t u8LedId)
 
 static uint16_t u16LED_GetCurrentTime(void) {
     /* This should be implemented based on your system's timing service */
-    extern uint16_t Timer_GetValue(TimerChan_t enuTimerCH);
     return Timer_GetValue(TIMER_CH1);
 }
 
-void LEDController_Init(void)
+void LEDController_vidInit(void)
 {
     uint8_t u8I;
 

@@ -1,8 +1,9 @@
-set(MODULE_NAME Diagnostics)
+set(MODULE_NAME SegmentDriver)
 
 # Collect driver sources
 file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
-    "src/*.c"
+    "SegmentDriver.c",
+    "SegmentDriver_lcfg.c"
 )
 
 add_library(${MODULE_NAME} ${${MODULE_NAME}_SOURCES})
@@ -13,4 +14,4 @@ target_include_directories(${MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
 )
 
-target_link_libraries(${MODULE_NAME} PRIVATE SensorManager Display Dio Timer)
+target_link_libraries(${MODULE_NAME} PUBLIC Dio)

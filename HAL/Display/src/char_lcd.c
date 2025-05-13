@@ -12,6 +12,9 @@
 //
 //*****************************************************************************
 #define LCD_c
+#ifndef F_CPU
+ #define F_CPU	16000000UL
+ #endif
 #include "Std_Types.h"
 #include <util/delay.h>
 #include "char_lcd.h"

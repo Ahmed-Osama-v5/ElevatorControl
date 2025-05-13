@@ -6,6 +6,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include "Std_Types.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "Timer_types.h"

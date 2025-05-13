@@ -3,7 +3,7 @@
 
 #include "CallHandler_gcfg.h"
 #include "LEDController_gcfg.h"
-//#include "ElevatorController_gcfg.h"
+#include "ElevatorController_gcfg.h"
 
 
 void CallHandler_vidInit(void);

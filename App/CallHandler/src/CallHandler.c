@@ -292,13 +292,13 @@ static void vidProcess_led_blink(uint8_t u8Floor) {
         // Apply duty cycle
         if(pstrLedState->bCurrentState) {
             uint16_t u16OnTime = (cu16LED_BLINK_PERIOD_MS * pstrLedState->u8DutyPercent) / 100;
-            elevator_hal_vidTimer_start(u16OnTime);
-            elevator_hal_vidSet_floor_led(u8Floor, True);
+            //elevator_hal_vidTimer_start(u16OnTime);
+            //elevator_hal_vidSet_floor_led(u8Floor, True);
         }
         else {
             uint16_t u16OffTime = (cu16LED_BLINK_PERIOD_MS * (100 - pstrLedState->u8DutyPercent)) / 100;
-            elevator_hal_vidTimer_start(u16OffTime);
-            elevator_hal_vidSet_floor_led(u8Floor, False);
+            //elevator_hal_vidTimer_start(u16OffTime);
+            //elevator_hal_vidSet_floor_led(u8Floor, False);
         }
     }
 }
