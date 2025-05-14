@@ -5,13 +5,13 @@
 #include "SystemConfig.h"
 
 // Latch control pins for the two 74HC573s
-#define cenuGPIOLED_LATCH0_PORT     GPIOB
+#define cenuLED_LATCH0_PORT         ((GPIO_t) GPIOB)
 #define cu8LED_LATCH0_PIN           ((uint8_t) 2U)
-#define cenuGPIOLED_LATCH1_PORT     GPIOB
+#define cenuLED_LATCH1_PORT         ((GPIO_t) GPIOB)
 #define cu8LED_LATCH1_PIN           ((uint8_t) 3U)
 
 // Data port for LEDs (8 bits at a time)
-#define cenuGPIOLED_DATA_PORT       GPIOA
+#define cenuLED_DATA_PORT           ((GPIO_t) GPIOA)
 
 /* LED Hardware Configuration */
 typedef struct {
@@ -19,15 +19,11 @@ typedef struct {
     uint8_t u8BitPos;       // Bit position in the latch (0-7)
 }LEDHWConfig_t;
 
-
-/* Maximum number of LEDs that can be controlled */
-#define cu8LED_MAX_COUNT              cu8MAX_FLOORS
-
 /* LED Pattern Timing Configurations (in milliseconds) */
-#define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 500U)
-#define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 500U)
-#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 300U)
-#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 700U)
+#define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 60000U)
+#define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 0U)
+#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 10000U)
+#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 10000U)
 #define cu16LED_MAINTENANCE_ON_TIME     ((uint16_t) 200U)
 #define cu16LED_MAINTENANCE_OFF_TIME    ((uint16_t) 200U)
 #define cu16LED_ERROR_ON_TIME           ((uint16_t) 100U)
@@ -35,6 +31,12 @@ typedef struct {
 
 /* LED Controller Task Period (in milliseconds) */
 #define cu8LED_CONTROLLER_PERIOD_MS   ((uint8_t) 10U)
+
+/* LED CallType */
+typedef enum {
+    LED_CALL_TYPE_INTERNAL,
+    LED_CALL_TYPE_EXTERNAL
+} LEDCallType_t;
 
 /* LED States */
 typedef enum {
@@ -62,13 +64,13 @@ typedef struct {
 typedef struct
 {
     boolean bIsActive;
-    CallType_t enuCallType;
+    LEDCallType_t enuLEDCallType;
     uint16_t u16BlinkTimer;
     boolean bLEDState;
 }FloorLED_t;
 
 
 /* External declaration of LED configuration array */
-extern const LEDHWConfig_t LED_HWConfig[cu8LED_MAX_COUNT];
+extern const LEDHWConfig_t LED_HWConfig[cu8MAX_FLOORS];
 
 #endif // LED_CONTROLLER_GCFG_H
