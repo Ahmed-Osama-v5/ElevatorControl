@@ -339,9 +339,12 @@ uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
         u16retVal = milliseconds;
         break;
     case (TIMER_CH1):
+    /*
         timerCount = TCNT1;
         milliseconds = timerCount / ticksPerMs;
         u16retVal = milliseconds;
+        */
+        u16retVal = TCNT1;
         break;
     case (TIMER_CH2):
         timerCount = TCNT2;

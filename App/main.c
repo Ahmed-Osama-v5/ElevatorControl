@@ -2,6 +2,7 @@
  * @file main.c
  * @brief Main application file for testAVR
  */
+#include "Timer_types.h"
 #ifndef F_CPU
  #define F_CPU	16000000UL
  #endif
@@ -10,9 +11,11 @@
 #include "char_lcd.h"
 #include "SystemConfig.h"
  #include "dio.h"
+ #include "Timer.h"
 #include "dio_types.h"
 #include "MotionController.h"
 #include "SegmentDriver.h"
+#include "LEDController.h"
 
 /* Local Function prototypes */
 static void vidSystem_Init();
@@ -23,6 +26,9 @@ int main(void)
     /* Initialize system */
     vidSystem_Init();
 
+    LEDController_vidSetPattern(5, LED_PATTERN_INTERNAL_CALL);
+    LEDController_vidSetPattern(6, LED_PATTERN_EXTERNAL_CALL);
+
     LCD_init();
     LCD_send_string("Elevator V1.1");
 
@@ -30,16 +36,7 @@ int main(void)
 
     while (1)
     {
-        for(u8Floor = 0; u8Floor < cu8MAX_FLOORS; u8Floor++)
-        {
-            /* Display floor number */
-            SegmentDriver_vidWrite(u8Floor);
-            LCD_goto_xy(0, LINE_1);
-            LCD_send_int(u8Floor, 2);
-            _delay_ms(1000);
-        }
-        SegmentDriver_vidTurnOff();
-        _delay_ms(1000);
+        LEDController_vidProcess();
     }
 
     return 0;
@@ -54,21 +51,19 @@ static void vidSystem_Init()
     /* Initialize Segment driver */
     SegmentDriver_vidInit();
 
+    /* Initialize LEDController */
+    LEDController_vidInit();
+
+    Timer_cfg_t strTimer = {0};
+    strTimer.enuTimerCH = TIMER_CH1;
+    strTimer.enumTimerIntMode = TIMER_INT_DISABLED;
+    strTimer.enuTimerPre = TIMER_PRESCALER_1024;
+    strTimer.CBK_Ptr = NULL;
+    Timer_Init(&strTimer);
+    Timer_Start(TIMER_CH1, 0);
+
     /* Initialize DIOs */
-    Dio_Cfg_t strDio = {0};
-
-    /* CALL_0_LATCH pin */
-    strDio.enuGPIO = CALL_0_LATCH_GPIO;
-    strDio.enuPinDir = DIR_OUTPUT;
-    strDio.u8Pin = CALL_0_LATCH_PIN;
-    DIO_Init(&strDio);
-
-    /* CALL_1_LATCH pin */
-    strDio.enuGPIO = CALL_1_LATCH_GPIO;
-    strDio.enuPinDir = DIR_OUTPUT;
-    strDio.u8Pin = CALL_1_LATCH_PIN;
-    DIO_Init(&strDio);
-    
+    Dio_Cfg_t strDio = {0};    
 
     /* CALL_0_OUT pin */
     strDio.enuGPIO = CALL_0_OUT_GPIO;
@@ -82,10 +77,6 @@ static void vidSystem_Init()
     strDio.enuPinDir = DIR_INPUT;
     strDio.u8Pin = CALL_1_OUT_PIN;
     DIO_Init(&strDio);
-    
-    DIO_WritePin(CALL_0_LATCH_GPIO, CALL_0_LATCH_PIN, STATE_LOW);
-    DIO_WritePin(CALL_1_LATCH_GPIO, CALL_1_LATCH_PIN, STATE_LOW);
-
 
     /* Init sensor control pins */
     strDio.enuGPIO = SEN_0_INPUT_GPIO;

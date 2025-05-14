@@ -6,7 +6,7 @@
 #include "LEDController_lcfg.h"
 
 /* Module private variables */
-static LEDStatus_t enuLedStatus[cu8LED_MAX_COUNT];
+static LEDStatus_t enuLedStatus[cu8MAX_FLOORS];
 static uint8_t au8LatchData[2] = {0};  // Data for two 74HC573 latches
 static boolean bModuleInitialized = False;
 
@@ -16,7 +16,7 @@ static void vidLED_UpdateHardware(uint8_t u8LedId, boolean bState);
 static uint16_t u16LED_GetCurrentTime(void);
 static void vidLED_LatchUpdate(uint8_t u8LatchIndex);
 
-const LEDHWConfig_t LED_HWConfig[cu8LED_MAX_COUNT] = {
+const LEDHWConfig_t LED_HWConfig[cu8MAX_FLOORS] = {
     {0, 0}, // LED 0: Latch 0, Bit 0
     {0, 1}, // LED 1: Latch 0, Bit 1
     {0, 2}, // ...
@@ -37,16 +37,16 @@ const LEDHWConfig_t LED_HWConfig[cu8LED_MAX_COUNT] = {
 
 static void vidLED_LatchUpdate(uint8_t u8LatchIndex) {
     // Output the data to the data port
-    DIO_WritePort(cenuGPIOLED_DATA_PORT, au8LatchData[u8LatchIndex]);
+    DIO_WritePort(cenuLED_DATA_PORT, au8LatchData[u8LatchIndex]);
     // Toggle the corresponding latch pin
     if (u8LatchIndex == 0) {
-        DIO_WritePin(cenuGPIOLED_LATCH0_PORT, cu8LED_LATCH0_PIN, STATE_HIGH);
+        DIO_WritePin(cenuLED_LATCH0_PORT, cu8LED_LATCH0_PIN, STATE_HIGH);
         // Small delay if needed
-        DIO_WritePin(cenuGPIOLED_LATCH0_PORT, cu8LED_LATCH0_PIN, STATE_LOW);
+        DIO_WritePin(cenuLED_LATCH0_PORT, cu8LED_LATCH0_PIN, STATE_LOW);
     } else {
-        DIO_WritePin(cenuGPIOLED_LATCH1_PORT, cu8LED_LATCH1_PIN, STATE_HIGH);
+        DIO_WritePin(cenuLED_LATCH1_PORT, cu8LED_LATCH1_PIN, STATE_HIGH);
         // Small delay if needed
-        DIO_WritePin(cenuGPIOLED_LATCH1_PORT, cu8LED_LATCH1_PIN, STATE_LOW);
+        DIO_WritePin(cenuLED_LATCH1_PORT, cu8LED_LATCH1_PIN, STATE_LOW);
     }
 }
 
@@ -54,18 +54,37 @@ static void vidLED_UpdateHardware(uint8_t u8LedId, boolean bState) {
     uint8_t u8LatchIndex = LED_HWConfig[u8LedId].u8LatchIndex;
     uint8_t u8BitPos = LED_HWConfig[u8LedId].u8BitPos;
     
-    if(bState) {
-        au8LatchData[u8LatchIndex] |= (1 << u8BitPos);
-    } else {
-        au8LatchData[u8LatchIndex] &= ~(1 << u8BitPos);
+    if(bLED_ValidateId(u8LedId))
+    {
+        if(bState)
+        {
+            if(u8LedId >= 8U)
+            {
+                au8LatchData[u8LatchIndex] |= (1 << u8BitPos);
+            }
+            else
+            {
+                au8LatchData[u8LatchIndex] |= (1 << (7 - u8BitPos));
+            }
+        }
+        else
+        {
+            if(u8LedId >= 8U)
+            {
+                au8LatchData[u8LatchIndex] &= ~(1 << u8BitPos);
+            }
+            else
+            {
+                au8LatchData[u8LatchIndex] &= ~(1 << (7 - u8BitPos));
+            }
+        }
+        vidLED_LatchUpdate(u8LatchIndex);
     }
-    
-    vidLED_LatchUpdate(u8LatchIndex);
 }
 
 static boolean bLED_ValidateId(uint8_t u8LedId)
 {
-    if(u8LedId >= cu8LED_MAX_COUNT) {
+    if(u8LedId >= cu8MAX_FLOORS) {
         return False;
     }
     return True;
@@ -82,23 +101,23 @@ void LEDController_vidInit(void)
 
     /* Initialize latch control pins */
     Dio_Cfg_t dio_config = {
-        .enuGPIO = cenuGPIOLED_LATCH0_PORT,
+        .enuGPIO = cenuLED_LATCH0_PORT,
         .u8Pin = cu8LED_LATCH0_PIN,
         .enuPinDir = DIR_OUTPUT
     };
     DIO_Init(&dio_config);
     
-    dio_config.enuGPIO = cenuGPIOLED_LATCH1_PORT;
+    dio_config.enuGPIO = cenuLED_LATCH1_PORT;
     dio_config.u8Pin = cu8LED_LATCH1_PIN;
     DIO_Init(&dio_config);
 
     /* Initialize data port */
-    dio_config.enuGPIO = cenuGPIOLED_DATA_PORT;
+    dio_config.enuGPIO = cenuLED_DATA_PORT;
     dio_config.u8Pin = 0xFF;  // All pins as output
     DIO_Init(&dio_config);
     
     /* Initialize LED states */
-    for(u8I = 0; u8I < cu8LED_MAX_COUNT; u8I++) {
+    for(u8I = 0; u8I < cu8MAX_FLOORS; u8I++) {
         enuLedStatus[u8I].enuState = LED_STATE_OFF;
         enuLedStatus[u8I].enuPattern = LED_PATTERN_NONE;
         enuLedStatus[u8I].u16LastToggleTime = 0;
@@ -143,7 +162,7 @@ void LEDController_vidProcess(void)
     
     u16CurrentTime = u16LED_GetCurrentTime();
     
-    for(u8I = 0; u8I < cu8LED_MAX_COUNT; u8I++) {
+    for(u8I = 0; u8I < cu8MAX_FLOORS; u8I++) {
         if(enuLedStatus[u8I].enuState == LED_STATE_BLINKING) {
             /* Determine pattern timing */
             switch(enuLedStatus[u8I].enuPattern) {
