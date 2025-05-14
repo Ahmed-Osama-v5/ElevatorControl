@@ -2,19 +2,13 @@
  * @file main.c
  * @brief Main application file for testAVR
  */
-#include "MotionController.h"
-#include "MotionController/interfaces/MotionController_gcfg.h"
-#include "RelayManager_gcfg.h"
-#include <stdint.h>
 #ifndef F_CPU
  #define F_CPU	16000000UL
  #endif
 #include <avr/io.h>
 #include <util/delay.h>
-#include "ElevatorController.h"
 #include "char_lcd.h"
 #include "SystemConfig.h"
-#include "LEDController.h"
  #include "dio.h"
 #include "dio_types.h"
 #include "MotionController.h"
@@ -40,8 +34,12 @@ int main(void)
         {
             /* Display floor number */
             SegmentDriver_vidWrite(u8Floor);
+            LCD_goto_xy(0, LINE_1);
+            LCD_send_int(u8Floor, 2);
             _delay_ms(1000);
         }
+        SegmentDriver_vidTurnOff();
+        _delay_ms(1000);
     }
 
     return 0;

@@ -70,6 +70,9 @@ void SegmentDriver_vidInit (void);
 /* Write on 7 segment display */
 void SegmentDriver_vidWrite (uint8_t u8Value);
 
+/* Turn off 7 segment display */
+void SegmentDriver_vidTurnOff (void);
+
 /* Xxx   Services ********************************************************* */
 
 

@@ -77,10 +77,17 @@ ModeChangeResult_t ModeManager_enuRequestMode(ModeState_t enuNewMode)
         enuResult = MODE_CHANGE_BLOCKED;
     }
     
-    /* Start transition */
-    bIsTransitionInProgress = True;
-    u16TransitionStartTime = u16GetTimeMs();
-    vidExecuteTransition(enuNewMode);
+    if(enuResult != MODE_CHANGE_OK)
+    {
+        /* Do nothing */
+    }
+    else
+    {
+        /* Start transition */
+        bIsTransitionInProgress = True;
+        u16TransitionStartTime = u16GetTimeMs();
+        vidExecuteTransition(enuNewMode);
+    }
     
     return enuResult;
 }

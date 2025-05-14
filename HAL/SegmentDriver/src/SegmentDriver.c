@@ -140,6 +140,23 @@ void SegmentDriver_vidWrite (uint8_t u8Value)
     DIO_WritePin(cenuSegment_LATCH_Port, cu8Segment_LATCH_Pin, STATE_LOW);
 }
 
+/* Turn off 7 segment display */
+void SegmentDriver_vidTurnOff (void)
+{
+    /* Turn off segment display */
+    DIO_WritePort(strSegmentConfig[0].enuSegmentPort, cu8Segment_Off);
+
+    /* Send a pulse to shift register */
+    
+    /* Set Segment latch pin HIGH */
+    DIO_WritePin(cenuSegment_LATCH_Port, cu8Segment_LATCH_Pin, STATE_HIGH);
+
+    _delay_ms(1);
+
+    /* Set Segment latch pin LOW */
+    DIO_WritePin(cenuSegment_LATCH_Port, cu8Segment_LATCH_Pin, STATE_LOW);
+}
+
 /* ************************************************************************ */
 /* Xxx   Services                                                           */
 /* ************************************************************************ */

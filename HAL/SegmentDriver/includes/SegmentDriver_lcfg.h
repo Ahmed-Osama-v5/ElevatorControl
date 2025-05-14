@@ -37,6 +37,9 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+/* Segment display off value */
+#define cu8Segment_Off ((uint8_t) 0x00U)
+
 /* Segment GPIO Configuration */
 typedef struct {
     GPIO_t  enuSegmentPort;
