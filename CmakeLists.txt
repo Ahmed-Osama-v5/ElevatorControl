@@ -24,6 +24,7 @@ add_subdirectory(App/ModeManager)
 add_subdirectory(App/MotionController)
 
 #HAL
+add_subdirectory(HAL/ButtonDriver)
 add_subdirectory(HAL/Display)
 add_subdirectory(HAL/SensorManager)
 add_subdirectory(HAL/RelayManager)
@@ -49,6 +50,8 @@ target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/App/ModeManager/interfaces
     ${CMAKE_SOURCE_DIR}/App/MotionController/includes
     ${CMAKE_SOURCE_DIR}/App/MotionController/interfaces
+    ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/includes
+    ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/Display/includes
     ${CMAKE_SOURCE_DIR}/HAL/Display/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/SensorManager/includes

@@ -2,7 +2,6 @@
  * @file main.c
  * @brief Main application file for testAVR
  */
-#include "Timer_types.h"
 #ifndef F_CPU
  #define F_CPU	16000000UL
  #endif
@@ -19,7 +18,7 @@
 
 /* Local Function prototypes */
 static void vidSystem_Init();
-static PinState_t readSensor(Sensor_t sensor);
+static PinState_t readSensor(Sensor_t enuSensor);
 
 int main(void)
 {
@@ -32,11 +31,28 @@ int main(void)
     LCD_init();
     LCD_send_string("Elevator V1.1");
 
-    uint8_t u8Floor = 0;
+    uint8_t u8Floor = 20U;
+    PinState_t enuSensorState = STATE_LOW;
+    Sensor_t enuSensor = FLOOR_M;
 
     while (1)
     {
         LEDController_vidProcess();
+        for(enuSensor = 0; enuSensor < 16U; enuSensor++)
+        {
+            enuSensorState = readSensor(enuSensor);
+            if(enuSensorState == STATE_HIGH)
+            {
+                u8Floor = (uint8_t)enuSensor;
+            }
+            else
+            {
+            }
+        }
+        LCD_goto_xy(0, LINE_1);
+        LCD_send_string("S: ");
+        LCD_send_int((uint16_t)u8Floor, 2);
+        u8Floor = 20U;
     }
 
     return 0;
@@ -105,11 +121,11 @@ static void vidSystem_Init()
     DIO_Init(&strDio);
 }
 
-static PinState_t readSensor(Sensor_t sensor)
+static PinState_t readSensor(Sensor_t enuSensor)
 {
     PinState_t retVal = STATE_LOW;
     
-    switch(sensor)
+    switch(enuSensor)
     {
         case FLOOR_M:
             DIO_WritePin(SEL_1_GPIO, SEL_1_PIN, STATE_HIGH);
