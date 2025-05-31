@@ -24,10 +24,7 @@
 
 /* cross dependency inclusions ******************************************** */
 
-// REMARK: include here only header file, which provide definitions
-//   used in THIS file. An exception is Std_Types.h which is NEVER included
-//   here. It is demanded to be on top of the inclusion list of each C file.
-//   If there is none inclusion here(usual case) then remove this sub section.
+#include "SensorManager.h"
 
 /* own header inclusions ************************************************** */
 
@@ -40,6 +37,9 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+/* Button States */
+#define BUTTON_PRESSED      STD_LOW
+#define BUTTON_RELEASED     STD_HIGH
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -47,7 +47,16 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
-
+/* Button Configuration Structure */
+#if 0
+typedef struct {
+     channel;        /* DIO Channel ID */
+    DIO_PortType port;              /* DIO Port ID */
+    DIO_PinType pin;                /* DIO Pin ID */
+    uint8 active_state;             /* BUTTON_PRESSED or BUTTON_RELEASED */
+    uint8 pull_up_enabled;          /* STD_ON or STD_OFF */
+} ButtonConfig_t;
+#endif
 /* ************************************************************************ */
 /* ************************************************************************ */
 /* Exported Variables                                                       */
@@ -67,7 +76,9 @@
 /* Initialise the component. */
 void ButtonDriver_vidInit (void);
 
-/* Xxx   Services ********************************************************* */
+/* Main Functions ********************************************************* */
+boolean Button_bIsPressed(ButtonId_t enuButtonId);
+boolean Button_bIsReleased(ButtonId_t enuButtonId);
 
 
 /* ************************************************************************ */
