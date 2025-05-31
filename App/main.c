@@ -2,6 +2,7 @@
  * @file main.c
  * @brief Main application file for testAVR
  */
+#include "ButtonDriver_gcfg.h"
 #ifndef F_CPU
  #define F_CPU	16000000UL
  #endif
@@ -15,6 +16,7 @@
 #include "MotionController.h"
 #include "SegmentDriver.h"
 #include "LEDController.h"
+#include "ButtonDriver.h"
 
 /* Local Function prototypes */
 static void vidSystem_Init();
@@ -119,6 +121,18 @@ static void vidSystem_Init()
     strDio.enuPinDir = DIR_OUTPUT;
     strDio.u8Pin = SEL_3_PIN;
     DIO_Init(&strDio);
+
+    /* Initialize buttons */
+    ButtonDriver_vidInit();
+
+    if(ButtonDriver_bIsPressed(BTN_PRG) == True)
+    {
+        /* Enter programming mode */
+    }
+    else
+    {
+        /* Initialize the system in normal mode */
+    }
 }
 
 static PinState_t readSensor(Sensor_t enuSensor)

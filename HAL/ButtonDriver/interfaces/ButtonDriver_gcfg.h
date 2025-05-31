@@ -37,7 +37,7 @@ typedef enum {
     BTN_UP,
     BTN_DN,
     BTN_OK,
-    BTN_PRG = cu8SENSOR_PHASE_2
+    BTN_PRG
 } ButtonId_t;
 
 /* Button State Type */

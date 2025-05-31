@@ -77,8 +77,8 @@ typedef struct {
 void ButtonDriver_vidInit (void);
 
 /* Main Functions ********************************************************* */
-boolean Button_bIsPressed(ButtonId_t enuButtonId);
-boolean Button_bIsReleased(ButtonId_t enuButtonId);
+boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId);
+boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId);
 
 
 /* ************************************************************************ */

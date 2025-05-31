@@ -15,8 +15,6 @@
 /* Set Ownership                                                            */
 /* ************************************************************************ */
 
-#include "SensorManager.h"
-#include "SystemConfig.h"
 #define ButtonDriver_C
 
 /* ************************************************************************ */
@@ -34,6 +32,7 @@
 /* other components of the project **************************************** */
 
 #include "dio.h"
+#include "SystemConfig.h"
 
 /* own header inclusions ************************************************** */
 
@@ -62,7 +61,7 @@ void ButtonDriver_vidInit (void)
 }
 
 /* Main Functions ********************************************************* */
-boolean Button_bIsPressed(ButtonId_t enuButtonId)
+boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
 {
     /* Return value variable */
     boolean bBtnPressed = False;
@@ -140,7 +139,7 @@ boolean Button_bIsPressed(ButtonId_t enuButtonId)
 }
 /* ************************************************************************ */
 
-boolean Button_bIsReleased(ButtonId_t enuButtonId)
+boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
 {
     /* Return value variable */
     boolean bBtnReleased = False;
