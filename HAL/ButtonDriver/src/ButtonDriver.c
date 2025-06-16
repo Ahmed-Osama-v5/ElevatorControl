@@ -15,6 +15,7 @@
 /* Set Ownership                                                            */
 /* ************************************************************************ */
 
+#include "dio_types.h"
 #define ButtonDriver_C
 
 /* ************************************************************************ */
@@ -67,7 +68,7 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
     boolean bBtnPressed = False;
     
     /* Sensor state variable */
-    uint8_t* pu8SensorState = NULL;
+    PinState_t enuSensorState = STATE_LOW;
 
     switch (enuButtonId)
     {
@@ -120,8 +121,8 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
             }
             break;
         case BTN_PRG:
-            (void) SensorManager_stdReadSensor(PHASE_2, pu8SensorState);
-            if(pu8SensorState != NULL && *pu8SensorState == cu8SENSOR_STATE_ACTIVE)
+            (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
+            if(enuSensorState == cu8SENSOR_STATE_ACTIVE)
             {
                 bBtnPressed = True; // Button is pressed
             }
@@ -145,7 +146,7 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
     boolean bBtnReleased = False;
     
     /* Sensor state variable */
-    uint8_t* pu8SensorState = NULL;
+    PinState_t enuSensorState = STATE_LOW;
 
     switch (enuButtonId)
     {
@@ -198,8 +199,8 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
             }
             break;
         case BTN_PRG:
-            (void) SensorManager_stdReadSensor(PHASE_2, pu8SensorState);
-            if(pu8SensorState != NULL && *pu8SensorState == cu8SENSOR_STATE_INACTIVE)
+            (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
+            if(enuSensorState == cu8SENSOR_STATE_INACTIVE)
             {
                 bBtnReleased = True; // Button is released
             }

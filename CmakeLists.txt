@@ -7,7 +7,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER avr-gcc CACHE STRING "c compiler" FORCE)
 set(CMAKE_CXX_COMPILER avr-g++ CACHE STRING "c++ compiler" FORCE)
 set(CMAKE_OBJCOPY avr-objcopy CACHE STRING "avr-objcopy" FORCE)
-set(CMAKE_C_FLAGS "-mmcu=${MCU_NAME} -Os -DF_CPU=16000000UL")
+set(CMAKE_C_FLAGS "-mmcu=${MCU_NAME} -Os -DF_CPU=8000000UL")
 ##################################################################################
 project(ElevatorConrol)
 

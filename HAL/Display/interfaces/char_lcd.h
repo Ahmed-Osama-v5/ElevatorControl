@@ -13,7 +13,7 @@
 #ifndef CHAR_LCD_H_
 #define CHAR_LCD_H_
 #ifndef F_CPU
- #define F_CPU	16000000UL
+ #define F_CPU	8000000UL
  #endif
 #include "char_lcd_gcfg.h"
 #include "dio.h"

@@ -65,7 +65,7 @@
 
 /* Basic Services ********************************************************* */
 
-/* Initialise the component. */
+/* Initialize the component. */
 void RelayManager_vidInit (void);
 
 /* Activate relay. */

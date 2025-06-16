@@ -45,22 +45,23 @@
 
 typedef enum
 {
-    FLOOR_M = 0,
-    SELECTOR,
-    STOP_SEN,
-    SHK,
-    LOCK,
-    UP_LIMIT,
-    DN_LIMIT,
     MNT_SEN,
-    MNT_UP,
-    MNT_DN,
-    OPEN_DOOR,
-    OVER_LOAD,
-    CLOSE_DOOR,
-    FL,
-    PHASE_1,
+    DN_LIMIT,
+    UP_LIMIT,
+    LOCK,
+    SHK,
+    STOP_SEN,
+    SELECTOR,
+    FLOOR_M,
     PHASE_2,
+    PHASE_1,
+    FULL_LOAD,
+    CLOSE_DOOR,
+    OVER_LOAD,
+    OPEN_DOOR,
+    MNT_DN,
+    MNT_UP,
+    NO_SENSOR
 }Sensor_t;
 
 #endif // SYSTEM_CONFIG_H

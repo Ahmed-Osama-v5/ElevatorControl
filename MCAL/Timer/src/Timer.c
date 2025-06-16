@@ -328,7 +328,7 @@ uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
 {
     uint16_t u16retVal = 0;
     uint16_t timerCount;
-    uint32_t ticksPerMs = (F_CPU / TIMER1_PRESCALER) / 1000;
+    uint32_t ticksPerMs = (F_CPU / Timer_GetPrescalerValue(TIMER1_PRESCALER)) / 1000;
     uint16_t milliseconds;
 
     switch (enuTimerCH)
@@ -339,12 +339,10 @@ uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
         u16retVal = milliseconds;
         break;
     case (TIMER_CH1):
-    /*
         timerCount = TCNT1;
         milliseconds = timerCount / ticksPerMs;
         u16retVal = milliseconds;
-        */
-        u16retVal = TCNT1;
+        //u16retVal = TCNT1;
         break;
     case (TIMER_CH2):
         timerCount = TCNT2;
@@ -358,6 +356,29 @@ uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
         break;
     }
     return u16retVal;
+ }
+
+ inline uint16_t Timer_GetPrescalerValue(TimerPre_t enuTimerPre)
+ {
+    switch (enuTimerPre)
+    {
+    case TIMER_PRESCALER_NO:
+        return (uint16_t) 1;
+    case TIMER_PRESCALER_8:
+        return (uint16_t) 8;
+    case TIMER_PRESCALER_32:
+        return (uint16_t) 32;
+    case TIMER_PRESCALER_64:
+        return (uint16_t) 64;
+    case TIMER_PRESCALER_128:
+        return (uint16_t) 128;
+    case TIMER_PRESCALER_256:
+        return (uint16_t) 256;
+    case TIMER_PRESCALER_1024:
+        return (uint16_t) 1024;
+    default:
+        return (uint16_t) 1;
+    }
  }
  
  ISR(TIMER0_OVF_vect)

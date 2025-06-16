@@ -142,5 +142,5 @@ boolean elevator_hal_bTimer_elapsed(void)
 
 uint16_t elevator_hal_u16Get_time_ms(void)
 {
-    return 0;
+    return Timer_GetValue(SYSTEM_TIMER_CHANNEL);
 }

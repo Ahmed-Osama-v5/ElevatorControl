@@ -2,6 +2,7 @@
 #define SENSOR_MANAGER_GCFG_H
 
 #include "Std_Types.h"
+#include "dio_types.h"
 
 /* Sensor Group 1 (Connected to U12 74LS151 - SEN_1_OUT) */
 #define cu8SENSOR_FLOOR_M         ((uint8_t) 0U)
@@ -42,7 +43,7 @@
 #define cu8SENSOR_READ_ERROR      ((uint8_t) 1U)
 
 /* Sensor States */
-#define cu8SENSOR_STATE_ACTIVE    ((uint8_t) 1U)
-#define cu8SENSOR_STATE_INACTIVE  ((uint8_t) 0U)
+#define cu8SENSOR_STATE_ACTIVE    ((uint8_t) STATE_HIGH)
+#define cu8SENSOR_STATE_INACTIVE  ((uint8_t) STATE_LOW)
 
 #endif /* SENSOR_MANAGER_GCFG_H */

@@ -68,6 +68,8 @@ void Timer_Stop(TimerChan_t enuTimerCH);
   * 							
   */
 uint16_t Timer_GetValue(TimerChan_t enuTimerCH);
+
+inline uint16_t Timer_GetPrescalerValue(TimerPre_t enuTimerPre);
  
 
 #endif /* DIO_H */

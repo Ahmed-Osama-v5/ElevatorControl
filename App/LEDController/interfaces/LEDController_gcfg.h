@@ -22,8 +22,8 @@ typedef struct {
 /* LED Pattern Timing Configurations (in milliseconds) */
 #define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 60000U)
 #define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 0U)
-#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 10000U)
-#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 10000U)
+#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 5000U)
+#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 5000U)
 #define cu16LED_MAINTENANCE_ON_TIME     ((uint16_t) 200U)
 #define cu16LED_MAINTENANCE_OFF_TIME    ((uint16_t) 200U)
 #define cu16LED_ERROR_ON_TIME           ((uint16_t) 100U)

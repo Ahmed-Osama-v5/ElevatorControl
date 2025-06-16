@@ -8,7 +8,7 @@
             ],
             "defines": [
                 "__AVR_ATmega32__",
-                "F_CPU=16000000L"
+                "F_CPU=8000000L"
             ],
             "compilerPath": "C:/WinAVR-20100110/bin/avr-gcc.exe",
             "cStandard": "c11",
