@@ -1,16 +1,37 @@
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        (C) Copyright 2026 by                             */
+/*                                 HexaMix                                  */
+/*                         All rights reserved                              */
+/*           This software is the exclusive property of HexaMix.            */
+/*   It cannot be communicated or divulged to anybody without a previous    */
+/*  written authorisation.                                                  */
+/*                                                                          */
+/*     Any partial or complete copy of this program whether it is in its    */
+/*   original shape or in its modified shape has to mention this copyright  */
+/*  and its proprietor.                                                     */
+/*                                                                          */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        FILE INCLUSION MANAGEMENT                         */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Protection against bad and multiple inclusions                           */
+/* ************************************************************************ */
+
 #ifndef MOTION_CONTROLLER_GCFG_H
 #define MOTION_CONTROLLER_GCFG_H
 
 #include "dio_types.h"
 
-/* Relay States */
-#define cu8RELAY_ENGAGED         ((PinState_t) STATE_HIGH)
-#define cu8RELAY_DISENGAGED      ((PinState_t) STATE_LOW)
-
-/* Motion Control Parameters */
-#define cu8MAX_FLOOR             ((uint8_t) 16U)
-#define cu16SLOWDOWN_DISTANCE    ((uint16_t) 1U)  /* Floor distance to start slowing */
-#define cu16MOTION_TIMEOUT_MS    ((uint16_t) 30000U)
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Export of CallHandler configuration settings                             */
+/* ************************************************************************ */
+/* ************************************************************************ */
 
 /* Motion States */
 typedef enum {
@@ -23,12 +44,12 @@ typedef enum {
     MOTION_STATE_ERROR
 } MotionState_t;
 
-/* Motion Commands */
-typedef enum {
-    MOTION_CMD_STOP,
-    MOTION_CMD_MOVE_UP,
-    MOTION_CMD_MOVE_DOWN
-} MotionCommand_t;
 
 
 #endif // MOTION_CONTROLLER_GCFG_H
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                           E N D   O F   F I L E                          */
+/* ************************************************************************ */
+/* ************************************************************************ */

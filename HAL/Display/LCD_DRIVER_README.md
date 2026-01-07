@@ -29,7 +29,7 @@ To switch between LCD drivers, modify the `LCD_DRIVER_TYPE` in `HAL/Display/inte
 ```c
 #include "lcd_config.h"
 
-int main(void) {
+int _main___(void) {
     LCD_Init();
     LCD_Clear();
     LCD_SetCursor(0, 0);

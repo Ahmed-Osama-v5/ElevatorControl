@@ -1,17 +1,66 @@
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        (C) Copyright 2026 by                             */
+/*                                 HexaMix                                  */
+/*                         All rights reserved                              */
+/*           This software is the exclusive property of HexaMix.            */
+/*   It cannot be communicated or divulged to anybody without a previous    */
+/*  written authorisation.                                                  */
+/*                                                                          */
+/*     Any partial or complete copy of this program whether it is in its    */
+/*   original shape or in its modified shape has to mention this copyright  */
+/*  and its proprietor.                                                     */
+/*                                                                          */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        FILE INCLUSION MANAGEMENT                         */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Protection against bad and multiple inclusions                           */
+/* ************************************************************************ */
+
 #ifndef MOTION_CONTROLLER_H
 #define MOTION_CONTROLLER_H
 
+/* ************************************************************************ */
+/* Header Inclusions                                                        */
+/* ************************************************************************ */
+
+/* cross dependency inclusions ******************************************** */
+
 #include "Std_Types.h"
+
+/* own header inclusions ************************************************** */
+
+/* export the global configuration */
 #include "MotionController_gcfg.h"
 
-/* Function Declarations */
-Std_ReturnType_t MotionController_stdInit(void);
-Std_ReturnType_t MotionController_stdDeInit(void);
-Std_ReturnType_t MotionController_stdSetTargetFloor(uint8_t u8Floor);
-Std_ReturnType_t MotionController_stdExecuteCommand(MotionCommand_t enuCommand);
-Std_ReturnType_t MotionController_stdGetCurrentState(MotionState_t* penuState);
-Std_ReturnType_t MotionController_stdProcess(void);
-uint8_t MotionController_u8GetCurrentFloor(void);
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Exported Functions                                                       */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* Basic Services ********************************************************* */
+/**
+ * @brief Initialize the Motion Controller.
+ */
+void MotionController_vidInit(void);
+
+/**
+ * @brief Move the elevator in a specific direction.
+ * @param enuState The motion state and speed (up, down or stop).
+ */
+void MotionController_vidMove(MotionState_t enuState);
 
 
 #endif // MOTION_CONTROLLER_H
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                           E N D   O F   F I L E                          */
+/* ************************************************************************ */
+/* ************************************************************************ */

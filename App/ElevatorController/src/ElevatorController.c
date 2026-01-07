@@ -1,6 +1,5 @@
 
 
-#include "SystemConfig.h"
 #define ElevatorController_c
 
 #include "Std_Types.h"
@@ -9,6 +8,8 @@
 #include "ElevatorController.h"
 #include "ElevatorController_lcfg.h"
 #include "Timer.h"
+
+#include "SystemConfig.h"
 
 #include "RelayManager.h"
 #include "LEDController.h"
@@ -219,7 +220,7 @@ void elevator_hal_vidInit(void)
     ButtonDriver_vidInit();
 
     /* Initialize motion controller */
-    (void) MotionController_stdInit();
+    MotionController_vidInit();
 
     /* Initialize system timer */
     Timer_cfg_t strTimer;
@@ -239,36 +240,36 @@ void ElevatorController_vidSplashScreen(void)
     LCD_WriteString("Elevator System");
 
     /* Blink all LEDs */
-    for (u8Index = 0; u8Index < cu8MAX_FLOOR; u8Index++)
+    for (u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index++)
     {
         LEDController_vidSetState(u8Index, LED_STATE_ON);
     }
     _delay_ms(500); // Wait for 500 milliseconds
 
     /* Blink every other LED */
-    for (u8Index = 0; u8Index < cu8MAX_FLOOR; u8Index++)
+    for (u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index++)
     {
         LEDController_vidSetState(u8Index, LED_STATE_OFF);
     }
-    for (u8Index = 0; u8Index < cu8MAX_FLOOR; u8Index += 2)
+    for (u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index += 2)
     {
         LEDController_vidSetState(u8Index, LED_STATE_ON);
     }
     _delay_ms(500); // Wait for 500 milliseconds
     
     /* Blink every other LED */
-    for (u8Index = 0; u8Index < cu8MAX_FLOOR; u8Index++)
+    for (u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index++)
     {
         LEDController_vidSetState(u8Index, LED_STATE_OFF);
     }
-    for (u8Index = 1; u8Index < cu8MAX_FLOOR; u8Index += 2)
+    for (u8Index = 1; u8Index < cu8MAX_FLOORS; u8Index += 2)
     {
         LEDController_vidSetState(u8Index, LED_STATE_ON);
     }
     _delay_ms(500); // Wait for 500 milliseconds
     
     /* Turn LEDs off */
-    for (u8Index = 0; u8Index < cu8MAX_FLOOR; u8Index++)
+    for (u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index++)
     {
         LEDController_vidSetState(u8Index, LED_STATE_OFF);
     }

@@ -40,6 +40,5 @@ int main(void)
         /* TODO: Handle this condition */
         while(1);
     }
-
     return 0;
 }

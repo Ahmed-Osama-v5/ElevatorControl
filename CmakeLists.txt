@@ -2,18 +2,33 @@
 cmake_minimum_required(VERSION 3.22)
 
 set(MCU_NAME atmega32)
+set(MCU_FREQUENCY 8000000UL)
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER avr-gcc CACHE STRING "c compiler" FORCE)
 set(CMAKE_CXX_COMPILER avr-g++ CACHE STRING "c++ compiler" FORCE)
 set(CMAKE_OBJCOPY avr-objcopy CACHE STRING "avr-objcopy" FORCE)
-set(CMAKE_C_FLAGS "-mmcu=${MCU_NAME} -Os -DF_CPU=8000000UL")
+#set(CMAKE_C_FLAGS "-mmcu=${MCU_NAME} -Os -DF_CPU=${MCU_FREQUENCY}")
 ##################################################################################
-project(ElevatorConrol)
+# Separate flags for Debug and Release
+set(CMAKE_C_FLAGS_DEBUG "-mmcu=${MCU_NAME} -g -DF_CPU=${MCU_FREQUENCY}")
+set(CMAKE_C_FLAGS_RELEASE "-mmcu=${MCU_NAME} -Os -DF_CPU=${MCU_FREQUENCY}")
+
+# Default to Release if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+    Message(STATUS "No build type specified, defaulting to Release")
+endif()
+##################################################################################
+project(ElevatorControl)
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.h)
 
-string(REGEX REPLACE "build/[^;]+;?" "" SOURCES "${SOURCES}")
+# Exclude top-level build directories and generated CMake files from the globbed list
+# This prevents generated files (e.g., CompilerId tests) from being picked up and
+# causing multiple-definition/link errors (e.g., duplicate `main`).
+string(REGEX REPLACE "(^|;)build[^;]*;?" "\\1" SOURCES "${SOURCES}")
+string(REGEX REPLACE "(^|;)CMakeFiles[^;]*;?" "\\1" SOURCES "${SOURCES}")
 
 #App
 add_subdirectory(App/ElevatorController)
@@ -40,9 +55,9 @@ add_subdirectory(MCAL/Dio)
 add_subdirectory(MCAL/EepD)
 add_subdirectory(MCAL/Timer)
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES})
+add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf ${SOURCES})
 
-target_include_directories(${PROJECT_NAME}.elf PUBLIC
+target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/Common
     ${CMAKE_SOURCE_DIR}/App/ElevatorController/includes
     ${CMAKE_SOURCE_DIR}/App/ElevatorController/interfaces
@@ -79,14 +94,27 @@ target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/includes
 )
 
+# Generate hex file (separate from build, no longer ALL)
+add_custom_target(hex ALL
+    DEPENDS ${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf
+    COMMAND ${CMAKE_OBJCOPY} -j .text -j .data -O ihex ${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf ${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.hex
+    COMMAND avr-size -C --mcu=${MCU_NAME} ${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf
+    COMMENT "Creating HEX file and showing memory usage")
 
-message("${FLASH_FLAGS}")
+# Flash to microcontroller
+add_custom_target(flash
+    DEPENDS hex
+    COMMAND avrdude -c usbasp -p m32 -B 1.0 -U flash:w:${PROJECT_NAME}.hex:a
+    COMMENT "Flashing ${PROJECT_NAME}.hex to ATmega32")
 
-add_custom_target(flash ALL
-    DEPENDS ${PROJECT_NAME}.elf
-    COMMAND avr-objcopy -j .txt -j .data -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
-    COMMAND avr-size -C --mcu=atmega32 ${PROJECT_NAME}.elf)
+#message("${FLASH_FLAGS}")
 
-add_custom_target(burn
-    DEPENDS flash
-    COMMAND avrdude -c usbasp -p m32 -B 1.0 -U flash:w:${PROJECT_NAME}.hex:a)
+#add_custom_target(flash ALL
+#    DEPENDS ${PROJECT_NAME}.elf
+#    COMMAND avr-objcopy -j .text -j .data -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
+#    COMMAND avr-size -C --mcu=atmega32 ${PROJECT_NAME}.elf)
+
+#add_custom_target(burn
+#    DEPENDS flash
+#    COMMAND avrdude -c usbasp -p m32 -B 1.0 -U flash:w:${PROJECT_NAME}.hex:a)
+    
