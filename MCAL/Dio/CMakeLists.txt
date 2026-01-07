@@ -4,7 +4,6 @@ set(DRIVER_NAME Dio)
 # Collect driver sources
 file(GLOB_RECURSE ${DRIVER_NAME}_SOURCES
     "src/*.c"
-    "cfg/*.c"
 )
 
 # Create driver library

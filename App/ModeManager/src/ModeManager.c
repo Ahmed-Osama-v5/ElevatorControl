@@ -10,7 +10,7 @@
 
 /* Private Variables */
 static ModeStatus_t strModeStatus;
-static boolean bIsTransitionInProgress = False;
+static boolean bIsTransitionInProgress = FALSE;
 static uint16_t u16TransitionStartTime = 0;
 
 /* Private Function Declarations */
@@ -27,10 +27,10 @@ const ModeSwitchConfig_t     strMode_SwitchConfig = {
     .enuGPIO = GPIOA
 };
 const OperationPermission_t  strMode_OperationPermissions[cu8OPERATION_COUNT] = {
-    {True,  False, False},  /* Operation 0: Normal Mode */
-    {False, True,  False},  /* Operation 1: Program Mode */
-    {False, False, True},   /* Operation 2: Maintenance Mode */
-    {True,  True,  True}    /* Operation 3: All Modes */
+    {TRUE,  FALSE, FALSE},  /* Operation 0: Normal Mode */
+    {FALSE, TRUE,  FALSE},  /* Operation 1: Program Mode */
+    {FALSE, FALSE, TRUE},   /* Operation 2: Maintenance Mode */
+    {TRUE,  TRUE,  TRUE}    /* Operation 3: All Modes */
 };
 
 void ModeManager_Init(void)
@@ -50,7 +50,7 @@ void ModeManager_Init(void)
     strModeStatus.enuCurrentMode = MODE_NORMAL;
     strModeStatus.u16ModeEntryTime = u16GetTimeMs();
     strModeStatus.u8ErrorCode = cu8MODE_ERROR_NONE;
-    strModeStatus.bIsInitialized = True;
+    strModeStatus.bIsInitialized = TRUE;
     
     /* Initial mode reading */
     ModeState_t enuInitialMode = enuReadModeSwitches();
@@ -84,7 +84,7 @@ ModeChangeResult_t ModeManager_enuRequestMode(ModeState_t enuNewMode)
     else
     {
         /* Start transition */
-        bIsTransitionInProgress = True;
+        bIsTransitionInProgress = TRUE;
         u16TransitionStartTime = u16GetTimeMs();
         vidExecuteTransition(enuNewMode);
     }
@@ -118,7 +118,7 @@ Std_ReturnType_t ModeManager_Process(void)
         u16CurrentTime = u16GetTimeMs();
         if((u16CurrentTime - u16TransitionStartTime) >= cu16MODE_TRANSITION_TIMEOUT) {
             strModeStatus.u8ErrorCode = cu8MODE_ERROR_TIMEOUT;
-            bIsTransitionInProgress = False;
+            bIsTransitionInProgress = FALSE;
             vidNotifyModeChange(MODE_ERROR);
         }
     }
@@ -128,9 +128,9 @@ Std_ReturnType_t ModeManager_Process(void)
 
 boolean ModeManager_bIsAllowedOperation(uint8_t u8OperationId)
 {
-    boolean bResult = False;
+    boolean bResult = FALSE;
     if(u8OperationId >= cu8OPERATION_COUNT) {
-        bResult = False;
+        bResult = FALSE;
     }
     
     switch(strModeStatus.enuCurrentMode) {
@@ -147,7 +147,7 @@ boolean ModeManager_bIsAllowedOperation(uint8_t u8OperationId)
             break;
             
         default:
-            bResult = False;
+            bResult = FALSE;
             break;
     }
 
@@ -224,7 +224,7 @@ static void vidExecuteTransition(ModeState_t enuNewMode) {
     /* Notify other modules about mode change */
     vidNotifyModeChange(enuNewMode);
     
-    bIsTransitionInProgress = False;
+    bIsTransitionInProgress = FALSE;
 }
 
 static ModeState_t enuReadModeSwitches(void) {

@@ -15,7 +15,7 @@ static DiagEventLog_t astrEventLog[cu8MAX_EVENT_LOG_SIZE];
 static uint8_t u8EventLogIndex = 0;
 static DiagComponentStatus_t astrComponentStatus[6];  /* One for each component */
 static DiagMaintenanceData_t strMaintenanceData;
-static boolean bInitialized = False;
+static boolean bInitialized = FALSE;
 static uint16_t u16LastHealthCheck = 0;
 
 /* Private Function Declarations */
@@ -49,7 +49,7 @@ Std_ReturnType_t Diagnostics_Init(void)
     strMaintenanceData.u16DoorCycles = 0;
     strMaintenanceData.u16TravelCycles = 0;
     strMaintenanceData.u16OperatingTime = 0;
-    strMaintenanceData.bMaintenanceNeeded = False;
+    strMaintenanceData.bMaintenanceNeeded = FALSE;
     
     /* Clear event log */
     for(u8Index = 0; u8Index < cu8MAX_EVENT_LOG_SIZE; u8Index++)
@@ -61,7 +61,7 @@ Std_ReturnType_t Diagnostics_Init(void)
     
     u8EventLogIndex = 0;
     u16LastHealthCheck = u16GetTimeMs();
-    bInitialized = True;
+    bInitialized = TRUE;
     
     /* Log system initialization */
     vidLogEvent(DIAG_EVENT_SYSTEM_RESET, 0);
@@ -175,7 +175,7 @@ static void vidCheckMaintenanceStatus(void)
     {
         if(!strMaintenanceData.bMaintenanceNeeded)
         {
-            strMaintenanceData.bMaintenanceNeeded = True;
+            strMaintenanceData.bMaintenanceNeeded = TRUE;
             vidLogEvent(DIAG_EVENT_MAINTENANCE_DUE, 0);
         }
     }
@@ -249,9 +249,9 @@ static boolean bIsErrorCritical(DiagError_t enuError)
         case DIAG_ERR_STOP_ACTIVATED:
         case DIAG_ERR_LOCK_FAULT:
         case DIAG_ERR_OVERLOAD:
-            return True;
+            return TRUE;
         default:
-            return False;
+            return FALSE;
     }
 }
 

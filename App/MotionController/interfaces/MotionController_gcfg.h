@@ -19,6 +19,7 @@ typedef enum {
     MOTION_STATE_MOVING_UP_LS,    /* Moving Up Low Speed */
     MOTION_STATE_MOVING_DOWN_HS,  /* Moving Down High Speed */
     MOTION_STATE_MOVING_DOWN_LS,  /* Moving Down Low Speed */
+    MOTION_STATE_STOPPING,        /* Stopping motion */
     MOTION_STATE_ERROR
 } MotionState_t;
 

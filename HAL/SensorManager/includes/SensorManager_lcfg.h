@@ -9,7 +9,7 @@
 #endif
 
 /* Sensor debounce value */
-#define cu8SENSOR_DEBOUNCE_COUNTER  ((uint8_t) 5U)
+#define cu8SENSOR_DEBOUNCE_COUNTER  ((uint8_t) 1U)
 
 /* Multiplexer GPIO Configuration */
 typedef struct {

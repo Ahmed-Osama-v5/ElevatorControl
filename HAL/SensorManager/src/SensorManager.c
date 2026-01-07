@@ -1,18 +1,19 @@
 
+#define SensorManager_c
+
+
 #include "SensorManager_gcfg.h"
 #include "SystemConfig.h"
 #include "dio_types.h"
 
-#define SensorManager_c
 
 #include "SensorManager_lcfg.h"
 #include "SensorManager.h"
 #include "dio.h"
-#include "Timer.h"
 
 /* Private Variables */
 static SensorStatus_t strSensorStatus[cu8SENSOR_COUNT];
-static boolean bModuleInitialized = False;
+static boolean bModuleInitialized = FALSE;
 
 const MuxConfig_t cstrMux_Config = {
     .enuSelectPin1_Port = GPIOB,
@@ -36,7 +37,7 @@ Std_ReturnType_t SensorManager_stdInit(void) {
     Std_ReturnType_t stdResult = E_OK;
     uint8_t u8I;
     
-    if(bModuleInitialized == True) {
+    if(bModuleInitialized == TRUE) {
         return E_NOT_OK;
     }
 
@@ -56,11 +57,12 @@ Std_ReturnType_t SensorManager_stdInit(void) {
     dio_config.u8Pin = cstrMux_Config.u8SelectPin3_Pin;
     DIO_Init(&dio_config);
     
+    /* Initialize GPIO for multiplexer outputs */
     dio_config.enuGPIO = cstrMux_Config.enuOutput0_Port;
     dio_config.u8Pin = cstrMux_Config.u8Output0_Pin;
+    dio_config.enuPinDir = DIR_INPUT;
     DIO_Init(&dio_config);
     
-    /* Initialize GPIO for multiplexer outputs */
     dio_config.enuGPIO = cstrMux_Config.enuOutput1_Port;
     dio_config.u8Pin = cstrMux_Config.u8Output1_Pin;
     dio_config.enuPinDir = DIR_INPUT;
@@ -72,7 +74,7 @@ Std_ReturnType_t SensorManager_stdInit(void) {
         strSensorStatus[u8I].u8ActiveCounter = 0;
     }
     
-    bModuleInitialized = True;
+    bModuleInitialized = TRUE;
     return stdResult;
 }
 
@@ -101,29 +103,15 @@ Std_ReturnType_t SensorManager_stdReadSensor(Sensor_t enuSensorId, PinState_t* p
     /* Read multiplexer output */
     stdResult = stdReadMuxOutput(u8MuxNumber, &enuReadState);
 
-    /* Debounce read status */
-    if(enuReadState == cu8SENSOR_STATE_INACTIVE)
+    if(enuReadState != STATE_LOW)
     {
-        strSensorStatus[enuSensorId].u8ActiveCounter = 0;
-        strSensorStatus[enuSensorId].enuSensorState = cu8SENSOR_STATE_INACTIVE;
-        
         /* Update sensor state */
-        *penuSensorState = cu8SENSOR_STATE_INACTIVE;
+        *penuSensorState = cu8SENSOR_STATE_ACTIVE;
     }
     else
     {
-        if(strSensorStatus[enuSensorId].u8ActiveCounter >= cu8SENSOR_DEBOUNCE_COUNTER)
-        {
-            strSensorStatus[enuSensorId].enuSensorState = cu8SENSOR_STATE_ACTIVE;
-            strSensorStatus[enuSensorId].u8ActiveCounter = 0;
-            
-            /* Update sensor state */
-            *penuSensorState = cu8SENSOR_STATE_ACTIVE;
-        }
-        else
-        {
-            strSensorStatus[enuSensorId].u8ActiveCounter++;
-        }
+        /* Update sensor state */
+        *penuSensorState = cu8SENSOR_STATE_INACTIVE;
     }
 
     return stdResult;
@@ -146,25 +134,6 @@ static Std_ReturnType_t stdReadMuxOutput(uint8_t u8MuxNumber, PinState_t* penuSt
     }
     
     return E_OK;
-}
-
-Std_ReturnType_t SensorManager_stdReadAllSensors(void) {
-    uint8_t u8I;
-    PinState_t enuState;
-    Std_ReturnType_t stdResult = E_OK;
-    
-    for(u8I = 0; u8I < cu8SENSOR_COUNT; u8I++) {
-        if(SensorManager_stdReadSensor(u8I, &enuState) != E_OK) {
-            stdResult = E_NOT_OK;
-        }
-    }
-    
-    return stdResult;
-}
-
-uint8_t SensorManager_u8GetSensorCounter(Sensor_t enuSensorId)
-{
-    return strSensorStatus[enuSensorId].u8ActiveCounter;
 }
 
 inline char* toString(Sensor_t enuSensorId)

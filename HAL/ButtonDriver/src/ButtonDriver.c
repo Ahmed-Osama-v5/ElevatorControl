@@ -15,7 +15,6 @@
 /* Set Ownership                                                            */
 /* ************************************************************************ */
 
-#include "dio_types.h"
 #define ButtonDriver_C
 
 /* ************************************************************************ */
@@ -58,14 +57,20 @@
 
 void ButtonDriver_vidInit (void)
 {
-    /* Do nothing */
+    Dio_Cfg_t stDioCfg;
+    /* Initialize the DIO configuration structure */
+    stDioCfg.enuPinDir = DIR_INPUT; // Set pin direction to input
+    stDioCfg.enuGPIO = enuBTN_INPUT_GPIO; // Set the GPIO port
+    stDioCfg.u8Pin = cu8BTN_INPUT_PIN; // Set the pin number
+    /* Initialize the DIO pin */
+    DIO_Init(&stDioCfg);
 }
 
 /* Main Functions ********************************************************* */
 boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
 {
     /* Return value variable */
-    boolean bBtnPressed = False;
+    boolean bBtnPressed = FALSE;
     
     /* Sensor state variable */
     PinState_t enuSensorState = STATE_LOW;
@@ -79,14 +84,15 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_LOW)
             {
-                bBtnPressed = True; // Button is pressed
+                bBtnPressed = TRUE; // Button is pressed
             }
             else
             {
-                bBtnPressed = False; // Button is not pressed
+                bBtnPressed = FALSE; // Button is not pressed
             }
+            _delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
             break;
         case BTN_DN:
             // Select CALL_10 input
@@ -95,14 +101,15 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_LOW)
             {
-                bBtnPressed = True; // Button is pressed
+                bBtnPressed = TRUE; // Button is pressed
             }
             else
             {
-                bBtnPressed = False; // Button is not pressed
+                bBtnPressed = FALSE; // Button is not pressed
             }
+            _delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
             break;
         case BTN_OK:
             // Select CALL_8 input
@@ -111,31 +118,31 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) == STATE_LOW)
             {
-                bBtnPressed = True; // Button is pressed
+                bBtnPressed = TRUE; // Button is pressed
             }
             else
             {
-                bBtnPressed = False; // Button is not pressed
+                bBtnPressed = FALSE; // Button is not pressed
             }
             break;
         case BTN_PRG:
             (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
             if(enuSensorState == cu8SENSOR_STATE_ACTIVE)
             {
-                bBtnPressed = True; // Button is pressed
+                bBtnPressed = TRUE; // Button is pressed
             }
             else
             {
-                bBtnPressed = False; // Button is not pressed
+                bBtnPressed = FALSE; // Button is not pressed
             }
             break;
         default:
-            bBtnPressed = False; // Invalid button ID
+            bBtnPressed = FALSE; // Invalid button ID
             break;
     }
-    _delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
+    //_delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
     return bBtnPressed;
 }
 /* ************************************************************************ */
@@ -143,7 +150,7 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
 boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
 {
     /* Return value variable */
-    boolean bBtnReleased = False;
+    boolean bBtnReleased = FALSE;
     
     /* Sensor state variable */
     PinState_t enuSensorState = STATE_LOW;
@@ -157,13 +164,13 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_LOW)
             {
-                bBtnReleased = True; // Button is released
+                bBtnReleased = TRUE; // Button is released
             }
             else
             {
-                bBtnReleased = False; // Button is not released
+                bBtnReleased = FALSE; // Button is not released
             }
             break;
         case BTN_DN:
@@ -173,13 +180,13 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_LOW)
             {
-                bBtnReleased = True; // Button is released
+                bBtnReleased = TRUE; // Button is released
             }
             else
             {
-                bBtnReleased = False; // Button is not released
+                bBtnReleased = FALSE; // Button is not released
             }
             break;
         case BTN_OK:
@@ -189,31 +196,31 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
             DIO_WritePin(SEL_3_GPIO, SEL_3_PIN, STATE_LOW);
             _delay_ms(1); // Wait for the sensor to stabilize
             // Read the sensor state
-            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_HIGH)
+            if(DIO_ReadPin(enuBTN_INPUT_GPIO, cu8BTN_INPUT_PIN) != STATE_LOW)
             {
-                bBtnReleased = True; // Button is released
+                bBtnReleased = TRUE; // Button is released
             }
             else
             {
-                bBtnReleased = False; // Button is not released
+                bBtnReleased = FALSE; // Button is not released
             }
             break;
         case BTN_PRG:
             (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
             if(enuSensorState == cu8SENSOR_STATE_INACTIVE)
             {
-                bBtnReleased = True; // Button is released
+                bBtnReleased = TRUE; // Button is released
             }
             else
             {
-                bBtnReleased = False; // Button is not released
+                bBtnReleased = FALSE; // Button is not released
             }
             break;
         default:
-            bBtnReleased = False; // Invalid button ID
+            bBtnReleased = FALSE; // Invalid button ID
             break;
     }
-    _delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
+    //_delay_ms(cu8BUTTON_DEFAULT_DEBOUNCE_TIME); // Debounce delay
     return bBtnReleased;
 }
 /* ************************************************************************ */

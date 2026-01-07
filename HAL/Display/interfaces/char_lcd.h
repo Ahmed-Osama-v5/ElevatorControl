@@ -12,28 +12,10 @@
 //*****************************************************************************
 #ifndef CHAR_LCD_H_
 #define CHAR_LCD_H_
-#ifndef F_CPU
- #define F_CPU	8000000UL
- #endif
+
 #include "char_lcd_gcfg.h"
 #include "dio.h"
 
-#ifndef LCD_RS_PIN
-#define LCD_RS_PIN	0 	//define MCU pin connected to LCD RS
-#endif
-#ifndef LCD_RS_GPIO
-#define LCD_RS_GPIO	GPIOB
-#endif
-
-#ifndef LCD_EN_PIN
-#define LCD_EN_PIN	1	//define MCU pin connected to LCD E
-#endif
-#ifndef LCD_EN_GPIO
-#define LCD_EN_GPIO	GPIOB
-#endif
-
-#define LCD_DATA_DDR	DDRA
-#define LCD_DATA_PORT	GPIOA
 
 /* LCD Commands definition */
 #define Lcd_clear           	(0x01)
@@ -63,12 +45,13 @@
 
 
 void LCD_EN_pulse(void);
+void LCD_send_nibble(uint8_t data);
 void LCD_send_char(char data);		//forms data ready to send to LCD
 void LCD_send_command(uint8_t data);	//forms command ready to send to LCD
 void LCD_init(void);			//Initializes LCD
 void LCD_clear(void);				//Clears LCD
 void LCD_send_string(const char* data);	//Outputs string to LCD
-void LCD_goto_xy(uint8_t Col, uint8_t Line);	//Cursor to X Y position
+void LCD_goto_xy(uint8_t Line, uint8_t Col);	//Cursor to X Y position
 void LCD_send_int(uint16_t var, uint8_t numOfDigits);
 
 

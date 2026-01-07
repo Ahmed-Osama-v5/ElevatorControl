@@ -20,10 +20,6 @@ typedef struct {
 /* Function Declarations */
 extern Std_ReturnType_t SensorManager_stdInit(void);
 extern Std_ReturnType_t SensorManager_stdReadSensor(Sensor_t enuSensorId, PinState_t* penuSensorState);
-extern Std_ReturnType_t SensorManager_stdReadAllSensors(void);
-extern Std_ReturnType_t SensorManager_stdGetSensorStatus(Sensor_t enuSensorId, SensorStatus_t* pstrStatus);
-extern Std_ReturnType_t SensorManager_stdProcess(void);
-uint8_t SensorManager_u8GetSensorCounter(Sensor_t enuSensorId);
 
 inline char* toString(Sensor_t enuSensorId);
 

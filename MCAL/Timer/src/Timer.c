@@ -101,13 +101,11 @@ void Timer_Init(Timer_cfg_t* strTimer_cfg)
   * Description: This function starts the needed timer.
   *
   */
-void Timer_Start(TimerChan_t enuTimerCH, uint16_t u16Timer_Count)
+void Timer_Start(TimerChan_t enuTimerCH)
 {
     switch(enuTimerCH)
     {
     case(TIMER_CH0):
-        //TCNT0 = (0xFF - (uint8)Timer_Count); /* pre-load timer */
-        TCNT0 = (uint8_t)u16Timer_Count; /* pre-load timer */
         /* set prescaler */
         switch (gsau8_preScaler[enuTimerCH])
         {
@@ -142,7 +140,6 @@ void Timer_Start(TimerChan_t enuTimerCH, uint16_t u16Timer_Count)
         }
         break;
     case(TIMER_CH1):
-        TCNT1 = (0xFFFF - u16Timer_Count); /* pre-load timer */
         /* set prescaler */
         switch (gsau8_preScaler[enuTimerCH])
         {
@@ -177,7 +174,6 @@ void Timer_Start(TimerChan_t enuTimerCH, uint16_t u16Timer_Count)
         }
         break;
     case(TIMER_CH2):
-        TCNT2 = (0xFF - (uint8_t)u16Timer_Count); /* pre-load timer */
         /* set prescaler */
         switch (gsau8_preScaler[enuTimerCH])
         {

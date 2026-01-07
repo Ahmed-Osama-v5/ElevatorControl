@@ -35,12 +35,10 @@
 /* Multiplexer Output Pins */
 /* SEN_1_OUT */
 #define cu8MUX1_OUT_PIN          ((uint8_t) 0U)
+
 /* SEN_0_OUT */
 #define cu8MUX2_OUT_PIN          ((uint8_t) 1U)
 
-/* Sensor Read Status */
-#define cu8SENSOR_READ_OK         ((uint8_t) 0U)
-#define cu8SENSOR_READ_ERROR      ((uint8_t) 1U)
 
 /* Sensor States */
 #define cu8SENSOR_STATE_ACTIVE    ((uint8_t) STATE_HIGH)

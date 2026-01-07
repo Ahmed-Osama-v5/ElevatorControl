@@ -26,22 +26,74 @@ void LCD_EN_pulse(void)
 	DIO_WritePin(LCD_EN_GPIO, LCD_EN_PIN, STATE_LOW);
 }
 
+void LCD_send_nibble(uint8_t data)
+{
+	uint8_t mask = 1;
+	data >>= 4;
+	if(data&mask)
+		DIO_WritePin(LCD_D4_GPIO, LCD_D4_PIN, STATE_HIGH);
+	else
+		DIO_WritePin(LCD_D4_GPIO, LCD_D4_PIN, STATE_LOW);
+
+	mask *= 2;
+	if(data&mask)
+		DIO_WritePin(LCD_D5_GPIO, LCD_D5_PIN, STATE_HIGH);
+	else
+		DIO_WritePin(LCD_D5_GPIO, LCD_D5_PIN, STATE_LOW);
+
+	mask *= 2;
+	if(data&mask)
+		DIO_WritePin(LCD_D6_GPIO, LCD_D6_PIN, STATE_HIGH);
+	else
+		DIO_WritePin(LCD_D6_GPIO, LCD_D6_PIN, STATE_LOW);
+
+	mask *= 2;
+	if(data&mask)
+		DIO_WritePin(LCD_D7_GPIO, LCD_D7_PIN, STATE_HIGH);
+	else
+		DIO_WritePin(LCD_D7_GPIO, LCD_D7_PIN, STATE_LOW);
+}
+
 void LCD_send_char(char data)
 {
 	DIO_WritePin(LCD_RS_GPIO, LCD_RS_PIN, STATE_HIGH);
+	
+	#if (LCD_MODE == LCD_FOUR_BIT)
+	LCD_send_nibble(data);
+	LCD_EN_pulse();
 
+	LCD_send_nibble(data<<4);
+	LCD_EN_pulse();
+	DIO_WritePort(LCD_DATA_PORT, 0);
+
+	#elif (LCD_MODE == LCD_EIGHT_BIT)
 	DIO_WritePort(LCD_DATA_PORT, data);
 	LCD_EN_pulse();
 	DIO_WritePort(LCD_DATA_PORT, 0);
+	#else
+		#error "Invalid LCD_MODE configuration"
+	#endif
 	_delay_ms(5);
 }
 void LCD_send_command(uint8_t data)
 {
 	DIO_WritePin(LCD_RS_GPIO, LCD_RS_PIN, STATE_LOW);
 	
+	#if (LCD_MODE == LCD_FOUR_BIT)
+	LCD_send_nibble(data);
+	LCD_EN_pulse();
+
+	LCD_send_nibble(data<<4);
+	LCD_EN_pulse();
+	DIO_WritePort(LCD_DATA_PORT, 0);
+
+	#elif (LCD_MODE == LCD_EIGHT_BIT)
 	DIO_WritePort(LCD_DATA_PORT, data);
 	LCD_EN_pulse();
 	DIO_WritePort(LCD_DATA_PORT, 0);
+	#else
+		#error "Invalid LCD_MODE configuration"
+	#endif
 	_delay_ms(5);
 }
 void LCD_init(void)
@@ -66,7 +118,28 @@ void LCD_init(void)
 
 	LCD_send_command(Lcd_clear);
 	_delay_ms(5);
+
+	#if (LCD_MODE == LCD_FOUR_BIT)
+	LCD_send_command(0x33);
+	_delay_ms(20);
+	LCD_send_command(0x32);
+	_delay_ms(20);
+	LCD_send_command(Four_bit);
+	_delay_ms(20);
+	LCD_send_command(Cursor_on);
+	_delay_ms(20);
+	LCD_send_command(Lcd_clear);
+	_delay_ms(20);
+	LCD_send_command(Increment_cursor);
+	_delay_ms(20);
+	LCD_send_command(Cursor_off);
+	_delay_ms(20);
+
+	#elif (LCD_MODE == LCD_EIGHT_BIT)
 	LCD_send_command(Eight_bit);
+	#else
+		#error "Invalid LCD_MODE configuration"
+	#endif
 	_delay_us(50);
 	LCD_send_command(Cursor_off);
 	_delay_us(50);
@@ -83,7 +156,7 @@ void LCD_send_string(const char* data)
 	}
 }
 
-void LCD_goto_xy(uint8_t Col, uint8_t Line)
+void LCD_goto_xy(uint8_t Line, uint8_t Col)
 {
 	uint8_t DDRAMAddr;
 	// remap lines into proper order

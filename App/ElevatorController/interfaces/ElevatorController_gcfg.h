@@ -4,6 +4,8 @@
 #include "Std_Types.h"
 #include "SystemConfig.h"
 
+#define DOOR_OPEN_TIME_MS  3000 // Time in milliseconds for door to stay open
+
 typedef enum
 {
     DOOR_MANUAL,
@@ -27,9 +29,11 @@ typedef enum
 
 typedef enum
 {
+    MODE_INIT,
     MODE_NORMAL,
     MODE_PROGRAM,
-    MODE_MAINTENANCE
+    MODE_MAINTENANCE,
+    MODE_ERROR
 }OperatingMode_t;
 
 typedef struct
@@ -40,8 +44,8 @@ typedef struct
     DoorState_t enuDoorState;
     OperatingMode_t enuOperatingMode;
     boolean bFloorCalls[cu8MAX_FLOORS];
-    CallType_t enuCallTypes[cu8MAX_FLOORS];
-    FloorLED_t strFloorLEDs[cu8MAX_FLOORS];
+    //CallType_t enuCallTypes[cu8MAX_FLOORS];
+    //FloorLED_t strFloorLEDs[cu8MAX_FLOORS];
     uint16_t u16DoorTimer;
     boolean bEmergencyStop;
 } Elevator_t;

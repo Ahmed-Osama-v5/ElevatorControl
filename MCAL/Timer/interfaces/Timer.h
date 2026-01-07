@@ -32,7 +32,7 @@ void Timer_Init(Timer_cfg_t* strTimer_cfg);
   * Description: This function strats the needed timer.
   * 							
   */
-void Timer_Start(TimerChan_t enuTimerCH, uint16_t u16Timer_Count);
+void Timer_Start(TimerChan_t enuTimerCH);
  
  /**
   * Input: 

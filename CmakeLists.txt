@@ -23,15 +23,21 @@ add_subdirectory(App/LEDController)
 add_subdirectory(App/ModeManager)
 add_subdirectory(App/MotionController)
 
+#EventProcessor
+#add_subdirectory(EventProcessor)
+
 #HAL
 add_subdirectory(HAL/ButtonDriver)
 add_subdirectory(HAL/Display)
+add_subdirectory(HAL/I2C_LCD)
+add_subdirectory(HAL/SoftI2C)
 add_subdirectory(HAL/SensorManager)
 add_subdirectory(HAL/RelayManager)
 add_subdirectory(HAL/SegmentDriver)
 
 #MCAL
 add_subdirectory(MCAL/Dio)
+add_subdirectory(MCAL/EepD)
 add_subdirectory(MCAL/Timer)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
@@ -50,10 +56,15 @@ target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/App/ModeManager/interfaces
     ${CMAKE_SOURCE_DIR}/App/MotionController/includes
     ${CMAKE_SOURCE_DIR}/App/MotionController/interfaces
+    ${CMAKE_SOURCE_DIR}/EventProcessor/includes
+    ${CMAKE_SOURCE_DIR}/EventProcessor/interfaces
+    ${CMAKE_SOURCE_DIR}/Common
     ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/includes
     ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/Display/includes
     ${CMAKE_SOURCE_DIR}/HAL/Display/interfaces
+    ${CMAKE_SOURCE_DIR}/HAL/I2C_LCD/interfaces
+    ${CMAKE_SOURCE_DIR}/HAL/SoftI2C/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/SensorManager/includes
     ${CMAKE_SOURCE_DIR}/HAL/SensorManager/interfaces
     ${CMAKE_SOURCE_DIR}/HAL/RelayManager/includes
@@ -62,6 +73,8 @@ target_include_directories(${PROJECT_NAME}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/HAL/SegmentDriver/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Dio/includes
+    ${CMAKE_SOURCE_DIR}/MCAL/EepD/interfaces
+    ${CMAKE_SOURCE_DIR}/MCAL/EepD/includes
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/includes
 )

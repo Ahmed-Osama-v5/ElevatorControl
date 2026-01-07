@@ -42,7 +42,7 @@ Std_ReturnType_t MotionController_stdInit(void)
     strMotionStatus.u8TargetFloor = 1U;
     strMotionStatus.u8CurrentFloor = 1U;
     strMotionStatus.u16LastMotionTime = 0U;
-    strMotionStatus.bInitialized = True;
+    strMotionStatus.bInitialized = TRUE;
     
     return stdRetVal;
 }
@@ -68,7 +68,7 @@ Std_ReturnType_t MotionController_stdExecuteCommand(MotionCommand_t enuCommand)
     switch (enuCommand)
     {
         case MOTION_CMD_STOP:
-            vidControlRelays(False, False, False, False);
+            vidControlRelays(FALSE, FALSE, FALSE, FALSE);
             strMotionStatus.enuCurrentState = MOTION_STATE_IDLE;
             break;
             
@@ -76,7 +76,7 @@ Std_ReturnType_t MotionController_stdExecuteCommand(MotionCommand_t enuCommand)
             if (strMotionStatus.u8CurrentFloor < strMotionStatus.u8TargetFloor)
             {
                 /* Start moving up at high speed */
-                vidControlRelays(True, False, False, True);
+                vidControlRelays(TRUE, FALSE, FALSE, TRUE);
                 strMotionStatus.enuCurrentState = MOTION_STATE_MOVING_UP_HS;
                 strMotionStatus.u16LastMotionTime = u16GetTimeMs();
             }
@@ -86,7 +86,7 @@ Std_ReturnType_t MotionController_stdExecuteCommand(MotionCommand_t enuCommand)
             if (strMotionStatus.u8CurrentFloor > strMotionStatus.u8TargetFloor)
             {
                 /* Start moving down at high speed */
-                vidControlRelays(False, True, False, True);
+                vidControlRelays(FALSE, TRUE, FALSE, TRUE);
                 strMotionStatus.enuCurrentState = MOTION_STATE_MOVING_DOWN_HS;
                 strMotionStatus.u16LastMotionTime = u16GetTimeMs();
             }
@@ -127,7 +127,7 @@ Std_ReturnType_t MotionController_stdProcess(void)
             if (bIsTargetFloorReached())
             {
                 /* Switch to low speed */
-                vidControlRelays(True, False, True, False);
+                vidControlRelays(TRUE, FALSE, TRUE, FALSE);
                 strMotionStatus.enuCurrentState = MOTION_STATE_MOVING_UP_LS;
             }
             break;
@@ -143,7 +143,7 @@ Std_ReturnType_t MotionController_stdProcess(void)
             if (bIsTargetFloorReached())
             {
                 /* Switch to low speed */
-                vidControlRelays(False, True, True, False);
+                vidControlRelays(FALSE, TRUE, TRUE, FALSE);
                 strMotionStatus.enuCurrentState = MOTION_STATE_MOVING_DOWN_LS;
             }
             break;
@@ -203,26 +203,26 @@ static void vidControlRelays(boolean bUp, boolean bDown, boolean bLS, boolean bH
 
 static boolean bIsTargetFloorReached(void)
 {
-    uint8_t u8SensorState;
+    PinState_t enuReadState;
     
     /* Read floor sensor for target floor */
-    SensorManager_stdReadSensor(cu8SENSOR_SELECTOR, &u8SensorState);
-    return (u8SensorState == cu8SENSOR_STATE_ACTIVE);
+    SensorManager_stdReadSensor(cu8SENSOR_SELECTOR, &enuReadState);
+    return (enuReadState == cu8SENSOR_STATE_ACTIVE);
 }
 
 static boolean bIsFloorMarkReached(void)
 {
-    uint8_t u8SensorState;
-    
+    PinState_t enuReadState;
+
     /* Read floor mark sensor */
-    SensorManager_stdReadSensor(cu8SENSOR_FLOOR_M, &u8SensorState);
-    return (u8SensorState == cu8SENSOR_STATE_ACTIVE);
+    SensorManager_stdReadSensor(cu8SENSOR_FLOOR_M, &enuReadState);
+    return (enuReadState == cu8SENSOR_STATE_ACTIVE);
 }
 
 static void vidUpdateCurrentFloor(void)
 {
-    uint8_t u8SensorState;
-    
+    PinState_t enuReadState;
+
     /* Update current floor based on floor mark sensor */
     if (bIsFloorMarkReached())
     {

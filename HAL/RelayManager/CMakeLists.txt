@@ -2,7 +2,7 @@ set(MODULE_NAME RelayManager)
 
 # Collect driver sources
 file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
-    "RelayManager.c",
+    "RelayManager.c"
     "RelayManager_lcfg.c"
 )
 

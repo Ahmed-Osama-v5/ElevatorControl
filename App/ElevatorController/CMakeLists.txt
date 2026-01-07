@@ -13,4 +13,19 @@ target_include_directories(${MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
 )
 
-target_link_libraries(${MODULE_NAME} PUBLIC CallHandler LEDController Timer)
+target_link_libraries(${MODULE_NAME} PUBLIC 
+    ModeManager
+    CallHandler
+    LEDController
+    MotionController
+    Diagnostics
+
+    ButtonDriver
+    Display
+    SensorManager
+    RelayManager
+    SegmentDriver
+
+    EepD
+    Timer
+)

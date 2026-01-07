@@ -2,7 +2,7 @@ set(MODULE_NAME SegmentDriver)
 
 # Collect driver sources
 file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
-    "SegmentDriver.c",
+    "SegmentDriver.c"
     "SegmentDriver_lcfg.c"
 )
 

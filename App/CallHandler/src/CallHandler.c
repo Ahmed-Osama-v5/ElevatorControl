@@ -1,302 +1,282 @@
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        (C) Copyright 2026 by                             */
+/*                                 HexaMix                                  */
+/*                         All rights reserved                              */
+/*           This software is the exclusive property of HexaMix.            */
+/*   It cannot be communicated or divulged to anybody without a previous    */
+/*  written authorisation.                                                  */
+/*                                                                          */
+/*     Any partial or complete copy of this program whether it is in its    */
+/*   original shape or in its modified shape has to mention this copyright  */
+/*  and its proprietor.                                                     */
+/*                                                                          */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        FILE INCLUSION MANAGEMENT                         */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Set Ownership                                                            */
+/* ************************************************************************ */
 
 #define CallHandler_c
 
-#include "Std_Types.h"
+/* ************************************************************************ */
+/* Header Inclusions                                                        */
+/* ************************************************************************ */
 
-#include "CallHandler_lcfg.h"
+/* standard and platform dependent types ********************************** */
+
+#include "std_types.h"
+
+/* other components of the project **************************************** */
+
+#include "dio.h"
 #include "ElevatorController.h"
 
+/* own header inclusions ************************************************** */
+
+/* access to its own exports */
 #include "CallHandler.h"
 
+/* access to the modul's local configuration */
+#include "CallHandler_lcfg.h"
 
-static CallHandler_t callHandler;
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                     LOCAL FUNCTIONS PROTOTYPES                           */
+/* ************************************************************************ */
+/* ************************************************************************ */
 
-// Private function declarations
-static boolean bQueue_is_empty(const CallQueue_t* cpstrQueue);
-static boolean bQueue_is_full(const CallQueue_t* cpstrQueue);
-static void vidQueue_enqueue(CallQueue_t* pstrQueue, uint8_t u8Floor, CallType_t enuCallType);
-static ElevatorCall_t* pstrQueue_peek(CallQueue_t* pstrQueue);
-static void vidQueue_dequeue(CallQueue_t* pstrQueue);
-static void vidUpdate_led_state(uint8_t u8Floor, CallType_t enuCallType);
-static void vidProcess_led_blink(uint8_t u8Floor);
-static boolean bShould_accept_call(uint8_t u8Floor, MoveDirection_t enuDirection, CallType_t enuCallType);
+/* Calls scanner */
+/**
+ * @brief Get the Call object
+ * 
+ * @param enuCallType 
+ * @return uint8_t 
+ */
+static uint8_t u8GetCall(CallType_t enuCallType);
 
-void  *my_memset(void *b, int c, int len);
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                          EXPORTED FUNCTIONS                              */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Basic Services                                                           */
+/* ************************************************************************ */
 
+/* ************************************************************************ */
+/* Initialise the component. */
+/**
+ * @brief This function initializes the CallHandler component.
+ * 
+ */
 void CallHandler_vidInit(void)
 {
-    uint8_t i;
+    /* Initialize Call inputs DIOs */
+    Dio_Cfg_t dio_config = {
+        .enuGPIO = cstrCallDio_Config.enuCALL_0_Port,
+        .u8Pin = cstrCallDio_Config.u8CALL_0_Pin,
+        .enuPinDir = DIR_INPUT
+    };
+    DIO_Init(&dio_config);
 
-    // Initialize call queues
-    (void) my_memset(&callHandler, 0, sizeof(callHandler));
-    
-    // Initialize LED states
-    for(i = 0; i < cu8MAX_FLOORS; i++) {
-        callHandler.strLedStates[i].bIsBlinking = False;
-        callHandler.strLedStates[i].u16LastToggle = 0;
-        callHandler.strLedStates[i].bCurrentState = False;
-        callHandler.strLedStates[i].u8DutyPercent = cu8LED_INT_DUTY_CYCLE;
-    }
+    dio_config.enuGPIO = cstrCallDio_Config.enuCALL_1_Port;
+    dio_config.u8Pin = cstrCallDio_Config.u8CALL_1_Pin;
+    DIO_Init(&dio_config);
+
+    dio_config.enuGPIO = cstrCallDio_Config.enuCALL_CON_Port;
+    dio_config.u8Pin = cstrCallDio_Config.u8CALL_CON_Pin;
+    dio_config.enuPinDir = DIR_OUTPUT;
+    DIO_Init(&dio_config);
 }
 
-void CallHandler_vidProcess(Elevator_t* pstrElevator)
+/* ************************************************************************ */
+/* Call Services                                                            */
+/* ************************************************************************ */
+/**
+ * @brief scans call inputs and register a call in the output param.
+ * 
+ * @param pstrCall struct holding call info.
+ */
+void CallHandler_vidGetCall(Call_t* cpstrCall)
 {
-    uint16_t u16CurrentTime = elevator_hal_u16Get_time_ms();
-    
-    // Process call queues based on direction
-    CallQueue_t* pstrActiveQueue = (pstrElevator->enuDirection == DIR_UP) ? 
-                            &callHandler.strUpCalls : &callHandler.strDownCalls;
-    
-    // Check if we need to change direction
-    if(bQueue_is_empty(pstrActiveQueue)) {
-        if(pstrElevator->enuDirection == DIR_UP && CallHandler_bHas_calls_below(pstrElevator->u8CurrentFloor)) {
-            pstrElevator->enuDirection = DIR_DOWN;
-            pstrActiveQueue = &callHandler.strDownCalls;
-        }
-        else if(pstrElevator->enuDirection == DIR_DOWN && CallHandler_bHas_calls_above(pstrElevator->u8CurrentFloor)) {
-            pstrElevator->enuDirection = DIR_UP;
-            pstrActiveQueue = &callHandler.strUpCalls;
-        }
-        else {
-            pstrElevator->enuDirection = DIR_IDLE;
-        }
-    }
-    
-    // Process LEDs
-    CallHandler_vidProcess_leds();
-}
-
-boolean CallHandler_bRegister_call(uint8_t u8Floor, CallType_t enuCallType, MoveDirection_t enuDirection)
-{
-    if(u8Floor >= cu8MAX_FLOORS) {
-        return False;
-    }
-    
-    // Don't accept calls for current floor if door is open
-    if(elevator_hal_bRead_floor_sensor(u8Floor) && 
-        elevator_hal_bRead_door_open_sensor()) {
-        return False;
-    }
-    
-    // Determine which queue to use
-    CallQueue_t* pstrTargetQueue = (enuDirection == DIR_UP) ? 
-                           &callHandler.strUpCalls : &callHandler.strDownCalls;
-    
-    if(!bQueue_is_full(pstrTargetQueue)) {
-        vidQueue_enqueue(pstrTargetQueue, u8Floor, enuCallType);
-        vidUpdate_led_state(u8Floor, enuCallType);
-        return True;
-    }
-    
-    return False;
-}
-
-void CallHandler_vidClear_call(uint8_t u8Floor)
-{
-    uint8_t u8I, u8J;
-    // Clear calls from both queues for this floor
-    CallQueue_t* pstrQueues[] = {&callHandler.strUpCalls, &callHandler.strDownCalls};
-    
-    for(u8I = 0; u8I < 2; u8I++) {
-        CallQueue_t* pstrQueue = pstrQueues[u8I];
-        uint8_t size = pstrQueue->u8Size;
-        
-        for(u8J = 0; u8J < size; u8J++) {
-            ElevatorCall_t* pstrCall = pstrQueue_peek(pstrQueue);
-            if(pstrCall != NULL)
-            {
-                if(pstrCall && pstrCall->u8Floor == u8Floor) {
-                    vidQueue_dequeue(pstrQueue);
-                }
-                else
-                {
-                    /* Do nothing */
-                }
-            }
-            else
-            {
-                /* Do nothing */
-            }
-        }
-    }
-    
-    // Reset LED state for this floor
-    callHandler.strLedStates[u8Floor].bIsBlinking = False;
-    elevator_hal_vidSet_floor_led(u8Floor, False);
-}
-
-boolean CallHandler_bHas_calls_above(uint8_t u8CurrentFloor)
-{
-    uint8_t u8I, u8J;
-    CallQueue_t* pstrQueues[] = {&callHandler.strUpCalls, &callHandler.strDownCalls};
-    
-    for(u8I = 0; u8I < 2; u8I++) {
-        CallQueue_t* pstrQueue = pstrQueues[u8I];
-        uint8_t u8Size = pstrQueue->u8Size;
-        
-        for(u8J = 0; u8J < u8Size; u8J++) {
-            ElevatorCall_t* pstrCall = &pstrQueue->strCalls[(pstrQueue->u8Head + u8J) % cu8CALL_QUEUE_SIZE];
-            if(pstrCall->u8Floor > u8CurrentFloor) {
-                return True;
-            }
-        }
-    }
-    
-    return False;
-}
-
-boolean CallHandler_bHas_calls_below(uint8_t u8CurrentFloor)
-{
-    uint8_t u8I, u8J;
-    CallQueue_t* pstrQueues[] = {&callHandler.strUpCalls, &callHandler.strDownCalls};
-    
-    for(u8I = 0; u8I < 2; u8I++) {
-        CallQueue_t* pstrQueue = pstrQueues[u8I];
-        uint8_t u8Size = pstrQueue->u8Size;
-        
-        for(u8J = 0; u8J < u8Size; u8J++) {
-            ElevatorCall_t* pstrCall = &pstrQueue->strCalls[(pstrQueue->u8Head + u8J) % cu8CALL_QUEUE_SIZE];
-            if(pstrCall->u8Floor < u8CurrentFloor) {
-                return True;
-            }
-        }
-    }
-    
-    return False;
-}
-
-uint8_t CallHandler_u8Get_next_floor(uint8_t u8CurrentFloor, MoveDirection_t enuDirection)
-{
-    uint8_t u8I;
-    CallQueue_t* pstrActiveQueue = (enuDirection == DIR_UP) ? 
-                            &callHandler.strUpCalls : &callHandler.strDownCalls;
-    
-    if(bQueue_is_empty(pstrActiveQueue)) {
-        return u8CurrentFloor;
-    }
-    
-    if(enuDirection == DIR_UP) {
-        uint8_t u8NextFloor = cu8MAX_FLOORS;
-        for(u8I = 0; u8I < pstrActiveQueue->u8Size; u8I++) {
-            ElevatorCall_t* pstrCall = &pstrActiveQueue->strCalls[(pstrActiveQueue->u8Head + u8I) % cu8CALL_QUEUE_SIZE];
-            if(pstrCall->u8Floor > u8CurrentFloor && pstrCall->u8Floor < u8NextFloor) {
-                u8NextFloor = pstrCall->u8Floor;
-            }
-        }
-        return u8NextFloor;
-    }
-    else {
-        uint8_t u8NextFloor = 0;
-        for(u8I = 0; u8I < pstrActiveQueue->u8Size; u8I++) {
-            ElevatorCall_t* pstrCall = &pstrActiveQueue->strCalls[(pstrActiveQueue->u8Head + u8I) % cu8CALL_QUEUE_SIZE];
-            if(pstrCall->u8Floor < u8CurrentFloor && pstrCall->u8Floor > u8NextFloor) {
-                u8NextFloor = pstrCall->u8Floor;
-            }
-        }
-        return u8NextFloor;
-    }
-}
-
-void CallHandler_vidProcess_leds(void)
-{
-    uint8_t u8Floor;
-    uint16_t u16CurrentTime = elevator_hal_u16Get_time_ms();
-    
-    // Process LED blinking for all floors
-    for(u8Floor = 0; u8Floor < cu8MAX_FLOORS; u8Floor++) {
-        if(callHandler.strLedStates[u8Floor].bIsBlinking) {
-            vidProcess_led_blink(u8Floor);
-        }
-    }
-}
-
-void  *my_memset(void *b, int c, int len)
-{
-  unsigned char *p = b;
-  while(len > 0)
+    // Implementation to scan call inputs and register a call
+    if (cpstrCall != NULL)
     {
-      *p = c;
-      p++;
-      len--;
-    }
-  return(b);
-}
+        uint16_t u16CallResult = 0U;
+        uint8_t u8FloorIndex = 0U;
+        uint8_t u8CurrentFloor = ElevatorController_u8GetCurrentFloor();
 
-static boolean bQueue_is_empty(const CallQueue_t* cpstrQueue) {
-    return (cpstrQueue->u8Size == 0);
-}
+        /* TODO: remember to turn all LEDs off through "ElevatorController" */
 
-static boolean bQueue_is_full(const CallQueue_t* cpstrQueue) {
-    return (cpstrQueue->u8Size == cu8CALL_QUEUE_SIZE);
-}
+        /* Scan Inner calls */
+        u16CallResult = u8GetCall(CALL_INTERNAL);
 
-static void vidQueue_enqueue(CallQueue_t* pstrQueue, uint8_t u8Floor, CallType_t enuCallType) {
-    if(!bQueue_is_full(pstrQueue)) {
-        pstrQueue->strCalls[pstrQueue->u8Tail].u8Floor = u8Floor;
-        pstrQueue->strCalls[pstrQueue->u8Tail].enuCallType = enuCallType;
-        pstrQueue->strCalls[pstrQueue->u8Tail].u16Timestamp = elevator_hal_u16Get_time_ms();
-        pstrQueue->u8Tail = (pstrQueue->u8Tail + 1) % cu8CALL_QUEUE_SIZE;
-        pstrQueue->u8Size++;
-    }
-}
+        /* Process result */
+        if(u16CallResult != 0U)
+        {
+            for(u8FloorIndex = 0U; u8FloorIndex < cu8MAX_FLOORS; u8FloorIndex++)
+            {
+                if (u16CallResult & (1U << u8FloorIndex))
+                {
+                    /* Check if call is regestered */
+                    if(cpstrCall->u8Floor[u8FloorIndex] == 1)
+                    {
+                        cpstrCall->enuCallType[u8FloorIndex] = CALL_INTERNAL;
+                    }
 
-static ElevatorCall_t* pstrQueue_peek(CallQueue_t* pstrQueue) {
-    if(!bQueue_is_empty(pstrQueue)) {
-        return &pstrQueue->strCalls[pstrQueue->u8Head];
-    }
-    return NULL;
-}
+                    /* Handle new call */
+                    else
+                    {
+                        /* Check if call is equal to current floor and discard it */
+                        if((u8FloorIndex == u8CurrentFloor)
+                         ||(((u8FloorIndex == (u8CurrentFloor - 1)) || (u8FloorIndex == (u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
+                        {
+                            /* Call is either to current floor or elevator is too close to the called floor */
+                            /* Don't register the call */
+                        }
+                        else
+                        {
+                            /* New valid call */
+                            cpstrCall->u8Floor[u8FloorIndex] = 1;
+                            cpstrCall->enuCallType[u8FloorIndex] = CALL_INTERNAL;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            u16CallResult = 0U;
 
-static void vidQueue_dequeue(CallQueue_t* pstrQueue) {
-    if(!bQueue_is_empty(pstrQueue)) {
-        pstrQueue->u8Head = (pstrQueue->u8Head + 1) % cu8CALL_QUEUE_SIZE;
-        pstrQueue->u8Size--;
-    }
-}
-
-static void vidUpdate_led_state(uint8_t u8Floor, CallType_t enuCallType) {
-    LedBlinkState_t* pstrLedState = &callHandler.strLedStates[u8Floor];
-    pstrLedState->bIsBlinking = True;
-    
-    // Set duty cycle based on call type
-    switch(enuCallType) {
-        case CALL_INTERNAL:
-        pstrLedState->u8DutyPercent = cu8LED_INT_DUTY_CYCLE;
-            break;
+            /* Scan Outer calls */
+            u16CallResult = u8GetCall(CALL_EXTERNAL);
             
-        case CALL_EXTERNAL:
-        pstrLedState->u8DutyPercent = cu8LED_EXT_DUTY_CYCLE;
-            break;
-            
-        case CALL_BOTH:
-            // Use internal call pattern as priority
-            pstrLedState->u8DutyPercent = cu8LED_INT_DUTY_CYCLE;
-            break;
-            
-        default:
-        pstrLedState->bIsBlinking = False;
-            break;
+            /* Process result */
+            if(u16CallResult != 0U)
+            {
+                for(u8FloorIndex = 0U; u8FloorIndex < cu8MAX_FLOORS; u8FloorIndex++)
+                {
+                    if (u16CallResult & (1U << u8FloorIndex))
+                    {
+                        /* Check if call is regestered */
+                        if(cpstrCall->u8Floor[u8FloorIndex] == 1)
+                        {
+                            /* Call already registered, discard new call */
+                        }
+
+                        /* Handle new call */
+                        else
+                        {
+                            /* Check if call is equal to current floor and discard it */
+                            if((u8FloorIndex == u8CurrentFloor)
+                            ||(((u8FloorIndex == (u8CurrentFloor - 1)) || (u8FloorIndex == (u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
+                            {
+                                /* Call is either to current floor or elevator is too close to the called floor */
+                                /* Don't register the call */
+                            }
+                            else
+                            {
+                                /* New valid call */
+                                cpstrCall->u8Floor[u8FloorIndex] = 1;
+                                cpstrCall->enuCallType[u8FloorIndex] = CALL_EXTERNAL;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    else
+    {
+        // Handle the case where cpstrCall is NULL, e.g., log an error or take appropriate action
     }
 }
+/* ************************************************************************ */
 
-static void vidProcess_led_blink(uint8_t u8Floor) {
-    LedBlinkState_t* pstrLedState = &callHandler.strLedStates[u8Floor];
-    uint16_t u16CurrentTime = elevator_hal_u16Get_time_ms();
-    
-    if(u16CurrentTime - pstrLedState->u16LastToggle >= cu16LED_BLINK_PERIOD_MS) {
-        pstrLedState->bCurrentState = !pstrLedState->bCurrentState;
-        pstrLedState->u16LastToggle = u16CurrentTime;
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                           LOCAL FUNCTIONS                                */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Calls scanner */
+/**
+ * @brief Get the Call object
+ * 
+ * @param enuCallType 
+ * @return uint8_t 
+ */
+static uint8_t u8GetCall(CallType_t enuCallType)
+{
+    PinState_t enuPinState = STATE_HIGH;
+	uint16_t u16RetVal = 0U;
+    uint8_t u8FloorIndex = 0U;
+
+    if(enuCallType == CALL_INTERNAL)
+    {
+        /* Set CallControl pin to Inner call */
+        DIO_WritePin(cstrCallDio_Config.enuCALL_CON_Port, cstrCallDio_Config.u8CALL_CON_Pin, STATE_LOW);
         
-        // Apply duty cycle
-        if(pstrLedState->bCurrentState) {
-            uint16_t u16OnTime = (cu16LED_BLINK_PERIOD_MS * pstrLedState->u8DutyPercent) / 100;
-            //elevator_hal_vidTimer_start(u16OnTime);
-            //elevator_hal_vidSet_floor_led(u8Floor, True);
+    }
+    else if (enuCallType == CALL_EXTERNAL)
+    {
+        /* Set CallControl pin to Outer call */
+        DIO_WritePin(cstrCallDio_Config.enuCALL_CON_Port, cstrCallDio_Config.u8CALL_CON_Pin, STATE_HIGH);
+    }
+    else
+    {
+        // Handle other call types if necessary or log an error
+    }
+
+    /* Scan floors 0 to 7 */
+    for(u8FloorIndex=0;u8FloorIndex<8;u8FloorIndex++)
+    {
+        /* Mux select(u8FloorIndex) */
+        
+        /* Read floor inner call from mux output */
+        enuPinState = DIO_ReadPin(cstrCallDio_Config.enuCALL_0_Port, cstrCallDio_Config.u8CALL_0_Pin);
+
+        if(enuPinState == STATE_LOW)
+        {
+            u16RetVal |= (1U << u8FloorIndex);
         }
-        else {
-            uint16_t u16OffTime = (cu16LED_BLINK_PERIOD_MS * (100 - pstrLedState->u8DutyPercent)) / 100;
-            //elevator_hal_vidTimer_start(u16OffTime);
-            //elevator_hal_vidSet_floor_led(u8Floor, False);
+        else
+        {
+            u16RetVal &= ~(1U << u8FloorIndex);
         }
     }
+    /* Scan floors 8 to 15 */
+    for(u8FloorIndex=0;u8FloorIndex<8;u8FloorIndex++)
+    {
+        /* Mux select(7-u8FloorIndex) */
+        
+        /* Read floor inner call from mux output */
+        enuPinState = DIO_ReadPin(cstrCallDio_Config.enuCALL_1_Port, cstrCallDio_Config.u8CALL_1_Pin);
+
+        if(enuPinState == STATE_LOW)
+        {
+            u16RetVal |= (1U << (u8FloorIndex + 8));
+        }
+        else
+        {
+            u16RetVal &= ~(1U << (u8FloorIndex + 8));
+        }
+    }
+
+    return u16RetVal;
 }
+/* ************************************************************************ */
+
+
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                           E N D   O F   F I L E                          */
+/* ************************************************************************ */
+/* ************************************************************************ */

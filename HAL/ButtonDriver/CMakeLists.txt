@@ -2,7 +2,7 @@ set(MODULE_NAME ButtonDriver)
 
 # Collect driver sources
 file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
-    "ButtonDriver.c",
+    "ButtonDriver.c"
     "ButtonDriver_lcfg.c"
 )
 
