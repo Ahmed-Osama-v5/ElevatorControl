@@ -70,7 +70,7 @@ Std_ReturnType_t SensorManager_stdInit(void) {
     
     /* Initialize sensor status array */
     for(u8I = 0; u8I < cu8SENSOR_COUNT; u8I++) {
-        strSensorStatus[u8I].enuSensorState = cu8SENSOR_STATE_INACTIVE;
+        strSensorStatus[u8I].enuSensorState = cenuSENSOR_STATE_INACTIVE;
         strSensorStatus[u8I].u8ActiveCounter = 0;
     }
     
@@ -106,12 +106,12 @@ Std_ReturnType_t SensorManager_stdReadSensor(Sensor_t enuSensorId, PinState_t* p
     if(enuReadState != STATE_LOW)
     {
         /* Update sensor state */
-        *penuSensorState = cu8SENSOR_STATE_ACTIVE;
+        *penuSensorState = cenuSENSOR_STATE_ACTIVE;
     }
     else
     {
         /* Update sensor state */
-        *penuSensorState = cu8SENSOR_STATE_INACTIVE;
+        *penuSensorState = cenuSENSOR_STATE_INACTIVE;
     }
 
     return stdResult;

@@ -129,7 +129,7 @@ boolean ButtonDriver_bIsPressed(ButtonId_t enuButtonId)
             break;
         case BTN_PRG:
             (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
-            if(enuSensorState == cu8SENSOR_STATE_ACTIVE)
+            if(enuSensorState == cenuSENSOR_STATE_ACTIVE)
             {
                 bBtnPressed = TRUE; // Button is pressed
             }
@@ -207,7 +207,7 @@ boolean ButtonDriver_bIsReleased(ButtonId_t enuButtonId)
             break;
         case BTN_PRG:
             (void) SensorManager_stdReadSensor(PHASE_2, &enuSensorState);
-            if(enuSensorState == cu8SENSOR_STATE_INACTIVE)
+            if(enuSensorState == cenuSENSOR_STATE_INACTIVE)
             {
                 bBtnReleased = TRUE; // Button is released
             }

@@ -103,7 +103,7 @@ Std_ReturnType_t Diagnostics_ReportError(DiagComponent_t enuComponent, DiagError
 Std_ReturnType_t Diagnostics_Process(void)
 {
     uint32_t u16CurrentTime;
-    uint8_t u8SensorState;
+    PinState_t enuSensorState;
     
     if(!bInitialized)
     {
@@ -121,20 +121,20 @@ Std_ReturnType_t Diagnostics_Process(void)
     }
     
     /* Check critical sensors */
-    SensorManager_stdReadSensor(cu8SENSOR_PHASE_1, &u8SensorState);
-    if(u8SensorState == cu8SENSOR_STATE_ACTIVE)
+    SensorManager_stdReadSensor(cu8SENSOR_PHASE_1, &enuSensorState);
+    if(enuSensorState == cenuSENSOR_STATE_ACTIVE)
     {
         Diagnostics_ReportError(DIAG_COMP_MOTION_CTRL, DIAG_ERR_PHASE_FAULT);
     }
     
-    SensorManager_stdReadSensor(cu8SENSOR_STOP_SEN, &u8SensorState);
-    if(u8SensorState == cu8SENSOR_STATE_ACTIVE)
+    SensorManager_stdReadSensor(cu8SENSOR_STOP_SEN, &enuSensorState);
+    if(enuSensorState == cenuSENSOR_STATE_ACTIVE)
     {
         Diagnostics_ReportError(DIAG_COMP_MOTION_CTRL, DIAG_ERR_STOP_ACTIVATED);
     }
     
-    SensorManager_stdReadSensor(cu8SENSOR_OVER_LOAD, &u8SensorState);
-    if(u8SensorState == cu8SENSOR_STATE_ACTIVE)
+    SensorManager_stdReadSensor(cu8SENSOR_OVER_LOAD, &enuSensorState);
+    if(enuSensorState == cenuSENSOR_STATE_ACTIVE)
     {
         Diagnostics_ReportError(DIAG_COMP_MOTION_CTRL, DIAG_ERR_OVERLOAD);
     }

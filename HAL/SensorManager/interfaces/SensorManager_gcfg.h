@@ -41,7 +41,7 @@
 
 
 /* Sensor States */
-#define cu8SENSOR_STATE_ACTIVE    ((uint8_t) STATE_HIGH)
-#define cu8SENSOR_STATE_INACTIVE  ((uint8_t) STATE_LOW)
+#define cenuSENSOR_STATE_ACTIVE    (STATE_HIGH)
+#define cenuSENSOR_STATE_INACTIVE  (STATE_LOW)
 
 #endif /* SENSOR_MANAGER_GCFG_H */
