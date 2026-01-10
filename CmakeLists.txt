@@ -35,6 +35,7 @@ add_subdirectory(App/ElevatorController)
 add_subdirectory(App/CallHandler)
 add_subdirectory(App/Diagnostics)
 add_subdirectory(App/LEDController)
+add_subdirectory(App/Menu)
 add_subdirectory(App/MotionController)
 
 #EventProcessor
@@ -66,10 +67,10 @@ target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/App/Diagnostics/interfaces
     ${CMAKE_SOURCE_DIR}/App/LEDController/includes
     ${CMAKE_SOURCE_DIR}/App/LEDController/interfaces
+    ${CMAKE_SOURCE_DIR}/App/Menu/includes
+    ${CMAKE_SOURCE_DIR}/App/Menu/interfaces
     ${CMAKE_SOURCE_DIR}/App/MotionController/includes
     ${CMAKE_SOURCE_DIR}/App/MotionController/interfaces
-    ${CMAKE_SOURCE_DIR}/EventProcessor/includes
-    ${CMAKE_SOURCE_DIR}/EventProcessor/interfaces
     ${CMAKE_SOURCE_DIR}/Common
     ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/includes
     ${CMAKE_SOURCE_DIR}/HAL/ButtonDriver/interfaces

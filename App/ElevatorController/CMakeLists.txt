@@ -18,6 +18,7 @@ target_link_libraries(${MODULE_NAME} PUBLIC
     LEDController
     MotionController
     Diagnostics
+    Menu
 
     ButtonDriver
     Display

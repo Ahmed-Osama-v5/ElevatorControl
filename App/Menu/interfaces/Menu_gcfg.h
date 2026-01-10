@@ -22,12 +22,10 @@
 /* Protection against bad and multiple inclusions                           */
 /* ************************************************************************ */
 
-#ifndef ELEVATOR_CONTROLLER_GCFG_H
-#define ELEVATOR_CONTROLLER_GCFG_H
+#ifndef MENU_GCFG_H
+#define MENU_GCFG_H
 
-#include "Std_Types.h"
-#include "SystemConfig.h"
-
+#include "std_types.h"
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -35,56 +33,44 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
-#define DOOR_OPEN_TIME_MS  3000 // Time in milliseconds for door to stay open
+#define MENU_MAX_ITEMS          ((uint8_t) 10U)
+#define MENU_BLINK_PERIOD_MS    ((uint16_t) 20U)
 
-typedef enum
-{
-    DOOR_MANUAL,
-    DOOR_AUTOMATIC
-}DoorType_t;
+typedef enum {
+    SLOW_TIMER_MID,
+    FAST_TIMER_MID,
+    CAM_TIMER__MID,
+    STOP_TIMER_MID,
+    LIGHT_TIMER_MID,
+    DOOR_NUMBER_MID,
+    COLLECTION_DIR_MID,
+    MNT_SPEED_MID,
+    DOOR_OPTIONS_MID,
+    PARKING_FLOOR_MID,
+    CAM_FAIL_CNT_MID,
+    CABIN_PW_MID,
+    PHS_SEQ_MID,
+    MENU_ITEM_COUNT
+} MenuItemId_t;
 
-typedef enum
-{
-    DOOR_CLOSED,
-    DOOR_OPENING,
-    DOOR_OPEN,
-    DOOR_CLOSING
-}DoorState_t;
+typedef enum {
+    MENU_MODE_NAVIGATE,
+    MENU_MODE_EDIT
+} MenuMode_t;
 
-typedef enum
-{
-    DIR_IDLE,
-    DIR_UP,
-    DIR_DOWN
-}MoveDirection_t;
+typedef struct {
+    const char* label;
+    uint8_t value;
+    uint8_t minValue;
+    uint8_t maxValue;
+    uint8_t eepromAddress;
+} MenuItem_t;
 
-typedef enum
-{
-    MODE_INIT,
-    MODE_NORMAL,
-    MODE_PROGRAM,
-    MODE_MAINTENANCE,
-    MODE_ERROR
-}OperatingMode_t;
-
-typedef struct
-{
-    uint8_t u8CurrentFloor;
-    MoveDirection_t enuDirection;
-    DoorType_t enuDoorType;
-    DoorState_t enuDoorState;
-    OperatingMode_t enuOperatingMode;
-    boolean bFloorCalls[cu8MAX_FLOORS];
-    //CallType_t enuCallTypes[cu8MAX_FLOORS];
-    //FloorLED_t strFloorLEDs[cu8MAX_FLOORS];
-    uint16_t u16DoorTimer;
-    boolean bEmergencyStop;
-} Elevator_t;
-
-#endif // ELEVATOR_CONTROLLER_GCFG_H
+#endif // MENU_GCFG_H
 
 /* ************************************************************************ */
 /* ************************************************************************ */
 /*                           E N D   O F   F I L E                          */
 /* ************************************************************************ */
 /* ************************************************************************ */
+

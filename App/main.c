@@ -36,9 +36,10 @@ int main(void)
     else
 
     #endif
+    
+    while(1)
     {
-        /* TODO: Handle this condition */
-        while(1);
+        ElevatorController_vidProgrammingLoop();
     }
     return 0;
 }

@@ -1,9 +1,46 @@
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        (C) Copyright 2026 by                             */
+/*                                 HexaMix                                  */
+/*                         All rights reserved                              */
+/*           This software is the exclusive property of HexaMix.            */
+/*   It cannot be communicated or divulged to anybody without a previous    */
+/*  written authorisation.                                                  */
+/*                                                                          */
+/*     Any partial or complete copy of this program whether it is in its    */
+/*   original shape or in its modified shape has to mention this copyright  */
+/*  and its proprietor.                                                     */
+/*                                                                          */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                        FILE INCLUSION MANAGEMENT                         */
+/* ************************************************************************ */
+/* ************************************************************************ */
+/* Protection against bad and multiple inclusions                           */
+/* ************************************************************************ */
+
 #ifndef ELEVATOR_CONTROLLER_LCFG_H
 #define ELEVATOR_CONTROLLER_LCFG_H
+
+/* ************************************************************************ */
+/* Header Inclusions                                                        */
+/* ************************************************************************ */
+
+/* other modules of the project ******************************************* */
+
 
 #if ! ((defined ElevatorController_c) || (defined ElevatorController_lcfg_c))
     #error "This file must not be included from outside of it's component"
 #endif
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                          CONFIGURATION DATA                              */
+/* ************************************************************************ */
+/* ************************************************************************ */
 
 typedef enum
 {
@@ -11,6 +48,13 @@ typedef enum
     DOWN_COLLECTIVE
 } CollectionDir_t;
 
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                            PERSISTENT DATA                               */
+/* ************************************************************************ */
+/* ************************************************************************ */
+
+/* default values */
 #define cu8SLOW_TIMER_DEF_VALUE             ((uint8_t) 7U)
 #define cu8FAST_TIMER_DEF_VALUE             ((uint8_t) 18U)
 #define cu8CAM_TIMER_DEF_VALUE              ((uint8_t) 3U)
@@ -51,4 +95,42 @@ typedef enum
 #define cu8MASTER_PASSWORD_L_DEF_VALUE      ((uint8_t) 158U)
 #define cu8MASTER_PASSWORD_H_DEF_VALUE      ((uint8_t) 0U)
 
+
+/* minimum values */
+#define cu8SLOW_TIMER_MIN_VALUE             ((uint8_t) 1U)
+#define cu8FAST_TIMER_MIN_VALUE             ((uint8_t) 1U)
+#define cu8CAM_TIMER_MIN_VALUE              ((uint8_t) 1U)
+#define cu8STOP_TIMER_MIN_VALUE             ((uint8_t) 1U)
+#define cu8LIGHT_TIMER_MIN_VALUE            ((uint8_t) 1U)
+#define cu8DOOR_NUMBER_MIN_VALUE            ((uint8_t) 1U)
+#define cu8COLLECTION_DIR_MIN_VALUE         ((uint8_t) DOWN_COLLECTIVE)
+#define cu8MNT_SPEED_MIN_VALUE              ((uint8_t) 0U)
+#define cu8DOOR_OPTIONS_MIN_VALUE           ((uint8_t) 0U)
+#define cu8PARKING_FLOOR_MIN_VALUE          ((uint8_t) 0U)
+#define cu8CAM_FAIL_CNT_MIN_VALUE           ((uint8_t) 0U)
+#define cu8CABIN_PW_MIN_VALUE               ((uint8_t) 0U)
+#define cu8PHS_SEQ_MIN_VALUE                ((uint8_t) 0U)
+
+
+/* maximum values */
+#define cu8SLOW_TIMER_MAX_VALUE             ((uint8_t) 20U)
+#define cu8FAST_TIMER_MAX_VALUE             ((uint8_t) 30U)
+#define cu8CAM_TIMER_MAX_VALUE              ((uint8_t) 20U)
+#define cu8STOP_TIMER_MAX_VALUE             ((uint8_t) 10U)
+#define cu8LIGHT_TIMER_MAX_VALUE            ((uint8_t) 20U)
+#define cu8DOOR_NUMBER_MAX_VALUE            ((uint8_t) 16U)
+#define cu8COLLECTION_DIR_MAX_VALUE         ((uint8_t) 4U)
+#define cu8MNT_SPEED_MAX_VALUE              ((uint8_t) 1U)
+#define cu8DOOR_OPTIONS_MAX_VALUE           ((uint8_t) 1U)
+#define cu8PARKING_FLOOR_MAX_VALUE          (cu8DOOR_NUMBER_MAX_VALUE)
+#define cu8CAM_FAIL_CNT_MAX_VALUE           ((uint8_t) 20U)
+#define cu8CABIN_PW_MAX_VALUE               ((uint8_t) 1U)
+#define cu8PHS_SEQ_MAX_VALUE                ((uint8_t) 1U)
+
 #endif // ELEVATOR_CONTROLLER_LCFG_H
+
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                           E N D   O F   F I L E                          */
+/* ************************************************************************ */
+/* ************************************************************************ */

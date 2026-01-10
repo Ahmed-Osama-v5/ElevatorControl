@@ -22,66 +22,23 @@
 /* Protection against bad and multiple inclusions                           */
 /* ************************************************************************ */
 
-#ifndef ELEVATOR_CONTROLLER_GCFG_H
-#define ELEVATOR_CONTROLLER_GCFG_H
+#ifndef MENU_LCFG_H
+#define MENU_LCFG_H
 
-#include "Std_Types.h"
-#include "SystemConfig.h"
-
+#if ! ((defined Menu_c) || (defined Menu_lcfg_c))
+#error "This file must not be included from outside of it's component"
+#endif
 
 /* ************************************************************************ */
 /* ************************************************************************ */
-/* Export of CallHandler configuration settings                             */
+/*                          CONFIGURATION DATA                              */
 /* ************************************************************************ */
 /* ************************************************************************ */
 
-#define DOOR_OPEN_TIME_MS  3000 // Time in milliseconds for door to stay open
+/* Menu blink hardware timer channel */
+#define MENU_BLINK_HW_TIMER_CHANNEL TIMER_CH2
 
-typedef enum
-{
-    DOOR_MANUAL,
-    DOOR_AUTOMATIC
-}DoorType_t;
-
-typedef enum
-{
-    DOOR_CLOSED,
-    DOOR_OPENING,
-    DOOR_OPEN,
-    DOOR_CLOSING
-}DoorState_t;
-
-typedef enum
-{
-    DIR_IDLE,
-    DIR_UP,
-    DIR_DOWN
-}MoveDirection_t;
-
-typedef enum
-{
-    MODE_INIT,
-    MODE_NORMAL,
-    MODE_PROGRAM,
-    MODE_MAINTENANCE,
-    MODE_ERROR
-}OperatingMode_t;
-
-typedef struct
-{
-    uint8_t u8CurrentFloor;
-    MoveDirection_t enuDirection;
-    DoorType_t enuDoorType;
-    DoorState_t enuDoorState;
-    OperatingMode_t enuOperatingMode;
-    boolean bFloorCalls[cu8MAX_FLOORS];
-    //CallType_t enuCallTypes[cu8MAX_FLOORS];
-    //FloorLED_t strFloorLEDs[cu8MAX_FLOORS];
-    uint16_t u16DoorTimer;
-    boolean bEmergencyStop;
-} Elevator_t;
-
-#endif // ELEVATOR_CONTROLLER_GCFG_H
+#endif // MENU_LCFG_H
 
 /* ************************************************************************ */
 /* ************************************************************************ */
