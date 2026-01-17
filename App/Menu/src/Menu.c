@@ -1,4 +1,3 @@
-
 /* ************************************************************************ */
 /* ************************************************************************ */
 /*                        (C) Copyright 2026 by                             */
@@ -66,9 +65,9 @@ static uint8_t itemCount = 0;
 /*                     LOCAL FUNCTIONS PROTOTYPES                           */
 /* ************************************************************************ */
 /* ************************************************************************ */
-static void Menu_HandleBlinkDisplay(void);
+static void HandleBlinkDisplay(void);
 static void UpdateBlinkCounter(void);
-static void Menu_DisplayCurrentItem(void);
+static void DisplayCurrentItem(void);
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -118,7 +117,7 @@ void Menu_UpdateItemValue(MenuItemId_t itemId, uint8_t value) {
     }
 }
 
-static void Menu_DisplayCurrentItem(void) {
+static void DisplayCurrentItem(void) {
     char buffer[17];
 
     LCD_Clear();
@@ -127,11 +126,11 @@ static void Menu_DisplayCurrentItem(void) {
         LCD_SetCursor(0, 0);
         LCD_WriteString((char*)menuItems[currentItemId].label);
 
-        Menu_HandleBlinkDisplay();
+        HandleBlinkDisplay();
     }
 }
 
-static void Menu_HandleBlinkDisplay(void)
+static void HandleBlinkDisplay(void)
 {
     char buffer[17];
 
@@ -151,7 +150,7 @@ static void Menu_HandleNavigateMode(void) {
         } else {
             currentItemId = 0;
         }
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_UP));
     }
 
@@ -161,7 +160,7 @@ static void Menu_HandleNavigateMode(void) {
         } else {
             currentItemId = itemCount - 1;
         }
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_DN));
     }
 
@@ -170,7 +169,7 @@ static void Menu_HandleNavigateMode(void) {
         blinkState = 1;
         blinkCounter = 0;
         Timer_Start(MENU_BLINK_HW_TIMER_CHANNEL);
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_OK));
     }
 }
@@ -180,7 +179,7 @@ static void Menu_HandleEditMode(void) {
         if (menuItems[currentItemId].value < menuItems[currentItemId].maxValue) {
             menuItems[currentItemId].value++;
         }
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_UP));
     }
 
@@ -188,7 +187,7 @@ static void Menu_HandleEditMode(void) {
         if (menuItems[currentItemId].value > menuItems[currentItemId].minValue) {
             menuItems[currentItemId].value--;
         }
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_DN));
     }
 
@@ -200,7 +199,7 @@ static void Menu_HandleEditMode(void) {
         (void) EEPROM_u8Update(menuItems[currentItemId].eepromAddress, menuItems[currentItemId].value);
         _delay_ms(20);
 
-        Menu_DisplayCurrentItem();
+        DisplayCurrentItem();
         while (ButtonDriver_bIsPressed(BTN_OK));
     }
 }
@@ -210,7 +209,7 @@ void Menu_Task(void) {
     if (currentMode == MENU_MODE_EDIT) {
         if (lastBlinkState != blinkState) {
             lastBlinkState = blinkState;
-            Menu_HandleBlinkDisplay();
+            HandleBlinkDisplay();
         }
         Menu_HandleEditMode();
     }
@@ -222,7 +221,7 @@ void Menu_Task(void) {
 
 void Menu_Update(void)
 {
-    Menu_DisplayCurrentItem();
+    DisplayCurrentItem();
 }
 
 

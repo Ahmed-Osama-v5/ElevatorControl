@@ -14,8 +14,6 @@ int main(void)
 
     /* Initialize system */
     ElevatorController_Init();
-
-    #if 0
     
     /* Display splash screen */
     ElevatorController_vidSplashScreen();
@@ -34,12 +32,8 @@ int main(void)
         ElevatorController_vidOperationLoop();
     }
     else
-
-    #endif
-    
-    while(1)
     {
-        ElevatorController_vidProgrammingLoop();
+        
     }
     return 0;
 }

@@ -70,13 +70,23 @@ typedef enum
 typedef struct
 {
     uint8_t u8CurrentFloor;
+    uint8_t u8SlowTimer;
+    uint8_t u8FastTimer;
+    uint8_t u8CamTimer;
+    uint8_t u8StopTimer;
+    uint8_t u8LightTimer;
+    uint8_t u8FloorCount;
+    uint8_t u8MntSpeed;
+    uint8_t u8ParkFloor;
+    uint8_t u8CamFailCnt;
+    uint8_t u8CabinPwd;
+    uint8_t u8PhsSeq;
+    uint8_t u8CollectionDir;
     MoveDirection_t enuDirection;
     DoorType_t enuDoorType;
     DoorState_t enuDoorState;
     OperatingMode_t enuOperatingMode;
     boolean bFloorCalls[cu8MAX_FLOORS];
-    //CallType_t enuCallTypes[cu8MAX_FLOORS];
-    //FloorLED_t strFloorLEDs[cu8MAX_FLOORS];
     uint16_t u16DoorTimer;
     boolean bEmergencyStop;
 } Elevator_t;

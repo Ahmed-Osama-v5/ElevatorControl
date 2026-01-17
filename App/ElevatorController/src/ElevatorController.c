@@ -22,7 +22,6 @@
 /* Set Ownership                                                            */
 /* ************************************************************************ */
 
-#include "EepD_gcfg.h"
 #define ElevatorController_c
 
 /* ************************************************************************ */
@@ -69,17 +68,10 @@
 
 static OperatingMode_t enuCurrentMode = MODE_INIT;
 
+static Elevator_t strElevator = {0}; // Main elevator state
+
 uint8_t u8AccessFlag = 0;
 uint16_t u16EnteredPass = 0, u16StoredPass = 0, u16MasterPass = 0;
-uint8_t u8SlowTimer = 0, u8FastTimer = 0, u8CamTimer = 0, u8StopTimer = 0, u8LightTimer = 0;
-uint8_t u8DoorNumber = 0;
-uint8_t u8CollectionDir = 0;
-uint8_t u8MntSpeed = 0;
-uint8_t u8DoorOpt = 0;
-uint8_t u8ParkFloor = 0;
-uint8_t u8CamFailCnt = 0;
-uint8_t u8CabinPwd = 0;
-uint8_t u8PhsSeq = 0;
 
 
 /**
@@ -93,30 +85,6 @@ static void updateMenuItems(void);
  * 
  */
 static void EEPROM_LoadValues(void);
-
-// 1. Safety checks
-static boolean vidCheckEmergencyConditions(Elevator_t* pstrElevator);
-
-// 2. Process button inputs
-static void vidProcessButtonInputs(Elevator_t* pstrElevator);
-
-// 3. Update current floor based on sensors
-static void vidUpdateCurrentFloor(Elevator_t* pstrElevator);
-
-// 4. Handle idle state
-static void vidHandleIdleState(Elevator_t* pstrElevator);
-
-// 5. Handle upward movement
-static void vidHandleUpMovement(Elevator_t* pstrElevator);
-
-// 6. Handle downward movement  
-static void vidHandleDownMovement(Elevator_t* pstrElevator);
-
-// 7. Door control
-static void vidProcessDoorControl(Elevator_t* pstrElevator);
-
-// 8. Update displays
-static void vidUpdateDisplays(Elevator_t* pstrElevator);
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -138,6 +106,9 @@ void ElevatorController_Init(void)
     elevator_hal_vidInit();
     
     elevator_hal_vidTimer_start(); // Start the timer
+
+    /* Update values from EEPROM */
+    EEPROM_LoadValues();
 
     updateMenuItems();
 
@@ -169,30 +140,7 @@ void elevator_hal_vidInit(void)
     ButtonDriver_vidInit();
 
     /* Initialize motion controller */
-    MotionController_vidInit();
-
-    /* Update values from EEPROM */
-    EEPROM_LoadValues();
-
-    if(u8SlowTimer == 0xFF)
-    {
-        /* Fresh flash detected, reset defaults */
-        LCD_SetCursor(0, 0);
-        LCD_WriteString("Initializing...");
-        vidResetDefaults();
-        _delay_ms(2000); // Display for 2 seconds
-
-        /* Update values from EEPROM */
-        EEPROM_LoadValues();
-        
-        LCD_SetCursor(1, 0);
-        LCD_WriteString("               ");
-    }
-    else
-    {
-        /* Not a fresh flash, proceed with normal operation */
-    }
-    
+    MotionController_vidInit();    
     
     /* Initialize Menu module */
     Menu_Init();
@@ -205,6 +153,7 @@ void elevator_hal_vidInit(void)
     strTimer.CBK_Ptr = NULL; // No callback function for now
     Timer_Init(&strTimer);
 
+    /* Enable global interrupts */
     sei();
 }
 
@@ -252,9 +201,7 @@ void ElevatorController_vidSplashScreen(void)
     }
 
     /* Detecting fresh flash */
-	(void) EEPROM_u8Read(cu8SLOW_TIMER_EE_ADD, &u8SlowTimer);
-
-    if(u8SlowTimer == 0xFF)
+    if(strElevator.u8SlowTimer == 0xFF)
     {
         /* Fresh flash detected, reset defaults */
         LCD_SetCursor(0, 0);
@@ -278,7 +225,7 @@ void ElevatorController_vidSplashScreen(void)
     _delay_ms(500); // Display for 500 milliseconds
     LCD_WriteChar('.');
     _delay_ms(500); // Display for 500 milliseconds
-    //LCD_clear();
+    LCD_Clear();
 }
 
 OperatingMode_t ElevatorController_enuGetMode(void)
@@ -296,11 +243,7 @@ OperatingMode_t ElevatorController_enuGetMode(void)
 }
 
 void ElevatorController_vidOperationLoop(void)
-{
-    static Elevator_t strElevator = {0}; // Main elevator state
-    static uint16_t u16LastProcessTime = 0;
-    uint16_t u16CurrentTime;
-    
+{    
     // Initialize elevator state
     strElevator.u8CurrentFloor = 0;
     strElevator.enuDirection = DIR_IDLE;
@@ -310,57 +253,12 @@ void ElevatorController_vidOperationLoop(void)
     
     while(1)
     {
-        u16CurrentTime = elevator_hal_u16Get_time_ms();
         
-        // 1. SAFETY CHECKS
-        if(vidCheckEmergencyConditions(&strElevator))
-        {
-            continue; // Skip normal operation if emergency
-        }
-        
-        // 2. PROCESS BUTTON INPUTS
-        vidProcessButtonInputs(&strElevator);
-        
-        // 3. UPDATE CURRENT FLOOR
-        vidUpdateCurrentFloor(&strElevator);
-        
-        // 4. PROCESS CALLS
-        //CallHandler_vidProcess(&strElevator);
-        
-        // 5. MAIN STATE MACHINE
-        switch(strElevator.enuDirection)
-        {
-            case DIR_IDLE:
-                vidHandleIdleState(&strElevator);
-                break;
-                
-            case DIR_UP:
-                vidHandleUpMovement(&strElevator);
-                break;
-                
-            case DIR_DOWN:
-                vidHandleDownMovement(&strElevator);
-                break;
-        }
-        
-        // 6. DOOR CONTROL
-        vidProcessDoorControl(&strElevator);
-        
-        // 7. UPDATE DISPLAYS
-        vidUpdateDisplays(&strElevator);
-        
-        // 8. PROCESS LEDS
-        LEDController_vidProcess();
-        
-        // Small delay to prevent overwhelming the system
-        _delay_ms(10);
     }
 }
 
 void ElevatorController_vidProgrammingLoop(void)
 {
-    Menu_Task();
-    #if 0
     /* Programming mode */
     uint8_t u8Tmp = 0;
 
@@ -389,12 +287,12 @@ void ElevatorController_vidProgrammingLoop(void)
 
     while(1)
     {
-        if(u8AccessFlag)
+        if(!u8AccessFlag)
         {
             /* Access not granted yet */
 
-            LCD_SetCursor(5, 1);
-            //LCD_send_int(u16EnteredPass, 3);
+            LCD_SetCursor(1, 5);
+            LCD_send_int(u16EnteredPass, 3);
             
             /* get password entry from user */
             if(ButtonDriver_bIsPressed(BTN_UP))
@@ -428,17 +326,19 @@ void ElevatorController_vidProgrammingLoop(void)
                 if((u16EnteredPass == u16StoredPass) || (u16EnteredPass == u16MasterPass))
                 {
                     u8AccessFlag = TRUE;
-                    LCD_SetCursor(0, 1);
+                    LCD_SetCursor(0, 0);
                     LCD_WriteString("Access Granted");
                     _delay_ms(1000); // Display for 1 second
+                    LCD_Clear();
+                    Menu_Update();
                 }
                 else
                 {
                     u8AccessFlag = FALSE;
-                    LCD_SetCursor(0, 1);
+                    LCD_SetCursor(0, 0);
                     LCD_WriteString("Access Denied");
                     _delay_ms(1000); // Display for 1 second
-                    LCD_SetCursor(0, 1);
+                    LCD_SetCursor(1, 0);
                     LCD_WriteString("             ");
                 }
             }
@@ -449,7 +349,6 @@ void ElevatorController_vidProgrammingLoop(void)
             Menu_Task();
         }
     }
-        #endif
 }
 
 /* Services ********************************************************* */
@@ -599,19 +498,19 @@ void vidResetDefaults(void)
  */
 static void updateMenuItems(void)
 {
-    Menu_SetItemData(SLOW_TIMER_MID, "Slow:", u8SlowTimer, cu8SLOW_TIMER_MIN_VALUE, cu8SLOW_TIMER_MAX_VALUE, cu8SLOW_TIMER_EE_ADD);
-    Menu_SetItemData(FAST_TIMER_MID, "Fast:", u8FastTimer, cu8FAST_TIMER_MIN_VALUE, cu8FAST_TIMER_MAX_VALUE, cu8FAST_TIMER_EE_ADD);
-    Menu_SetItemData(CAM_TIMER__MID, "CAM:", u8CamTimer, cu8CAM_TIMER_MIN_VALUE, cu8CAM_TIMER_MAX_VALUE, cu8CAM_TIMER_EE_ADD);
-    Menu_SetItemData(STOP_TIMER_MID, "Stop:", u8StopTimer, cu8STOP_TIMER_MIN_VALUE, cu8STOP_TIMER_MAX_VALUE, cu8STOP_TIMER_EE_ADD);
-    Menu_SetItemData(LIGHT_TIMER_MID, "Light:", u8LightTimer, cu8LIGHT_TIMER_MIN_VALUE, cu8LIGHT_TIMER_MAX_VALUE, cu8LIGHT_TIMER_EE_ADD);
-    Menu_SetItemData(DOOR_NUMBER_MID, "Floor Cnt:", u8DoorNumber, cu8DOOR_NUMBER_MIN_VALUE, cu8DOOR_NUMBER_MAX_VALUE, cu8DOOR_NUMBER_EE_ADD);
-    Menu_SetItemData(COLLECTION_DIR_MID, "Col dir:", u8CollectionDir, cu8COLLECTION_DIR_MIN_VALUE, cu8COLLECTION_DIR_MAX_VALUE, cu8COLLECTION_DIR_EE_ADD);
-    Menu_SetItemData(MNT_SPEED_MID, "Mnt speed:", u8MntSpeed, cu8MNT_SPEED_MIN_VALUE, cu8MNT_SPEED_MAX_VALUE, cu8MNT_SPEED_EE_ADD);
-    Menu_SetItemData(DOOR_OPTIONS_MID, "Door type:", u8DoorOpt, cu8DOOR_OPTIONS_MIN_VALUE, cu8DOOR_OPTIONS_MAX_VALUE, cu8DOOR_OPTIONS_EE_ADD);
-    Menu_SetItemData(PARKING_FLOOR_MID, "Park floor:", u8ParkFloor, cu8PARKING_FLOOR_MIN_VALUE, cu8PARKING_FLOOR_MAX_VALUE, cu8PARKING_FLOOR_EE_ADD);
-    Menu_SetItemData(CAM_FAIL_CNT_MID, "CAM Fail Cnt:", u8CamFailCnt, cu8CAM_FAIL_CNT_MIN_VALUE, cu8CAM_FAIL_CNT_MAX_VALUE, cu8CAM_FAIL_CNT_EE_ADD);
-    Menu_SetItemData(CABIN_PW_MID, "Cabin Pwd:", u8CabinPwd, cu8CABIN_PW_MIN_VALUE, cu8CABIN_PW_MAX_VALUE, cu8CABIN_PW_EE_ADD);
-    Menu_SetItemData(PHS_SEQ_MID, "Phs Seq:", u8PhsSeq, cu8PHS_SEQ_MIN_VALUE, cu8PHS_SEQ_MAX_VALUE, cu8PHS_SEQ_EE_ADD);
+    Menu_SetItemData(SLOW_TIMER_MID, "Slow:", strElevator.u8SlowTimer, cu8SLOW_TIMER_MIN_VALUE, cu8SLOW_TIMER_MAX_VALUE, cu8SLOW_TIMER_EE_ADD);
+    Menu_SetItemData(FAST_TIMER_MID, "Fast:", strElevator.u8FastTimer, cu8FAST_TIMER_MIN_VALUE, cu8FAST_TIMER_MAX_VALUE, cu8FAST_TIMER_EE_ADD);
+    Menu_SetItemData(CAM_TIMER__MID, "CAM:", strElevator.u8CamTimer, cu8CAM_TIMER_MIN_VALUE, cu8CAM_TIMER_MAX_VALUE, cu8CAM_TIMER_EE_ADD);
+    Menu_SetItemData(STOP_TIMER_MID, "Stop:", strElevator.u8StopTimer, cu8STOP_TIMER_MIN_VALUE, cu8STOP_TIMER_MAX_VALUE, cu8STOP_TIMER_EE_ADD);
+    Menu_SetItemData(LIGHT_TIMER_MID, "Light:", strElevator.u8LightTimer, cu8LIGHT_TIMER_MIN_VALUE, cu8LIGHT_TIMER_MAX_VALUE, cu8LIGHT_TIMER_EE_ADD);
+    Menu_SetItemData(DOOR_NUMBER_MID, "Floor Cnt:", strElevator.u8FloorCount, cu8DOOR_NUMBER_MIN_VALUE, cu8DOOR_NUMBER_MAX_VALUE, cu8DOOR_NUMBER_EE_ADD);
+    Menu_SetItemData(COLLECTION_DIR_MID, "Col dir:", strElevator.u8CollectionDir, cu8COLLECTION_DIR_MIN_VALUE, cu8COLLECTION_DIR_MAX_VALUE, cu8COLLECTION_DIR_EE_ADD);
+    Menu_SetItemData(MNT_SPEED_MID, "Mnt speed:", strElevator.u8MntSpeed, cu8MNT_SPEED_MIN_VALUE, cu8MNT_SPEED_MAX_VALUE, cu8MNT_SPEED_EE_ADD);
+    Menu_SetItemData(DOOR_OPTIONS_MID, "Door type:", (uint8_t)strElevator.enuDoorType, cu8DOOR_OPTIONS_MIN_VALUE, cu8DOOR_OPTIONS_MAX_VALUE, cu8DOOR_OPTIONS_EE_ADD);
+    Menu_SetItemData(PARKING_FLOOR_MID, "Park floor:", strElevator.u8ParkFloor, cu8PARKING_FLOOR_MIN_VALUE, cu8PARKING_FLOOR_MAX_VALUE, cu8PARKING_FLOOR_EE_ADD);
+    Menu_SetItemData(CAM_FAIL_CNT_MID, "CAM Fail Cnt:", strElevator.u8CamFailCnt, cu8CAM_FAIL_CNT_MIN_VALUE, cu8CAM_FAIL_CNT_MAX_VALUE, cu8CAM_FAIL_CNT_EE_ADD);
+    Menu_SetItemData(CABIN_PW_MID, "Cabin Pwd:", strElevator.u8CabinPwd, cu8CABIN_PW_MIN_VALUE, cu8CABIN_PW_MAX_VALUE, cu8CABIN_PW_EE_ADD);
+    Menu_SetItemData(PHS_SEQ_MID, "Phs Seq:", strElevator.u8PhsSeq, cu8PHS_SEQ_MIN_VALUE, cu8PHS_SEQ_MAX_VALUE, cu8PHS_SEQ_EE_ADD);
 }
 
 /**
@@ -621,188 +520,36 @@ static void updateMenuItems(void)
 static void EEPROM_LoadValues(void)
 {
     uint8_t u8ReadDelay = 5;
-    (void) EEPROM_u8Read(cu8SLOW_TIMER_EE_ADD, &u8SlowTimer);
+    (void) EEPROM_u8Read(cu8CURRENT_FLOOR_EE_ADD, &strElevator.u8CurrentFloor);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8FAST_TIMER_EE_ADD, &u8FastTimer);
+    (void) EEPROM_u8Read(cu8SLOW_TIMER_EE_ADD, &strElevator.u8SlowTimer);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8CAM_TIMER_EE_ADD, &u8CamTimer);
+    (void) EEPROM_u8Read(cu8FAST_TIMER_EE_ADD, &strElevator.u8FastTimer);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8STOP_TIMER_EE_ADD, &u8StopTimer);
+    (void) EEPROM_u8Read(cu8CAM_TIMER_EE_ADD, &strElevator.u8CamTimer);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8LIGHT_TIMER_EE_ADD, &u8LightTimer);
+    (void) EEPROM_u8Read(cu8STOP_TIMER_EE_ADD, &strElevator.u8StopTimer);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8DOOR_NUMBER_EE_ADD, &u8DoorNumber);
+    (void) EEPROM_u8Read(cu8LIGHT_TIMER_EE_ADD, &strElevator.u8LightTimer);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8COLLECTION_DIR_EE_ADD, &u8CollectionDir);
+    (void) EEPROM_u8Read(cu8DOOR_NUMBER_EE_ADD, &strElevator.u8FloorCount);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8MNT_SPEED_EE_ADD, &u8MntSpeed);
+    (void) EEPROM_u8Read(cu8COLLECTION_DIR_EE_ADD, &strElevator.u8CollectionDir);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8DOOR_OPTIONS_EE_ADD, &u8DoorOpt);
+    (void) EEPROM_u8Read(cu8MNT_SPEED_EE_ADD, &strElevator.u8MntSpeed);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8PARKING_FLOOR_EE_ADD, &u8ParkFloor);
+    (void) EEPROM_u8Read(cu8DOOR_OPTIONS_EE_ADD, (uint8_t *)&strElevator.enuDoorType);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8CAM_FAIL_CNT_EE_ADD, &u8CamFailCnt);
+    (void) EEPROM_u8Read(cu8PARKING_FLOOR_EE_ADD, &strElevator.u8ParkFloor);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8CABIN_PW_EE_ADD, &u8CabinPwd);
+    (void) EEPROM_u8Read(cu8CAM_FAIL_CNT_EE_ADD, &strElevator.u8CamFailCnt);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8PHS_SEQ_EE_ADD, &u8PhsSeq);
+    (void) EEPROM_u8Read(cu8CABIN_PW_EE_ADD, &strElevator.u8CabinPwd);
+    _delay_ms(u8ReadDelay);
+    (void) EEPROM_u8Read(cu8PHS_SEQ_EE_ADD, &strElevator.u8PhsSeq);
     _delay_ms(u8ReadDelay);
 }
 
-// 1. Safety checks
-static boolean vidCheckEmergencyConditions(Elevator_t* pstrElevator)
-{
-    PinState_t enuStopState;
-    // Check emergency stop button, door sensors, etc.
-    (void) SensorManager_stdReadSensor(STOP_SEN, &enuStopState);
-    if(enuStopState == STATE_LOW)
-    {
-        pstrElevator->bEmergencyStop = TRUE;
-        elevator_hal_vidMotor_stop();
-        return TRUE;
-    }
-    return FALSE;
-}
-
-// 2. Process button inputs
-static void vidProcessButtonInputs(Elevator_t* pstrElevator)
-{
-    uint8_t u8Floor;
-    
-    // Check floor buttons (0 to MAX_FLOORS-1)
-    for(u8Floor = 0; u8Floor < cu8MAX_FLOORS; u8Floor++)
-    {
-        if(ButtonDriver_bIsPressed(u8Floor)) // Assuming floor buttons
-        {
-            //CallHandler_bRegister_call(u8Floor, CALL_INTERNAL, DIR_UP);
-        }
-    }
-}
-
-// 3. Update current floor based on sensors
-static void vidUpdateCurrentFloor(Elevator_t* pstrElevator)
-{
-    uint8_t u8Floor;
-    
-    for(u8Floor = 0; u8Floor < cu8MAX_FLOORS; u8Floor++)
-    {
-        //if(SensorManager_bReadFloorSensor(u8Floor))
-        {
-            if(pstrElevator->u8CurrentFloor != u8Floor)
-            {
-                pstrElevator->u8CurrentFloor = u8Floor;
-                // Clear calls for this floor if we're stopping
-                if(pstrElevator->enuDirection != DIR_IDLE)
-                {
-                    //CallHandler_vidClear_call(u8Floor);
-                }
-            }
-            break;
-        }
-    }
-}
-
-// 4. Handle idle state
-static void vidHandleIdleState(Elevator_t* pstrElevator)
-{
-    /*
-    // Check if there are any calls
-    if(CallHandler_bHas_calls_above(pstrElevator->u8CurrentFloor))
-    {
-        pstrElevator->enuDirection = DIR_UP;
-        elevator_hal_vidMotor_up();
-    }
-    else if(CallHandler_bHas_calls_below(pstrElevator->u8CurrentFloor))
-    {
-        pstrElevator->enuDirection = DIR_DOWN;
-        elevator_hal_vidMotor_down();
-    }
-    // Otherwise stay idle
-    */
-}
-
-// 5. Handle upward movement
-static void vidHandleUpMovement(Elevator_t* pstrElevator)
-{
-    uint8_t u8NextFloor = 0;//CallHandler_u8Get_next_floor(pstrElevator->u8CurrentFloor, DIR_UP);
-    
-    if(u8NextFloor == pstrElevator->u8CurrentFloor)
-    {
-        // Reached target floor
-        elevator_hal_vidMotor_stop();
-        pstrElevator->enuDirection = DIR_IDLE;
-        pstrElevator->enuDoorState = DOOR_OPENING;
-        pstrElevator->u16DoorTimer = elevator_hal_u16Get_time_ms();
-    }
-    // Continue moving up
-}
-
-// 6. Handle downward movement  
-static void vidHandleDownMovement(Elevator_t* pstrElevator)
-{
-    uint8_t u8NextFloor = 0;//CallHandler_u8Get_next_floor(pstrElevator->u8CurrentFloor, DIR_DOWN);
-    
-    if(u8NextFloor == pstrElevator->u8CurrentFloor)
-    {
-        // Reached target floor
-        elevator_hal_vidMotor_stop();
-        pstrElevator->enuDirection = DIR_IDLE;
-        pstrElevator->enuDoorState = DOOR_OPENING;
-        pstrElevator->u16DoorTimer = elevator_hal_u16Get_time_ms();
-    }
-    // Continue moving down
-}
-
-// 7. Door control
-static void vidProcessDoorControl(Elevator_t* pstrElevator)
-{
-    uint16_t u16CurrentTime = elevator_hal_u16Get_time_ms();
-    
-    switch(pstrElevator->enuDoorState)
-    {
-        case DOOR_OPENING:
-            elevator_hal_vidDoor_open();
-            pstrElevator->enuDoorState = DOOR_OPEN;
-            pstrElevator->u16DoorTimer = u16CurrentTime;
-            break;
-            
-        case DOOR_OPEN:
-            // Keep door open for configured time
-            if(u16CurrentTime - pstrElevator->u16DoorTimer > DOOR_OPEN_TIME_MS)
-            {
-                pstrElevator->enuDoorState = DOOR_CLOSING;
-            }
-            break;
-            
-        case DOOR_CLOSING:
-            elevator_hal_vidDoor_close();
-            pstrElevator->enuDoorState = DOOR_CLOSED;
-            break;
-            
-        case DOOR_CLOSED:
-            // Ready for movement
-            break;
-    }
-}
-
-// 8. Update displays
-static void vidUpdateDisplays(Elevator_t* pstrElevator)
-{
-    elevator_hal_vidDisplay_floor(pstrElevator->u8CurrentFloor);
-    
-    switch(pstrElevator->enuDirection)
-    {
-        case DIR_UP:
-            elevator_hal_vidDisplay_status("UP  ");
-            break;
-        case DIR_DOWN:
-            elevator_hal_vidDisplay_status("DOWN");
-            break;
-        default:
-            elevator_hal_vidDisplay_status("IDLE");
-            break;
-    }
-}
 /* ************************************************************************ */
 
 
