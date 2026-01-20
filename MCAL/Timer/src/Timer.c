@@ -5,9 +5,11 @@
  *      Author: Ahmed
  */
  #include "Timer.h"
+#include "std_types.h"
 
 
  static uint8_t gsau8_preScaler[MAX_TIMER_CHANNELS] = {TIMER_NO_CLOCK, TIMER_NO_CLOCK, TIMER_NO_CLOCK};
+ static uint8_t gsau8_startState[MAX_TIMER_CHANNELS] = {FALSE, FALSE, FALSE};
 
 /**
  * Input: Pointer to callback function.
@@ -103,122 +105,127 @@ void Timer_Init(Timer_cfg_t* strTimer_cfg)
   */
 void Timer_Start(TimerChan_t enuTimerCH)
 {
-    switch(enuTimerCH)
+    if(gsau8_startState[enuTimerCH] == FALSE)
     {
-    case(TIMER_CH0):
-        /* set prescaler */
-        switch (gsau8_preScaler[enuTimerCH])
+        gsau8_startState[enuTimerCH] = TRUE;
+
+        switch(enuTimerCH)
         {
-        case (TIMER_PRESCALER_NO):
-            /* 1 */
-            TCCR0 &= ~((1 << CS02) | (1 << CS01));
-            TCCR0 |= (1 << CS00);
-            break;
-        case (TIMER_PRESCALER_8):
-            /* 2 */
-            TCCR0 &= ~((1 << CS02) | (1 << CS00));
-            TCCR0 |= (1 << CS01);
-            break;
-        case (TIMER_PRESCALER_64):
-            /* 3 */
-            TCCR0 &= ~(1 << CS02);
-            TCCR0 |= ((1 << CS01) | (1 << CS00));
-            break;
-        case (TIMER_PRESCALER_256):
-            /* 4 */
-            TCCR0 &= ~((1 << CS01) | (1 << CS00));
-            TCCR0 |= (1 << CS02);
-            break;
-        case (TIMER_PRESCALER_1024):
-            /* 5 */
-            TCCR0 &= ~(1 << CS01);
-            TCCR0 |= ((1 << CS02) | (1 << CS00));
-            break;
-        default:
-            /* Do nothing */
-            break;
-        }
-        break;
-    case(TIMER_CH1):
-        /* set prescaler */
-        switch (gsau8_preScaler[enuTimerCH])
-        {
-        case (TIMER_PRESCALER_NO):
-            /* 1 */
-            TCCR1B &= ~((1 << CS12) | (1 << CS11));
-            TCCR1B |= (1 << CS10);
-            break;
-        case (TIMER_PRESCALER_8):
-            /* 2 */
-            TCCR1B &= ~((1 << CS12) | (1 << CS10));
-            TCCR1B |= (1 << CS11);
-            break;
-        case (TIMER_PRESCALER_64):
-            /* 3 */
-            TCCR1B &= ~(1 << CS12);
-            TCCR1B |= ((1 << CS11) | (1 << CS10));
-            break;
-        case (TIMER_PRESCALER_256):
-            /* 4 */
-            TCCR1B &= ~((1 << CS11) | (1 << CS10));
-            TCCR1B |= (1 << CS12);
-            break;
-        case (TIMER_PRESCALER_1024):
-            /* 5 */
-            TCCR1B &= ~(1 << CS11);
-            TCCR1B |= ((1 << CS12) | (1 << CS10));
-            break;
-            default:
-            /* Do nothing */
+        case(TIMER_CH0):
+            /* set prescaler */
+            switch (gsau8_preScaler[enuTimerCH])
+            {
+            case (TIMER_PRESCALER_NO):
+                /* 1 */
+                TCCR0 &= ~((1 << CS02) | (1 << CS01));
+                TCCR0 |= (1 << CS00);
                 break;
-        }
-        break;
-    case(TIMER_CH2):
-        /* set prescaler */
-        switch (gsau8_preScaler[enuTimerCH])
-        {
-        case (TIMER_PRESCALER_NO):
-            /* 1 */
-            TCCR2 &= ~((1 << CS22) | (1 << CS21));
-            TCCR2 |= (1 << CS20);
+            case (TIMER_PRESCALER_8):
+                /* 2 */
+                TCCR0 &= ~((1 << CS02) | (1 << CS00));
+                TCCR0 |= (1 << CS01);
+                break;
+            case (TIMER_PRESCALER_64):
+                /* 3 */
+                TCCR0 &= ~(1 << CS02);
+                TCCR0 |= ((1 << CS01) | (1 << CS00));
+                break;
+            case (TIMER_PRESCALER_256):
+                /* 4 */
+                TCCR0 &= ~((1 << CS01) | (1 << CS00));
+                TCCR0 |= (1 << CS02);
+                break;
+            case (TIMER_PRESCALER_1024):
+                /* 5 */
+                TCCR0 &= ~(1 << CS01);
+                TCCR0 |= ((1 << CS02) | (1 << CS00));
+                break;
+            default:
+                /* Do nothing */
+                break;
+            }
             break;
-        case (TIMER_PRESCALER_8):
-            /* 2 */
-            TCCR2 &= ~((1 << CS22) | (1 << CS20));
-            TCCR2 |= (1 << CS21);
+        case(TIMER_CH1):
+            /* set prescaler */
+            switch (gsau8_preScaler[enuTimerCH])
+            {
+            case (TIMER_PRESCALER_NO):
+                /* 1 */
+                TCCR1B &= ~((1 << CS12) | (1 << CS11));
+                TCCR1B |= (1 << CS10);
+                break;
+            case (TIMER_PRESCALER_8):
+                /* 2 */
+                TCCR1B &= ~((1 << CS12) | (1 << CS10));
+                TCCR1B |= (1 << CS11);
+                break;
+            case (TIMER_PRESCALER_64):
+                /* 3 */
+                TCCR1B &= ~(1 << CS12);
+                TCCR1B |= ((1 << CS11) | (1 << CS10));
+                break;
+            case (TIMER_PRESCALER_256):
+                /* 4 */
+                TCCR1B &= ~((1 << CS11) | (1 << CS10));
+                TCCR1B |= (1 << CS12);
+                break;
+            case (TIMER_PRESCALER_1024):
+                /* 5 */
+                TCCR1B &= ~(1 << CS11);
+                TCCR1B |= ((1 << CS12) | (1 << CS10));
+                break;
+                default:
+                /* Do nothing */
+                    break;
+            }
             break;
-        case (TIMER_PRESCALER_32):
-            /* 3 */
-            TCCR2 &= ~(1 << CS22);
-            TCCR2 |= ((1 << CS21) | (1 << CS20));
-            break;
-        case (TIMER_PRESCALER_64):
-            /* 4 */
-            TCCR2 &= ~((1 << CS21) | (1 << CS20));
-            TCCR2 |= (1 << CS22);
-            break;
-        case (TIMER_PRESCALER_128):
-            /* 5 */
-            TCCR2 &= ~(1 << CS21);
-            TCCR2 |= ((1 << CS22) | (1 << CS20));
-            break;
-        case (TIMER_PRESCALER_256):
-            /* 6 */
-            TCCR2 &= ~(1 << CS20);
-            TCCR2 |= ((1 << CS22) | (1 << CS21));
-            break;
-        case (TIMER_PRESCALER_1024):
-            /* 7 */
-            TCCR2 |= ((1 << CS22) | (1 << CS21) | (1 << CS20));
+        case(TIMER_CH2):
+            /* set prescaler */
+            switch (gsau8_preScaler[enuTimerCH])
+            {
+            case (TIMER_PRESCALER_NO):
+                /* 1 */
+                TCCR2 &= ~((1 << CS22) | (1 << CS21));
+                TCCR2 |= (1 << CS20);
+                break;
+            case (TIMER_PRESCALER_8):
+                /* 2 */
+                TCCR2 &= ~((1 << CS22) | (1 << CS20));
+                TCCR2 |= (1 << CS21);
+                break;
+            case (TIMER_PRESCALER_32):
+                /* 3 */
+                TCCR2 &= ~(1 << CS22);
+                TCCR2 |= ((1 << CS21) | (1 << CS20));
+                break;
+            case (TIMER_PRESCALER_64):
+                /* 4 */
+                TCCR2 &= ~((1 << CS21) | (1 << CS20));
+                TCCR2 |= (1 << CS22);
+                break;
+            case (TIMER_PRESCALER_128):
+                /* 5 */
+                TCCR2 &= ~(1 << CS21);
+                TCCR2 |= ((1 << CS22) | (1 << CS20));
+                break;
+            case (TIMER_PRESCALER_256):
+                /* 6 */
+                TCCR2 &= ~(1 << CS20);
+                TCCR2 |= ((1 << CS22) | (1 << CS21));
+                break;
+            case (TIMER_PRESCALER_1024):
+                /* 7 */
+                TCCR2 |= ((1 << CS22) | (1 << CS21) | (1 << CS20));
+                break;
+            default:
+                /* Do nothing */
+                break;
+            }
             break;
         default:
             /* Do nothing */
             break;
         }
-        break;
-    default:
-        /* Do nothing */
-        break;
     }
 }
  
@@ -233,20 +240,25 @@ void Timer_Start(TimerChan_t enuTimerCH)
   */
 void Timer_Stop(TimerChan_t enuTimerCH)
 {
-    switch(enuTimerCH)
+    if(gsau8_startState[enuTimerCH] == TRUE)
     {
-    case(TIMER_CH0):
-        TCCR0 &= ~((1 << CS02) | (1 << CS01) | (1 << CS00));
-        break;
-    case(TIMER_CH1):
-        TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
-        break;
-    case(TIMER_CH2):
-        TCCR2 &= ~((1 << CS22) | (1 << CS21) | (1 << CS20));
-        break;
-    default:
-        /* Do nothing */
-        break;
+        gsau8_startState[enuTimerCH] = FALSE;
+        
+        switch(enuTimerCH)
+        {
+        case(TIMER_CH0):
+            TCCR0 &= ~((1 << CS02) | (1 << CS01) | (1 << CS00));
+            break;
+        case(TIMER_CH1):
+            TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
+            break;
+        case(TIMER_CH2):
+            TCCR2 &= ~((1 << CS22) | (1 << CS21) | (1 << CS20));
+            break;
+        default:
+            /* Do nothing */
+            break;
+        }
     }
 }
 

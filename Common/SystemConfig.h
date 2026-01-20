@@ -40,6 +40,9 @@
 #define SEL_3_PIN                       ((uint8_t) 4U)
 
 #define SYSTEM_TIMER_CHANNEL            ((TimerChan_t) TIMER_CH1)
+#define BLINK_TIMER_CHANNEL             ((TimerChan_t) TIMER_CH2)
+
+#define cu8BLINK_TIMER_OVFS             ((uint8_t) 15U)
 
 
 /* EEPROM addresses */

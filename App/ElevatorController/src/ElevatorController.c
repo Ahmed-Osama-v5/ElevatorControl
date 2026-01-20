@@ -65,13 +65,40 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+#define cu8SELECTOR_CNT_CONF    ((uint8_t) 2U)
 
 static OperatingMode_t enuCurrentMode = MODE_INIT;
 
 static Elevator_t strElevator = {0}; // Main elevator state
 
+uint8_t u8SelectorCount = 0, u8SelectorPoleCnt = 0;
+
 uint8_t u8AccessFlag = 0;
 uint16_t u16EnteredPass = 0, u16StoredPass = 0, u16MasterPass = 0;
+
+boolean segmentBlinkState = FALSE;
+
+PinState_t enuStopState = STATE_LOW;
+PinState_t enuSelState = STATE_LOW;
+PinState_t enuFloorMState = STATE_LOW;
+PinState_t enuSHKState = STATE_LOW;
+PinState_t enuLockState = STATE_LOW;
+PinState_t enuMUPState = STATE_LOW;
+PinState_t enuMDNState = STATE_LOW;
+PinState_t enuUPLState = STATE_LOW;
+PinState_t enuDNLState = STATE_LOW;
+PinState_t enuMNTState = STATE_LOW;
+PinState_t enuOpenSigState = STATE_LOW;
+PinState_t enuCloseSigState = STATE_LOW;
+PinState_t enuOVLState = STATE_LOW;
+PinState_t enuFLState = STATE_LOW;
+PinState_t enuPHS1State = STATE_LOW;
+PinState_t enuPHS2State = STATE_LOW;
+
+volatile uint8_t blinkTimerOvf = 0;
+
+
+Timer_cfg_t strBlinkTimer;
 
 
 /**
@@ -85,6 +112,18 @@ static void updateMenuItems(void);
  * 
  */
 static void EEPROM_LoadValues(void);
+
+/**
+ * @brief Blink timer callback function
+ * 
+ */
+static void blinkTimerCBK(void);
+
+/**
+ * @brief Reads all sensors and updates their states
+ * 
+ */
+static void readAllSensors(void);
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -152,6 +191,13 @@ void elevator_hal_vidInit(void)
     strTimer.enuTimerPre = TIMER_PRESCALER_1024; // Example prescaler value
     strTimer.CBK_Ptr = NULL; // No callback function for now
     Timer_Init(&strTimer);
+
+    /* Init segment blink timer */
+    strBlinkTimer.enuTimerCH = BLINK_TIMER_CHANNEL;
+    strBlinkTimer.enumTimerIntMode = TIMER_INT_ENABLED;
+    strBlinkTimer.enuTimerPre = TIMER_PRESCALER_1024; // Example prescaler value
+    strBlinkTimer.CBK_Ptr = blinkTimerCBK; // No callback function for now
+    Timer_Init(&strBlinkTimer);
 
     /* Enable global interrupts */
     sei();
@@ -253,7 +299,268 @@ void ElevatorController_vidOperationLoop(void)
     
     while(1)
     {
-        
+        /* Sensors and mode checks */
+        readAllSensors();
+        /* Check for errors */
+        if( (enuStopState == STATE_LOW) ||
+            (enuUPLState == STATE_LOW) ||
+            (enuDNLState == STATE_LOW) ||
+            (enuOVLState == STATE_HIGH) ||
+            (enuFLState == STATE_HIGH))
+        {
+            strElevator.enuOperatingMode = MODE_ERROR;
+        }
+        else
+        {
+            /* Check if phase sequence is used or not */
+            if(strElevator.u8PhsSeq == 1U)
+            {
+                /* Phase sequence is used.
+                 * Check for errors */
+                if((enuPHS1State == STATE_HIGH) || (enuPHS2State == STATE_HIGH))
+                {
+                    strElevator.enuOperatingMode = MODE_ERROR;
+                }
+                else
+                {
+                    /* Check wheather operating in normal mode or maintenance */
+                    if(enuMNTState == STATE_LOW)
+                    {
+                        /* Normal mode */
+                        strElevator.enuOperatingMode = MODE_NORMAL;
+                        /* Stop blink timer */
+                        Timer_Stop(BLINK_TIMER_CHANNEL);
+                        /* De-activate mnt relay */
+                        RelayManager_vidDeActivateRelay(RELAY_MNT);
+                        /* turn cabin light off */
+                        RelayManager_vidDeActivateRelay(RELAY_LIGHT);
+                    }
+                    else
+                    {
+                        /* Maintenance mode */
+                        strElevator.enuOperatingMode = MODE_MAINTENANCE;
+                        /* Activate mnt relay */
+                        RelayManager_vidActivateRelay(RELAY_MNT);
+                        /* turn cabin light on */
+                        RelayManager_vidActivateRelay(RELAY_LIGHT);
+                    }
+                }
+            }
+            else
+            {
+                /* Check wheather operating in normal mode or maintenance */
+                if(enuMNTState == STATE_LOW)
+                {
+                    /* Normal mode */
+                    strElevator.enuOperatingMode = MODE_NORMAL;
+                    /* De-activate mnt relay */
+                    RelayManager_vidDeActivateRelay(RELAY_MNT);
+                    /* turn cabin light off */
+                    RelayManager_vidDeActivateRelay(RELAY_LIGHT);
+                }
+                else
+                {
+                    /* Maintenance mode */
+                    strElevator.enuOperatingMode = MODE_MAINTENANCE;
+                    /* Activate mnt relay */
+                    RelayManager_vidActivateRelay(RELAY_MNT);
+                    /* turn cabin light on */
+                    RelayManager_vidActivateRelay(RELAY_LIGHT);
+                }
+            }
+        }
+
+        switch(strElevator.enuOperatingMode)
+        {
+            case MODE_NORMAL:
+                SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
+                LCD_SetCursor(1, 0);
+                LCD_WriteString("          ");
+                break;
+            case MODE_MAINTENANCE:
+                /* Display current floor and pole cnt */
+                LCD_SetCursor(0, 0);
+                LCD_WriteString("C: ");
+                LCD_send_int((uint16_t)strElevator.u8CurrentFloor, 2);
+                LCD_SetCursor(1, 0);
+                LCD_WriteString("cn: ");
+                LCD_send_int((uint16_t)u8SelectorCount, 2);
+                LCD_WriteString(",  P: ");
+                LCD_send_int((uint16_t)u8SelectorPoleCnt, 2);
+                /* Start segment blink timer */
+                Timer_Start(BLINK_TIMER_CHANNEL);
+                if(segmentBlinkState)
+                {
+                    SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
+                }
+                else
+                {
+                    SegmentDriver_vidWrite(cu8MNT_ERROR);
+                }
+                /* Check if movement is required */
+                if((enuUPLState == STATE_HIGH) && (enuDNLState == STATE_HIGH))
+                {
+                    if((enuMUPState == STATE_HIGH) && (enuMDNState == STATE_LOW))
+                    {
+                        /* Move up */
+                        strElevator.enuDirection = DIR_UP;
+                        RelayManager_vidActivateRelay(RELAY_UP);
+                        if(strElevator.u8MntSpeed == 0)
+                        {
+                            /* Slow speed */
+                            RelayManager_vidActivateRelay(RELAY_LS);
+                        }
+                        else
+                        {
+                            /* High speed */
+                            RelayManager_vidActivateRelay(RELAY_HS);
+                        }
+                    }
+                    else if((enuMUPState == STATE_LOW) && (enuMDNState == STATE_HIGH))
+                    {
+                        /* Move down */
+                        strElevator.enuDirection = DIR_DOWN;
+                        RelayManager_vidActivateRelay(RELAY_DN);
+                        if(strElevator.u8MntSpeed == 0)
+                        {
+                            /* Slow speed */
+                            RelayManager_vidActivateRelay(RELAY_LS);
+                        }
+                        else
+                        {
+                            /* High speed */
+                            RelayManager_vidActivateRelay(RELAY_HS);
+                        }
+                    }
+                    else
+                    {
+                        /* Stop elevator */
+                        strElevator.enuDirection = DIR_IDLE;
+                        RelayManager_vidDeActivateRelay(RELAY_UP);
+                        RelayManager_vidDeActivateRelay(RELAY_DN);
+                        RelayManager_vidDeActivateRelay(RELAY_LS);
+                        RelayManager_vidDeActivateRelay(RELAY_HS);
+                    }
+                }
+                break;
+            case MODE_ERROR:
+                /* Start segment blink timer */
+                Timer_Start(BLINK_TIMER_CHANNEL);
+                if(segmentBlinkState)
+                {
+                    SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
+                }
+                else
+                {
+                    /* Display error */
+                    LCD_SetCursor(1, 0);
+                    if(enuStopState == STATE_LOW)
+                    {
+                        LCD_WriteString("STOP ERROR");
+                        SegmentDriver_vidWrite(cu8STOP_ERROR);
+                    }
+                    else if(enuUPLState == STATE_LOW)
+                    {
+                        LCD_WriteString("UPL  ERROR");
+                        SegmentDriver_vidWrite(cu8LIMIT_ERROR);
+                    }
+                    else if(enuDNLState == STATE_LOW)
+                    {
+                        LCD_WriteString("DNL  ERROR");
+                        SegmentDriver_vidWrite(cu8LIMIT_ERROR);
+                    }
+                    else if(enuOVLState == STATE_HIGH)
+                    {
+                        LCD_WriteString("OVL  ERROR");
+                        SegmentDriver_vidWrite(cu8OVL_ERROR);
+                    }
+                    else if(enuFLState == STATE_HIGH)
+                    {
+                        LCD_WriteString("FL   ERROR");
+                        SegmentDriver_vidWrite(cu8FL_ERROR);
+                    }
+                    else if(enuPHS1State == STATE_HIGH)
+                    {
+                        LCD_WriteString("PHS1 ERROR");
+                        SegmentDriver_vidWrite(cu8PHS_ERROR);
+                    }
+                    else if(enuPHS2State == STATE_HIGH)
+                    {
+                        LCD_WriteString("PHS2 ERROR");
+                        SegmentDriver_vidWrite(cu8PHS_ERROR);
+                    }
+                    else
+                    {
+                        /* No error */
+                    }
+                }
+                break;
+            default:
+                // Handle unexpected operating mode
+                break;
+
+        }
+
+        /* Counting floors */
+        if( (strElevator.enuOperatingMode == MODE_NORMAL) ||
+            (strElevator.enuOperatingMode == MODE_MAINTENANCE))
+            {
+                /* debounce selsctor */
+                if(enuSelState == STATE_HIGH)
+                {
+                    if(u8SelectorCount < cu8SELECTOR_CNT_CONF)
+                    {
+                        u8SelectorCount++;
+                    }
+                    else
+                    {
+                        u8SelectorCount = 0;
+                        u8SelectorPoleCnt++;
+                    }
+                }
+                if(strElevator.enuDirection == DIR_UP)
+                {
+                    if(strElevator.u8CurrentFloor < strElevator.u8FloorCount)
+                    {
+                        if(u8SelectorPoleCnt == 2)
+                        {
+                            strElevator.u8CurrentFloor++;
+                            u8SelectorPoleCnt = 0;
+                        }
+                        else
+                        {
+                            /* Do nothing */
+                        }
+                    }
+                    else
+                    {
+                        /* Do nothing */
+                    }
+                }
+                else if(strElevator.enuDirection == DIR_DOWN)
+                {
+                    if(strElevator.u8CurrentFloor > 0)
+                    {
+                        if(u8SelectorPoleCnt == 2)
+                        {
+                            strElevator.u8CurrentFloor--;
+                            u8SelectorPoleCnt = 0;
+                        }
+                        else
+                        {
+                            /* Do nothing */
+                        }
+                    }
+                    else
+                    {
+                        /* Do nothing */
+                    }
+                }
+                else
+                {
+                    /* Do nothing */
+                }
+            }
     }
 }
 
@@ -548,6 +855,45 @@ static void EEPROM_LoadValues(void)
     _delay_ms(u8ReadDelay);
     (void) EEPROM_u8Read(cu8PHS_SEQ_EE_ADD, &strElevator.u8PhsSeq);
     _delay_ms(u8ReadDelay);
+}
+
+/**
+ * @brief Reads all sensors and updates their states
+ * 
+ */
+static void readAllSensors(void)
+{
+    SensorManager_stdReadSensor(FLOOR_M, &enuFloorMState);
+    SensorManager_stdReadSensor(SELECTOR, &enuSelState);
+    SensorManager_stdReadSensor(STOP_SEN, &enuStopState);
+    SensorManager_stdReadSensor(SHK, &enuSHKState);
+    SensorManager_stdReadSensor(LOCK, &enuLockState);
+    SensorManager_stdReadSensor(UP_LIMIT, &enuUPLState);
+    SensorManager_stdReadSensor(DN_LIMIT, &enuDNLState);
+    SensorManager_stdReadSensor(MNT_SEN, &enuMNTState);
+    SensorManager_stdReadSensor(MNT_UP, &enuMUPState);
+    SensorManager_stdReadSensor(MNT_DN, &enuMDNState);
+    SensorManager_stdReadSensor(OPEN_DOOR, &enuOpenSigState);
+    SensorManager_stdReadSensor(OVER_LOAD, &enuOVLState);
+    SensorManager_stdReadSensor(CLOSE_DOOR, &enuCloseSigState);
+    SensorManager_stdReadSensor(FULL_LOAD, &enuFLState);
+    SensorManager_stdReadSensor(PHASE_1, &enuPHS1State);
+    SensorManager_stdReadSensor(PHASE_2, &enuPHS2State);
+}
+
+/**
+ * @brief Blink timer callback function
+ * 
+ */
+static void blinkTimerCBK(void)
+{
+    blinkTimerOvf++;
+    if (blinkTimerOvf >= cu8BLINK_TIMER_OVFS)
+    {
+        blinkTimerOvf = 0;
+        segmentBlinkState = !segmentBlinkState;
+    }
+
 }
 
 /* ************************************************************************ */

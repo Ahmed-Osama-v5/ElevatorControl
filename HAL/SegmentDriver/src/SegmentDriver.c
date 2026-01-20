@@ -112,20 +112,28 @@ void SegmentDriver_vidInit (void)
 /* Write on 7 segment display */
 void SegmentDriver_vidWrite (uint8_t u8Value)
 {
-    
-    /* Write value to segment pins */
-    DIO_WritePort(strSegmentConfig[0].enuSegmentPort, au8SegmentDigits[u8Value%10]);
-
-    /* Check if value is less than 10 */
-    if (u8Value < 10U)
+    /* Display floor value */
+    if(u8Value < 20)
     {
-        /* Set Segment H pin LOW */
-        DIO_WritePin(cenuSegment_H_Port, cu8Segment_H_Pin, STATE_LOW);
+        /* Write value to segment pins */
+        DIO_WritePort(strSegmentConfig[0].enuSegmentPort, au8SegmentDigits[u8Value%10]);
+
+        /* Check if value is less than 10 */
+        if (u8Value < 10U)
+        {
+            /* Set Segment H pin LOW */
+            DIO_WritePin(cenuSegment_H_Port, cu8Segment_H_Pin, STATE_LOW);
+        }
+        else
+        {
+            /* Set Segment H pin HIGH */
+            DIO_WritePin(cenuSegment_H_Port, cu8Segment_H_Pin, STATE_HIGH);
+        }
     }
     else
     {
-        /* Set Segment H pin HIGH */
-        DIO_WritePin(cenuSegment_H_Port, cu8Segment_H_Pin, STATE_HIGH);
+        /* Display error value */
+        DIO_WritePort(strSegmentConfig[0].enuSegmentPort, u8Value);
     }
 
     /* Send a pulse to shift register */
