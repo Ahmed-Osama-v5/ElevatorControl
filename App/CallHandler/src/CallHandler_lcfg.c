@@ -71,6 +71,12 @@ const CallDioConfig_t cstrCallDio_Config
     .u8CALL_0_Pin = 4,
     .enuCALL_1_Port = GPIOD,
     .u8CALL_1_Pin = 3,
+    .enuSEL_0_Port = GPIOB,
+    .u8SEL_0_Pin = 6,
+    .enuSEL_1_Port = GPIOB,
+    .u8SEL_1_Pin = 5,
+    .enuSEL_2_Port = GPIOB,
+    .u8SEL_2_Pin = 4,
     .enuCALL_CON_Port = GPIOD,
     .u8CALL_CON_Pin = 6
 };

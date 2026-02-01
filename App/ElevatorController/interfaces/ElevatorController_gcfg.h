@@ -27,6 +27,7 @@
 
 #include "Std_Types.h"
 #include "SystemConfig.h"
+#include "CallHandler_gcfg.h"
 
 
 /* ************************************************************************ */
@@ -53,7 +54,9 @@ typedef enum
 {
     DIR_IDLE,
     DIR_UP,
-    DIR_DOWN
+    DIR_DOWN,
+    DIR_SLOWING,
+    DIR_STOPPING
 }MoveDirection_t;
 
 typedef enum
@@ -65,9 +68,16 @@ typedef enum
     MODE_ERROR
 }OperatingMode_t;
 
+typedef enum
+{
+    COLLECTION_UP,
+    COLLECTION_DOWN
+}CollDir_t;
+
 typedef struct
 {
     uint8_t u8CurrentFloor;
+    uint8_t u8DestinationFloor;
     uint8_t u8SlowTimer;
     uint8_t u8FastTimer;
     uint8_t u8CamTimer;
@@ -81,10 +91,11 @@ typedef struct
     uint8_t u8PhsSeq;
     uint8_t u8CollectionDir;
     MoveDirection_t enuDirection;
+    CollDir_t enuCollDir;
     DoorType_t enuDoorType;
     DoorState_t enuDoorState;
     OperatingMode_t enuOperatingMode;
-    boolean bFloorCalls[cu8MAX_FLOORS];
+    CallType_t aenuFloorCalls[cu8MAX_FLOORS];
     uint16_t u16DoorTimer;
     boolean bEmergencyStop;
 } Elevator_t;

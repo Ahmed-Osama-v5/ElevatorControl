@@ -49,6 +49,12 @@ typedef struct {
     uint8_t u8CALL_0_Pin;
     GPIO_t  enuCALL_1_Port;
     uint8_t u8CALL_1_Pin;
+    GPIO_t  enuSEL_0_Port;
+    uint8_t u8SEL_0_Pin;
+    GPIO_t  enuSEL_1_Port;
+    uint8_t u8SEL_1_Pin;
+    GPIO_t  enuSEL_2_Port;
+    uint8_t u8SEL_2_Pin;
     GPIO_t  enuCALL_CON_Port;
     uint8_t u8CALL_CON_Pin;
 } CallDioConfig_t;

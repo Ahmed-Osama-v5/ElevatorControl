@@ -22,6 +22,7 @@
 /* Set Ownership                                                            */
 /* ************************************************************************ */
 
+#include "CallHandler_gcfg.h"
 #define CallHandler_c
 
 /* ************************************************************************ */
@@ -36,6 +37,8 @@
 
 #include "dio.h"
 #include "ElevatorController.h"
+#include "LEDController.h"
+#include "RelayManager.h"
 
 /* own header inclusions ************************************************** */
 
@@ -51,14 +54,23 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+/* Elevator object pointer */
+static Elevator_t* spstrElevator;
+
 /* Calls scanner */
 /**
  * @brief Get the Call object
  * 
  * @param enuCallType 
- * @return uint8_t 
+ * @return uint16_t 
  */
-static uint8_t u8GetCall(CallType_t enuCallType);
+static uint16_t u16GetCall(CallType_t enuCallType);
+
+/**
+ * @brief Process the call queue
+ * @param bIsQueueEmpty Indicates if the call queue is empty
+ */
+static void vidProcessCallQueue(void);
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -74,8 +86,20 @@ static uint8_t u8GetCall(CallType_t enuCallType);
  * @brief This function initializes the CallHandler component.
  * 
  */
-void CallHandler_vidInit(void)
+void CallHandler_vidInit(Elevator_t* pstrElevator)
 {
+    if(pstrElevator != NULL)
+    {
+        uint8_t u8Index = 0;
+
+        spstrElevator = pstrElevator;
+        
+        /* Init call queue */
+        for (u8Index = 0; u8Index < spstrElevator->u8FloorCount; u8Index++)
+        {
+            spstrElevator->aenuFloorCalls[u8Index] = CALL_NONE;
+        }
+    }
     /* Initialize Call inputs DIOs */
     Dio_Cfg_t dio_config = {
         .enuGPIO = cstrCallDio_Config.enuCALL_0_Port,
@@ -102,10 +126,10 @@ void CallHandler_vidInit(void)
  * 
  * @param pstrCall struct holding call info.
  */
-void CallHandler_vidGetCall(Call_t* cpstrCall)
+void CallHandler_vidGetCall(void)
 {
     // Implementation to scan call inputs and register a call
-    if (cpstrCall != NULL)
+    if (spstrElevator != NULL)
     {
         uint16_t u16CallResult = 0U;
         uint8_t u8FloorIndex = 0U;
@@ -114,19 +138,21 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
         /* TODO: remember to turn all LEDs off through "ElevatorController" */
 
         /* Scan Inner calls */
-        u16CallResult = u8GetCall(CALL_INTERNAL);
+        u16CallResult = u16GetCall(CALL_INTERNAL);
 
         /* Process result */
         if(u16CallResult != 0U)
         {
-            for(u8FloorIndex = 0U; u8FloorIndex < cu8MAX_FLOORS; u8FloorIndex++)
+            for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
             {
                 if (u16CallResult & (1U << u8FloorIndex))
                 {
-                    /* Check if call is regestered */
-                    if(cpstrCall->u8Floor[u8FloorIndex] == 1)
+                    if(spstrElevator->aenuFloorCalls[u8FloorIndex] == CALL_EXTERNAL)
                     {
-                        cpstrCall->enuCallType[u8FloorIndex] = CALL_INTERNAL;
+                        spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
+
+                        /* Set led pattern to internal */
+                        LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
                     }
 
                     /* Handle new call */
@@ -142,8 +168,19 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
                         else
                         {
                             /* New valid call */
-                            cpstrCall->u8Floor[u8FloorIndex] = 1;
-                            cpstrCall->enuCallType[u8FloorIndex] = CALL_INTERNAL;
+                            spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
+
+                            /* Set led pattern to internal */
+                            LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
+
+                            if(spstrElevator->enuDirection == DIR_IDLE)
+                            {
+                                spstrElevator->u8DestinationFloor = u8FloorIndex;
+                                if(spstrElevator->u8CurrentFloor < u8FloorIndex)
+                                    spstrElevator->enuDirection = DIR_UP;
+                                else
+                                    spstrElevator->enuDirection = DIR_DOWN;
+                            }
                         }
                     }
                 }
@@ -154,17 +191,17 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
             u16CallResult = 0U;
 
             /* Scan Outer calls */
-            u16CallResult = u8GetCall(CALL_EXTERNAL);
+            u16CallResult = u16GetCall(CALL_EXTERNAL);
             
             /* Process result */
             if(u16CallResult != 0U)
             {
-                for(u8FloorIndex = 0U; u8FloorIndex < cu8MAX_FLOORS; u8FloorIndex++)
+                for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
                 {
                     if (u16CallResult & (1U << u8FloorIndex))
                     {
                         /* Check if call is regestered */
-                        if(cpstrCall->u8Floor[u8FloorIndex] == 1)
+                        if(spstrElevator->aenuFloorCalls[u8FloorIndex] != CALL_NONE)
                         {
                             /* Call already registered, discard new call */
                         }
@@ -172,9 +209,18 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
                         /* Handle new call */
                         else
                         {
+                            /* check if call is made to current floor from external */
+                            if((u8FloorIndex == spstrElevator->u8CurrentFloor) && (spstrElevator->enuDirection == DIR_IDLE))
+                            {
+                                /* Turn on cabin lights */
+                                RelayManager_vidActivateRelay(RELAY_LIGHT);
+
+                                /* Activate cabin lights timeout */
+                                ElevatorController_vidStartLightTimer();
+                            }
                             /* Check if call is equal to current floor and discard it */
-                            if((u8FloorIndex == u8CurrentFloor)
-                            ||(((u8FloorIndex == (u8CurrentFloor - 1)) || (u8FloorIndex == (u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
+                            if((u8FloorIndex == spstrElevator->u8CurrentFloor)
+                            ||((spstrElevator->enuDirection != DIR_IDLE) && ((u8FloorIndex == (spstrElevator->u8CurrentFloor - 1)) || (u8FloorIndex == (spstrElevator->u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
                             {
                                 /* Call is either to current floor or elevator is too close to the called floor */
                                 /* Don't register the call */
@@ -182,15 +228,29 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
                             else
                             {
                                 /* New valid call */
-                                cpstrCall->u8Floor[u8FloorIndex] = 1;
-                                cpstrCall->enuCallType[u8FloorIndex] = CALL_EXTERNAL;
+                                spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_EXTERNAL;
+
+                                /* Set led pattern to internal */
+                                LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_EXTERNAL_CALL);
+
+                                if(spstrElevator->enuDirection == DIR_IDLE)
+                                {
+                                    spstrElevator->u8DestinationFloor = u8FloorIndex;
+                                    if(spstrElevator->u8CurrentFloor < u8FloorIndex)
+                                        spstrElevator->enuDirection = DIR_UP;
+                                    else
+                                        spstrElevator->enuDirection = DIR_DOWN;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
+        if(spstrElevator->enuDirection == DIR_STOPPING)
+        {
+            vidProcessCallQueue();
+        }
     }
     else
     {
@@ -206,12 +266,12 @@ void CallHandler_vidGetCall(Call_t* cpstrCall)
 /* ************************************************************************ */
 /* Calls scanner */
 /**
- * @brief Get the Call object
+ * @brief Get the Call request from hardware
  * 
  * @param enuCallType 
- * @return uint8_t 
+ * @return uint16_t 
  */
-static uint8_t u8GetCall(CallType_t enuCallType)
+static uint16_t u16GetCall(CallType_t enuCallType)
 {
     PinState_t enuPinState = STATE_HIGH;
 	uint16_t u16RetVal = 0U;
@@ -237,6 +297,57 @@ static uint8_t u8GetCall(CallType_t enuCallType)
     for(u8FloorIndex=0;u8FloorIndex<8;u8FloorIndex++)
     {
         /* Mux select(u8FloorIndex) */
+        switch(u8FloorIndex)
+        {
+            case 0:
+                // Handle floor 0
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 1:
+                // Handle floor 1
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 2:
+                // Handle floor 2
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 3:
+                // Handle floor 3
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 4:
+                // Handle floor 4
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 5:
+                // Handle floor 5
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 6:
+                // Handle floor 6
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 7:
+                // Handle floor 7
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+        }
         
         /* Read floor inner call from mux output */
         enuPinState = DIO_ReadPin(cstrCallDio_Config.enuCALL_0_Port, cstrCallDio_Config.u8CALL_0_Pin);
@@ -254,6 +365,57 @@ static uint8_t u8GetCall(CallType_t enuCallType)
     for(u8FloorIndex=0;u8FloorIndex<8;u8FloorIndex++)
     {
         /* Mux select(7-u8FloorIndex) */
+        switch(u8FloorIndex)
+        {
+            case 0:
+                // Handle floor 8
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 1:
+                // Handle floor 9
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 2:
+                // Handle floor 10
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 3:
+                // Handle floor 11
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_LOW);
+                break;
+            case 4:
+                // Handle floor 12
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 5:
+                // Handle floor 13
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 6:
+                // Handle floor 14
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_LOW);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+            case 7:
+                // Handle floor 15
+                DIO_WritePin(cstrCallDio_Config.enuSEL_0_Port, cstrCallDio_Config.u8SEL_0_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_1_Port, cstrCallDio_Config.u8SEL_1_Pin, STATE_HIGH);
+                DIO_WritePin(cstrCallDio_Config.enuSEL_2_Port, cstrCallDio_Config.u8SEL_2_Pin, STATE_HIGH);
+                break;
+        }
         
         /* Read floor inner call from mux output */
         enuPinState = DIO_ReadPin(cstrCallDio_Config.enuCALL_1_Port, cstrCallDio_Config.u8CALL_1_Pin);
@@ -269,6 +431,169 @@ static uint8_t u8GetCall(CallType_t enuCallType)
     }
 
     return u16RetVal;
+}
+
+
+/**
+ * @brief Process the call queue
+ * @param bIsQueueEmpty Indicates if the call queue is empty
+ */
+static void vidProcessCallQueue(void)
+{
+	uint8_t tmpFlag = 0, retVal = 0, i;
+    if(spstrElevator->enuDirection == DIR_UP)
+    {
+        for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
+        {
+            if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] == CALL_INTERNAL))
+            {
+				tmpFlag = 1;
+                retVal = i;
+				break;
+            }
+            else
+			{
+				/* Do nothing */
+			}
+        }
+		if(! tmpFlag)
+		{
+			for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
+			{
+				if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+				{
+					tmpFlag = 1;
+					retVal = i;
+				}
+				else
+				{
+					/* Do nothing */
+				}
+			}
+			if(tmpFlag)
+				spstrElevator->u8DestinationFloor =  retVal;
+		}
+		else
+		{
+			spstrElevator->u8DestinationFloor =  retVal;
+		}
+
+        /* Check if destination is down */
+        for(i=spstrElevator->u8CurrentFloor;i>0;i--)
+        {
+            if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+            {
+                spstrElevator->enuDirection = DIR_DOWN;
+                spstrElevator->u8DestinationFloor =  i;
+            }
+        }
+        if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
+        {
+            spstrElevator->enuDirection = DIR_DOWN;
+            spstrElevator->u8DestinationFloor =  0;
+        }
+    }
+    else
+    {
+        /* Check if destination is down */
+        for(i=spstrElevator->u8CurrentFloor;i>0;i--)
+        {
+            if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+            {
+                spstrElevator->u8DestinationFloor =  i;
+            }
+        }
+        if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
+        {
+            spstrElevator->enuDirection = DIR_DOWN;
+            spstrElevator->u8DestinationFloor =  0;
+        }
+
+        for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
+        {
+            if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+            {
+                spstrElevator->enuDirection = DIR_UP;
+                spstrElevator->u8DestinationFloor =  i;
+            }
+        }
+    }
+
+    #if 0
+    /* Process call queue and set destination floor */
+    uint8_t u8Index = 0;
+    for(u8Index=0;u8Index<spstrElevator->u8FloorCount;u8Index++)
+    {
+        if((u8Index > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[u8Index] != CALL_NONE))
+        {
+            /* Check collection direction */
+            if(spstrElevator->enuCollDir == COLLECTION_UP)
+            {
+                /* Check motion direction */
+                if(spstrElevator->enuDirection == DIR_UP)
+                {
+                    spstrElevator->u8DestinationFloor = u8Index;
+                    break;
+                }
+            }
+            else
+            {
+                /* Collection down */
+
+                /* Check motion direction */
+                if(spstrElevator->enuDirection == DIR_UP)
+                {
+                    /* If call is internal */
+                    if(spstrElevator->aenuFloorCalls[u8Index] == CALL_INTERNAL)
+                    {
+                        spstrElevator->u8DestinationFloor = u8Index;
+                        break;
+                    }
+                }
+                else
+                {
+                    /* Do nothing */
+                }
+            }
+        }
+        else if((u8Index < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[u8Index] != CALL_NONE))
+        {
+            /* Check collection direction */
+            if(spstrElevator->enuCollDir == COLLECTION_UP)
+            {
+                /* Check motion direction */
+                if(spstrElevator->enuDirection == DIR_DOWN)
+                {
+                    /* If call is internal */
+                    if(spstrElevator->aenuFloorCalls[u8Index] == CALL_INTERNAL)
+                    {
+                        spstrElevator->u8DestinationFloor = u8Index;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                /* Collection down */
+
+                /* Check motion direction */
+                if(spstrElevator->enuDirection == DIR_DOWN)
+                {
+                    spstrElevator->u8DestinationFloor = u8Index;
+                    break;
+                }
+                else
+                {
+                    /* Do nothing */
+                }
+            }
+        }
+        else
+        {
+            /* Do nothing */
+        }
+    }
+        #endif
 }
 /* ************************************************************************ */
 

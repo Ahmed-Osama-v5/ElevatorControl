@@ -38,15 +38,8 @@ typedef enum
 {
     CALL_NONE,
     CALL_INTERNAL,
-    CALL_EXTERNAL,
-    CALL_BOTH
+    CALL_EXTERNAL
 } CallType_t;
-
-typedef struct
-{
-    uint8_t u8Floor[cu8MAX_FLOORS];
-    CallType_t enuCallType[cu8MAX_FLOORS];
-} Call_t;
 
 /*typedef struct
 {

@@ -25,7 +25,7 @@
 #ifndef LED_CONTROLLER_GCFG_H
 #define LED_CONTROLLER_GCFG_H
 
-
+#include "std_types.h"
 #include "SystemConfig.h"
 
 /* ************************************************************************ */

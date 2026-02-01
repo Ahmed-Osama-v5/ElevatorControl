@@ -30,6 +30,7 @@
 /* ************************************************************************ */
 
 /* cross dependency inclusions ******************************************** */
+#include "ElevatorController_gcfg.h"
 #include "SystemConfig.h"
 
 /* own header inclusions ************************************************** */
@@ -50,14 +51,14 @@
  * @brief This function initializes the CallHandler component.
  * 
  */
-void CallHandler_vidInit(void);
+void CallHandler_vidInit(Elevator_t* pstrElevator);
 
 /**
  * @brief scans call inputs and register a call in the output param.
  * 
  * @param pstrCall struct holding call info.
  */
-void CallHandler_vidGetCall(Call_t* cpstrCall);
+void CallHandler_vidGetCall(void);
 
 
 #endif // CALL_HANDLER_H

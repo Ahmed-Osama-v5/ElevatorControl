@@ -28,4 +28,5 @@ target_link_libraries(${MODULE_NAME} PUBLIC
 
     EepD
     Timer
+    UART
 )

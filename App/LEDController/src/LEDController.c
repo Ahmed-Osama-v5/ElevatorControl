@@ -125,11 +125,32 @@ void LEDController_vidSetState(uint8_t u8LedId, LEDState_t enuState)
     enuLedStatus[u8LedId].enuState = enuState;
     enuLedStatus[u8LedId].enuPattern = LED_PATTERN_NONE;
     
-    if(enuState == LED_STATE_ON) {
-        vidLED_UpdateHardware(u8LedId, TRUE);
+    vidLED_UpdateHardware(u8LedId, enuState ? TRUE : FALSE);
+}
+
+/**
+ * @brief Sets the state of all LEDs off
+ * 
+ */
+void LEDController_vidTurnAllOff(void)
+{
+    uint8_t u8Index;
+    for(u8Index=0;u8Index<cu8MAX_FLOORS;u8Index++)
+    {
+        vidLED_UpdateHardware(u8Index, FALSE);
     }
-    else if(enuState == LED_STATE_OFF) {
-        vidLED_UpdateHardware(u8LedId, FALSE);
+}
+
+/**
+ * @brief Sets the pattern of all LEDs to none
+ * 
+ */
+void LEDController_vidSetPatAllOff(void)
+{
+    uint8_t u8Index;
+    for(u8Index=0;u8Index<cu8MAX_FLOORS;u8Index++)
+    {
+        enuLedStatus[u8Index].enuPattern = LED_PATTERN_NONE;
     }
 }
 
@@ -191,7 +212,8 @@ void LEDController_vidProcess(void)
                 if((u16CurrentTime - enuLedStatus[u8I].u16LastToggleTime) >= u16OnTime) {
                     enuLedStatus[u8I].bCurrentOutput = FALSE;
                     enuLedStatus[u8I].u16LastToggleTime = u16CurrentTime;
-                    vidLED_UpdateHardware(u8I, FALSE);
+                    if(enuLedStatus[u8I].enuPattern != LED_PATTERN_INTERNAL_CALL)
+                        vidLED_UpdateHardware(u8I, FALSE);
                 }
             }
             else {

@@ -33,13 +33,9 @@ string(REGEX REPLACE "(^|;)CMakeFiles[^;]*;?" "\\1" SOURCES "${SOURCES}")
 #App
 add_subdirectory(App/ElevatorController)
 add_subdirectory(App/CallHandler)
-add_subdirectory(App/Diagnostics)
 add_subdirectory(App/LEDController)
 add_subdirectory(App/Menu)
 add_subdirectory(App/MotionController)
-
-#EventProcessor
-#add_subdirectory(EventProcessor)
 
 #HAL
 add_subdirectory(HAL/ButtonDriver)
@@ -54,6 +50,7 @@ add_subdirectory(HAL/SegmentDriver)
 add_subdirectory(MCAL/Dio)
 add_subdirectory(MCAL/EepD)
 add_subdirectory(MCAL/Timer)
+add_subdirectory(MCAL/Uart)
 
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf ${SOURCES})
 
@@ -63,8 +60,6 @@ target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/App/ElevatorController/interfaces
     ${CMAKE_SOURCE_DIR}/App/CallHandler/includes
     ${CMAKE_SOURCE_DIR}/App/CallHandler/interfaces
-    ${CMAKE_SOURCE_DIR}/App/Diagnostics/includes
-    ${CMAKE_SOURCE_DIR}/App/Diagnostics/interfaces
     ${CMAKE_SOURCE_DIR}/App/LEDController/includes
     ${CMAKE_SOURCE_DIR}/App/LEDController/interfaces
     ${CMAKE_SOURCE_DIR}/App/Menu/includes
@@ -90,6 +85,8 @@ target_include_directories(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf PUBLIC
     ${CMAKE_SOURCE_DIR}/MCAL/EepD/includes
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/interfaces
     ${CMAKE_SOURCE_DIR}/MCAL/Timer/includes
+    ${CMAKE_SOURCE_DIR}/MCAL/Uart/includes
+    ${CMAKE_SOURCE_DIR}/MCAL/Uart/interfaces
 )
 
 # Generate hex file (separate from build, no longer ALL)

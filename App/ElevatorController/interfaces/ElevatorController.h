@@ -79,6 +79,12 @@ uint8_t ElevatorController_u8GetCurrentFloor(void);
  */
 uint8_t ElevatorController_u8GetSelectorCnt(void);
 
+/**
+ * @brief Starts the light timer for the elevator.
+ * 
+ */
+void ElevatorController_vidStartLightTimer(void);
+
 // HAL initialization
 void elevator_hal_vidInit(void);
 
@@ -104,8 +110,6 @@ uint16_t elevator_hal_u16Get_time_ms(void);
 void ElevatorController_vidSplashScreen(void);
 
 OperatingMode_t ElevatorController_enuGetMode(void);
-
-void vidResetDefaults(void);
 
 
 /* ************************************************************************ */

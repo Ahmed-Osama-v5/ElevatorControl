@@ -63,6 +63,17 @@ void LEDController_vidInit(void);
 void LEDController_vidSetState(uint8_t u8LedId, LEDState_t enuState);
 
 /**
+ * @brief Sets the state of all LEDs off
+ * 
+ */
+void LEDController_vidTurnAllOff(void);
+/**
+ * @brief Sets the pattern of all LEDs to none
+ * 
+ */
+void LEDController_vidSetPatAllOff(void);
+
+/**
  * @brief Sets the pattern of a specific LED
  * 
  * @param u8LedId 

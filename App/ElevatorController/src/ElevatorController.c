@@ -24,6 +24,9 @@
 
 #define ElevatorController_c
 
+//#define _DEBUG
+#define _TEST
+
 /* ************************************************************************ */
 /* Header Inclusions                                                        */
 /* ************************************************************************ */
@@ -49,6 +52,10 @@
 #include "EepD.h"
 #include "Menu.h"
 
+#ifdef _DEBUG
+#include "uart.h"
+#endif
+
 
 /* own header inclusions ************************************************** */
 
@@ -65,11 +72,16 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+
 #define cu8SELECTOR_CNT_CONF    ((uint8_t) 2U)
+
+#define cu16SYSTEM_TIMER_OVFS_PER_S    ((uint16_t) 2U)
 
 static OperatingMode_t enuCurrentMode = MODE_INIT;
 
-static Elevator_t strElevator = {0}; // Main elevator state
+Elevator_t strElevator = {0}; // Main elevator state
+
+OperatingMode_t enuPreviousMode = MODE_NORMAL;
 
 uint8_t u8SelectorCount = 0, u8SelectorPoleCnt = 0;
 
@@ -97,6 +109,25 @@ PinState_t enuPHS2State = STATE_LOW;
 
 volatile uint8_t blinkTimerOvf = 0;
 
+volatile uint16_t u16SlowTimerCounter = 0;
+volatile uint16_t u16FastTimerCounter = 0;
+volatile uint16_t u16CamTimerCounter = 0;
+volatile uint16_t u16ShkTimerCounter = 0;
+volatile uint16_t u16StopTimerCounter = 0;
+volatile uint16_t u16LightTimerCounter = 0;
+volatile boolean bSlowTimerActive = FALSE;
+volatile boolean bFastTimerActive = FALSE;
+volatile boolean bCamTimerActive = FALSE;
+volatile boolean bShkTimerActive = FALSE;
+volatile boolean bStopTimerActive = FALSE;
+volatile boolean bLightTimerActive = FALSE;
+volatile boolean bSlowTimerExpired = FALSE;
+volatile boolean bFastTimerExpired = FALSE;
+volatile boolean bCamTimerExpired = FALSE;
+volatile boolean bShkTimerExpired = FALSE;
+volatile boolean bStopTimerExpired = FALSE;
+volatile boolean bLightTimerExpired = FALSE;
+
 
 Timer_cfg_t strBlinkTimer;
 
@@ -114,16 +145,65 @@ static void updateMenuItems(void);
 static void EEPROM_LoadValues(void);
 
 /**
- * @brief Blink timer callback function
+ * @brief Set values in EEPROM to default
  * 
+ */
+static void vidResetDefaults(void);
+
+/**
+ * @brief Blink timer callback function
+ *
  */
 static void blinkTimerCBK(void);
 
 /**
  * @brief Reads all sensors and updates their states
- * 
+ *
  */
 static void readAllSensors(void);
+
+/**
+ * @brief System timer callback function
+ *
+ */
+static void systemTimerCBK(void);
+
+/**
+ * @brief Drops all pending elevator calls
+ * This function iterates through all floors and resets their call states to CALL_NONE.
+ * 
+ */
+static void vidDropCalls(void);
+
+/**
+ * @brief Checks if the call queue is empty
+ * 
+ * @return boolean TRUE if the call queue is empty, FALSE otherwise
+ */
+static boolean bIsCallQueueEmpty(void);
+
+static void vidStartSlowTimer(void);
+static void vidStopSlowTimer(void);
+static boolean bIsSlowTimerExpired(void);
+
+static void vidStartFastTimer(void);
+static void vidStopFastTimer(void);
+static boolean bIsFastTimerExpired(void);
+
+static void vidStartCamTimer(void);
+static void vidStopCamTimer(void);
+static boolean bIsCamTimerExpired(void);
+
+static void vidStartShkTimer(void);
+static void vidStopShkTimer(void);
+static boolean bIsShkTimerExpired(void);
+
+static void vidStartStopTimer(void);
+static void vidStopStopTimer(void);
+static boolean bIsStopTimerExpired(void);
+
+static void vidStopLightTimer(void);
+static boolean bIsLightTimerExpired(void);
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -142,16 +222,37 @@ static void readAllSensors(void);
 */
 void ElevatorController_Init(void)
 {
+    uint8_t u8Index;
+
     elevator_hal_vidInit();
     
     elevator_hal_vidTimer_start(); // Start the timer
 
-    /* Update values from EEPROM */
-    EEPROM_LoadValues();
-
     updateMenuItems();
 
     Menu_Update();
+
+    /* Init elevator state */
+    strElevator.u8CurrentFloor = 0;
+    strElevator.u8DestinationFloor = 0;
+    strElevator.u8FloorCount = 0;
+    strElevator.enuDirection = DIR_IDLE;
+    strElevator.enuCollDir = COLLECTION_DOWN;
+    strElevator.enuDoorState = DOOR_CLOSED;
+    strElevator.enuOperatingMode = MODE_NORMAL;
+    strElevator.bEmergencyStop = FALSE;
+
+    for(u8Index = 0; u8Index < cu8MAX_FLOORS; u8Index++)
+    {
+        strElevator.aenuFloorCalls[u8Index] = CALL_NONE;
+    }
+
+    /* Update values from EEPROM */
+    EEPROM_LoadValues();
+
+#ifdef _DEBUG
+    UART_init(9600);
+    #endif
 }
 
 // HAL initialization
@@ -170,7 +271,7 @@ void elevator_hal_vidInit(void)
     LEDController_vidInit();
 
     /* Initialize Call Handler */
-    CallHandler_vidInit();
+    CallHandler_vidInit(&strElevator);
 
     /* Initialize sensors */
     (void) SensorManager_stdInit();
@@ -187,16 +288,16 @@ void elevator_hal_vidInit(void)
     /* Initialize system timer */
     Timer_cfg_t strTimer;
     strTimer.enuTimerCH = SYSTEM_TIMER_CHANNEL;
-    strTimer.enumTimerIntMode = TIMER_INT_DISABLED;
-    strTimer.enuTimerPre = TIMER_PRESCALER_1024; // Example prescaler value
-    strTimer.CBK_Ptr = NULL; // No callback function for now
+    strTimer.enumTimerIntMode = TIMER_INT_ENABLED;
+    strTimer.enuTimerPre = TIMER_PRESCALER_64; // Example prescaler value
+    strTimer.CBK_Ptr = systemTimerCBK; 
     Timer_Init(&strTimer);
 
     /* Init segment blink timer */
     strBlinkTimer.enuTimerCH = BLINK_TIMER_CHANNEL;
     strBlinkTimer.enumTimerIntMode = TIMER_INT_ENABLED;
     strBlinkTimer.enuTimerPre = TIMER_PRESCALER_1024; // Example prescaler value
-    strBlinkTimer.CBK_Ptr = blinkTimerCBK; // No callback function for now
+    strBlinkTimer.CBK_Ptr = blinkTimerCBK; 
     Timer_Init(&strBlinkTimer);
 
     /* Enable global interrupts */
@@ -291,11 +392,11 @@ OperatingMode_t ElevatorController_enuGetMode(void)
 void ElevatorController_vidOperationLoop(void)
 {    
     // Initialize elevator state
-    strElevator.u8CurrentFloor = 0;
-    strElevator.enuDirection = DIR_IDLE;
-    strElevator.enuDoorState = DOOR_CLOSED;
-    strElevator.enuOperatingMode = MODE_NORMAL;
-    strElevator.bEmergencyStop = FALSE;
+    uint8_t u8Index = 0;
+
+#ifdef _DEBUG
+    UART_Send_String("Operation loop");
+    #endif
     
     while(1)
     {
@@ -323,42 +424,21 @@ void ElevatorController_vidOperationLoop(void)
                 }
                 else
                 {
-                    /* Check wheather operating in normal mode or maintenance */
-                    if(enuMNTState == STATE_LOW)
-                    {
-                        /* Normal mode */
-                        strElevator.enuOperatingMode = MODE_NORMAL;
-                        /* Stop blink timer */
-                        Timer_Stop(BLINK_TIMER_CHANNEL);
-                        /* De-activate mnt relay */
-                        RelayManager_vidDeActivateRelay(RELAY_MNT);
-                        /* turn cabin light off */
-                        RelayManager_vidDeActivateRelay(RELAY_LIGHT);
-                    }
-                    else
-                    {
-                        /* Maintenance mode */
-                        strElevator.enuOperatingMode = MODE_MAINTENANCE;
-                        /* Activate mnt relay */
-                        RelayManager_vidActivateRelay(RELAY_MNT);
-                        /* turn cabin light on */
-                        RelayManager_vidActivateRelay(RELAY_LIGHT);
-                    }
+                    /* Do nothing */
                 }
             }
             else
             {
+                /* Do nothing */
+            }
+        }
+
+        switch(strElevator.enuOperatingMode)
+        {
+            case MODE_NORMAL:
+                enuPreviousMode = MODE_NORMAL;
                 /* Check wheather operating in normal mode or maintenance */
-                if(enuMNTState == STATE_LOW)
-                {
-                    /* Normal mode */
-                    strElevator.enuOperatingMode = MODE_NORMAL;
-                    /* De-activate mnt relay */
-                    RelayManager_vidDeActivateRelay(RELAY_MNT);
-                    /* turn cabin light off */
-                    RelayManager_vidDeActivateRelay(RELAY_LIGHT);
-                }
-                else
+                if(enuMNTState == STATE_HIGH)
                 {
                     /* Maintenance mode */
                     strElevator.enuOperatingMode = MODE_MAINTENANCE;
@@ -367,83 +447,197 @@ void ElevatorController_vidOperationLoop(void)
                     /* turn cabin light on */
                     RelayManager_vidActivateRelay(RELAY_LIGHT);
                 }
-            }
-        }
-
-        switch(strElevator.enuOperatingMode)
-        {
-            case MODE_NORMAL:
-                SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
-                LCD_SetCursor(1, 0);
-                LCD_WriteString("          ");
-                break;
-            case MODE_MAINTENANCE:
-                /* Display current floor and pole cnt */
-                LCD_SetCursor(0, 0);
-                LCD_WriteString("C: ");
-                LCD_send_int((uint16_t)strElevator.u8CurrentFloor, 2);
-                LCD_SetCursor(1, 0);
-                LCD_WriteString("cn: ");
-                LCD_send_int((uint16_t)u8SelectorCount, 2);
-                LCD_WriteString(",  P: ");
-                LCD_send_int((uint16_t)u8SelectorPoleCnt, 2);
-                /* Start segment blink timer */
-                Timer_Start(BLINK_TIMER_CHANNEL);
-                if(segmentBlinkState)
-                {
-                    SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
-                }
                 else
                 {
-                    SegmentDriver_vidWrite(cu8MNT_ERROR);
-                }
-                /* Check if movement is required */
-                if((enuUPLState == STATE_HIGH) && (enuDNLState == STATE_HIGH))
-                {
-                    if((enuMUPState == STATE_HIGH) && (enuMDNState == STATE_LOW))
+                    /* Normal mode */
+                    /* Display current floor on 7-seg */
+                    SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
+
+                    /* Display info on LCD */
+                    LCD_SetCursor(0, 0);
+                    LCD_WriteString("C: ");
+                    LCD_send_int(strElevator.u8CurrentFloor, 2);
+                    LCD_SetCursor(1, 0);
+                    LCD_WriteString("D: ");
+
+
+                    /* Check call queue */
+                    /* turn off all LEDs */
+                    LEDController_vidTurnAllOff();
+
+                    CallHandler_vidGetCall();
+                    
+                    LCD_SetCursor(1, 3);
+                    LCD_send_int(strElevator.u8DestinationFloor, 2);
+
+                    /* restore each led state */
+                    LEDController_vidProcess();
+
+                    /* Process calls */
+                    if(bIsCallQueueEmpty() == TRUE)
                     {
-                        /* Move up */
-                        strElevator.enuDirection = DIR_UP;
-                        RelayManager_vidActivateRelay(RELAY_UP);
-                        if(strElevator.u8MntSpeed == 0)
-                        {
-                            /* Slow speed */
-                            RelayManager_vidActivateRelay(RELAY_LS);
-                        }
-                        else
-                        {
-                            /* High speed */
-                            RelayManager_vidActivateRelay(RELAY_HS);
-                        }
-                    }
-                    else if((enuMUPState == STATE_LOW) && (enuMDNState == STATE_HIGH))
-                    {
-                        /* Move down */
-                        strElevator.enuDirection = DIR_DOWN;
-                        RelayManager_vidActivateRelay(RELAY_DN);
-                        if(strElevator.u8MntSpeed == 0)
-                        {
-                            /* Slow speed */
-                            RelayManager_vidActivateRelay(RELAY_LS);
-                        }
-                        else
-                        {
-                            /* High speed */
-                            RelayManager_vidActivateRelay(RELAY_HS);
-                        }
+                        /* Call queue is empty */
+                        strElevator.enuDirection = DIR_IDLE;
+                        //LCD_SetCursor(1, 3);
+                        //LCD_WriteString("__");
                     }
                     else
                     {
+                        /* Process call queue */
+                    }
+
+                    if((strElevator.u8CurrentFloor == strElevator.u8DestinationFloor) && (strElevator.enuDirection != DIR_IDLE))
+                    {
+                        strElevator.enuDirection = DIR_SLOWING;
+                    }
+
+                    if(strElevator.enuDirection == DIR_SLOWING)
+                    {
+                        if(enuFloorMState == STATE_HIGH)
+                        {
+                            strElevator.enuDirection = DIR_STOPPING;
+                        }
+                    }
+
+                    /* Movement action required ? */
+                    if(strElevator.enuDirection == DIR_UP)
+                    {
+                        /* Move elevator up */
+                        RelayManager_vidActivateRelay(RELAY_HS);
+                        RelayManager_vidActivateRelay(RELAY_UP);
+                    }
+                    else if(strElevator.enuDirection == DIR_DOWN)
+                    {
+                        /* Move elevator down */
+                        RelayManager_vidActivateRelay(RELAY_HS);
+                        RelayManager_vidActivateRelay(RELAY_DN);
+                    }
+                    else if(strElevator.enuDirection == DIR_SLOWING)
+                    {
                         /* Stop elevator */
-                        strElevator.enuDirection = DIR_IDLE;
+                        RelayManager_vidDeActivateRelay(RELAY_HS);
+                        RelayManager_vidActivateRelay(RELAY_LS);
+                    }
+                    else if(strElevator.enuDirection == DIR_STOPPING)
+                    {
+                        /* Stop elevator */
+                        RelayManager_vidDeActivateRelay(RELAY_HS);
+                        RelayManager_vidDeActivateRelay(RELAY_LS);
                         RelayManager_vidDeActivateRelay(RELAY_UP);
                         RelayManager_vidDeActivateRelay(RELAY_DN);
-                        RelayManager_vidDeActivateRelay(RELAY_LS);
-                        RelayManager_vidDeActivateRelay(RELAY_HS);
+
+                        /* Indicate floor call has been served */
+                        strElevator.aenuFloorCalls[strElevator.u8DestinationFloor] = CALL_NONE;
+                        LEDController_vidSetPattern(strElevator.u8DestinationFloor, LED_PATTERN_NONE);
+                    }
+                    else
+                    {
+                        /* Do nothing */
+                    }
+                }
+                break;
+            case MODE_MAINTENANCE:
+                enuPreviousMode = MODE_MAINTENANCE;
+                /* Check wheather operating in normal mode or maintenance */
+                if(enuMNTState == STATE_LOW)
+                {
+                    /* Normal mode */
+                    strElevator.enuOperatingMode = MODE_NORMAL;
+
+                    /* Stop elevator */
+                    strElevator.enuDirection = DIR_IDLE;
+                    RelayManager_vidDeActivateRelay(RELAY_UP);
+                    RelayManager_vidDeActivateRelay(RELAY_DN);
+                    RelayManager_vidDeActivateRelay(RELAY_LS);
+                    RelayManager_vidDeActivateRelay(RELAY_HS);
+
+                    /* Activate light timer */
+                    ElevatorController_vidStartLightTimer();
+
+                    /* De-activate mnt relay */
+                    RelayManager_vidDeActivateRelay(RELAY_MNT);
+
+                    LCD_SetCursor(1, 0);
+                    LCD_WriteString("                ");
+                }
+                else
+                {
+                    /* Maintenance mode */
+                    /* Display current floor and pole cnt */
+                    LCD_SetCursor(0, 0);
+                    LCD_WriteString("C: ");
+                    LCD_send_int((uint16_t)strElevator.u8CurrentFloor, 2);
+                    
+                    /* Start segment blink timer */
+                    Timer_Start(BLINK_TIMER_CHANNEL);
+                    
+                    if(segmentBlinkState)
+                    {
+                        SegmentDriver_vidWrite(strElevator.u8CurrentFloor);
+                    }
+                    else
+                    {
+                        SegmentDriver_vidWrite(cu8MNT_ERROR);
+                    }
+                    /* Check if movement is required */
+                    if((enuUPLState == STATE_HIGH) && (enuDNLState == STATE_HIGH))
+                    {
+                        if((enuMUPState == STATE_HIGH) && (enuMDNState == STATE_LOW))
+                        {
+                            /* Move up */
+                            strElevator.enuDirection = DIR_UP;
+                            RelayManager_vidActivateRelay(RELAY_UP);
+                            if(strElevator.u8MntSpeed == 0)
+                            {
+                                /* Slow speed */
+                                RelayManager_vidActivateRelay(RELAY_LS);
+                            }
+                            else
+                            {
+                                /* High speed */
+                                RelayManager_vidActivateRelay(RELAY_HS);
+                            }
+                        }
+                        else if((enuMUPState == STATE_LOW) && (enuMDNState == STATE_HIGH))
+                        {
+                            /* Move down */
+                            strElevator.enuDirection = DIR_DOWN;
+                            RelayManager_vidActivateRelay(RELAY_DN);
+                            if(strElevator.u8MntSpeed == 0)
+                            {
+                                /* Slow speed */
+                                RelayManager_vidActivateRelay(RELAY_LS);
+                            }
+                            else
+                            {
+                                /* High speed */
+                                RelayManager_vidActivateRelay(RELAY_HS);
+                            }
+                        }
+                        else
+                        {
+                            /* Stop elevator */
+                            strElevator.enuDirection = DIR_IDLE;
+                            RelayManager_vidDeActivateRelay(RELAY_UP);
+                            RelayManager_vidDeActivateRelay(RELAY_DN);
+                            RelayManager_vidDeActivateRelay(RELAY_LS);
+                            RelayManager_vidDeActivateRelay(RELAY_HS);
+                        }
                     }
                 }
                 break;
             case MODE_ERROR:
+                /* Stop elevator */
+                strElevator.enuDirection = DIR_IDLE;
+                RelayManager_vidDeActivateRelay(RELAY_UP);
+                RelayManager_vidDeActivateRelay(RELAY_DN);
+                RelayManager_vidDeActivateRelay(RELAY_LS);
+                RelayManager_vidDeActivateRelay(RELAY_HS);
+
+                /* Drop all calls */
+                vidDropCalls();
+                LEDController_vidSetPatAllOff();
+                
                 /* Start segment blink timer */
                 Timer_Start(BLINK_TIMER_CHANNEL);
                 if(segmentBlinkState)
@@ -491,7 +685,16 @@ void ElevatorController_vidOperationLoop(void)
                     }
                     else
                     {
-                        /* No error */
+                        LCD_SetCursor(1, 0);
+                        LCD_WriteString("                ");
+                        if(enuPreviousMode == MODE_MAINTENANCE)
+                        {
+                            strElevator.enuOperatingMode = MODE_MAINTENANCE;
+                        }
+                        else
+                        {
+                            strElevator.enuOperatingMode = MODE_NORMAL;
+                        }
                     }
                 }
                 break;
@@ -500,6 +703,49 @@ void ElevatorController_vidOperationLoop(void)
                 break;
 
         }
+
+        #ifdef _TEST
+        if(strElevator.enuOperatingMode == MODE_NORMAL)
+        {
+            LCD_SetCursor(0, 13);
+            LCD_WriteString("NRM");
+        }
+        else if(strElevator.enuOperatingMode == MODE_MAINTENANCE)
+        {
+            LCD_SetCursor(0, 13);
+            LCD_WriteString("MNT");
+        }
+        else
+        {
+            /* Do nothing */
+        }
+        
+        if(strElevator.enuDirection == DIR_UP)
+        {
+            LCD_SetCursor(1, 13);
+            LCD_WriteString("UP ");
+        }
+        else if(strElevator.enuDirection == DIR_DOWN)
+        {
+            LCD_SetCursor(1, 13);
+            LCD_WriteString("DN ");
+        }
+        else if(strElevator.enuDirection == DIR_STOPPING)
+        {
+            LCD_SetCursor(1, 13);
+            LCD_WriteString("STP");
+        }
+        else if(strElevator.enuDirection == DIR_SLOWING)
+        {
+            LCD_SetCursor(1, 13);
+            LCD_WriteString("SLW");
+        }
+        else
+        {
+            LCD_SetCursor(1, 13);
+            LCD_WriteString("IDL");
+        }
+        #endif // _DEBUG
 
         /* Counting floors */
         if( (strElevator.enuOperatingMode == MODE_NORMAL) ||
@@ -522,7 +768,7 @@ void ElevatorController_vidOperationLoop(void)
                 {
                     if(strElevator.u8CurrentFloor < strElevator.u8FloorCount)
                     {
-                        if(u8SelectorPoleCnt == 2)
+                        if(u8SelectorPoleCnt >= 2)
                         {
                             strElevator.u8CurrentFloor++;
                             u8SelectorPoleCnt = 0;
@@ -541,7 +787,7 @@ void ElevatorController_vidOperationLoop(void)
                 {
                     if(strElevator.u8CurrentFloor > 0)
                     {
-                        if(u8SelectorPoleCnt == 2)
+                        if(u8SelectorPoleCnt >= 2)
                         {
                             strElevator.u8CurrentFloor--;
                             u8SelectorPoleCnt = 0;
@@ -666,7 +912,7 @@ void ElevatorController_vidProgrammingLoop(void)
  */
 uint8_t ElevatorController_u8GetCurrentFloor(void)
 {
-    return 0;
+    return strElevator.u8CurrentFloor;
 }
 
 /**
@@ -676,7 +922,7 @@ uint8_t ElevatorController_u8GetCurrentFloor(void)
  */
 uint8_t ElevatorController_u8GetSelectorCnt(void)
 {
-    return 0;
+    return u8SelectorPoleCnt;
 }
 
 
@@ -741,7 +987,7 @@ uint16_t elevator_hal_u16Get_time_ms(void)
     return Timer_GetValue(SYSTEM_TIMER_CHANNEL);
 }
 
-void vidResetDefaults(void)
+static void vidResetDefaults(void)
 {
 	/* RESET_DEFAULT_VALUES */
 	(void) EEPROM_u8Write(cu8SLOW_TIMER_EE_ADD, cu8SLOW_TIMER_DEF_VALUE);
@@ -841,7 +1087,7 @@ static void EEPROM_LoadValues(void)
     _delay_ms(u8ReadDelay);
     (void) EEPROM_u8Read(cu8DOOR_NUMBER_EE_ADD, &strElevator.u8FloorCount);
     _delay_ms(u8ReadDelay);
-    (void) EEPROM_u8Read(cu8COLLECTION_DIR_EE_ADD, &strElevator.u8CollectionDir);
+    (void) EEPROM_u8Read(cu8COLLECTION_DIR_EE_ADD, (uint8_t*)&strElevator.enuCollDir);
     _delay_ms(u8ReadDelay);
     (void) EEPROM_u8Read(cu8MNT_SPEED_EE_ADD, &strElevator.u8MntSpeed);
     _delay_ms(u8ReadDelay);
@@ -882,6 +1128,40 @@ static void readAllSensors(void)
 }
 
 /**
+ * @brief Drops all pending elevator calls
+ * This function iterates through all floors and resets their call states to CALL_NONE.
+ * 
+ */
+static void vidDropCalls(void)
+{
+    uint8_t index;
+    for(index = 0; index < strElevator.u8FloorCount; index++)
+    {
+        strElevator.aenuFloorCalls[index] = CALL_NONE;
+    }
+}
+
+/**
+ * @brief Checks if the call queue is empty
+ * 
+ * @return boolean TRUE if the call queue is empty, FALSE otherwise
+ */
+static boolean bIsCallQueueEmpty(void)
+{
+    uint8_t u8Index = 0;
+
+    for(u8Index = 0; u8Index < strElevator.u8FloorCount; u8Index++)
+    {
+        if(strElevator.aenuFloorCalls[u8Index] != CALL_NONE)
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+/**
  * @brief Blink timer callback function
  * 
  */
@@ -896,8 +1176,259 @@ static void blinkTimerCBK(void)
 
 }
 
+
+/**
+ * @brief System timer callback function
+ *
+ */
+static void systemTimerCBK(void)
+{
+    if (bSlowTimerActive) {
+        u16SlowTimerCounter++;
+        if (u16SlowTimerCounter >= (strElevator.u8SlowTimer * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bSlowTimerExpired = TRUE;
+            bSlowTimerActive = FALSE;
+            u16SlowTimerCounter = 0;
+        }
+    }
+
+    if (bFastTimerActive) {
+        u16FastTimerCounter++;
+        if (u16FastTimerCounter >= (strElevator.u8FastTimer * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bFastTimerExpired = TRUE;
+            bFastTimerActive = FALSE;
+            u16FastTimerCounter = 0;
+        }
+    }
+
+    if (bCamTimerActive) {
+        u16CamTimerCounter++;
+        if (u16CamTimerCounter >= (strElevator.u8CamTimer * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bCamTimerExpired = TRUE;
+            bCamTimerActive = FALSE;
+            u16CamTimerCounter = 0;
+        }
+    }
+
+    if (bShkTimerActive) {
+        u16ShkTimerCounter++;
+        if (u16ShkTimerCounter >= (100 * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bShkTimerExpired = TRUE;
+            bShkTimerActive = FALSE;
+            u16ShkTimerCounter = 0;
+        }
+    }
+
+    if (bStopTimerActive) {
+        u16StopTimerCounter++;
+        if (u16StopTimerCounter >= (strElevator.u8StopTimer * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bStopTimerExpired = TRUE;
+            bStopTimerActive = FALSE;
+            u16StopTimerCounter = 0;
+        }
+    }
+
+    if (bLightTimerActive) {
+        u16LightTimerCounter++;
+        if (u16LightTimerCounter >= (((uint16_t)strElevator.u8LightTimer) * cu16SYSTEM_TIMER_OVFS_PER_S)) {
+            bLightTimerExpired = TRUE;
+            bLightTimerActive = FALSE;
+            u16LightTimerCounter = 0;
+            /* De-activate light relay */
+            RelayManager_vidDeActivateRelay(RELAY_LIGHT);
+        }
+    }
+}
+
+/* ************************************************************************ */
+/* Timer Control Functions Implementation                                   */
 /* ************************************************************************ */
 
+/**
+ * @brief Start the slow timer
+ *
+ */
+static void vidStartSlowTimer(void)
+{
+    u16SlowTimerCounter = 0;
+    bSlowTimerExpired = FALSE;
+    bSlowTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the slow timer
+ *
+ */
+static void vidStopSlowTimer(void)
+{
+    bSlowTimerActive = FALSE;
+    u16SlowTimerCounter = 0;
+}
+
+/**
+ * @brief Check if slow timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsSlowTimerExpired(void)
+{
+    return bSlowTimerExpired;
+}
+
+/**
+ * @brief Start the fast timer
+ *
+ */
+static void vidStartFastTimer(void)
+{
+    u16FastTimerCounter = 0;
+    bFastTimerExpired = FALSE;
+    bFastTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the fast timer
+ *
+ */
+static void vidStopFastTimer(void)
+{
+    bFastTimerActive = FALSE;
+    u16FastTimerCounter = 0;
+}
+
+/**
+ * @brief Check if fast timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsFastTimerExpired(void)
+{
+    return bFastTimerExpired;
+}
+
+/**
+ * @brief Start the camera timer
+ *
+ */
+static void vidStartCamTimer(void)
+{
+    u16CamTimerCounter = 0;
+    bCamTimerExpired = FALSE;
+    bCamTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the camera timer
+ *
+ */
+static void vidStopCamTimer(void)
+{
+    bCamTimerActive = FALSE;
+    u16CamTimerCounter = 0;
+}
+
+/**
+ * @brief Check if camera timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsCamTimerExpired(void)
+{
+    return bCamTimerExpired;
+}
+
+/**
+ * @brief Start the shake timer
+ *
+ */
+static void vidStartShkTimer(void)
+{
+    u16ShkTimerCounter = 0;
+    bShkTimerExpired = FALSE;
+    bShkTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the shake timer
+ *
+ */
+static void vidStopShkTimer(void)
+{
+    bShkTimerActive = FALSE;
+    u16ShkTimerCounter = 0;
+}
+
+/**
+ * @brief Check if shake timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsShkTimerExpired(void)
+{
+    return bShkTimerExpired;
+}
+
+/**
+ * @brief Start the stop timer
+ *
+ */
+static void vidStartStopTimer(void)
+{
+    u16StopTimerCounter = 0;
+    bStopTimerExpired = FALSE;
+    bStopTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the stop timer
+ *
+ */
+static void vidStopStopTimer(void)
+{
+    bStopTimerActive = FALSE;
+    u16StopTimerCounter = 0;
+}
+
+/**
+ * @brief Check if stop timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsStopTimerExpired(void)
+{
+    return bStopTimerExpired;
+}
+
+/**
+ * @brief Start the light timer
+ *
+ */
+void ElevatorController_vidStartLightTimer(void)
+{
+    u16LightTimerCounter = 0;
+    bLightTimerExpired = FALSE;
+    bLightTimerActive = TRUE;
+}
+
+/**
+ * @brief Stop the light timer
+ *
+ */
+static void vidStopLightTimer(void)
+{
+    bLightTimerActive = FALSE;
+    u16LightTimerCounter = 0;
+}
+
+/**
+ * @brief Check if light timer has expired
+ *
+ * @return boolean TRUE if expired, FALSE otherwise
+ */
+static boolean bIsLightTimerExpired(void)
+{
+    return bLightTimerExpired;
+}
 
 /* ************************************************************************ */
 
