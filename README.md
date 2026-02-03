@@ -20,7 +20,9 @@ ElevatorControl/
 
 └── CMakeLists.txt
 
-![Actual PCB]([Actual_Product.jpg))
+## Actual PCB
+![Actual_Product](https://github.com/user-attachments/assets/04c5aad4-f0ad-4cbc-806e-e76af274a8f9)
+
 
 ## 🔧 Hardware Requirements
 
