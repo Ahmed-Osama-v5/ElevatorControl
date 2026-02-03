@@ -20,6 +20,8 @@ ElevatorControl/
 
 └── CMakeLists.txt
 
+![Actual PCB]([Actual_Product.jpg))
+
 ## 🔧 Hardware Requirements
 
 - **Microcontroller**: ATmega32
