@@ -59,7 +59,7 @@ High-level drivers for external hardware:
 ### Application Layer
 Main elevator control logic:
 - Elevator controller
-- Call (floor request) handler
+- Call handler (floor request)
 - LED controller
 - Motion controller
 - Menu module (to handle menu items in settings programming mode)
@@ -78,7 +78,7 @@ Main elevator control logic:
 mkdir build && cd build
 
 # Configure with CMake
-cmake -G "Ninja"
+cmake .. -G "Ninja"
 
 # Build
 ninja
