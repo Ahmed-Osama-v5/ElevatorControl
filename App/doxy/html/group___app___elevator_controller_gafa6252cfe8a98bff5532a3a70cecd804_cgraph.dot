@@ -1,0 +1,13 @@
+digraph "ElevatorController_vidProgrammingLoop"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="ElevatorController\l_vidProgrammingLoop",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Programming loop of the elevator controller."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Menu_Task",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gad548770a70948ea8b773edc7e34baff3",tooltip="Periodic task handler for the menu system."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Menu_Update",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gaf2b117dc5131d237881bc0049a7d7875",tooltip="Processes user input and updates the menu state."];
+}

@@ -1,0 +1,43 @@
+\doxysection{LEDHWConfig\+\_\+t Struct Reference}
+\hypertarget{struct_l_e_d_h_w_config__t}{}\label{struct_l_e_d_h_w_config__t}\index{LEDHWConfig\_t@{LEDHWConfig\_t}}
+
+
+Maps a logical LED index to its physical latch and bit position.  
+
+
+
+
+{\ttfamily \+\#include $<$LEDController\+\_\+gcfg.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t_a3eedfb0fda1740c983fa6f18f5eb01b8}{u8\+Latch\+Index}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t_ad9e9e0d7f81186b56ee36cae3b92bc86}{u8\+Bit\+Pos}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Maps a logical LED index to its physical latch and bit position. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_l_e_d_h_w_config__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_l_e_d_h_w_config__t_ad9e9e0d7f81186b56ee36cae3b92bc86}\index{LEDHWConfig\_t@{LEDHWConfig\_t}!u8BitPos@{u8BitPos}}
+\index{u8BitPos@{u8BitPos}!LEDHWConfig\_t@{LEDHWConfig\_t}}
+\doxysubsubsection{\texorpdfstring{u8BitPos}{u8BitPos}}
+{\footnotesize\ttfamily \label{struct_l_e_d_h_w_config__t_ad9e9e0d7f81186b56ee36cae3b92bc86} 
+uint8\+\_\+t u8\+Bit\+Pos}
+
+Bit position within the latch (0-\/7). \Hypertarget{struct_l_e_d_h_w_config__t_a3eedfb0fda1740c983fa6f18f5eb01b8}\index{LEDHWConfig\_t@{LEDHWConfig\_t}!u8LatchIndex@{u8LatchIndex}}
+\index{u8LatchIndex@{u8LatchIndex}!LEDHWConfig\_t@{LEDHWConfig\_t}}
+\doxysubsubsection{\texorpdfstring{u8LatchIndex}{u8LatchIndex}}
+{\footnotesize\ttfamily \label{struct_l_e_d_h_w_config__t_a3eedfb0fda1740c983fa6f18f5eb01b8} 
+uint8\+\_\+t u8\+Latch\+Index}
+
+Latch index:\+ 0 = first latch (LEDs 0-\/7), 1 = second latch (LEDs 8-\/15). 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+LEDController/\+interfaces/\+\doxymbox{\hyperlink{_l_e_d_controller__gcfg_8h}{LEDController\+\_\+gcfg.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,147 @@
+\doxysubsection{LEDController }
+\hypertarget{group___app___l_e_d_controller}{}\label{group___app___l_e_d_controller}\index{LEDController@{LEDController}}
+Collaboration diagram for LEDController:\+
+% FIG 0
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg}{LEDController Global Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_ga7023892e1e36dfee0e46dd50665aa1c9}{LEDController\+\_\+vid\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the LEDController module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_ga289a64caa7f77895961590819ed77b01}{LEDController\+\_\+vid\+Set\+State}} (uint8\+\_\+t u8\+Led\+Id, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\+\_\+t}} enu\+State)
+\begin{DoxyCompactList}\small\item\em Sets the instantaneous state of a specific LED. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_ga52582159dd1a2680fe0b6b982bf854ec}{LEDController\+\_\+vid\+Turn\+All\+Off}} (void)
+\begin{DoxyCompactList}\small\item\em Turns all LEDs off immediately. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_gad017181a52174f8e459c08a5cf7791a0}{LEDController\+\_\+vid\+Set\+Pat\+All\+Off}} (void)
+\begin{DoxyCompactList}\small\item\em Clears the blink pattern for all LEDs. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_gaf2c9d7fa8b5c6c9f4c149ad0d21c6801}{LEDController\+\_\+vid\+Set\+Pattern}} (uint8\+\_\+t u8\+Led\+Id, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}} enu\+Pattern)
+\begin{DoxyCompactList}\small\item\em Assigns a blink pattern to a specific LED. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___l_e_d_controller_gab2f34f31224f83409ca73df50edf7e7f}{LEDController\+\_\+vid\+Process}} (void)
+\begin{DoxyCompactList}\small\item\em Periodic processing task for the LED controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app___l_e_d_controller_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app___l_e_d_controller_ga7023892e1e36dfee0e46dd50665aa1c9}\index{LEDController@{LEDController}!LEDController\_vidInit@{LEDController\_vidInit}}
+\index{LEDController\_vidInit@{LEDController\_vidInit}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidInit()}{LEDController\_vidInit()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_ga7023892e1e36dfee0e46dd50665aa1c9} 
+void LEDController\+\_\+vid\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the LEDController module. 
+
+Configures the latch and data GPIO lines as outputs, clears all latch outputs, and resets internal LED state tracking.
+
+Initializes the LEDController module. Here is the caller graph for this function:\+
+% FIG 1
+\Hypertarget{group___app___l_e_d_controller_gab2f34f31224f83409ca73df50edf7e7f}\index{LEDController@{LEDController}!LEDController\_vidProcess@{LEDController\_vidProcess}}
+\index{LEDController\_vidProcess@{LEDController\_vidProcess}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidProcess()}{LEDController\_vidProcess()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_gab2f34f31224f83409ca73df50edf7e7f} 
+void LEDController\+\_\+vid\+Process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Periodic processing task for the LED controller. 
+
+Updates blink timers and writes the resulting LED states to the hardware latches. Must be called every \doxylink{group___l_e_d_controller__gcfg_gaba53baae858dfc6ca902d3aa81ec2114}{cu8\+LED\+\_\+\+CONTROLLER\+\_\+\+PERIOD\+\_\+\+MS} milliseconds.
+
+Periodic processing task for the LED controller. Here is the caller graph for this function:\+
+% FIG 2
+\Hypertarget{group___app___l_e_d_controller_gad017181a52174f8e459c08a5cf7791a0}\index{LEDController@{LEDController}!LEDController\_vidSetPatAllOff@{LEDController\_vidSetPatAllOff}}
+\index{LEDController\_vidSetPatAllOff@{LEDController\_vidSetPatAllOff}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidSetPatAllOff()}{LEDController\_vidSetPatAllOff()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_gad017181a52174f8e459c08a5cf7791a0} 
+void LEDController\+\_\+vid\+Set\+Pat\+All\+Off (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the blink pattern for all LEDs. 
+
+Sets every LED\textquotesingle{}s pattern to \doxylink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5}{LED\+\_\+\+PATTERN\+\_\+\+NONE} without changing the current physical on/\+off state.
+
+Clears the blink pattern for all LEDs. Here is the caller graph for this function:\+
+% FIG 3
+\Hypertarget{group___app___l_e_d_controller_gaf2c9d7fa8b5c6c9f4c149ad0d21c6801}\index{LEDController@{LEDController}!LEDController\_vidSetPattern@{LEDController\_vidSetPattern}}
+\index{LEDController\_vidSetPattern@{LEDController\_vidSetPattern}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidSetPattern()}{LEDController\_vidSetPattern()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_gaf2c9d7fa8b5c6c9f4c149ad0d21c6801} 
+void LEDController\+\_\+vid\+Set\+Pattern (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{u8\+Led\+Id}{, }\item[{\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}}}]{enu\+Pattern}{}\end{DoxyParamCaption})}
+
+
+
+Assigns a blink pattern to a specific LED. 
+
+The pattern determines the on/\+off timing applied when the LED is processed by \doxylink{group___app___l_e_d_controller_gab2f34f31224f83409ca73df50edf7e7f}{LEDController\+\_\+vid\+Process}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8\+Led\+Id} & Logical LED index (0 to cu8\+MAX\+\_\+\+FLOORS -\/ 1). \\
+\hline
+{\em enu\+Pattern} & Blink pattern to assign (see \doxylink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}).\\
+\hline
+\end{DoxyParams}
+Assigns a blink pattern to a specific LED.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8\+Led\+Id} & \\
+\hline
+{\em enu\+Pattern} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+% FIG 4
+\Hypertarget{group___app___l_e_d_controller_ga289a64caa7f77895961590819ed77b01}\index{LEDController@{LEDController}!LEDController\_vidSetState@{LEDController\_vidSetState}}
+\index{LEDController\_vidSetState@{LEDController\_vidSetState}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidSetState()}{LEDController\_vidSetState()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_ga289a64caa7f77895961590819ed77b01} 
+void LEDController\+\_\+vid\+Set\+State (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{u8\+Led\+Id}{, }\item[{\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\+\_\+t}}}]{enu\+State}{}\end{DoxyParamCaption})}
+
+
+
+Sets the instantaneous state of a specific LED. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8\+Led\+Id} & Logical LED index (0 to cu8\+MAX\+\_\+\+FLOORS -\/ 1). \\
+\hline
+{\em enu\+State} & Desired state:\+ \doxylink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789}{LED\+\_\+\+STATE\+\_\+\+OFF}, \doxylink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550}{LED\+\_\+\+STATE\+\_\+\+ON}, or \doxylink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93}{LED\+\_\+\+STATE\+\_\+\+BLINKING}.\\
+\hline
+\end{DoxyParams}
+Sets the instantaneous state of a specific LED.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8\+Led\+Id} & \\
+\hline
+{\em enu\+State} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function:\+
+% FIG 5
+\Hypertarget{group___app___l_e_d_controller_ga52582159dd1a2680fe0b6b982bf854ec}\index{LEDController@{LEDController}!LEDController\_vidTurnAllOff@{LEDController\_vidTurnAllOff}}
+\index{LEDController\_vidTurnAllOff@{LEDController\_vidTurnAllOff}!LEDController@{LEDController}}
+\doxysubsubsubsection{\texorpdfstring{LEDController\_vidTurnAllOff()}{LEDController\_vidTurnAllOff()}}
+{\footnotesize\ttfamily \label{group___app___l_e_d_controller_ga52582159dd1a2680fe0b6b982bf854ec} 
+void LEDController\+\_\+vid\+Turn\+All\+Off (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Turns all LEDs off immediately. 
+
+Writes a cleared state to both latches and resets all internal active flags.
+
+Turns all LEDs off immediately. Here is the caller graph for this function:\+
+% FIG 6
+\input{group___l_e_d_controller__gcfg}

@@ -1,0 +1,233 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Topic Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Topics}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Data Structure Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Data Structures}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Topic Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Application Layer }{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{7}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler }{7}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}Detailed Description}{8}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}Function Documentation}{8}{subsubsection.4.1.2.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.2.2.1}CallHandler\_vidGetCall()}{8}{subsubsubsection.4.1.2.2.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.2.2.2}CallHandler\_vidInit()}{8}{subsubsubsection.4.1.2.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler Global Config }{8}{subsubsection.4.1.2.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.2.3.1}Detailed Description}{9}{subsubsubsection.4.1.2.3.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.2.3.2}Enumeration Type Documentation}{9}{subsubsubsection.4.1.2.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.2.3.2.1}CallType\_t}{9}{subsubsubsubsection.4.1.2.3.2.1}%
+\contentsline {subsection}{\numberline {4.1.3}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller }{9}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}Detailed Description}{10}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}Function Documentation}{10}{subsubsection.4.1.3.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.1}elevator\_hal\_u16Get\_time\_ms()}{10}{subsubsubsection.4.1.3.2.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.2}elevator\_hal\_vidDisplay\_floor()}{10}{subsubsubsection.4.1.3.2.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.3}elevator\_hal\_vidDisplay\_status()}{11}{subsubsubsection.4.1.3.2.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.4}elevator\_hal\_vidInit()}{11}{subsubsubsection.4.1.3.2.4}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.5}ElevatorController\_enuGetMode()}{11}{subsubsubsection.4.1.3.2.5}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.6}ElevatorController\_u8GetCurrentFloor()}{11}{subsubsubsection.4.1.3.2.6}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.7}ElevatorController\_u8GetSelectorCnt()}{12}{subsubsubsection.4.1.3.2.7}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.8}ElevatorController\_vidOperationLoop()}{12}{subsubsubsection.4.1.3.2.8}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.9}ElevatorController\_vidProgrammingLoop()}{12}{subsubsubsection.4.1.3.2.9}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.2.10}ElevatorController\_vidStartLightTimer()}{12}{subsubsubsection.4.1.3.2.10}%
+\contentsline {subsubsection}{\numberline {4.1.3.3}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller Local Config }{13}{subsubsection.4.1.3.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.3.1}Detailed Description}{14}{subsubsubsection.4.1.3.3.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.3.2}Macro Definition Documentation}{14}{subsubsubsection.4.1.3.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.1}cu8CABIN\_PW\_DEF\_VALUE}{14}{subsubsubsubsection.4.1.3.3.2.1}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.2}cu8CAM\_FAIL\_CNT\_DEF\_VALUE}{14}{subsubsubsubsection.4.1.3.3.2.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.3}cu8CAM\_TIMER\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.3}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.4}cu8COLLECTION\_DIR\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.4}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.5}cu8CURRENT\_FLOOR\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.5}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.6}cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.6}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.7}cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.7}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.8}cu8DISPLAY\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.8}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.9}cu8DOOR\_NUMBER\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.9}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.10}cu8DOOR\_OPTIONS\_DEF\_VALUE}{15}{subsubsubsubsection.4.1.3.3.2.10}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.11}cu8FAST\_TIMER\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.11}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.12}cu8FLOOR\_0\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.12}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.13}cu8FLOOR\_10\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.13}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.14}cu8FLOOR\_11\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.14}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.15}cu8FLOOR\_12\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.15}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.16}cu8FLOOR\_13\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.16}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.17}cu8FLOOR\_14\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.17}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.18}cu8FLOOR\_15\_DEF\_VALUE}{16}{subsubsubsubsection.4.1.3.3.2.18}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.19}cu8FLOOR\_1\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.19}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.20}cu8FLOOR\_2\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.20}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.21}cu8FLOOR\_3\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.21}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.22}cu8FLOOR\_4\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.22}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.23}cu8FLOOR\_5\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.23}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.24}cu8FLOOR\_6\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.24}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.25}cu8FLOOR\_7\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.25}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.26}cu8FLOOR\_8\_DEF\_VALUE}{17}{subsubsubsubsection.4.1.3.3.2.26}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.27}cu8FLOOR\_9\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.27}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.28}cu8LIGHT\_TIMER\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.28}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.29}cu8MASTER\_PASSWORD\_H\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.29}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.30}cu8MASTER\_PASSWORD\_L\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.30}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.31}cu8MNT\_SPEED\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.31}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.32}cu8PARKING\_FLOOR\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.32}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.33}cu8PASSWORD\_H\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.33}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.34}cu8PASSWORD\_L\_DEF\_VALUE}{18}{subsubsubsubsection.4.1.3.3.2.34}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.35}cu8PHS\_SEQ\_DEF\_VALUE}{19}{subsubsubsubsection.4.1.3.3.2.35}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.36}cu8SLOW\_TIMER\_DEF\_VALUE}{19}{subsubsubsubsection.4.1.3.3.2.36}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.37}cu8STOP\_TIMER\_DEF\_VALUE}{19}{subsubsubsubsection.4.1.3.3.2.37}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.38}cu8STORED\_TRAVEL\_DEF\_VALUE}{19}{subsubsubsubsection.4.1.3.3.2.38}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.2.39}cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE}{19}{subsubsubsubsection.4.1.3.3.2.39}%
+\contentsline {subsubsubsection}{\numberline {4.1.3.3.3}Enumeration Type Documentation}{19}{subsubsubsection.4.1.3.3.3}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.3.3.3.1}CollectionDir\_t}{19}{subsubsubsubsection.4.1.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.4}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller Global Config }{19}{subsubsection.4.1.3.4}%
+\contentsline {subsection}{\numberline {4.1.4}LEDController }{20}{subsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.4.1}Detailed Description}{20}{subsubsection.4.1.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.4.2}Function Documentation}{20}{subsubsection.4.1.4.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.1}LEDController\_vidInit()}{20}{subsubsubsection.4.1.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.2}LEDController\_vidProcess()}{20}{subsubsubsection.4.1.4.2.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.3}LEDController\_vidSetPatAllOff()}{21}{subsubsubsection.4.1.4.2.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.4}LEDController\_vidSetPattern()}{21}{subsubsubsection.4.1.4.2.4}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.5}LEDController\_vidSetState()}{21}{subsubsubsection.4.1.4.2.5}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.2.6}LEDController\_vidTurnAllOff()}{22}{subsubsubsection.4.1.4.2.6}%
+\contentsline {subsubsection}{\numberline {4.1.4.3}LEDController Global Config }{22}{subsubsection.4.1.4.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.3.1}Detailed Description}{24}{subsubsubsection.4.1.4.3.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.3.2}Macro Definition Documentation}{24}{subsubsubsection.4.1.4.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.1}cenuLED\_DATA\_PORT}{24}{subsubsubsubsection.4.1.4.3.2.1}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.2}cenuLED\_LATCH0\_PORT}{24}{subsubsubsubsection.4.1.4.3.2.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.3}cenuLED\_LATCH1\_PORT}{24}{subsubsubsubsection.4.1.4.3.2.3}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.4}cu16LED\_ERROR\_OFF\_TIME}{24}{subsubsubsubsection.4.1.4.3.2.4}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.5}cu16LED\_ERROR\_ON\_TIME}{24}{subsubsubsubsection.4.1.4.3.2.5}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.6}cu16LED\_EXTERNAL\_CALL\_OFF\_TIME}{24}{subsubsubsubsection.4.1.4.3.2.6}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.7}cu16LED\_EXTERNAL\_CALL\_ON\_TIME}{24}{subsubsubsubsection.4.1.4.3.2.7}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.8}cu16LED\_INTERNAL\_CALL\_OFF\_TIME}{25}{subsubsubsubsection.4.1.4.3.2.8}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.9}cu16LED\_INTERNAL\_CALL\_ON\_TIME}{25}{subsubsubsubsection.4.1.4.3.2.9}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.10}cu16LED\_MAINTENANCE\_OFF\_TIME}{25}{subsubsubsubsection.4.1.4.3.2.10}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.11}cu16LED\_MAINTENANCE\_ON\_TIME}{25}{subsubsubsubsection.4.1.4.3.2.11}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.12}cu8LED\_LATCH0\_PIN}{25}{subsubsubsubsection.4.1.4.3.2.12}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.2.13}cu8LED\_LATCH1\_PIN}{25}{subsubsubsubsection.4.1.4.3.2.13}%
+\contentsline {subsubsubsection}{\numberline {4.1.4.3.3}Enumeration Type Documentation}{26}{subsubsubsection.4.1.4.3.3}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.3.1}LEDCallType\_t}{26}{subsubsubsubsection.4.1.4.3.3.1}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.3.2}LEDPattern\_t}{26}{subsubsubsubsection.4.1.4.3.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.4.3.3.3}LEDState\_t}{26}{subsubsubsubsection.4.1.4.3.3.3}%
+\contentsline {subsection}{\numberline {4.1.5}Main }{26}{subsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.5.1}Detailed Description}{27}{subsubsection.4.1.5.1}%
+\contentsline {subsubsection}{\numberline {4.1.5.2}Function Documentation}{27}{subsubsection.4.1.5.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.5.2.1}main()}{27}{subsubsubsection.4.1.5.2.1}%
+\contentsline {subsection}{\numberline {4.1.6}Menu }{27}{subsection.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.1.6.1}Detailed Description}{28}{subsubsection.4.1.6.1}%
+\contentsline {subsubsection}{\numberline {4.1.6.2}Function Documentation}{28}{subsubsection.4.1.6.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.2.1}Menu\_Init()}{28}{subsubsubsection.4.1.6.2.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.2.2}Menu\_SetItemData()}{28}{subsubsubsection.4.1.6.2.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.2.3}Menu\_Task()}{28}{subsubsubsection.4.1.6.2.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.2.4}Menu\_Update()}{29}{subsubsubsection.4.1.6.2.4}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.2.5}Menu\_UpdateItemValue()}{29}{subsubsubsection.4.1.6.2.5}%
+\contentsline {subsubsection}{\numberline {4.1.6.3}Menu Global Config }{29}{subsubsection.4.1.6.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.3.1}Detailed Description}{30}{subsubsubsection.4.1.6.3.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.6.3.2}Enumeration Type Documentation}{30}{subsubsubsection.4.1.6.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.6.3.2.1}MenuItemId\_t}{30}{subsubsubsubsection.4.1.6.3.2.1}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.6.3.2.2}MenuMode\_t}{30}{subsubsubsubsection.4.1.6.3.2.2}%
+\contentsline {subsection}{\numberline {4.1.7}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller }{30}{subsection.4.1.7}%
+\contentsline {subsubsection}{\numberline {4.1.7.1}Detailed Description}{31}{subsubsection.4.1.7.1}%
+\contentsline {subsubsection}{\numberline {4.1.7.2}Function Documentation}{31}{subsubsection.4.1.7.2}%
+\contentsline {subsubsubsection}{\numberline {4.1.7.2.1}MotionController\_vidInit()}{31}{subsubsubsection.4.1.7.2.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.7.2.2}MotionController\_vidMove()}{31}{subsubsubsection.4.1.7.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.7.3}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller Global Config }{31}{subsubsection.4.1.7.3}%
+\contentsline {subsubsubsection}{\numberline {4.1.7.3.1}Detailed Description}{32}{subsubsubsection.4.1.7.3.1}%
+\contentsline {subsubsubsection}{\numberline {4.1.7.3.2}Enumeration Type Documentation}{32}{subsubsubsection.4.1.7.3.2}%
+\contentsline {subsubsubsubsection}{\numberline {4.1.7.3.2.1}MotionState\_t}{32}{subsubsubsubsection.4.1.7.3.2.1}%
+\contentsline {chapter}{\numberline {5}Data Structure Documentation}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dio\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Config\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{33}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{33}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{34}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Field Documentation}{34}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}aenuFloorCalls}{34}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2.2}bEmergencyStop}{34}{subsubsection.5.2.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.3}enuCollDir}{34}{subsubsection.5.2.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.2.4}enuDirection}{35}{subsubsection.5.2.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.2.5}enuDoorState}{35}{subsubsection.5.2.2.5}%
+\contentsline {subsubsection}{\numberline {5.2.2.6}enuDoorType}{35}{subsubsection.5.2.2.6}%
+\contentsline {subsubsection}{\numberline {5.2.2.7}enuOperatingMode}{35}{subsubsection.5.2.2.7}%
+\contentsline {subsubsection}{\numberline {5.2.2.8}u16DoorTimer}{35}{subsubsection.5.2.2.8}%
+\contentsline {subsubsection}{\numberline {5.2.2.9}u8CabinPwd}{35}{subsubsection.5.2.2.9}%
+\contentsline {subsubsection}{\numberline {5.2.2.10}u8CamFailCnt}{35}{subsubsection.5.2.2.10}%
+\contentsline {subsubsection}{\numberline {5.2.2.11}u8CamTimer}{35}{subsubsection.5.2.2.11}%
+\contentsline {subsubsection}{\numberline {5.2.2.12}u8CollectionDir}{36}{subsubsection.5.2.2.12}%
+\contentsline {subsubsection}{\numberline {5.2.2.13}u8CurrentFloor}{36}{subsubsection.5.2.2.13}%
+\contentsline {subsubsection}{\numberline {5.2.2.14}u8DestinationFloor}{36}{subsubsection.5.2.2.14}%
+\contentsline {subsubsection}{\numberline {5.2.2.15}u8FastTimer}{36}{subsubsection.5.2.2.15}%
+\contentsline {subsubsection}{\numberline {5.2.2.16}u8FloorCount}{36}{subsubsection.5.2.2.16}%
+\contentsline {subsubsection}{\numberline {5.2.2.17}u8LightTimer}{36}{subsubsection.5.2.2.17}%
+\contentsline {subsubsection}{\numberline {5.2.2.18}u8MntSpeed}{36}{subsubsection.5.2.2.18}%
+\contentsline {subsubsection}{\numberline {5.2.2.19}u8ParkFloor}{36}{subsubsection.5.2.2.19}%
+\contentsline {subsubsection}{\numberline {5.2.2.20}u8PhsSeq}{37}{subsubsection.5.2.2.20}%
+\contentsline {subsubsection}{\numberline {5.2.2.21}u8SlowTimer}{37}{subsubsection.5.2.2.21}%
+\contentsline {subsubsection}{\numberline {5.2.2.22}u8StopTimer}{37}{subsubsection.5.2.2.22}%
+\contentsline {section}{\numberline {5.3}Floor\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{37}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{37}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Field Documentation}{37}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}bIsActive}{37}{subsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {5.3.2.2}bLEDState}{38}{subsubsection.5.3.2.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.3}enuLEDCallType}{38}{subsubsection.5.3.2.3}%
+\contentsline {subsubsection}{\numberline {5.3.2.4}u16BlinkTimer}{38}{subsubsection.5.3.2.4}%
+\contentsline {section}{\numberline {5.4}LEDConfig\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{38}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{38}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Field Documentation}{38}{subsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.1}enuPattern}{38}{subsubsection.5.4.2.1}%
+\contentsline {subsubsection}{\numberline {5.4.2.2}u16OffTime}{39}{subsubsection.5.4.2.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.3}u16OnTime}{39}{subsubsection.5.4.2.3}%
+\contentsline {subsubsection}{\numberline {5.4.2.4}u8LedId}{39}{subsubsection.5.4.2.4}%
+\contentsline {section}{\numberline {5.5}LEDHWConfig\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{39}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{39}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Field Documentation}{39}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}u8BitPos}{39}{subsubsection.5.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.5.2.2}u8LatchIndex}{40}{subsubsection.5.5.2.2}%
+\contentsline {section}{\numberline {5.6}LEDStatus\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{40}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Item\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{40}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{40}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Field Documentation}{41}{subsection.5.7.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.1}eepromAddress}{41}{subsubsection.5.7.2.1}%
+\contentsline {subsubsection}{\numberline {5.7.2.2}label}{41}{subsubsection.5.7.2.2}%
+\contentsline {subsubsection}{\numberline {5.7.2.3}maxValue}{41}{subsubsection.5.7.2.3}%
+\contentsline {subsubsection}{\numberline {5.7.2.4}minValue}{41}{subsubsection.5.7.2.4}%
+\contentsline {subsubsection}{\numberline {5.7.2.5}value}{41}{subsubsection.5.7.2.5}%
+\contentsline {chapter}{\numberline {6}File Documentation}{43}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{43}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler.h File Reference}{44}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{44}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.h File Reference}{45}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Detailed Description}{45}{subsection.6.4.1}%
+\contentsline {section}{\numberline {6.5}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{45}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}includes/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.h File Reference}{46}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{48}{subsection.6.6.1}%
+\contentsline {section}{\numberline {6.7}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{48}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.h File Reference}{50}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Detailed Description}{51}{subsection.6.8.1}%
+\contentsline {section}{\numberline {6.9}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{51}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.h File Reference}{52}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}Detailed Description}{53}{subsection.6.10.1}%
+\contentsline {subsection}{\numberline {6.10.2}Enumeration Type Documentation}{53}{subsection.6.10.2}%
+\contentsline {subsubsection}{\numberline {6.10.2.1}CollDir\_t}{53}{subsubsection.6.10.2.1}%
+\contentsline {subsubsection}{\numberline {6.10.2.2}DoorState\_t}{53}{subsubsection.6.10.2.2}%
+\contentsline {subsubsection}{\numberline {6.10.2.3}DoorType\_t}{54}{subsubsection.6.10.2.3}%
+\contentsline {subsubsection}{\numberline {6.10.2.4}MoveDirection\_t}{54}{subsubsection.6.10.2.4}%
+\contentsline {subsubsection}{\numberline {6.10.2.5}OperatingMode\_t}{54}{subsubsection.6.10.2.5}%
+\contentsline {section}{\numberline {6.11}Elevator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{55}{section.6.11}%
+\contentsline {section}{\numberline {6.12}LEDController\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{56}{section.6.12}%
+\contentsline {section}{\numberline {6.13}LEDController/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LEDController.h File Reference}{57}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Detailed Description}{57}{subsection.6.13.1}%
+\contentsline {section}{\numberline {6.14}LEDController.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{57}{section.6.14}%
+\contentsline {section}{\numberline {6.15}LEDController/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LEDController\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.h File Reference}{58}{section.6.15}%
+\contentsline {subsection}{\numberline {6.15.1}Detailed Description}{60}{subsection.6.15.1}%
+\contentsline {section}{\numberline {6.16}LEDController\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{60}{section.6.16}%
+\contentsline {section}{\numberline {6.17}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}c File Reference}{61}{section.6.17}%
+\contentsline {subsection}{\numberline {6.17.1}Detailed Description}{61}{subsection.6.17.1}%
+\contentsline {section}{\numberline {6.18}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{62}{section.6.18}%
+\contentsline {section}{\numberline {6.19}Menu/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu.h File Reference}{62}{section.6.19}%
+\contentsline {subsection}{\numberline {6.19.1}Detailed Description}{63}{subsection.6.19.1}%
+\contentsline {section}{\numberline {6.20}Menu.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{63}{section.6.20}%
+\contentsline {section}{\numberline {6.21}Menu/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.h File Reference}{64}{section.6.21}%
+\contentsline {subsection}{\numberline {6.21.1}Detailed Description}{64}{subsection.6.21.1}%
+\contentsline {section}{\numberline {6.22}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{65}{section.6.22}%
+\contentsline {section}{\numberline {6.23}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{66}{section.6.23}%
+\contentsline {section}{\numberline {6.24}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.h File Reference}{66}{section.6.24}%
+\contentsline {subsection}{\numberline {6.24.1}Detailed Description}{66}{subsection.6.24.1}%
+\contentsline {section}{\numberline {6.25}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{67}{section.6.25}%
+\contentsline {section}{\numberline {6.26}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}interfaces/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.h File Reference}{67}{section.6.26}%
+\contentsline {subsection}{\numberline {6.26.1}Detailed Description}{68}{subsection.6.26.1}%
+\contentsline {section}{\numberline {6.27}Motion\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}gcfg.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{68}{section.6.27}%
+\contentsline {chapter}{Index}{69}{section*.57}%

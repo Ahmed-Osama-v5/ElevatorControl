@@ -25,6 +25,18 @@
 #ifndef CALL_HANDLER_GCFG_H
 #define CALL_HANDLER_GCFG_H
 
+/**
+ * @file CallHandler_gcfg.h
+ * @brief Global configuration types for the CallHandler module.
+ *
+ * Defines the @ref CallType_t enumeration that classifies floor calls
+ * and is shared across application modules.
+ *
+ * @defgroup CallHandler_gcfg CallHandler Global Config
+ * @ingroup App_CallHandler
+ * @{
+ */
+
 #include "std_types.h"
 #include "SystemConfig.h"
 
@@ -34,11 +46,14 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
+/**
+ * @brief Classifies the type of a floor call.
+ */
 typedef enum
 {
-    CALL_NONE,
-    CALL_INTERNAL,
-    CALL_EXTERNAL
+    CALL_NONE,     /**< No active call registered for this floor. */
+    CALL_INTERNAL, /**< Call originated from inside the cabin (cabin panel button). */
+    CALL_EXTERNAL  /**< Call originated from a landing panel button. */
 } CallType_t;
 
 /*typedef struct
@@ -70,6 +85,7 @@ typedef struct {
 } CallHandler_t;
 */
 
+/** @} */
 
 #endif // CALL_HANDLER_GCFG_H
 

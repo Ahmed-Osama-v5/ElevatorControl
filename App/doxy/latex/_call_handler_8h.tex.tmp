@@ -1,0 +1,25 @@
+\doxysection{Call\+Handler/\+interfaces/\+\+Call\+Handler.h File Reference}
+\hypertarget{_call_handler_8h}{}\label{_call_handler_8h}\index{CallHandler/interfaces/CallHandler.h@{CallHandler/interfaces/CallHandler.h}}
+
+
+Public interface for the Call\+Handler module.  
+
+
+{\ttfamily \+\#include "{}Elevator\+Controller\+\_\+gcfg.\+h"{}}\newline
+{\ttfamily \+\#include "{}System\+Config.\+h"{}}\newline
+{\ttfamily \+\#include "{}Call\+Handler\+\_\+gcfg.\+h"{}}\newline
+Include dependency graph for Call\+Handler.\+h:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___call_handler_ga27bd537f1c94c0ce47f789e07e4ea710}{Call\+Handler\+\_\+vid\+Init}} (\doxymbox{\hyperlink{struct_elevator__t}{Elevator\+\_\+t}} \texorpdfstring{$\ast$}{*}pstr\+Elevator)
+\begin{DoxyCompactList}\small\item\em Initializes the Call\+Handler module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___call_handler_ga7587f1b27295913a2e6980e2b79e9aa5}{Call\+Handler\+\_\+vid\+Get\+Call}} (void)
+\begin{DoxyCompactList}\small\item\em Scans all call inputs and registers active calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Public interface for the Call\+Handler module. 
+
+The Call\+Handler module scans all floor call inputs (internal cabin buttons and external landing buttons) and registers the resulting calls into the shared \doxylink{struct_elevator__t}{Elevator\+\_\+t} state structure. 

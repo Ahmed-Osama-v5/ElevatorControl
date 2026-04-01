@@ -1,0 +1,65 @@
+\doxysection{LEDController\+\_\+lcfg.\+h}
+\hypertarget{_l_e_d_controller__lcfg_8h_source}{}\label{_l_e_d_controller__lcfg_8h_source}\index{LEDController/includes/LEDController\_lcfg.h@{LEDController/includes/LEDController\_lcfg.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ LED\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ LED\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#if\ !\ ((defined\ LEDController\_c)\ ||\ (defined\ LEDController\_lcfg\_c))}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}This\ file\ must\ not\ be\ included\ from\ outside\ of\ it's\ component"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00033\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00034\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CONFIGURATION\ DATA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00035\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00036\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{/*\ Private\ defines\ */}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ cu8SHIFT\_REG\_DELAY\_US\ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ Module\ private\ types\ */}}
+\DoxyCodeLine{00042\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\_t}}\ enuState;}
+\DoxyCodeLine{00044\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\_t}}\ enuPattern;}
+\DoxyCodeLine{00045\ \ \ \ \ uint16\_t\ u16LastToggleTime;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{boolean}\ bCurrentOutput;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{boolean}\ bIsInitialized;}
+\DoxyCodeLine{00048\ \}\ \doxymbox{\hyperlink{struct_l_e_d_status__t}{LEDStatus\_t}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{/*\ LED\ MUX\ Hardware\ Configuration\ */}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\_t}}\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga13b9d4fc250a76bb16b5b50741df5b1e}{LED\_HWConfig}}[cu8MAX\_FLOORS];}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LED\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00056\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00057\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00058\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00059\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

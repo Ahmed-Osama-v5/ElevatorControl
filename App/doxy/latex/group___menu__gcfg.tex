@@ -1,0 +1,173 @@
+\doxysubsubsection{Menu Global Config }
+\hypertarget{group___menu__gcfg}{}\label{group___menu__gcfg}\index{Menu Global Config@{Menu Global Config}}
+Collaboration diagram for Menu Global Config:\+
+% FIG 0
+\doxysubsubsubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_menu_item__t}{Menu\+Item\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Data record for a single configurable menu item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___menu__gcfg_ga7dc867171c27cdec3157b3009802b676}\label{group___menu__gcfg_ga7dc867171c27cdec3157b3009802b676} 
+\+\#define {\bfseries MENU\+\_\+\+MAX\+\_\+\+ITEMS}~((uint8\+\_\+t) 10U)
+\begin{DoxyCompactList}\small\item\em Maximum number of menu items allowed in the system. \end{DoxyCompactList}\item 
+\Hypertarget{group___menu__gcfg_ga0f27b5f624fff6420c6135bc2fc397cb}\label{group___menu__gcfg_ga0f27b5f624fff6420c6135bc2fc397cb} 
+\+\#define {\bfseries MENU\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS}~((uint16\+\_\+t) 20U)
+\begin{DoxyCompactList}\small\item\em Blink period for the selected menu item cursor (ms). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6767920fb4d382125ebfafc15e1643}{SLOW\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eae1058f693e716df5caad9e571a7314bb}{FAST\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eab3333ab1cdc7e30d1252faf5173e98da}{CAM\+\_\+\+TIMER\+\_\+\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead467f237a32a156b0e2ba2f8782b1944}{STOP\+\_\+\+TIMER\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea351026c32539d24b01cc55b59ec43ff4}{LIGHT\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eac2740acc472f5d405e3801a4bbdf0e7a}{DOOR\+\_\+\+NUMBER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead15773d619cc26a91c9d4a82466db852}{COLLECTION\+\_\+\+DIR\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea3ee1134d6b4298cef872cfd47a8fecb1}{MNT\+\_\+\+SPEED\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1e572c442a809ba2c10053dfe3704290}{DOOR\+\_\+\+OPTIONS\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea2a03fa829ebffa895b27bc0fa4c471ce}{PARKING\+\_\+\+FLOOR\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eabec75bc896af5d0aa213f089bed4765f}{CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6eb19be1fda0b1418500d808f79eea}{CABIN\+\_\+\+PW\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1f15ce88774ceeaa1ea3cce8af6908b7}{PHS\+\_\+\+SEQ\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eadc0fd1fd9660a4963e9f3ef1e4a2468c}{MENU\+\_\+\+ITEM\+\_\+\+COUNT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Unique identifiers for each configurable menu item. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053}{Menu\+Mode\+\_\+t}} \{ \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3}{MENU\+\_\+\+MODE\+\_\+\+NAVIGATE}}
+, \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053af6ca032114fa10beddc07ce0f09044da}{MENU\+\_\+\+MODE\+\_\+\+EDIT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Operating mode of the menu navigation state machine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-enum-members}
+\Hypertarget{group___menu__gcfg_doc-enum-members}
+\doxysubsubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}\index{Menu Global Config@{Menu Global Config}!MenuItemId\_t@{MenuItemId\_t}}
+\index{MenuItemId\_t@{MenuItemId\_t}!Menu Global Config@{Menu Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{MenuItemId\_t}{MenuItemId\_t}}
+{\footnotesize\ttfamily \label{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e} 
+enum \doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}}}
+
+
+
+Unique identifiers for each configurable menu item. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLOW\_TIMER\_MID@{SLOW\_TIMER\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!SLOW\_TIMER\_MID@{SLOW\_TIMER\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6767920fb4d382125ebfafc15e1643}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6767920fb4d382125ebfafc15e1643} 
+SLOW\+\_\+\+TIMER\+\_\+\+MID&Deceleration timer configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FAST\_TIMER\_MID@{FAST\_TIMER\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!FAST\_TIMER\_MID@{FAST\_TIMER\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eae1058f693e716df5caad9e571a7314bb}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eae1058f693e716df5caad9e571a7314bb} 
+FAST\+\_\+\+TIMER\+\_\+\+MID&High-\/speed travel timer configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAM\_TIMER\_\_MID@{CAM\_TIMER\_\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!CAM\_TIMER\_\_MID@{CAM\_TIMER\_\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eab3333ab1cdc7e30d1252faf5173e98da}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eab3333ab1cdc7e30d1252faf5173e98da} 
+CAM\+\_\+\+TIMER\+\_\+\+\_\+\+MID&CAM pulse timer configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOP\_TIMER\_MID@{STOP\_TIMER\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!STOP\_TIMER\_MID@{STOP\_TIMER\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead467f237a32a156b0e2ba2f8782b1944}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead467f237a32a156b0e2ba2f8782b1944} 
+STOP\+\_\+\+TIMER\+\_\+\+MID&Stop phase timer configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LIGHT\_TIMER\_MID@{LIGHT\_TIMER\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!LIGHT\_TIMER\_MID@{LIGHT\_TIMER\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea351026c32539d24b01cc55b59ec43ff4}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea351026c32539d24b01cc55b59ec43ff4} 
+LIGHT\+\_\+\+TIMER\+\_\+\+MID&Cabin light auto-\/off timer configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_NUMBER\_MID@{DOOR\_NUMBER\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!DOOR\_NUMBER\_MID@{DOOR\_NUMBER\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eac2740acc472f5d405e3801a4bbdf0e7a}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eac2740acc472f5d405e3801a4bbdf0e7a} 
+DOOR\+\_\+\+NUMBER\+\_\+\+MID&Door count /\+ door number configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLLECTION\_DIR\_MID@{COLLECTION\_DIR\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!COLLECTION\_DIR\_MID@{COLLECTION\_DIR\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead15773d619cc26a91c9d4a82466db852}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead15773d619cc26a91c9d4a82466db852} 
+COLLECTION\+\_\+\+DIR\+\_\+\+MID&Call collection direction configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MNT\_SPEED\_MID@{MNT\_SPEED\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!MNT\_SPEED\_MID@{MNT\_SPEED\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea3ee1134d6b4298cef872cfd47a8fecb1}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea3ee1134d6b4298cef872cfd47a8fecb1} 
+MNT\+\_\+\+SPEED\+\_\+\+MID&Maintenance speed configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_OPTIONS\_MID@{DOOR\_OPTIONS\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!DOOR\_OPTIONS\_MID@{DOOR\_OPTIONS\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1e572c442a809ba2c10053dfe3704290}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1e572c442a809ba2c10053dfe3704290} 
+DOOR\+\_\+\+OPTIONS\+\_\+\+MID&Door type options configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PARKING\_FLOOR\_MID@{PARKING\_FLOOR\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!PARKING\_FLOOR\_MID@{PARKING\_FLOOR\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea2a03fa829ebffa895b27bc0fa4c471ce}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea2a03fa829ebffa895b27bc0fa4c471ce} 
+PARKING\+\_\+\+FLOOR\+\_\+\+MID&Parking floor configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAM\_FAIL\_CNT\_MID@{CAM\_FAIL\_CNT\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!CAM\_FAIL\_CNT\_MID@{CAM\_FAIL\_CNT\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eabec75bc896af5d0aa213f089bed4765f}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eabec75bc896af5d0aa213f089bed4765f} 
+CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+MID&CAM failure count threshold configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CABIN\_PW\_MID@{CABIN\_PW\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!CABIN\_PW\_MID@{CABIN\_PW\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6eb19be1fda0b1418500d808f79eea}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6eb19be1fda0b1418500d808f79eea} 
+CABIN\+\_\+\+PW\+\_\+\+MID&Cabin panel access password configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PHS\_SEQ\_MID@{PHS\_SEQ\_MID}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!PHS\_SEQ\_MID@{PHS\_SEQ\_MID}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1f15ce88774ceeaa1ea3cce8af6908b7}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1f15ce88774ceeaa1ea3cce8af6908b7} 
+PHS\+\_\+\+SEQ\+\_\+\+MID&Phase sequence configuration item. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU\_ITEM\_COUNT@{MENU\_ITEM\_COUNT}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!MENU\_ITEM\_COUNT@{MENU\_ITEM\_COUNT}}
+}\Hypertarget{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eadc0fd1fd9660a4963e9f3ef1e4a2468c}\label{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eadc0fd1fd9660a4963e9f3ef1e4a2468c} 
+MENU\+\_\+\+ITEM\+\_\+\+COUNT&Total number of menu items (not a valid item ID). \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053}\index{Menu Global Config@{Menu Global Config}!MenuMode\_t@{MenuMode\_t}}
+\index{MenuMode\_t@{MenuMode\_t}!Menu Global Config@{Menu Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{MenuMode\_t}{MenuMode\_t}}
+{\footnotesize\ttfamily \label{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053} 
+enum \doxymbox{\hyperlink{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053}{Menu\+Mode\+\_\+t}}}
+
+
+
+Operating mode of the menu navigation state machine. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU\_MODE\_NAVIGATE@{MENU\_MODE\_NAVIGATE}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!MENU\_MODE\_NAVIGATE@{MENU\_MODE\_NAVIGATE}}
+}\Hypertarget{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3}\label{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3} 
+MENU\+\_\+\+MODE\+\_\+\+NAVIGATE&User is scrolling through menu items. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU\_MODE\_EDIT@{MENU\_MODE\_EDIT}!Menu Global Config@{Menu Global Config}}
+\index{Menu Global Config@{Menu Global Config}!MENU\_MODE\_EDIT@{MENU\_MODE\_EDIT}}
+}\Hypertarget{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053af6ca032114fa10beddc07ce0f09044da}\label{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053af6ca032114fa10beddc07ce0f09044da} 
+MENU\+\_\+\+MODE\+\_\+\+EDIT&User is editing the value of the selected item. \\
+\hline
+
+\end{DoxyEnumFields}

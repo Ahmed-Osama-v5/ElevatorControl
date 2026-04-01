@@ -1,0 +1,268 @@
+\doxysubsubsection{LEDController Global Config }
+\hypertarget{group___l_e_d_controller__gcfg}{}\label{group___l_e_d_controller__gcfg}\index{LEDController Global Config@{LEDController Global Config}}
+Collaboration diagram for LEDController Global Config:\+
+% FIG 0
+\doxysubsubsubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Maps a logical LED index to its physical latch and bit position. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_l_e_d_config__t}{LEDConfig\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration entry for a single LED pattern. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_floor_l_e_d__t}{Floor\+LED\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Runtime state of a single floor LED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___l_e_d_controller__gcfg_gaba53baae858dfc6ca902d3aa81ec2114}\label{group___l_e_d_controller__gcfg_gaba53baae858dfc6ca902d3aa81ec2114} 
+\+\#define {\bfseries cu8\+LED\+\_\+\+CONTROLLER\+\_\+\+PERIOD\+\_\+\+MS}~((uint8\+\_\+t) 10U)
+\begin{DoxyCompactList}\small\item\em Task period for the LED controller (ms). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCall\+Type\+\_\+t}} \{ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341a0834b91f8bf843ef87e01be473862ac9}{LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+INTERNAL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341aeaa5f6cc0bb6797c6201127294a42e20}{LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+EXTERNAL}}
+ \}
+\begin{DoxyCompactList}\small\item\em Classifies the call type associated with an LED. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\+\_\+t}} \{ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789}{LED\+\_\+\+STATE\+\_\+\+OFF}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550}{LED\+\_\+\+STATE\+\_\+\+ON}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93}{LED\+\_\+\+STATE\+\_\+\+BLINKING}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the instantaneous state of a single LED. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5}{LED\+\_\+\+PATTERN\+\_\+\+NONE}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704daaa3d739b5e0e57b8c6c8112ab0bcbc13}{LED\+\_\+\+PATTERN\+\_\+\+INTERNAL\+\_\+\+CALL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704dad3835c2b8fe1ec466c6f2cac20b244dc}{LED\+\_\+\+PATTERN\+\_\+\+EXTERNAL\+\_\+\+CALL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da5bb4dcd9b0c2b7e44d7adf3033a7eb43}{LED\+\_\+\+PATTERN\+\_\+\+MAINTENANCE}}
+, \newline
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da73cd4de321975fc27aa47237e518a366}{LED\+\_\+\+PATTERN\+\_\+\+ERROR}}
+ \}
+\begin{DoxyCompactList}\small\item\em Pre-\/defined blink patterns for floor indicator LEDs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___l_e_d_controller__gcfg_ga13b9d4fc250a76bb16b5b50741df5b1e}\label{group___l_e_d_controller__gcfg_ga13b9d4fc250a76bb16b5b50741df5b1e} 
+const \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\+\_\+t}} {\bfseries LED\+\_\+\+HWConfig} \+[cu8\+MAX\+\_\+\+FLOORS]\+
+\begin{DoxyCompactList}\small\item\em External declaration of the per-\/floor hardware configuration array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Latch Control Pins}
+GPIO port and pin assignments for the two 74HC573 latch enable lines. \begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gad60e6e2932aa3ad07b6bd2e48f271af9}{cenu\+LED\+\_\+\+LATCH0\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOB)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaf0bb6341a990de721ed9e48fae9799a9}{cu8\+LED\+\_\+\+LATCH0\+\_\+\+PIN}}~((uint8\+\_\+t) 2U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga405ff64373424e4329ae236e983d4027}{cenu\+LED\+\_\+\+LATCH1\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOB)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gae0ef0742bf3eb8de2c8237648e836b76}{cu8\+LED\+\_\+\+LATCH1\+\_\+\+PIN}}~((uint8\+\_\+t) 3U)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{LED Data Port}
+8-\/bit parallel data port used to write LED states to the active latch. \begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga02aef0c312166d18a7310fd87e9ff8ec}{cenu\+LED\+\_\+\+DATA\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOA)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{LED Pattern Timing}
+On-\/time and off-\/time constants (in milliseconds) for each LED pattern. \begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga47e5884cc77b49bcaefb26bc3f9c601d}{cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 60000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga38cad8a7ec758e50d3a5ef63e9d13776}{cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gafff658e16fd4f0e1a035670d2ba19564}{cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 5000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga649aa4e6a2441cb4901e6b1db7825587}{cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 5000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gae50712c10f5509d0783a874138ed750b}{cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 200U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga95dfc5a1bebea403c4729b33f5fab0fa}{cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 200U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga27c067a7f9a4eeb332149fdb5305ef3c}{cu16\+LED\+\_\+\+ERROR\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 100U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gad7934484c2bfc55b02cb5ba3d95addac}{cu16\+LED\+\_\+\+ERROR\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 100U)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group___l_e_d_controller__gcfg_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___l_e_d_controller__gcfg_ga02aef0c312166d18a7310fd87e9ff8ec}\index{LEDController Global Config@{LEDController Global Config}!cenuLED\_DATA\_PORT@{cenuLED\_DATA\_PORT}}
+\index{cenuLED\_DATA\_PORT@{cenuLED\_DATA\_PORT}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cenuLED\_DATA\_PORT}{cenuLED\_DATA\_PORT}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga02aef0c312166d18a7310fd87e9ff8ec} 
+\+\#define cenu\+LED\+\_\+\+DATA\+\_\+\+PORT~((GPIO\+\_\+t) GPIOA)}
+
+Port carrying the 8-\/bit LED data bus. \Hypertarget{group___l_e_d_controller__gcfg_gad60e6e2932aa3ad07b6bd2e48f271af9}\index{LEDController Global Config@{LEDController Global Config}!cenuLED\_LATCH0\_PORT@{cenuLED\_LATCH0\_PORT}}
+\index{cenuLED\_LATCH0\_PORT@{cenuLED\_LATCH0\_PORT}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cenuLED\_LATCH0\_PORT}{cenuLED\_LATCH0\_PORT}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gad60e6e2932aa3ad07b6bd2e48f271af9} 
+\+\#define cenu\+LED\+\_\+\+LATCH0\+\_\+\+PORT~((GPIO\+\_\+t) GPIOB)}
+
+Port for latch 0 enable (LEDs 0-\/7). \Hypertarget{group___l_e_d_controller__gcfg_ga405ff64373424e4329ae236e983d4027}\index{LEDController Global Config@{LEDController Global Config}!cenuLED\_LATCH1\_PORT@{cenuLED\_LATCH1\_PORT}}
+\index{cenuLED\_LATCH1\_PORT@{cenuLED\_LATCH1\_PORT}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cenuLED\_LATCH1\_PORT}{cenuLED\_LATCH1\_PORT}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga405ff64373424e4329ae236e983d4027} 
+\+\#define cenu\+LED\+\_\+\+LATCH1\+\_\+\+PORT~((GPIO\+\_\+t) GPIOB)}
+
+Port for latch 1 enable (LEDs 8-\/15). \Hypertarget{group___l_e_d_controller__gcfg_gad7934484c2bfc55b02cb5ba3d95addac}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_ERROR\_OFF\_TIME@{cu16LED\_ERROR\_OFF\_TIME}}
+\index{cu16LED\_ERROR\_OFF\_TIME@{cu16LED\_ERROR\_OFF\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_ERROR\_OFF\_TIME}{cu16LED\_ERROR\_OFF\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gad7934484c2bfc55b02cb5ba3d95addac} 
+\+\#define cu16\+LED\+\_\+\+ERROR\+\_\+\+OFF\+\_\+\+TIME~((uint16\+\_\+t) 100U)}
+
+Error mode LED off time (ms). \Hypertarget{group___l_e_d_controller__gcfg_ga27c067a7f9a4eeb332149fdb5305ef3c}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_ERROR\_ON\_TIME@{cu16LED\_ERROR\_ON\_TIME}}
+\index{cu16LED\_ERROR\_ON\_TIME@{cu16LED\_ERROR\_ON\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_ERROR\_ON\_TIME}{cu16LED\_ERROR\_ON\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga27c067a7f9a4eeb332149fdb5305ef3c} 
+\+\#define cu16\+LED\+\_\+\+ERROR\+\_\+\+ON\+\_\+\+TIME~((uint16\+\_\+t) 100U)}
+
+Error mode LED on time (ms). \Hypertarget{group___l_e_d_controller__gcfg_ga649aa4e6a2441cb4901e6b1db7825587}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_EXTERNAL\_CALL\_OFF\_TIME@{cu16LED\_EXTERNAL\_CALL\_OFF\_TIME}}
+\index{cu16LED\_EXTERNAL\_CALL\_OFF\_TIME@{cu16LED\_EXTERNAL\_CALL\_OFF\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_EXTERNAL\_CALL\_OFF\_TIME}{cu16LED\_EXTERNAL\_CALL\_OFF\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga649aa4e6a2441cb4901e6b1db7825587} 
+\+\#define cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME~((uint16\+\_\+t) 5000U)}
+
+External call LED off time (ms). \Hypertarget{group___l_e_d_controller__gcfg_gafff658e16fd4f0e1a035670d2ba19564}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_EXTERNAL\_CALL\_ON\_TIME@{cu16LED\_EXTERNAL\_CALL\_ON\_TIME}}
+\index{cu16LED\_EXTERNAL\_CALL\_ON\_TIME@{cu16LED\_EXTERNAL\_CALL\_ON\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_EXTERNAL\_CALL\_ON\_TIME}{cu16LED\_EXTERNAL\_CALL\_ON\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gafff658e16fd4f0e1a035670d2ba19564} 
+\+\#define cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME~((uint16\+\_\+t) 5000U)}
+
+External call LED on time (ms). \Hypertarget{group___l_e_d_controller__gcfg_ga38cad8a7ec758e50d3a5ef63e9d13776}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_INTERNAL\_CALL\_OFF\_TIME@{cu16LED\_INTERNAL\_CALL\_OFF\_TIME}}
+\index{cu16LED\_INTERNAL\_CALL\_OFF\_TIME@{cu16LED\_INTERNAL\_CALL\_OFF\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_INTERNAL\_CALL\_OFF\_TIME}{cu16LED\_INTERNAL\_CALL\_OFF\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga38cad8a7ec758e50d3a5ef63e9d13776} 
+\+\#define cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME~((uint16\+\_\+t) 0U)}
+
+Internal call LED off time (ms). \Hypertarget{group___l_e_d_controller__gcfg_ga47e5884cc77b49bcaefb26bc3f9c601d}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_INTERNAL\_CALL\_ON\_TIME@{cu16LED\_INTERNAL\_CALL\_ON\_TIME}}
+\index{cu16LED\_INTERNAL\_CALL\_ON\_TIME@{cu16LED\_INTERNAL\_CALL\_ON\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_INTERNAL\_CALL\_ON\_TIME}{cu16LED\_INTERNAL\_CALL\_ON\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga47e5884cc77b49bcaefb26bc3f9c601d} 
+\+\#define cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME~((uint16\+\_\+t) 60000U)}
+
+Internal call LED on time (ms). \Hypertarget{group___l_e_d_controller__gcfg_ga95dfc5a1bebea403c4729b33f5fab0fa}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_MAINTENANCE\_OFF\_TIME@{cu16LED\_MAINTENANCE\_OFF\_TIME}}
+\index{cu16LED\_MAINTENANCE\_OFF\_TIME@{cu16LED\_MAINTENANCE\_OFF\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_MAINTENANCE\_OFF\_TIME}{cu16LED\_MAINTENANCE\_OFF\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga95dfc5a1bebea403c4729b33f5fab0fa} 
+\+\#define cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+OFF\+\_\+\+TIME~((uint16\+\_\+t) 200U)}
+
+Maintenance mode LED off time (ms). \Hypertarget{group___l_e_d_controller__gcfg_gae50712c10f5509d0783a874138ed750b}\index{LEDController Global Config@{LEDController Global Config}!cu16LED\_MAINTENANCE\_ON\_TIME@{cu16LED\_MAINTENANCE\_ON\_TIME}}
+\index{cu16LED\_MAINTENANCE\_ON\_TIME@{cu16LED\_MAINTENANCE\_ON\_TIME}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu16LED\_MAINTENANCE\_ON\_TIME}{cu16LED\_MAINTENANCE\_ON\_TIME}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gae50712c10f5509d0783a874138ed750b} 
+\+\#define cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+ON\+\_\+\+TIME~((uint16\+\_\+t) 200U)}
+
+Maintenance mode LED on time (ms). \Hypertarget{group___l_e_d_controller__gcfg_gaf0bb6341a990de721ed9e48fae9799a9}\index{LEDController Global Config@{LEDController Global Config}!cu8LED\_LATCH0\_PIN@{cu8LED\_LATCH0\_PIN}}
+\index{cu8LED\_LATCH0\_PIN@{cu8LED\_LATCH0\_PIN}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8LED\_LATCH0\_PIN}{cu8LED\_LATCH0\_PIN}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gaf0bb6341a990de721ed9e48fae9799a9} 
+\+\#define cu8\+LED\+\_\+\+LATCH0\+\_\+\+PIN~((uint8\+\_\+t) 2U)}
+
+Pin number for latch 0 enable. \Hypertarget{group___l_e_d_controller__gcfg_gae0ef0742bf3eb8de2c8237648e836b76}\index{LEDController Global Config@{LEDController Global Config}!cu8LED\_LATCH1\_PIN@{cu8LED\_LATCH1\_PIN}}
+\index{cu8LED\_LATCH1\_PIN@{cu8LED\_LATCH1\_PIN}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8LED\_LATCH1\_PIN}{cu8LED\_LATCH1\_PIN}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gae0ef0742bf3eb8de2c8237648e836b76} 
+\+\#define cu8\+LED\+\_\+\+LATCH1\+\_\+\+PIN~((uint8\+\_\+t) 3U)}
+
+Pin number for latch 1 enable. 
+
+\label{doc-enum-members}
+\Hypertarget{group___l_e_d_controller__gcfg_doc-enum-members}
+\doxysubsubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}\index{LEDController Global Config@{LEDController Global Config}!LEDCallType\_t@{LEDCallType\_t}}
+\index{LEDCallType\_t@{LEDCallType\_t}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{LEDCallType\_t}{LEDCallType\_t}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341} 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCall\+Type\+\_\+t}}}
+
+
+
+Classifies the call type associated with an LED. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_CALL\_TYPE\_INTERNAL@{LED\_CALL\_TYPE\_INTERNAL}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_CALL\_TYPE\_INTERNAL@{LED\_CALL\_TYPE\_INTERNAL}}
+}\Hypertarget{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341a0834b91f8bf843ef87e01be473862ac9}\label{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341a0834b91f8bf843ef87e01be473862ac9} 
+LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+INTERNAL&LED corresponds to an internal (cabin) call. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_CALL\_TYPE\_EXTERNAL@{LED\_CALL\_TYPE\_EXTERNAL}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_CALL\_TYPE\_EXTERNAL@{LED\_CALL\_TYPE\_EXTERNAL}}
+}\Hypertarget{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341aeaa5f6cc0bb6797c6201127294a42e20}\label{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341aeaa5f6cc0bb6797c6201127294a42e20} 
+LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+EXTERNAL&LED corresponds to an external (landing) call. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}\index{LEDController Global Config@{LEDController Global Config}!LEDPattern\_t@{LEDPattern\_t}}
+\index{LEDPattern\_t@{LEDPattern\_t}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{LEDPattern\_t}{LEDPattern\_t}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d} 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}}}
+
+
+
+Pre-\/defined blink patterns for floor indicator LEDs. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_PATTERN\_NONE@{LED\_PATTERN\_NONE}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_PATTERN\_NONE@{LED\_PATTERN\_NONE}}
+}\Hypertarget{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5}\label{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5} 
+LED\+\_\+\+PATTERN\+\_\+\+NONE&No active pattern; LED follows its direct state. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_PATTERN\_INTERNAL\_CALL@{LED\_PATTERN\_INTERNAL\_CALL}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_PATTERN\_INTERNAL\_CALL@{LED\_PATTERN\_INTERNAL\_CALL}}
+}\Hypertarget{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704daaa3d739b5e0e57b8c6c8112ab0bcbc13}\label{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704daaa3d739b5e0e57b8c6c8112ab0bcbc13} 
+LED\+\_\+\+PATTERN\+\_\+\+INTERNAL\+\_\+\+CALL&Pattern for a registered internal call. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_PATTERN\_EXTERNAL\_CALL@{LED\_PATTERN\_EXTERNAL\_CALL}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_PATTERN\_EXTERNAL\_CALL@{LED\_PATTERN\_EXTERNAL\_CALL}}
+}\Hypertarget{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704dad3835c2b8fe1ec466c6f2cac20b244dc}\label{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704dad3835c2b8fe1ec466c6f2cac20b244dc} 
+LED\+\_\+\+PATTERN\+\_\+\+EXTERNAL\+\_\+\+CALL&Pattern for a registered external call. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_PATTERN\_MAINTENANCE@{LED\_PATTERN\_MAINTENANCE}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_PATTERN\_MAINTENANCE@{LED\_PATTERN\_MAINTENANCE}}
+}\Hypertarget{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da5bb4dcd9b0c2b7e44d7adf3033a7eb43}\label{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da5bb4dcd9b0c2b7e44d7adf3033a7eb43} 
+LED\+\_\+\+PATTERN\+\_\+\+MAINTENANCE&Pattern used during maintenance mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_PATTERN\_ERROR@{LED\_PATTERN\_ERROR}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_PATTERN\_ERROR@{LED\_PATTERN\_ERROR}}
+}\Hypertarget{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da73cd4de321975fc27aa47237e518a366}\label{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da73cd4de321975fc27aa47237e518a366} 
+LED\+\_\+\+PATTERN\+\_\+\+ERROR&Pattern used during error mode. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}\index{LEDController Global Config@{LEDController Global Config}!LEDState\_t@{LEDState\_t}}
+\index{LEDState\_t@{LEDState\_t}!LEDController Global Config@{LEDController Global Config}}
+\doxysubsubsubsubsection{\texorpdfstring{LEDState\_t}{LEDState\_t}}
+{\footnotesize\ttfamily \label{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796} 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\+\_\+t}}}
+
+
+
+Represents the instantaneous state of a single LED. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_STATE\_OFF@{LED\_STATE\_OFF}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_STATE\_OFF@{LED\_STATE\_OFF}}
+}\Hypertarget{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789}\label{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789} 
+LED\+\_\+\+STATE\+\_\+\+OFF&LED is off. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_STATE\_ON@{LED\_STATE\_ON}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_STATE\_ON@{LED\_STATE\_ON}}
+}\Hypertarget{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550}\label{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550} 
+LED\+\_\+\+STATE\+\_\+\+ON&LED is continuously on. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_STATE\_BLINKING@{LED\_STATE\_BLINKING}!LEDController Global Config@{LEDController Global Config}}
+\index{LEDController Global Config@{LEDController Global Config}!LED\_STATE\_BLINKING@{LED\_STATE\_BLINKING}}
+}\Hypertarget{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93}\label{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93} 
+LED\+\_\+\+STATE\+\_\+\+BLINKING&LED is blinking according to its assigned pattern. \\
+\hline
+
+\end{DoxyEnumFields}

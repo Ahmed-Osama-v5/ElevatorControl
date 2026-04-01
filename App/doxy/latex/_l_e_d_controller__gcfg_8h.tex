@@ -1,0 +1,97 @@
+\doxysection{LEDController/\+interfaces/\+\+LEDController\+\_\+gcfg.h File Reference}
+\hypertarget{_l_e_d_controller__gcfg_8h}{}\label{_l_e_d_controller__gcfg_8h}\index{LEDController/interfaces/LEDController\_gcfg.h@{LEDController/interfaces/LEDController\_gcfg.h}}
+
+
+Global configuration types and hardware mappings for the LEDController module.  
+
+
+{\ttfamily \+\#include "{}std\+\_\+types.\+h"{}}\newline
+{\ttfamily \+\#include "{}System\+Config.\+h"{}}\newline
+Include dependency graph for LEDController\+\_\+gcfg.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Maps a logical LED index to its physical latch and bit position. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_l_e_d_config__t}{LEDConfig\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration entry for a single LED pattern. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_floor_l_e_d__t}{Floor\+LED\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Runtime state of a single floor LED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define {\bfseries cu8\+LED\+\_\+\+CONTROLLER\+\_\+\+PERIOD\+\_\+\+MS}~((uint8\+\_\+t) 10U)
+\begin{DoxyCompactList}\small\item\em Task period for the LED controller (ms). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Latch Control Pins}\par
+{\em GPIO port and pin assignments for the two 74HC573 latch enable lines. }\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gad60e6e2932aa3ad07b6bd2e48f271af9}{cenu\+LED\+\_\+\+LATCH0\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOB)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaf0bb6341a990de721ed9e48fae9799a9}{cu8\+LED\+\_\+\+LATCH0\+\_\+\+PIN}}~((uint8\+\_\+t) 2U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga405ff64373424e4329ae236e983d4027}{cenu\+LED\+\_\+\+LATCH1\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOB)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gae0ef0742bf3eb8de2c8237648e836b76}{cu8\+LED\+\_\+\+LATCH1\+\_\+\+PIN}}~((uint8\+\_\+t) 3U)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ LED Data Port}\par
+{\em 8-\/bit parallel data port used to write LED states to the active latch. }\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga02aef0c312166d18a7310fd87e9ff8ec}{cenu\+LED\+\_\+\+DATA\+\_\+\+PORT}}~((GPIO\+\_\+t) GPIOA)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ LED Pattern Timing}\par
+{\em On-\/time and off-\/time constants (in milliseconds) for each LED pattern. }\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga47e5884cc77b49bcaefb26bc3f9c601d}{cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 60000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga38cad8a7ec758e50d3a5ef63e9d13776}{cu16\+LED\+\_\+\+INTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gafff658e16fd4f0e1a035670d2ba19564}{cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 5000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga649aa4e6a2441cb4901e6b1db7825587}{cu16\+LED\+\_\+\+EXTERNAL\+\_\+\+CALL\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 5000U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gae50712c10f5509d0783a874138ed750b}{cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 200U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga95dfc5a1bebea403c4729b33f5fab0fa}{cu16\+LED\+\_\+\+MAINTENANCE\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 200U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga27c067a7f9a4eeb332149fdb5305ef3c}{cu16\+LED\+\_\+\+ERROR\+\_\+\+ON\+\_\+\+TIME}}~((uint16\+\_\+t) 100U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gad7934484c2bfc55b02cb5ba3d95addac}{cu16\+LED\+\_\+\+ERROR\+\_\+\+OFF\+\_\+\+TIME}}~((uint16\+\_\+t) 100U)
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCall\+Type\+\_\+t}} \{ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341a0834b91f8bf843ef87e01be473862ac9}{LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+INTERNAL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341aeaa5f6cc0bb6797c6201127294a42e20}{LED\+\_\+\+CALL\+\_\+\+TYPE\+\_\+\+EXTERNAL}}
+ \}
+\begin{DoxyCompactList}\small\item\em Classifies the call type associated with an LED. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\+\_\+t}} \{ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789}{LED\+\_\+\+STATE\+\_\+\+OFF}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550}{LED\+\_\+\+STATE\+\_\+\+ON}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93}{LED\+\_\+\+STATE\+\_\+\+BLINKING}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the instantaneous state of a single LED. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5}{LED\+\_\+\+PATTERN\+\_\+\+NONE}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704daaa3d739b5e0e57b8c6c8112ab0bcbc13}{LED\+\_\+\+PATTERN\+\_\+\+INTERNAL\+\_\+\+CALL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704dad3835c2b8fe1ec466c6f2cac20b244dc}{LED\+\_\+\+PATTERN\+\_\+\+EXTERNAL\+\_\+\+CALL}}
+, \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da5bb4dcd9b0c2b7e44d7adf3033a7eb43}{LED\+\_\+\+PATTERN\+\_\+\+MAINTENANCE}}
+, \newline
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da73cd4de321975fc27aa47237e518a366}{LED\+\_\+\+PATTERN\+\_\+\+ERROR}}
+ \}
+\begin{DoxyCompactList}\small\item\em Pre-\/defined blink patterns for floor indicator LEDs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\+\_\+t}} {\bfseries LED\+\_\+\+HWConfig} \+[cu8\+MAX\+\_\+\+FLOORS]\+
+\begin{DoxyCompactList}\small\item\em External declaration of the per-\/floor hardware configuration array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global configuration types and hardware mappings for the LEDController module. 
+
+Defines hardware pin assignments, timing constants, and the data types used to control floor indicator LEDs driven by two 74HC573 latches. 

@@ -1,0 +1,59 @@
+\doxysection{Floor\+LED\+\_\+t Struct Reference}
+\hypertarget{struct_floor_l_e_d__t}{}\label{struct_floor_l_e_d__t}\index{FloorLED\_t@{FloorLED\_t}}
+
+
+Runtime state of a single floor LED.  
+
+
+
+
+{\ttfamily \+\#include $<$LEDController\+\_\+gcfg.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+boolean \doxymbox{\hyperlink{struct_floor_l_e_d__t_a6565382dc0fd6d76f8912f4effba6394}{b\+Is\+Active}}
+\item 
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCall\+Type\+\_\+t}} \doxymbox{\hyperlink{struct_floor_l_e_d__t_aa57cd863d7d74bd8c461ed15a89f3716}{enu\+LEDCall\+Type}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{struct_floor_l_e_d__t_a28bbc172e86efbcca401f48c1cb05267}{u16\+Blink\+Timer}}
+\item 
+boolean \doxymbox{\hyperlink{struct_floor_l_e_d__t_a00973056bd21ba467eba0dcf16828fd4}{b\+LEDState}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Runtime state of a single floor LED. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_floor_l_e_d__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_floor_l_e_d__t_a6565382dc0fd6d76f8912f4effba6394}\index{FloorLED\_t@{FloorLED\_t}!bIsActive@{bIsActive}}
+\index{bIsActive@{bIsActive}!FloorLED\_t@{FloorLED\_t}}
+\doxysubsubsection{\texorpdfstring{bIsActive}{bIsActive}}
+{\footnotesize\ttfamily \label{struct_floor_l_e_d__t_a6565382dc0fd6d76f8912f4effba6394} 
+boolean b\+Is\+Active}
+
+TRUE if the LED has an active call or pattern. \Hypertarget{struct_floor_l_e_d__t_a00973056bd21ba467eba0dcf16828fd4}\index{FloorLED\_t@{FloorLED\_t}!bLEDState@{bLEDState}}
+\index{bLEDState@{bLEDState}!FloorLED\_t@{FloorLED\_t}}
+\doxysubsubsection{\texorpdfstring{bLEDState}{bLEDState}}
+{\footnotesize\ttfamily \label{struct_floor_l_e_d__t_a00973056bd21ba467eba0dcf16828fd4} 
+boolean b\+LEDState}
+
+Current physical on/\+off output state. \Hypertarget{struct_floor_l_e_d__t_aa57cd863d7d74bd8c461ed15a89f3716}\index{FloorLED\_t@{FloorLED\_t}!enuLEDCallType@{enuLEDCallType}}
+\index{enuLEDCallType@{enuLEDCallType}!FloorLED\_t@{FloorLED\_t}}
+\doxysubsubsection{\texorpdfstring{enuLEDCallType}{enuLEDCallType}}
+{\footnotesize\ttfamily \label{struct_floor_l_e_d__t_aa57cd863d7d74bd8c461ed15a89f3716} 
+\doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCall\+Type\+\_\+t}} enu\+LEDCall\+Type}
+
+Type of call driving this LED. \Hypertarget{struct_floor_l_e_d__t_a28bbc172e86efbcca401f48c1cb05267}\index{FloorLED\_t@{FloorLED\_t}!u16BlinkTimer@{u16BlinkTimer}}
+\index{u16BlinkTimer@{u16BlinkTimer}!FloorLED\_t@{FloorLED\_t}}
+\doxysubsubsection{\texorpdfstring{u16BlinkTimer}{u16BlinkTimer}}
+{\footnotesize\ttfamily \label{struct_floor_l_e_d__t_a28bbc172e86efbcca401f48c1cb05267} 
+uint16\+\_\+t u16\+Blink\+Timer}
+
+Blink phase countdown timer (ms). 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+LEDController/\+interfaces/\+\doxymbox{\hyperlink{_l_e_d_controller__gcfg_8h}{LEDController\+\_\+gcfg.\+h}}\end{DoxyCompactItemize}

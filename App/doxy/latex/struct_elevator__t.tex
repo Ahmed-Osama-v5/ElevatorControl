@@ -1,0 +1,203 @@
+\doxysection{Elevator\+\_\+t Struct Reference}
+\hypertarget{struct_elevator__t}{}\label{struct_elevator__t}\index{Elevator\_t@{Elevator\_t}}
+
+
+Holds the full runtime state of the elevator.  
+
+
+
+
+{\ttfamily \+\#include $<$Elevator\+Controller\+\_\+gcfg.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a1887a53c6d28e564917f1aaa046f6da5}{u8\+Current\+Floor}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_aed8bd2f321f7baea07d31b84b566919f}{u8\+Destination\+Floor}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a220d9434e6068f5fb01337137e876c74}{u8\+Slow\+Timer}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_abe0212b7646a9d7caf66536129af5f8d}{u8\+Fast\+Timer}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a0225b9bc9de0de8dc07aa0b992c9ef4c}{u8\+Cam\+Timer}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a213261ca2c0472ada7f312f076ce3aee}{u8\+Stop\+Timer}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_af4b96f85454e8fb3fd9e24f674fe4c15}{u8\+Light\+Timer}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a2e6bdf1605fdd762026df516432ff6f4}{u8\+Floor\+Count}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_abda37c5d7f511a1c2b9766df4b71e25b}{u8\+Mnt\+Speed}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_aef6619869083bd1b58f41bb0758ea280}{u8\+Park\+Floor}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a762522c5436cdaa22edd08b2a6ee4ccb}{u8\+Cam\+Fail\+Cnt}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_aa55b1f667c495cda716a6615c7f1b893}{u8\+Cabin\+Pwd}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a803748e180f783f1ba54ad2acbaae825}{u8\+Phs\+Seq}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_a26217749f42f25dc911b050a51716bf4}{u8\+Collection\+Dir}}
+\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{Move\+Direction\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_a142e964bab34dca8ef52c1fcc69480bc}{enu\+Direction}}
+\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{Coll\+Dir\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_aa27cec07a37be148ea9d1a7dbc04b2de}{enu\+Coll\+Dir}}
+\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{Door\+Type\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_a876589949ec4ebb5834d2c8413268732}{enu\+Door\+Type}}
+\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{Door\+State\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_a55939105b39d943ffa8b4c4427587809}{enu\+Door\+State}}
+\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_a9c6c292ea1455598036e93e8d1e02d6b}{enu\+Operating\+Mode}}
+\item 
+\doxymbox{\hyperlink{group___call_handler__gcfg_ga9ec797f02e093c7b190648e3ce85902e}{Call\+Type\+\_\+t}} \doxymbox{\hyperlink{struct_elevator__t_afb66d16e051b8c3db5a5924049ed30cd}{aenu\+Floor\+Calls}} \+[cu8\+MAX\+\_\+\+FLOORS]\+
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{struct_elevator__t_ab749f5ec239f0281b42c08470c724a28}{u16\+Door\+Timer}}
+\item 
+boolean \doxymbox{\hyperlink{struct_elevator__t_aa691b794a24008d5a14475e7fd3e2cc2}{b\+Emergency\+Stop}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds the full runtime state of the elevator. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_elevator__t_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_elevator__t_afb66d16e051b8c3db5a5924049ed30cd}\index{Elevator\_t@{Elevator\_t}!aenuFloorCalls@{aenuFloorCalls}}
+\index{aenuFloorCalls@{aenuFloorCalls}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{aenuFloorCalls}{aenuFloorCalls}}
+{\footnotesize\ttfamily \label{struct_elevator__t_afb66d16e051b8c3db5a5924049ed30cd} 
+\doxymbox{\hyperlink{group___call_handler__gcfg_ga9ec797f02e093c7b190648e3ce85902e}{Call\+Type\+\_\+t}} aenu\+Floor\+Calls\+[cu8\+MAX\+\_\+\+FLOORS]\+}
+
+Array of pending call types indexed by floor. \Hypertarget{struct_elevator__t_aa691b794a24008d5a14475e7fd3e2cc2}\index{Elevator\_t@{Elevator\_t}!bEmergencyStop@{bEmergencyStop}}
+\index{bEmergencyStop@{bEmergencyStop}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{bEmergencyStop}{bEmergencyStop}}
+{\footnotesize\ttfamily \label{struct_elevator__t_aa691b794a24008d5a14475e7fd3e2cc2} 
+boolean b\+Emergency\+Stop}
+
+Flag indicating an active emergency stop condition. \Hypertarget{struct_elevator__t_aa27cec07a37be148ea9d1a7dbc04b2de}\index{Elevator\_t@{Elevator\_t}!enuCollDir@{enuCollDir}}
+\index{enuCollDir@{enuCollDir}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{enuCollDir}{enuCollDir}}
+{\footnotesize\ttfamily \label{struct_elevator__t_aa27cec07a37be148ea9d1a7dbc04b2de} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{Coll\+Dir\+\_\+t}} enu\+Coll\+Dir}
+
+Active call-\/collection direction. \Hypertarget{struct_elevator__t_a142e964bab34dca8ef52c1fcc69480bc}\index{Elevator\_t@{Elevator\_t}!enuDirection@{enuDirection}}
+\index{enuDirection@{enuDirection}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{enuDirection}{enuDirection}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a142e964bab34dca8ef52c1fcc69480bc} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{Move\+Direction\+\_\+t}} enu\+Direction}
+
+Current movement direction state. \Hypertarget{struct_elevator__t_a55939105b39d943ffa8b4c4427587809}\index{Elevator\_t@{Elevator\_t}!enuDoorState@{enuDoorState}}
+\index{enuDoorState@{enuDoorState}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{enuDoorState}{enuDoorState}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a55939105b39d943ffa8b4c4427587809} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{Door\+State\+\_\+t}} enu\+Door\+State}
+
+Current door state. \Hypertarget{struct_elevator__t_a876589949ec4ebb5834d2c8413268732}\index{Elevator\_t@{Elevator\_t}!enuDoorType@{enuDoorType}}
+\index{enuDoorType@{enuDoorType}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{enuDoorType}{enuDoorType}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a876589949ec4ebb5834d2c8413268732} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{Door\+Type\+\_\+t}} enu\+Door\+Type}
+
+Configured door type (manual or automatic). \Hypertarget{struct_elevator__t_a9c6c292ea1455598036e93e8d1e02d6b}\index{Elevator\_t@{Elevator\_t}!enuOperatingMode@{enuOperatingMode}}
+\index{enuOperatingMode@{enuOperatingMode}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{enuOperatingMode}{enuOperatingMode}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a9c6c292ea1455598036e93e8d1e02d6b} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}} enu\+Operating\+Mode}
+
+Active operating mode of the controller. \Hypertarget{struct_elevator__t_ab749f5ec239f0281b42c08470c724a28}\index{Elevator\_t@{Elevator\_t}!u16DoorTimer@{u16DoorTimer}}
+\index{u16DoorTimer@{u16DoorTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u16DoorTimer}{u16DoorTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_ab749f5ec239f0281b42c08470c724a28} 
+uint16\+\_\+t u16\+Door\+Timer}
+
+Door open timer countdown (in milliseconds). \Hypertarget{struct_elevator__t_aa55b1f667c495cda716a6615c7f1b893}\index{Elevator\_t@{Elevator\_t}!u8CabinPwd@{u8CabinPwd}}
+\index{u8CabinPwd@{u8CabinPwd}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8CabinPwd}{u8CabinPwd}}
+{\footnotesize\ttfamily \label{struct_elevator__t_aa55b1f667c495cda716a6615c7f1b893} 
+uint8\+\_\+t u8\+Cabin\+Pwd}
+
+Cabin-\/panel access password. \Hypertarget{struct_elevator__t_a762522c5436cdaa22edd08b2a6ee4ccb}\index{Elevator\_t@{Elevator\_t}!u8CamFailCnt@{u8CamFailCnt}}
+\index{u8CamFailCnt@{u8CamFailCnt}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8CamFailCnt}{u8CamFailCnt}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a762522c5436cdaa22edd08b2a6ee4ccb} 
+uint8\+\_\+t u8\+Cam\+Fail\+Cnt}
+
+Count of consecutive CAM sensor failures. \Hypertarget{struct_elevator__t_a0225b9bc9de0de8dc07aa0b992c9ef4c}\index{Elevator\_t@{Elevator\_t}!u8CamTimer@{u8CamTimer}}
+\index{u8CamTimer@{u8CamTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8CamTimer}{u8CamTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a0225b9bc9de0de8dc07aa0b992c9ef4c} 
+uint8\+\_\+t u8\+Cam\+Timer}
+
+CAM pulse timer value. \Hypertarget{struct_elevator__t_a26217749f42f25dc911b050a51716bf4}\index{Elevator\_t@{Elevator\_t}!u8CollectionDir@{u8CollectionDir}}
+\index{u8CollectionDir@{u8CollectionDir}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8CollectionDir}{u8CollectionDir}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a26217749f42f25dc911b050a51716bf4} 
+uint8\+\_\+t u8\+Collection\+Dir}
+
+Raw collection direction byte. \Hypertarget{struct_elevator__t_a1887a53c6d28e564917f1aaa046f6da5}\index{Elevator\_t@{Elevator\_t}!u8CurrentFloor@{u8CurrentFloor}}
+\index{u8CurrentFloor@{u8CurrentFloor}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8CurrentFloor}{u8CurrentFloor}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a1887a53c6d28e564917f1aaa046f6da5} 
+uint8\+\_\+t u8\+Current\+Floor}
+
+Current floor position of the elevator cabin. \Hypertarget{struct_elevator__t_aed8bd2f321f7baea07d31b84b566919f}\index{Elevator\_t@{Elevator\_t}!u8DestinationFloor@{u8DestinationFloor}}
+\index{u8DestinationFloor@{u8DestinationFloor}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8DestinationFloor}{u8DestinationFloor}}
+{\footnotesize\ttfamily \label{struct_elevator__t_aed8bd2f321f7baea07d31b84b566919f} 
+uint8\+\_\+t u8\+Destination\+Floor}
+
+Target floor the elevator is moving toward. \Hypertarget{struct_elevator__t_abe0212b7646a9d7caf66536129af5f8d}\index{Elevator\_t@{Elevator\_t}!u8FastTimer@{u8FastTimer}}
+\index{u8FastTimer@{u8FastTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8FastTimer}{u8FastTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_abe0212b7646a9d7caf66536129af5f8d} 
+uint8\+\_\+t u8\+Fast\+Timer}
+
+High-\/speed travel timer (configurable, in task ticks). \Hypertarget{struct_elevator__t_a2e6bdf1605fdd762026df516432ff6f4}\index{Elevator\_t@{Elevator\_t}!u8FloorCount@{u8FloorCount}}
+\index{u8FloorCount@{u8FloorCount}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8FloorCount}{u8FloorCount}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a2e6bdf1605fdd762026df516432ff6f4} 
+uint8\+\_\+t u8\+Floor\+Count}
+
+Total number of floors in service. \Hypertarget{struct_elevator__t_af4b96f85454e8fb3fd9e24f674fe4c15}\index{Elevator\_t@{Elevator\_t}!u8LightTimer@{u8LightTimer}}
+\index{u8LightTimer@{u8LightTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8LightTimer}{u8LightTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_af4b96f85454e8fb3fd9e24f674fe4c15} 
+uint8\+\_\+t u8\+Light\+Timer}
+
+Cabin light auto-\/off timer (in task ticks). \Hypertarget{struct_elevator__t_abda37c5d7f511a1c2b9766df4b71e25b}\index{Elevator\_t@{Elevator\_t}!u8MntSpeed@{u8MntSpeed}}
+\index{u8MntSpeed@{u8MntSpeed}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8MntSpeed}{u8MntSpeed}}
+{\footnotesize\ttfamily \label{struct_elevator__t_abda37c5d7f511a1c2b9766df4b71e25b} 
+uint8\+\_\+t u8\+Mnt\+Speed}
+
+Maintenance mode travel speed setting. \Hypertarget{struct_elevator__t_aef6619869083bd1b58f41bb0758ea280}\index{Elevator\_t@{Elevator\_t}!u8ParkFloor@{u8ParkFloor}}
+\index{u8ParkFloor@{u8ParkFloor}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8ParkFloor}{u8ParkFloor}}
+{\footnotesize\ttfamily \label{struct_elevator__t_aef6619869083bd1b58f41bb0758ea280} 
+uint8\+\_\+t u8\+Park\+Floor}
+
+Parking floor where the elevator returns when idle. \Hypertarget{struct_elevator__t_a803748e180f783f1ba54ad2acbaae825}\index{Elevator\_t@{Elevator\_t}!u8PhsSeq@{u8PhsSeq}}
+\index{u8PhsSeq@{u8PhsSeq}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8PhsSeq}{u8PhsSeq}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a803748e180f783f1ba54ad2acbaae825} 
+uint8\+\_\+t u8\+Phs\+Seq}
+
+Phase sequence configuration byte. \Hypertarget{struct_elevator__t_a220d9434e6068f5fb01337137e876c74}\index{Elevator\_t@{Elevator\_t}!u8SlowTimer@{u8SlowTimer}}
+\index{u8SlowTimer@{u8SlowTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8SlowTimer}{u8SlowTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a220d9434e6068f5fb01337137e876c74} 
+uint8\+\_\+t u8\+Slow\+Timer}
+
+Deceleration timer (configurable, in task ticks). \Hypertarget{struct_elevator__t_a213261ca2c0472ada7f312f076ce3aee}\index{Elevator\_t@{Elevator\_t}!u8StopTimer@{u8StopTimer}}
+\index{u8StopTimer@{u8StopTimer}!Elevator\_t@{Elevator\_t}}
+\doxysubsubsection{\texorpdfstring{u8StopTimer}{u8StopTimer}}
+{\footnotesize\ttfamily \label{struct_elevator__t_a213261ca2c0472ada7f312f076ce3aee} 
+uint8\+\_\+t u8\+Stop\+Timer}
+
+Timer used during the stop phase. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Elevator\+Controller/\+interfaces/\+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h}{Elevator\+Controller\+\_\+gcfg.\+h}}\end{DoxyCompactItemize}

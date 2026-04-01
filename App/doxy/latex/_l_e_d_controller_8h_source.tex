@@ -1,0 +1,77 @@
+\doxysection{LEDController.\+h}
+\hypertarget{_l_e_d_controller_8h_source}{}\label{_l_e_d_controller_8h_source}\index{LEDController/interfaces/LEDController.h@{LEDController/interfaces/LEDController.h}}
+\doxymbox{\hyperlink{_l_e_d_controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ LED\_CONTROLLER\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ LED\_CONTROLLER\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ Header\ Inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ cross\ dependency\ inclusions\ ********************************************\ */}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ "{}Std\_Types.h"{}}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}dio.h"{}}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ "{}Timer.h"{}}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{/*\ own\ header\ inclusions\ **************************************************\ */}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{/*\ export\ the\ global\ configuration\ */}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_l_e_d_controller__gcfg_8h}{LEDController\_gcfg.h}}"{}}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00058\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00059\ \textcolor{comment}{/*\ Exported\ Functions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00061\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{/*\ Basic\ Services\ *********************************************************\ */}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_ga7023892e1e36dfee0e46dd50665aa1c9}{LEDController\_vidInit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_ga289a64caa7f77895961590819ed77b01}{LEDController\_vidSetState}}(uint8\_t\ u8LedId,\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\_t}}\ enuState);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_ga52582159dd1a2680fe0b6b982bf854ec}{LEDController\_vidTurnAllOff}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_gad017181a52174f8e459c08a5cf7791a0}{LEDController\_vidSetPatAllOff}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_gaf2c9d7fa8b5c6c9f4c149ad0d21c6801}{LEDController\_vidSetPattern}}(uint8\_t\ u8LedId,\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\_t}}\ enuPattern);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___l_e_d_controller_gab2f34f31224f83409ca73df50edf7e7f}{LEDController\_vidProcess}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LED\_CONTROLLER\_H}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00123\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00124\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00125\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00126\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

@@ -1,0 +1,146 @@
+\doxysection{Elevator\+Controller\+\_\+lcfg.\+h}
+\hypertarget{_elevator_controller__lcfg_8h_source}{}\label{_elevator_controller__lcfg_8h_source}\index{ElevatorController/includes/ElevatorController\_lcfg.h@{ElevatorController/includes/ElevatorController\_lcfg.h}}
+\doxymbox{\hyperlink{_elevator_controller__lcfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifndef\ ELEVATOR\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ ELEVATOR\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ Header\ Inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{comment}{/*\ other\ modules\ of\ the\ project\ *******************************************\ */}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#if\ !\ ((defined\ ElevatorController\_c)\ ||\ (defined\ ElevatorController\_lcfg\_c))}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}This\ file\ must\ not\ be\ included\ from\ outside\ of\ it's\ component"{}}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00053\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00054\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CONFIGURATION\ DATA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00055\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00056\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ DOOR\_OPEN\_TIME\_MS\ \ 3000}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a177ad3eb3dc1e7dea4966c17d54c9793}{UP\_COLLECTIVE}}\ =\ 0,\ }
+\DoxyCodeLine{00067\ \ \ \ \ \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}{DOWN\_COLLECTIVE}}\ \ \ \ }
+\DoxyCodeLine{00068\ \}\ \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga45f6ed02e52ea53c5cbba2c8c3459b04}{CollectionDir\_t}};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00071\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00072\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PERSISTENT\ DATA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00073\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00074\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ cu8SLOW\_TIMER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 7U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ cu8FAST\_TIMER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 18U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ cu8CAM\_TIMER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 3U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ cu8STOP\_TIMER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 2U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ cu8LIGHT\_TIMER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 10U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ cu8DOOR\_NUMBER\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 16U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ cu8DISPLAY\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_0\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_1\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_2\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 2U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_3\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 3U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_4\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 4U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_5\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 5U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_6\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 6U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_7\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 7U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_8\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 8U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_9\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 9U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_10\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 10U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_11\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 11U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_12\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 12U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_13\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 13U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_14\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 14U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ cu8FLOOR\_15\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 15U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ cu8COLLECTION\_DIR\_DEF\_VALUE\ \ \ \ \ \ \ \ \ ((uint8\_t)\ DOWN\_COLLECTIVE)\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ cu8MNT\_SPEED\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ cu8DOOR\_OPTIONS\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ cu8PARKING\_FLOOR\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 19U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ cu8CAM\_FAIL\_CNT\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 9U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ cu8CABIN\_PW\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ cu8PHS\_SEQ\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ cu8PASSWORD\_L\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ cu8PASSWORD\_H\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ cu8CURRENT\_FLOOR\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE\ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE\ \ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ cu8STORED\_TRAVEL\_DEF\_VALUE\ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 10U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE\ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ cu8MASTER\_PASSWORD\_L\_DEF\_VALUE\ \ \ \ \ \ ((uint8\_t)\ 158U)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ cu8MASTER\_PASSWORD\_H\_DEF\_VALUE\ \ \ \ \ \ ((uint8\_t)\ 0U)\ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{comment}{/*\ minimum\ values\ */}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ cu8SLOW\_TIMER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ cu8FAST\_TIMER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ cu8CAM\_TIMER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ cu8STOP\_TIMER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ cu8LIGHT\_TIMER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#define\ cu8DOOR\_NUMBER\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ cu8COLLECTION\_DIR\_MIN\_VALUE\ \ \ \ \ \ \ \ \ ((uint8\_t)\ DOWN\_COLLECTIVE)}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ cu8MNT\_SPEED\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ cu8DOOR\_OPTIONS\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ cu8PARKING\_FLOOR\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ cu8CAM\_FAIL\_CNT\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ cu8CABIN\_PW\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ cu8PHS\_SEQ\_MIN\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 0U)}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{comment}{/*\ maximum\ values\ */}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ cu8SLOW\_TIMER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 20U)}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#define\ cu8FAST\_TIMER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 30U)}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#define\ cu8CAM\_TIMER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 20U)}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#define\ cu8STOP\_TIMER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 10U)}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#define\ cu8LIGHT\_TIMER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 20U)}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#define\ cu8DOOR\_NUMBER\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 16U)}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ cu8COLLECTION\_DIR\_MAX\_VALUE\ \ \ \ \ \ \ \ \ ((uint8\_t)\ 4U)}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#define\ cu8MNT\_SPEED\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ cu8DOOR\_OPTIONS\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ cu8PARKING\_FLOOR\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ (cu8DOOR\_NUMBER\_MAX\_VALUE)}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ cu8CAM\_FAIL\_CNT\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 20U)}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#define\ cu8CABIN\_PW\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ cu8PHS\_SEQ\_MAX\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 1U)}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ELEVATOR\_CONTROLLER\_LCFG\_H}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00167\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00168\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00169\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00170\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

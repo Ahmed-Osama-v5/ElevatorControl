@@ -1,0 +1,104 @@
+\doxysection{Elevator\+Controller.\+h}
+\hypertarget{_elevator_controller_8h_source}{}\label{_elevator_controller_8h_source}\index{ElevatorController/interfaces/ElevatorController.h@{ElevatorController/interfaces/ElevatorController.h}}
+\doxymbox{\hyperlink{_elevator_controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ ELEVATOR\_CONTROLLER\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ ELEVATOR\_CONTROLLER\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ Header\ Inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ own\ header\ inclusions\ **************************************************\ */}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ export\ the\ global\ configuration\ */}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h}{ElevatorController\_gcfg.h}}"{}}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00052\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00053\ \textcolor{comment}{/*\ Exported\ Functions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00054\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00055\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{/*\ Basic\ Services\ *********************************************************\ */}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{/*\ Initialise\ the\ component.\ */}}
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gae8acd373178a1f3baa26cfc884ba49b0}{ElevatorController\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga09787f637b16ae577ae41c93c3ef1a60}{ElevatorController\_vidOperationLoop}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gafa6252cfe8a98bff5532a3a70cecd804}{ElevatorController\_vidProgrammingLoop}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{/*\ Services\ *********************************************************\ */}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ uint8\_t\ \doxymbox{\hyperlink{group___app___elevator_controller_ga3425566b84158ee6bfd17e28a3eede8e}{ElevatorController\_u8GetCurrentFloor}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00099\ uint8\_t\ \doxymbox{\hyperlink{group___app___elevator_controller_ga995de2c010191462d0560e03b8b12772}{ElevatorController\_u8GetSelectorCnt}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga70aacb5129bb154b723d61c432be6e6a}{ElevatorController\_vidStartLightTimer}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gab1b2d2f7d84b614ed36133f6bc7ae8c5}{elevator\_hal\_vidInit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga8d36eec068cdb76c169e0f571fedcc55}{elevator\_hal\_vidMotor\_up}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00125\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gad2e6af6024ee12556440e8687ffab4b2}{elevator\_hal\_vidMotor\_down}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gaa2c020978797586faa9205d16356663f}{elevator\_hal\_vidMotor\_stop}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gaef97fd61543e196149483f78cbd78f32}{elevator\_hal\_vidDoor\_open}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00140\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga1696a203578a51e0a9e8ac95457471df}{elevator\_hal\_vidDoor\_close}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gadfd879d1b3633d9f6ea1a98c6dfa68ab}{elevator\_hal\_vidDisplay\_floor}}(uint8\_t\ u8Floor);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga878a4d2da7b22e8315dbf9283f5c19cc}{elevator\_hal\_vidDisplay\_status}}(\textcolor{keyword}{const}\ uint8\_t*\ cpu8Status);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga120bf942b8a8918e1470eb74797fb96f}{elevator\_hal\_vidTimer\_start}}();}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_gaeff25f64e7cc0b537f460701bd8cf5d1}{elevator\_hal\_vidTimer\_stop}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00171\ uint16\_t\ \doxymbox{\hyperlink{group___app___elevator_controller_ga27c7272f64044c08b9b98048e259ad5e}{elevator\_hal\_u16Get\_time\_ms}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00176\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga5dc43ba96c33f6876035b1cbe3236e39}{ElevatorController\_vidSplashScreen}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{OperatingMode\_t}}\ \doxymbox{\hyperlink{group___app___elevator_controller_ga87a499f29800d03a3de918a20d284346}{ElevatorController\_enuGetMode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ELEVATOR\_CONTROLLER\_H}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00192\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00193\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00194\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00195\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

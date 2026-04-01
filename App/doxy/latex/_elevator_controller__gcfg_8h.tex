@@ -1,0 +1,232 @@
+\doxysection{Elevator\+Controller/\+interfaces/\+\+Elevator\+Controller\+\_\+gcfg.h File Reference}
+\hypertarget{_elevator_controller__gcfg_8h}{}\label{_elevator_controller__gcfg_8h}\index{ElevatorController/interfaces/ElevatorController\_gcfg.h@{ElevatorController/interfaces/ElevatorController\_gcfg.h}}
+
+
+Global configuration types for the Elevator\+Controller module.  
+
+
+{\ttfamily \+\#include "{}Std\+\_\+\+Types.\+h"{}}\newline
+{\ttfamily \+\#include "{}System\+Config.\+h"{}}\newline
+{\ttfamily \+\#include "{}Call\+Handler\+\_\+gcfg.\+h"{}}\newline
+Include dependency graph for Elevator\+Controller\+\_\+gcfg.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_elevator__t}{Elevator\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Holds the full runtime state of the elevator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{Door\+Type\+\_\+t}} \{ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2a0fb047be92599367413e76aa2ab5e312}{DOOR\+\_\+\+MANUAL}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2aca0bfd5ad7cc59c915cc3e91d90a7176}{DOOR\+\_\+\+AUTOMATIC}}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies how the elevator door is controlled. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{Door\+State\+\_\+t}} \{ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ae8b1c2b57163356ce43b43747e51f74e}{DOOR\+\_\+\+CLOSED}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a99eca5709ed520c7112e884b915d8082}{DOOR\+\_\+\+OPENING}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a11915658ade106027bd75056b907539d}{DOOR\+\_\+\+OPEN}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ab66bfdf0e51c75abbcfe59363cef65ee}{DOOR\+\_\+\+CLOSING}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the current state of the elevator door. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{Move\+Direction\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a23cfbe06c730d00665f544d390d94e39}{DIR\+\_\+\+IDLE}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a0b76fb863426c07c6c997a8d9523257b}{DIR\+\_\+\+UP}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895ab1bf68da897d09488069dd40e54f442d}{DIR\+\_\+\+DOWN}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a8998627e29dec8fbbd40e0477dfdf32f}{DIR\+\_\+\+SLOWING}}
+, \newline
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a73639afd6c926f6a32dd31601646fe3b}{DIR\+\_\+\+STOPPING}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the current movement direction or motion phase of the elevator. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ab41fca44eeeae8547a566bda8786c24e}{MODE\+\_\+\+INIT}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09af81b467c1f5e20f847402b03925c0d12}{MODE\+\_\+\+NORMAL}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ac0bb14a1652af327eb3738cc6c78149e}{MODE\+\_\+\+PROGRAM}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a75dab91e1cc3c791fb3842d2462541d1}{MODE\+\_\+\+MAINTENANCE}}
+, \newline
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a99e3afddafefc9ae9c720a31e98251f4}{MODE\+\_\+\+ERROR}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the operating mode of the elevator controller. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{Coll\+Dir\+\_\+t}} \{ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7eaed21d68ec2f4f949cace6e8d6867dfbd}{COLLECTION\+\_\+\+UP}}
+, \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7ea310f26a9508f730d8eeaca9abae16e1a}{COLLECTION\+\_\+\+DOWN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies the collection direction for call servicing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global configuration types for the Elevator\+Controller module. 
+
+Defines all shared data types (enumerations and structs) that describe the elevator\textquotesingle{}s runtime state and are exported to other modules. 
+
+\label{doc-enum-members}
+\Hypertarget{_elevator_controller__gcfg_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!CollDir\_t@{CollDir\_t}}
+\index{CollDir\_t@{CollDir\_t}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\doxysubsubsection{\texorpdfstring{CollDir\_t}{CollDir\_t}}
+{\footnotesize\ttfamily \label{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e} 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{Coll\+Dir\+\_\+t}}}
+
+
+
+Specifies the collection direction for call servicing. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLLECTION\_UP@{COLLECTION\_UP}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!COLLECTION\_UP@{COLLECTION\_UP}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7eaed21d68ec2f4f949cace6e8d6867dfbd}\label{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7eaed21d68ec2f4f949cace6e8d6867dfbd} 
+COLLECTION\+\_\+\+UP&Collect calls while travelling upward. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLLECTION\_DOWN@{COLLECTION\_DOWN}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!COLLECTION\_DOWN@{COLLECTION\_DOWN}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7ea310f26a9508f730d8eeaca9abae16e1a}\label{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7ea310f26a9508f730d8eeaca9abae16e1a} 
+COLLECTION\+\_\+\+DOWN&Collect calls while travelling downward. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DoorState\_t@{DoorState\_t}}
+\index{DoorState\_t@{DoorState\_t}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\doxysubsubsection{\texorpdfstring{DoorState\_t}{DoorState\_t}}
+{\footnotesize\ttfamily \label{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665} 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{Door\+State\+\_\+t}}}
+
+
+
+Represents the current state of the elevator door. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_CLOSED@{DOOR\_CLOSED}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_CLOSED@{DOOR\_CLOSED}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ae8b1c2b57163356ce43b43747e51f74e}\label{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ae8b1c2b57163356ce43b43747e51f74e} 
+DOOR\+\_\+\+CLOSED&Door is fully closed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_OPENING@{DOOR\_OPENING}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_OPENING@{DOOR\_OPENING}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a99eca5709ed520c7112e884b915d8082}\label{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a99eca5709ed520c7112e884b915d8082} 
+DOOR\+\_\+\+OPENING&Door is in the process of opening. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_OPEN@{DOOR\_OPEN}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_OPEN@{DOOR\_OPEN}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a11915658ade106027bd75056b907539d}\label{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a11915658ade106027bd75056b907539d} 
+DOOR\+\_\+\+OPEN&Door is fully open. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_CLOSING@{DOOR\_CLOSING}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_CLOSING@{DOOR\_CLOSING}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ab66bfdf0e51c75abbcfe59363cef65ee}\label{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ab66bfdf0e51c75abbcfe59363cef65ee} 
+DOOR\+\_\+\+CLOSING&Door is in the process of closing. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DoorType\_t@{DoorType\_t}}
+\index{DoorType\_t@{DoorType\_t}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\doxysubsubsection{\texorpdfstring{DoorType\_t}{DoorType\_t}}
+{\footnotesize\ttfamily \label{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2} 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{Door\+Type\+\_\+t}}}
+
+
+
+Specifies how the elevator door is controlled. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_MANUAL@{DOOR\_MANUAL}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_MANUAL@{DOOR\_MANUAL}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2a0fb047be92599367413e76aa2ab5e312}\label{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2a0fb047be92599367413e76aa2ab5e312} 
+DOOR\+\_\+\+MANUAL&Door is operated manually. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_AUTOMATIC@{DOOR\_AUTOMATIC}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DOOR\_AUTOMATIC@{DOOR\_AUTOMATIC}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2aca0bfd5ad7cc59c915cc3e91d90a7176}\label{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2aca0bfd5ad7cc59c915cc3e91d90a7176} 
+DOOR\+\_\+\+AUTOMATIC&Door is operated automatically by the controller. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MoveDirection\_t@{MoveDirection\_t}}
+\index{MoveDirection\_t@{MoveDirection\_t}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\doxysubsubsection{\texorpdfstring{MoveDirection\_t}{MoveDirection\_t}}
+{\footnotesize\ttfamily \label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895} 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{Move\+Direction\+\_\+t}}}
+
+
+
+Represents the current movement direction or motion phase of the elevator. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_IDLE@{DIR\_IDLE}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DIR\_IDLE@{DIR\_IDLE}}
+}\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a23cfbe06c730d00665f544d390d94e39}\label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a23cfbe06c730d00665f544d390d94e39} 
+DIR\+\_\+\+IDLE&Elevator is stationary with no pending direction. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_UP@{DIR\_UP}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DIR\_UP@{DIR\_UP}}
+}\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a0b76fb863426c07c6c997a8d9523257b}\label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a0b76fb863426c07c6c997a8d9523257b} 
+DIR\+\_\+\+UP&Elevator is moving upward. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_DOWN@{DIR\_DOWN}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DIR\_DOWN@{DIR\_DOWN}}
+}\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895ab1bf68da897d09488069dd40e54f442d}\label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895ab1bf68da897d09488069dd40e54f442d} 
+DIR\+\_\+\+DOWN&Elevator is moving downward. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_SLOWING@{DIR\_SLOWING}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DIR\_SLOWING@{DIR\_SLOWING}}
+}\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a8998627e29dec8fbbd40e0477dfdf32f}\label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a8998627e29dec8fbbd40e0477dfdf32f} 
+DIR\+\_\+\+SLOWING&Elevator is decelerating before stopping. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_STOPPING@{DIR\_STOPPING}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!DIR\_STOPPING@{DIR\_STOPPING}}
+}\Hypertarget{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a73639afd6c926f6a32dd31601646fe3b}\label{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a73639afd6c926f6a32dd31601646fe3b} 
+DIR\+\_\+\+STOPPING&Elevator is in the final stopping phase. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!OperatingMode\_t@{OperatingMode\_t}}
+\index{OperatingMode\_t@{OperatingMode\_t}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\doxysubsubsection{\texorpdfstring{OperatingMode\_t}{OperatingMode\_t}}
+{\footnotesize\ttfamily \label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09} 
+enum \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}}}
+
+
+
+Represents the operating mode of the elevator controller. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_INIT@{MODE\_INIT}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MODE\_INIT@{MODE\_INIT}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ab41fca44eeeae8547a566bda8786c24e}\label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ab41fca44eeeae8547a566bda8786c24e} 
+MODE\+\_\+\+INIT&Initialization mode at power-\/on. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_NORMAL@{MODE\_NORMAL}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MODE\_NORMAL@{MODE\_NORMAL}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09af81b467c1f5e20f847402b03925c0d12}\label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09af81b467c1f5e20f847402b03925c0d12} 
+MODE\+\_\+\+NORMAL&Normal passenger service mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_PROGRAM@{MODE\_PROGRAM}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MODE\_PROGRAM@{MODE\_PROGRAM}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ac0bb14a1652af327eb3738cc6c78149e}\label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ac0bb14a1652af327eb3738cc6c78149e} 
+MODE\+\_\+\+PROGRAM&Programming/\+configuration mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_MAINTENANCE@{MODE\_MAINTENANCE}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MODE\_MAINTENANCE@{MODE\_MAINTENANCE}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a75dab91e1cc3c791fb3842d2462541d1}\label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a75dab91e1cc3c791fb3842d2462541d1} 
+MODE\+\_\+\+MAINTENANCE&Maintenance or inspection mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MODE\_ERROR@{MODE\_ERROR}!ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}}
+\index{ElevatorController\_gcfg.h@{ElevatorController\_gcfg.h}!MODE\_ERROR@{MODE\_ERROR}}
+}\Hypertarget{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a99e3afddafefc9ae9c720a31e98251f4}\label{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a99e3afddafefc9ae9c720a31e98251f4} 
+MODE\+\_\+\+ERROR&Error /\+ fault mode. \\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,16 @@
+digraph "Menu_Update"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="Menu_Update",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Processes user input and updates the menu state."];
+  Node1 -> Node2 [id="edge5_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="ElevatorController_Init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#gae8acd373178a1f3baa26cfc884ba49b0",tooltip="This function initializes and starts the operation loop of the elevator controller."];
+  Node2 -> Node3 [id="edge6_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="main",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app__main.html#ga840291bc02cba5474a4cb46a9b9566fe",tooltip="Application entry point."];
+  Node1 -> Node4 [id="edge7_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="ElevatorController\l_vidProgrammingLoop",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#gafa6252cfe8a98bff5532a3a70cecd804",tooltip="Programming loop of the elevator controller."];
+  Node4 -> Node3 [id="edge8_Node000004_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+}

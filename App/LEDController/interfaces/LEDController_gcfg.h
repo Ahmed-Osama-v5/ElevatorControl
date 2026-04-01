@@ -25,6 +25,18 @@
 #ifndef LED_CONTROLLER_GCFG_H
 #define LED_CONTROLLER_GCFG_H
 
+/**
+ * @file LEDController_gcfg.h
+ * @brief Global configuration types and hardware mappings for the LEDController module.
+ *
+ * Defines hardware pin assignments, timing constants, and the data types
+ * used to control floor indicator LEDs driven by two 74HC573 latches.
+ *
+ * @defgroup LEDController_gcfg LEDController Global Config
+ * @ingroup App_LEDController
+ * @{
+ */
+
 #include "std_types.h"
 #include "SystemConfig.h"
 
@@ -34,74 +46,101 @@
 /* ************************************************************************ */
 /* ************************************************************************ */
 
-// Latch control pins for the two 74HC573s
-#define cenuLED_LATCH0_PORT         ((GPIO_t) GPIOB)
-#define cu8LED_LATCH0_PIN           ((uint8_t) 2U)
-#define cenuLED_LATCH1_PORT         ((GPIO_t) GPIOB)
-#define cu8LED_LATCH1_PIN           ((uint8_t) 3U)
+/** @name Latch Control Pins
+ *  GPIO port and pin assignments for the two 74HC573 latch enable lines.
+ *  @{
+ */
+#define cenuLED_LATCH0_PORT         ((GPIO_t) GPIOB) /**< Port for latch 0 enable (LEDs 0-7). */
+#define cu8LED_LATCH0_PIN           ((uint8_t) 2U)   /**< Pin number for latch 0 enable. */
+#define cenuLED_LATCH1_PORT         ((GPIO_t) GPIOB) /**< Port for latch 1 enable (LEDs 8-15). */
+#define cu8LED_LATCH1_PIN           ((uint8_t) 3U)   /**< Pin number for latch 1 enable. */
+/** @} */
 
-// Data port for LEDs (8 bits at a time)
-#define cenuLED_DATA_PORT           ((GPIO_t) GPIOA)
+/** @name LED Data Port
+ *  8-bit parallel data port used to write LED states to the active latch.
+ *  @{
+ */
+#define cenuLED_DATA_PORT           ((GPIO_t) GPIOA) /**< Port carrying the 8-bit LED data bus. */
+/** @} */
 
-/* LED Hardware Configuration */
+/**
+ * @brief Maps a logical LED index to its physical latch and bit position.
+ */
 typedef struct {
-    uint8_t u8LatchIndex;   // 0 for first 8 LEDs, 1 for second 8 LEDs
-    uint8_t u8BitPos;       // Bit position in the latch (0-7)
-}LEDHWConfig_t;
+    uint8_t u8LatchIndex;   /**< Latch index: 0 = first latch (LEDs 0-7), 1 = second latch (LEDs 8-15). */
+    uint8_t u8BitPos;       /**< Bit position within the latch (0-7). */
+} LEDHWConfig_t;
 
-/* LED Pattern Timing Configurations (in milliseconds) */
-#define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 60000U)
-#define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 0U)
-#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 5000U)
-#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 5000U)
-#define cu16LED_MAINTENANCE_ON_TIME     ((uint16_t) 200U)
-#define cu16LED_MAINTENANCE_OFF_TIME    ((uint16_t) 200U)
-#define cu16LED_ERROR_ON_TIME           ((uint16_t) 100U)
-#define cu16LED_ERROR_OFF_TIME          ((uint16_t) 100U)
+/** @name LED Pattern Timing
+ *  On-time and off-time constants (in milliseconds) for each LED pattern.
+ *  @{
+ */
+#define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 60000U) /**< Internal call LED on time (ms). */
+#define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 0U)     /**< Internal call LED off time (ms). */
+#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 5000U)  /**< External call LED on time (ms). */
+#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 5000U)  /**< External call LED off time (ms). */
+#define cu16LED_MAINTENANCE_ON_TIME     ((uint16_t) 200U)   /**< Maintenance mode LED on time (ms). */
+#define cu16LED_MAINTENANCE_OFF_TIME    ((uint16_t) 200U)   /**< Maintenance mode LED off time (ms). */
+#define cu16LED_ERROR_ON_TIME           ((uint16_t) 100U)   /**< Error mode LED on time (ms). */
+#define cu16LED_ERROR_OFF_TIME          ((uint16_t) 100U)   /**< Error mode LED off time (ms). */
+/** @} */
 
-/* LED Controller Task Period (in milliseconds) */
+/** @brief Task period for the LED controller (ms). */
 #define cu8LED_CONTROLLER_PERIOD_MS   ((uint8_t) 10U)
 
-/* LED CallType */
+/**
+ * @brief Classifies the call type associated with an LED.
+ */
 typedef enum {
-    LED_CALL_TYPE_INTERNAL,
-    LED_CALL_TYPE_EXTERNAL
+    LED_CALL_TYPE_INTERNAL, /**< LED corresponds to an internal (cabin) call. */
+    LED_CALL_TYPE_EXTERNAL  /**< LED corresponds to an external (landing) call. */
 } LEDCallType_t;
 
-/* LED States */
+/**
+ * @brief Represents the instantaneous state of a single LED.
+ */
 typedef enum {
-    LED_STATE_OFF,
-    LED_STATE_ON,
-    LED_STATE_BLINKING
+    LED_STATE_OFF,     /**< LED is off. */
+    LED_STATE_ON,      /**< LED is continuously on. */
+    LED_STATE_BLINKING /**< LED is blinking according to its assigned pattern. */
 } LEDState_t;
 
-/* LED Patterns */
+/**
+ * @brief Pre-defined blink patterns for floor indicator LEDs.
+ */
 typedef enum {
-    LED_PATTERN_NONE,
-    LED_PATTERN_INTERNAL_CALL,
-    LED_PATTERN_EXTERNAL_CALL,
-    LED_PATTERN_MAINTENANCE,
-    LED_PATTERN_ERROR
+    LED_PATTERN_NONE,          /**< No active pattern; LED follows its direct state. */
+    LED_PATTERN_INTERNAL_CALL, /**< Pattern for a registered internal call. */
+    LED_PATTERN_EXTERNAL_CALL, /**< Pattern for a registered external call. */
+    LED_PATTERN_MAINTENANCE,   /**< Pattern used during maintenance mode. */
+    LED_PATTERN_ERROR          /**< Pattern used during error mode. */
 } LEDPattern_t;
 
-/* LED Configuration Structure */
+/**
+ * @brief Configuration entry for a single LED pattern.
+ */
 typedef struct {
-    uint8_t u8LedId;
-    LEDPattern_t enuPattern;
-    uint16_t u16OnTime;
-    uint16_t u16OffTime;
+    uint8_t u8LedId;         /**< Logical LED identifier. */
+    LEDPattern_t enuPattern; /**< Active blink pattern assigned to this LED. */
+    uint16_t u16OnTime;      /**< Duration the LED stays on per cycle (ms). */
+    uint16_t u16OffTime;     /**< Duration the LED stays off per cycle (ms). */
 } LEDConfig_t;
+
+/**
+ * @brief Runtime state of a single floor LED.
+ */
 typedef struct
 {
-    boolean bIsActive;
-    LEDCallType_t enuLEDCallType;
-    uint16_t u16BlinkTimer;
-    boolean bLEDState;
-}FloorLED_t;
+    boolean bIsActive;              /**< TRUE if the LED has an active call or pattern. */
+    LEDCallType_t enuLEDCallType;   /**< Type of call driving this LED. */
+    uint16_t u16BlinkTimer;         /**< Blink phase countdown timer (ms). */
+    boolean bLEDState;              /**< Current physical on/off output state. */
+} FloorLED_t;
 
-
-/* External declaration of LED configuration array */
+/** @brief External declaration of the per-floor hardware configuration array. */
 extern const LEDHWConfig_t LED_HWConfig[cu8MAX_FLOORS];
+
+/** @} */
 
 #endif // LED_CONTROLLER_GCFG_H
 

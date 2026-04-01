@@ -1,0 +1,63 @@
+\doxysubsection{Motion\+Controller }
+\hypertarget{group___app___motion_controller}{}\label{group___app___motion_controller}\index{MotionController@{MotionController}}
+Collaboration diagram for Motion\+Controller:\+
+% FIG 0
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___motion_controller__gcfg}{Motion\+Controller Global Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___motion_controller_gaff4d0a144b97f3c3a37362ed940c8a47}{Motion\+Controller\+\_\+vid\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the Motion\+Controller module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___motion_controller_ga8f5a3d45bbd8254e3a7bccd5596a62b8}{Motion\+Controller\+\_\+vid\+Move}} (\doxymbox{\hyperlink{group___motion_controller__gcfg_ga3a6c33481958b391999111181b667ad6}{Motion\+State\+\_\+t}} enu\+State)
+\begin{DoxyCompactList}\small\item\em Applies a motion command to the elevator drive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app___motion_controller_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app___motion_controller_gaff4d0a144b97f3c3a37362ed940c8a47}\index{MotionController@{MotionController}!MotionController\_vidInit@{MotionController\_vidInit}}
+\index{MotionController\_vidInit@{MotionController\_vidInit}!MotionController@{MotionController}}
+\doxysubsubsubsection{\texorpdfstring{MotionController\_vidInit()}{MotionController\_vidInit()}}
+{\footnotesize\ttfamily \label{group___app___motion_controller_gaff4d0a144b97f3c3a37362ed940c8a47} 
+void Motion\+Controller\+\_\+vid\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the Motion\+Controller module. 
+
+Configures the relay output lines and sets the drive to the \doxylink{group___motion_controller__gcfg_gga3a6c33481958b391999111181b667ad6a91348a8fd81e4a65c4982eea167028c7}{MOTION\+\_\+\+STATE\+\_\+\+IDLE} state.
+
+Initializes the Motion\+Controller module. Here is the caller graph for this function:\+
+% FIG 1
+\Hypertarget{group___app___motion_controller_ga8f5a3d45bbd8254e3a7bccd5596a62b8}\index{MotionController@{MotionController}!MotionController\_vidMove@{MotionController\_vidMove}}
+\index{MotionController\_vidMove@{MotionController\_vidMove}!MotionController@{MotionController}}
+\doxysubsubsubsection{\texorpdfstring{MotionController\_vidMove()}{MotionController\_vidMove()}}
+{\footnotesize\ttfamily \label{group___app___motion_controller_ga8f5a3d45bbd8254e3a7bccd5596a62b8} 
+void Motion\+Controller\+\_\+vid\+Move (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group___motion_controller__gcfg_ga3a6c33481958b391999111181b667ad6}{Motion\+State\+\_\+t}}}]{enu\+State}{}\end{DoxyParamCaption})}
+
+
+
+Applies a motion command to the elevator drive. 
+
+Activates the relay combination that corresponds to the requested \doxylink{group___motion_controller__gcfg_ga3a6c33481958b391999111181b667ad6}{Motion\+State\+\_\+t}. Only one motion state is active at a time; calling this function while the drive is running will switch states immediately.
+
+
+\begin{DoxyParams}{Parameters}
+{\em enu\+State} & Target motion state (see \doxylink{group___motion_controller__gcfg_ga3a6c33481958b391999111181b667ad6}{Motion\+State\+\_\+t}).\\
+\hline
+\end{DoxyParams}
+Applies a motion command to the elevator drive.
+
+
+\begin{DoxyParams}{Parameters}
+{\em enu\+State} & The motion state and speed (up, down or stop). \\
+\hline
+\end{DoxyParams}
+\input{group___motion_controller__gcfg}

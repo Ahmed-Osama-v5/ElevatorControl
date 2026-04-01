@@ -1,0 +1,24 @@
+\doxysection{Motion\+Controller/\+interfaces/\+\+Motion\+Controller.h File Reference}
+\hypertarget{_motion_controller_8h}{}\label{_motion_controller_8h}\index{MotionController/interfaces/MotionController.h@{MotionController/interfaces/MotionController.h}}
+
+
+Public interface for the Motion\+Controller module.  
+
+
+{\ttfamily \+\#include "{}Std\+\_\+\+Types.\+h"{}}\newline
+{\ttfamily \+\#include "{}Motion\+Controller\+\_\+gcfg.\+h"{}}\newline
+Include dependency graph for Motion\+Controller.\+h:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___motion_controller_gaff4d0a144b97f3c3a37362ed940c8a47}{Motion\+Controller\+\_\+vid\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the Motion\+Controller module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___motion_controller_ga8f5a3d45bbd8254e3a7bccd5596a62b8}{Motion\+Controller\+\_\+vid\+Move}} (\doxymbox{\hyperlink{group___motion_controller__gcfg_ga3a6c33481958b391999111181b667ad6}{Motion\+State\+\_\+t}} enu\+State)
+\begin{DoxyCompactList}\small\item\em Applies a motion command to the elevator drive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Public interface for the Motion\+Controller module. 
+
+Controls the elevator\textquotesingle{}s drive system by activating the appropriate relay outputs for up/\+down high-\/speed and low-\/speed travel, as well as the controlled stop sequence. 

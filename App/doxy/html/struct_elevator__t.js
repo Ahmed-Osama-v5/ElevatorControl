@@ -1,0 +1,25 @@
+var struct_elevator__t =
+[
+    [ "aenuFloorCalls", "struct_elevator__t.html#afb66d16e051b8c3db5a5924049ed30cd", null ],
+    [ "bEmergencyStop", "struct_elevator__t.html#aa691b794a24008d5a14475e7fd3e2cc2", null ],
+    [ "enuCollDir", "struct_elevator__t.html#aa27cec07a37be148ea9d1a7dbc04b2de", null ],
+    [ "enuDirection", "struct_elevator__t.html#a142e964bab34dca8ef52c1fcc69480bc", null ],
+    [ "enuDoorState", "struct_elevator__t.html#a55939105b39d943ffa8b4c4427587809", null ],
+    [ "enuDoorType", "struct_elevator__t.html#a876589949ec4ebb5834d2c8413268732", null ],
+    [ "enuOperatingMode", "struct_elevator__t.html#a9c6c292ea1455598036e93e8d1e02d6b", null ],
+    [ "u16DoorTimer", "struct_elevator__t.html#ab749f5ec239f0281b42c08470c724a28", null ],
+    [ "u8CabinPwd", "struct_elevator__t.html#aa55b1f667c495cda716a6615c7f1b893", null ],
+    [ "u8CamFailCnt", "struct_elevator__t.html#a762522c5436cdaa22edd08b2a6ee4ccb", null ],
+    [ "u8CamTimer", "struct_elevator__t.html#a0225b9bc9de0de8dc07aa0b992c9ef4c", null ],
+    [ "u8CollectionDir", "struct_elevator__t.html#a26217749f42f25dc911b050a51716bf4", null ],
+    [ "u8CurrentFloor", "struct_elevator__t.html#a1887a53c6d28e564917f1aaa046f6da5", null ],
+    [ "u8DestinationFloor", "struct_elevator__t.html#aed8bd2f321f7baea07d31b84b566919f", null ],
+    [ "u8FastTimer", "struct_elevator__t.html#abe0212b7646a9d7caf66536129af5f8d", null ],
+    [ "u8FloorCount", "struct_elevator__t.html#a2e6bdf1605fdd762026df516432ff6f4", null ],
+    [ "u8LightTimer", "struct_elevator__t.html#af4b96f85454e8fb3fd9e24f674fe4c15", null ],
+    [ "u8MntSpeed", "struct_elevator__t.html#abda37c5d7f511a1c2b9766df4b71e25b", null ],
+    [ "u8ParkFloor", "struct_elevator__t.html#aef6619869083bd1b58f41bb0758ea280", null ],
+    [ "u8PhsSeq", "struct_elevator__t.html#a803748e180f783f1ba54ad2acbaae825", null ],
+    [ "u8SlowTimer", "struct_elevator__t.html#a220d9434e6068f5fb01337137e876c74", null ],
+    [ "u8StopTimer", "struct_elevator__t.html#a213261ca2c0472ada7f312f076ce3aee", null ]
+];

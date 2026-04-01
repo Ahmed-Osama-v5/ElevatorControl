@@ -1,0 +1,110 @@
+\doxysection{LEDController\+\_\+gcfg.\+h}
+\hypertarget{_l_e_d_controller__gcfg_8h_source}{}\label{_l_e_d_controller__gcfg_8h_source}\index{LEDController/interfaces/LEDController\_gcfg.h@{LEDController/interfaces/LEDController\_gcfg.h}}
+\doxymbox{\hyperlink{_l_e_d_controller__gcfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ LED\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ LED\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}std\_types.h"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}SystemConfig.h"{}}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00045\ \textcolor{comment}{/*\ Export\ of\ CallHandler\ configuration\ settings\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00047\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ cenuLED\_LATCH0\_PORT\ \ \ \ \ \ \ \ \ ((GPIO\_t)\ GPIOB)\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ cu8LED\_LATCH0\_PIN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 2U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ cenuLED\_LATCH1\_PORT\ \ \ \ \ \ \ \ \ ((GPIO\_t)\ GPIOB)\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ cu8LED\_LATCH1\_PIN\ \ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 3U)\ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ cenuLED\_DATA\_PORT\ \ \ \ \ \ \ \ \ \ \ ((GPIO\_t)\ GPIOA)\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00070\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t_a3eedfb0fda1740c983fa6f18f5eb01b8}{u8LatchIndex}};\ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t_ad9e9e0d7f81186b56ee36cae3b92bc86}{u8BitPos}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \}\ \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\_t}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ cu16LED\_INTERNAL\_CALL\_ON\_TIME\ \ \ ((uint16\_t)\ 60000U)\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ cu16LED\_INTERNAL\_CALL\_OFF\_TIME\ \ ((uint16\_t)\ 0U)\ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ cu16LED\_EXTERNAL\_CALL\_ON\_TIME\ \ \ ((uint16\_t)\ 5000U)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ cu16LED\_EXTERNAL\_CALL\_OFF\_TIME\ \ ((uint16\_t)\ 5000U)\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ cu16LED\_MAINTENANCE\_ON\_TIME\ \ \ \ \ ((uint16\_t)\ 200U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ cu16LED\_MAINTENANCE\_OFF\_TIME\ \ \ \ ((uint16\_t)\ 200U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ cu16LED\_ERROR\_ON\_TIME\ \ \ \ \ \ \ \ \ \ \ ((uint16\_t)\ 100U)\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ cu16LED\_ERROR\_OFF\_TIME\ \ \ \ \ \ \ \ \ \ ((uint16\_t)\ 100U)\ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ cu8LED\_CONTROLLER\_PERIOD\_MS\ \ \ ((uint8\_t)\ 10U)}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341a0834b91f8bf843ef87e01be473862ac9}{LED\_CALL\_TYPE\_INTERNAL}},\ }
+\DoxyCodeLine{00096\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga2dbb654c81fb667f379e33388116e341aeaa5f6cc0bb6797c6201127294a42e20}{LED\_CALL\_TYPE\_EXTERNAL}}\ \ }
+\DoxyCodeLine{00097\ \}\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCallType\_t}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a0eebea54c4dc200be6939742385ee789}{LED\_STATE\_OFF}},\ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796a024f137d8368d2d31196fbcfb8345550}{LED\_STATE\_ON}},\ \ \ \ \ \ }
+\DoxyCodeLine{00105\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gga82c9ba89309a0086d4272387fd8a7796af61006685f03f51d1560923ea5420b93}{LED\_STATE\_BLINKING}}\ }
+\DoxyCodeLine{00106\ \}\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga82c9ba89309a0086d4272387fd8a7796}{LEDState\_t}};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da9c0b99e9c2cd9da70c553b9470d5f9d5}{LED\_PATTERN\_NONE}},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704daaa3d739b5e0e57b8c6c8112ab0bcbc13}{LED\_PATTERN\_INTERNAL\_CALL}},\ }
+\DoxyCodeLine{00114\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704dad3835c2b8fe1ec466c6f2cac20b244dc}{LED\_PATTERN\_EXTERNAL\_CALL}},\ }
+\DoxyCodeLine{00115\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da5bb4dcd9b0c2b7e44d7adf3033a7eb43}{LED\_PATTERN\_MAINTENANCE}},\ \ \ }
+\DoxyCodeLine{00116\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ggaa16bb795b5539e1087705f1b70e5704da73cd4de321975fc27aa47237e518a366}{LED\_PATTERN\_ERROR}}\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00117\ \}\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\_t}};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00122\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00123\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_l_e_d_config__t_a535c7018a44b5c9289b88306b8acfc0c}{u8LedId}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00124\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_gaa16bb795b5539e1087705f1b70e5704d}{LEDPattern\_t}}\ \doxymbox{\hyperlink{struct_l_e_d_config__t_ad9f3d1712a029ba3f5ea4992675cad58}{enuPattern}};\ }
+\DoxyCodeLine{00125\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_l_e_d_config__t_ac5746425e8c00c952485178e78844933}{u16OnTime}};\ \ \ \ \ \ }
+\DoxyCodeLine{00126\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_l_e_d_config__t_a75aac82f4346a34be648b8ee6696f90d}{u16OffTime}};\ \ \ \ \ }
+\DoxyCodeLine{00127\ \}\ \doxymbox{\hyperlink{struct_l_e_d_config__t}{LEDConfig\_t}};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00133\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \doxymbox{\hyperlink{struct_floor_l_e_d__t_a6565382dc0fd6d76f8912f4effba6394}{bIsActive}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00135\ \ \ \ \ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga2dbb654c81fb667f379e33388116e341}{LEDCallType\_t}}\ \doxymbox{\hyperlink{struct_floor_l_e_d__t_aa57cd863d7d74bd8c461ed15a89f3716}{enuLEDCallType}};\ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_floor_l_e_d__t_a28bbc172e86efbcca401f48c1cb05267}{u16BlinkTimer}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \doxymbox{\hyperlink{struct_floor_l_e_d__t_a00973056bd21ba467eba0dcf16828fd4}{bLEDState}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00138\ \}\ \doxymbox{\hyperlink{struct_floor_l_e_d__t}{FloorLED\_t}};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_l_e_d_h_w_config__t}{LEDHWConfig\_t}}\ \doxymbox{\hyperlink{group___l_e_d_controller__gcfg_ga13b9d4fc250a76bb16b5b50741df5b1e}{LED\_HWConfig}}[cu8MAX\_FLOORS];}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LED\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00148\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00149\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00150\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00151\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

@@ -25,6 +25,19 @@
 #ifndef CALL_HANDLER_H
 #define CALL_HANDLER_H
 
+/**
+ * @file CallHandler.h
+ * @brief Public interface for the CallHandler module.
+ *
+ * The CallHandler module scans all floor call inputs (internal cabin
+ * buttons and external landing buttons) and registers the resulting
+ * calls into the shared @ref Elevator_t state structure.
+ *
+ * @defgroup App_CallHandler CallHandler
+ * @ingroup App
+ * @{
+ */
+
 /* ************************************************************************ */
 /* Header Inclusions                                                        */
 /* ************************************************************************ */
@@ -48,18 +61,25 @@
 
 /* Initialise the component. */
 /**
- * @brief This function initializes the CallHandler component.
- * 
+ * @brief Initializes the CallHandler module.
+ *
+ * Must be called once during system startup before any call scanning
+ * is performed. Stores a reference to the shared elevator state.
+ *
+ * @param pstrElevator  Pointer to the shared @ref Elevator_t state structure.
  */
 void CallHandler_vidInit(Elevator_t* pstrElevator);
 
 /**
- * @brief scans call inputs and register a call in the output param.
- * 
- * @param pstrCall struct holding call info.
+ * @brief Scans all call inputs and registers active calls.
+ *
+ * Reads each floor button (internal and external) and updates the
+ * @ref Elevator_t::aenuFloorCalls array accordingly. Should be called
+ * periodically from the main operation loop.
  */
 void CallHandler_vidGetCall(void);
 
+/** @} */
 
 #endif // CALL_HANDLER_H
 

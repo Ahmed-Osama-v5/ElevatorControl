@@ -1,0 +1,111 @@
+\doxysubsection{Menu }
+\hypertarget{group___app___menu}{}\label{group___app___menu}\index{Menu@{Menu}}
+Collaboration diagram for Menu:\+
+% FIG 0
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___menu__gcfg}{Menu Global Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___menu_gaff621a5d86b469749f3429000de480c9}{Menu\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the menu system. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_gad548770a70948ea8b773edc7e34baff3}{Menu\+\_\+\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Periodic task handler for the menu system. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_gaf2b117dc5131d237881bc0049a7d7875}{Menu\+\_\+\+Update}} (void)
+\begin{DoxyCompactList}\small\item\em Processes user input and updates the menu state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_ga03496e1332c535cd9d706da21065c5ea}{Menu\+\_\+\+Set\+Item\+Data}} (\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} item\+Id, const char \texorpdfstring{$\ast$}{*}label, uint8\+\_\+t value, uint8\+\_\+t min\+Value, uint8\+\_\+t max\+Value, uint8\+\_\+t eeprom\+Address)
+\begin{DoxyCompactList}\small\item\em Configures a menu item with its label, default value, and bounds. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_ga707d6d9764bb4e0047cead61402ad50b}{Menu\+\_\+\+Update\+Item\+Value}} (\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} item\+Id, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Updates the stored value of an existing menu item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app___menu_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app___menu_gaff621a5d86b469749f3429000de480c9}\index{Menu@{Menu}!Menu\_Init@{Menu\_Init}}
+\index{Menu\_Init@{Menu\_Init}!Menu@{Menu}}
+\doxysubsubsubsection{\texorpdfstring{Menu\_Init()}{Menu\_Init()}}
+{\footnotesize\ttfamily \label{group___app___menu_gaff621a5d86b469749f3429000de480c9} 
+void Menu\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the menu system. 
+
+Must be called once before any other Menu function. Resets the item list, sets the navigation cursor to the first item, and sets the mode to \doxylink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3}{MENU\+\_\+\+MODE\+\_\+\+NAVIGATE}. Here is the caller graph for this function:\+
+% FIG 1
+\Hypertarget{group___app___menu_ga03496e1332c535cd9d706da21065c5ea}\index{Menu@{Menu}!Menu\_SetItemData@{Menu\_SetItemData}}
+\index{Menu\_SetItemData@{Menu\_SetItemData}!Menu@{Menu}}
+\doxysubsubsubsection{\texorpdfstring{Menu\_SetItemData()}{Menu\_SetItemData()}}
+{\footnotesize\ttfamily \label{group___app___menu_ga03496e1332c535cd9d706da21065c5ea} 
+void Menu\+\_\+\+Set\+Item\+Data (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}}}]{item\+Id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{label}{, }\item[{uint8\+\_\+t}]{value}{, }\item[{uint8\+\_\+t}]{min\+Value}{, }\item[{uint8\+\_\+t}]{max\+Value}{, }\item[{uint8\+\_\+t}]{eeprom\+Address}{}\end{DoxyParamCaption})}
+
+
+
+Configures a menu item with its label, default value, and bounds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+Id} & Unique identifier of the menu item (\doxylink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}). \\
+\hline
+{\em label} & Null-\/terminated display label for the item. \\
+\hline
+{\em value} & Initial (current) value loaded from EEPROM. \\
+\hline
+{\em min\+Value} & Minimum allowable value for this parameter. \\
+\hline
+{\em max\+Value} & Maximum allowable value for this parameter. \\
+\hline
+{\em eeprom\+Address} & EEPROM address where this parameter is stored. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___app___menu_gad548770a70948ea8b773edc7e34baff3}\index{Menu@{Menu}!Menu\_Task@{Menu\_Task}}
+\index{Menu\_Task@{Menu\_Task}!Menu@{Menu}}
+\doxysubsubsubsection{\texorpdfstring{Menu\_Task()}{Menu\_Task()}}
+{\footnotesize\ttfamily \label{group___app___menu_gad548770a70948ea8b773edc7e34baff3} 
+void Menu\+\_\+\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Periodic task handler for the menu system. 
+
+Handles timed events such as cursor blinking. Should be called every \doxylink{group___menu__gcfg_ga0f27b5f624fff6420c6135bc2fc397cb}{MENU\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS} milliseconds. Here is the caller graph for this function:\+
+% FIG 2
+\Hypertarget{group___app___menu_gaf2b117dc5131d237881bc0049a7d7875}\index{Menu@{Menu}!Menu\_Update@{Menu\_Update}}
+\index{Menu\_Update@{Menu\_Update}!Menu@{Menu}}
+\doxysubsubsubsection{\texorpdfstring{Menu\_Update()}{Menu\_Update()}}
+{\footnotesize\ttfamily \label{group___app___menu_gaf2b117dc5131d237881bc0049a7d7875} 
+void Menu\+\_\+\+Update (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Processes user input and updates the menu state. 
+
+Reads button states to navigate between menu items or increment /\+ decrement the selected item\textquotesingle{}s value while in edit mode. Writes confirmed values to EEPROM. Here is the caller graph for this function:\+
+% FIG 3
+\Hypertarget{group___app___menu_ga707d6d9764bb4e0047cead61402ad50b}\index{Menu@{Menu}!Menu\_UpdateItemValue@{Menu\_UpdateItemValue}}
+\index{Menu\_UpdateItemValue@{Menu\_UpdateItemValue}!Menu@{Menu}}
+\doxysubsubsubsection{\texorpdfstring{Menu\_UpdateItemValue()}{Menu\_UpdateItemValue()}}
+{\footnotesize\ttfamily \label{group___app___menu_ga707d6d9764bb4e0047cead61402ad50b} 
+void Menu\+\_\+\+Update\+Item\+Value (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}}}]{item\+Id}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Updates the stored value of an existing menu item. 
+
+Refreshes the runtime value without changing the label or bounds. Useful for reloading a parameter from EEPROM after an external write.
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+Id} & Unique identifier of the menu item (\doxylink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}). \\
+\hline
+{\em value} & New value to assign to the item. \\
+\hline
+\end{DoxyParams}
+\input{group___menu__gcfg}

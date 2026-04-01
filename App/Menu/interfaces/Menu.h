@@ -25,6 +25,19 @@
 #ifndef MENU_H
 #define MENU_H
 
+/**
+ * @file Menu.h
+ * @brief Public interface for the Menu module.
+ *
+ * Provides an interactive LCD-based programming menu that allows
+ * technicians to view and modify elevator configuration parameters
+ * persisted in EEPROM. The menu is active only in @ref MODE_PROGRAM.
+ *
+ * @defgroup App_Menu Menu
+ * @ingroup App
+ * @{
+ */
+
 /* ************************************************************************ */
 /* Header Inclusions                                                        */
 /* ************************************************************************ */
@@ -49,42 +62,55 @@ extern "C" {
 /* ************************************************************************ */
 
 /**
- * @brief Initializes the menu system
- * 
+ * @brief Initializes the menu system.
+ *
+ * Must be called once before any other Menu function. Resets the
+ * item list, sets the navigation cursor to the first item, and
+ * sets the mode to @ref MENU_MODE_NAVIGATE.
  */
 void Menu_Init(void);
 
 /**
- * @brief Executes periodic menu tasks
- * 
+ * @brief Periodic task handler for the menu system.
+ *
+ * Handles timed events such as cursor blinking. Should be called
+ * every @ref MENU_BLINK_PERIOD_MS milliseconds.
  */
 void Menu_Task(void);
 
 /**
- * @brief Updates the menu state and handles user interactions
- * 
+ * @brief Processes user input and updates the menu state.
+ *
+ * Reads button states to navigate between menu items or increment /
+ * decrement the selected item's value while in edit mode.
+ * Writes confirmed values to EEPROM.
  */
 void Menu_Update(void);
 
 /**
- * @brief Sets the data for a menu item
- * 
- * @param itemId The unique identifier for the menu item
- * @param label The text label for the menu item
- * @param value The current value of the menu item
- * @param minValue The minimum allowable value for the menu item
- * @param maxValue The maximum allowable value for the menu item
- * @param eepromAddress The EEPROM address where the menu item data is stored
+ * @brief Configures a menu item with its label, default value, and bounds.
+ *
+ * @param itemId         Unique identifier of the menu item (@ref MenuItemId_t).
+ * @param label          Null-terminated display label for the item.
+ * @param value          Initial (current) value loaded from EEPROM.
+ * @param minValue       Minimum allowable value for this parameter.
+ * @param maxValue       Maximum allowable value for this parameter.
+ * @param eepromAddress  EEPROM address where this parameter is stored.
  */
 void Menu_SetItemData(MenuItemId_t itemId, const char* label, uint8_t value, uint8_t minValue, uint8_t maxValue, uint8_t eepromAddress);
 
 /**
- * @brief Updates the value of a menu item
- * 
- * @param itemId The unique identifier for the menu item
- * @param value The new value to set for the menu item
+ * @brief Updates the stored value of an existing menu item.
+ *
+ * Refreshes the runtime value without changing the label or bounds.
+ * Useful for reloading a parameter from EEPROM after an external write.
+ *
+ * @param itemId  Unique identifier of the menu item (@ref MenuItemId_t).
+ * @param value   New value to assign to the item.
  */
 void Menu_UpdateItemValue(MenuItemId_t itemId, uint8_t value);
+
+/** @} */
 
 #ifdef __cplusplus
 }

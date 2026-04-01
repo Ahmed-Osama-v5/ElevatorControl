@@ -1,0 +1,84 @@
+\doxysection{Menu\+\_\+gcfg.\+h}
+\hypertarget{_menu__gcfg_8h_source}{}\label{_menu__gcfg_8h_source}\index{Menu/interfaces/Menu\_gcfg.h@{Menu/interfaces/Menu\_gcfg.h}}
+\doxymbox{\hyperlink{_menu__gcfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ MENU\_GCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ MENU\_GCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}std\_types.h"{}}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ Export\ of\ CallHandler\ configuration\ settings\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00045\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ MENU\_MAX\_ITEMS\ \ \ \ \ \ \ \ \ \ ((uint8\_t)\ 10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ MENU\_BLINK\_PERIOD\_MS\ \ \ \ ((uint16\_t)\ 20U)}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6767920fb4d382125ebfafc15e1643}{SLOW\_TIMER\_MID}},\ \ \ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eae1058f693e716df5caad9e571a7314bb}{FAST\_TIMER\_MID}},\ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eab3333ab1cdc7e30d1252faf5173e98da}{CAM\_TIMER\_\_MID}},\ \ \ \ \ \ }
+\DoxyCodeLine{00063\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead467f237a32a156b0e2ba2f8782b1944}{STOP\_TIMER\_MID}},\ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea351026c32539d24b01cc55b59ec43ff4}{LIGHT\_TIMER\_MID}},\ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eac2740acc472f5d405e3801a4bbdf0e7a}{DOOR\_NUMBER\_MID}},\ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead15773d619cc26a91c9d4a82466db852}{COLLECTION\_DIR\_MID}},\ \ }
+\DoxyCodeLine{00067\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea3ee1134d6b4298cef872cfd47a8fecb1}{MNT\_SPEED\_MID}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1e572c442a809ba2c10053dfe3704290}{DOOR\_OPTIONS\_MID}},\ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea2a03fa829ebffa895b27bc0fa4c471ce}{PARKING\_FLOOR\_MID}},\ \ \ }
+\DoxyCodeLine{00070\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eabec75bc896af5d0aa213f089bed4765f}{CAM\_FAIL\_CNT\_MID}},\ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6eb19be1fda0b1418500d808f79eea}{CABIN\_PW\_MID}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1f15ce88774ceeaa1ea3cce8af6908b7}{PHS\_SEQ\_MID}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eadc0fd1fd9660a4963e9f3ef1e4a2468c}{MENU\_ITEM\_COUNT}}\ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \}\ \doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{MenuItemId\_t}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3}{MENU\_MODE\_NAVIGATE}},\ }
+\DoxyCodeLine{00081\ \ \ \ \ \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053af6ca032114fa10beddc07ce0f09044da}{MENU\_MODE\_EDIT}}\ \ \ \ \ \ }
+\DoxyCodeLine{00082\ \}\ \doxymbox{\hyperlink{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053}{MenuMode\_t}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{struct_menu_item__t_ab5fbdb5052858ca8d2538566229fbe64}{label}};\ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_menu_item__t_a638e4503e0ae6ce655b7ad2e17e8f0ad}{value}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_menu_item__t_ab4e5bd525067bff7532e53d2b1ff7c24}{minValue}};\ \ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_menu_item__t_ade4fb08a2a6490e1e820805ace2cbdf8}{maxValue}};\ \ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_menu_item__t_ad973ee69287e37674f36a595d4f450f2}{eepromAddress}};\ }
+\DoxyCodeLine{00093\ \}\ \doxymbox{\hyperlink{struct_menu_item__t}{MenuItem\_t}};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MENU\_GCFG\_H}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00100\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00101\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00102\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00103\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00104\ }
+
+\end{DoxyCode}

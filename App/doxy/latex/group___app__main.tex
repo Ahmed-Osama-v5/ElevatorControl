@@ -1,0 +1,47 @@
+\doxysubsection{Main }
+\hypertarget{group___app__main}{}\label{group___app__main}\index{Main@{Main}}
+Collaboration diagram for Main:\+
+% FIG 0
+\doxysubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___app__main_ga43bafb28b29491ec7f871319b5a3b2f8}\label{group___app__main_ga43bafb28b29491ec7f871319b5a3b2f8} 
+\+\#define {\bfseries F\+\_\+\+CPU}~8000000\+UL
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{group___app__main_ga840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Application entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app__main_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app__main_ga840291bc02cba5474a4cb46a9b9566fe}\index{Main@{Main}!main@{main}}
+\index{main@{main}!Main@{Main}}
+\doxysubsubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{group___app__main_ga840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Application entry point. 
+
+Sequence:\+
+\begin{DoxyEnumerate}
+\item Initialize all hardware and software sub-\/modules via \doxylink{group___app___elevator_controller_gae8acd373178a1f3baa26cfc884ba49b0}{Elevator\+Controller\+\_\+\+Init}.
+\item Display the splash screen via \doxylink{group___app___elevator_controller_ga5dc43ba96c33f6876035b1cbe3236e39}{Elevator\+Controller\+\_\+vid\+Splash\+Screen}.
+\item Read the boot mode via \doxylink{group___app___elevator_controller_ga87a499f29800d03a3de918a20d284346}{Elevator\+Controller\+\_\+enu\+Get\+Mode}.
+\item If MODE\+\_\+\+PROGRAM:\+ enter \doxylink{group___app___elevator_controller_gafa6252cfe8a98bff5532a3a70cecd804}{Elevator\+Controller\+\_\+vid\+Programming\+Loop}.
+\item If MODE\+\_\+\+NORMAL:\+ enter \doxylink{group___app___elevator_controller_ga09787f637b16ae577ae41c93c3ef1a60}{Elevator\+Controller\+\_\+vid\+Operation\+Loop}.
+\end{DoxyEnumerate}
+
+\begin{DoxyReturn}{Returns}
+int Always returns 0 (never reached on embedded target). 
+\end{DoxyReturn}
+Here is the call graph for this function:\+
+% FIG 1

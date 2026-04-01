@@ -1,0 +1,76 @@
+\doxysection{Call\+Handler\+\_\+lcfg.\+h}
+\hypertarget{_call_handler__lcfg_8h_source}{}\label{_call_handler__lcfg_8h_source}\index{CallHandler/includes/CallHandler\_lcfg.h@{CallHandler/includes/CallHandler\_lcfg.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ CALL\_HANDLER\_LCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ CALL\_HANDLER\_LCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00029\ \textcolor{comment}{/*\ Header\ Inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00030\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{/*\ other\ modules\ of\ the\ project\ *******************************************\ */}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}dio\_types.h"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#if\ !\ ((defined\ CallHandler\_c)\ ||\ (defined\ CallHandler\_lcfg\_c))}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}This\ file\ must\ not\ be\ included\ from\ outside\ of\ it's\ component"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CONFIGURATION\ DATA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ Call\ inputs\ GPIO\ Configuration\ */}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00048\ \ \ \ \ GPIO\_t\ \ enuCALL\_0\_Port;}
+\DoxyCodeLine{00049\ \ \ \ \ uint8\_t\ u8CALL\_0\_Pin;}
+\DoxyCodeLine{00050\ \ \ \ \ GPIO\_t\ \ enuCALL\_1\_Port;}
+\DoxyCodeLine{00051\ \ \ \ \ uint8\_t\ u8CALL\_1\_Pin;}
+\DoxyCodeLine{00052\ \ \ \ \ GPIO\_t\ \ enuSEL\_0\_Port;}
+\DoxyCodeLine{00053\ \ \ \ \ uint8\_t\ u8SEL\_0\_Pin;}
+\DoxyCodeLine{00054\ \ \ \ \ GPIO\_t\ \ enuSEL\_1\_Port;}
+\DoxyCodeLine{00055\ \ \ \ \ uint8\_t\ u8SEL\_1\_Pin;}
+\DoxyCodeLine{00056\ \ \ \ \ GPIO\_t\ \ enuSEL\_2\_Port;}
+\DoxyCodeLine{00057\ \ \ \ \ uint8\_t\ u8SEL\_2\_Pin;}
+\DoxyCodeLine{00058\ \ \ \ \ GPIO\_t\ \ enuCALL\_CON\_Port;}
+\DoxyCodeLine{00059\ \ \ \ \ uint8\_t\ u8CALL\_CON\_Pin;}
+\DoxyCodeLine{00060\ \}\ \doxymbox{\hyperlink{struct_call_dio_config__t}{CallDioConfig\_t}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_call_dio_config__t}{CallDioConfig\_t}}\ cstrCallDio\_Config;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CALL\_HANDLER\_LCFG\_H}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00067\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00068\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00069\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00070\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

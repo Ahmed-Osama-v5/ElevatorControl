@@ -1,0 +1,116 @@
+\doxysection{Elevator\+Controller\+\_\+gcfg.\+h}
+\hypertarget{_elevator_controller__gcfg_8h_source}{}\label{_elevator_controller__gcfg_8h_source}\index{ElevatorController/interfaces/ElevatorController\_gcfg.h@{ElevatorController/interfaces/ElevatorController\_gcfg.h}}
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ ELEVATOR\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ ELEVATOR\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}Std\_Types.h"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}SystemConfig.h"{}}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_call_handler__gcfg_8h}{CallHandler\_gcfg.h}}"{}}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00047\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00048\ \textcolor{comment}{/*\ Export\ of\ CallHandler\ configuration\ settings\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00049\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00050\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2a0fb047be92599367413e76aa2ab5e312}{DOOR\_MANUAL}},\ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2aca0bfd5ad7cc59c915cc3e91d90a7176}{DOOR\_AUTOMATIC}}\ \ }
+\DoxyCodeLine{00059\ \}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{DoorType\_t}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ae8b1c2b57163356ce43b43747e51f74e}{DOOR\_CLOSED}},\ \ \ }
+\DoxyCodeLine{00067\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a99eca5709ed520c7112e884b915d8082}{DOOR\_OPENING}},\ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665a11915658ade106027bd75056b907539d}{DOOR\_OPEN}},\ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665ab66bfdf0e51c75abbcfe59363cef65ee}{DOOR\_CLOSING}}\ \ \ }
+\DoxyCodeLine{00070\ \}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{DoorState\_t}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00076\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a23cfbe06c730d00665f544d390d94e39}{DIR\_IDLE}},\ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a0b76fb863426c07c6c997a8d9523257b}{DIR\_UP}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895ab1bf68da897d09488069dd40e54f442d}{DIR\_DOWN}},\ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a8998627e29dec8fbbd40e0477dfdf32f}{DIR\_SLOWING}},\ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895a73639afd6c926f6a32dd31601646fe3b}{DIR\_STOPPING}}\ \ }
+\DoxyCodeLine{00082\ \}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{MoveDirection\_t}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00088\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ab41fca44eeeae8547a566bda8786c24e}{MODE\_INIT}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09af81b467c1f5e20f847402b03925c0d12}{MODE\_NORMAL}},\ \ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ac0bb14a1652af327eb3738cc6c78149e}{MODE\_PROGRAM}},\ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a75dab91e1cc3c791fb3842d2462541d1}{MODE\_MAINTENANCE}},\ }
+\DoxyCodeLine{00093\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09a99e3afddafefc9ae9c720a31e98251f4}{MODE\_ERROR}}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00094\ \}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{OperatingMode\_t}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7eaed21d68ec2f4f949cace6e8d6867dfbd}{COLLECTION\_UP}},\ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7ea310f26a9508f730d8eeaca9abae16e1a}{COLLECTION\_DOWN}}\ \ }
+\DoxyCodeLine{00103\ \}\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{CollDir\_t}};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00109\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a1887a53c6d28e564917f1aaa046f6da5}{u8CurrentFloor}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00111\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_aed8bd2f321f7baea07d31b84b566919f}{u8DestinationFloor}};\ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a220d9434e6068f5fb01337137e876c74}{u8SlowTimer}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_abe0212b7646a9d7caf66536129af5f8d}{u8FastTimer}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00114\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a0225b9bc9de0de8dc07aa0b992c9ef4c}{u8CamTimer}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00115\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a213261ca2c0472ada7f312f076ce3aee}{u8StopTimer}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00116\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_af4b96f85454e8fb3fd9e24f674fe4c15}{u8LightTimer}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a2e6bdf1605fdd762026df516432ff6f4}{u8FloorCount}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00118\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_abda37c5d7f511a1c2b9766df4b71e25b}{u8MntSpeed}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00119\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_aef6619869083bd1b58f41bb0758ea280}{u8ParkFloor}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a762522c5436cdaa22edd08b2a6ee4ccb}{u8CamFailCnt}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00121\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_aa55b1f667c495cda716a6615c7f1b893}{u8CabinPwd}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a803748e180f783f1ba54ad2acbaae825}{u8PhsSeq}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00123\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_elevator__t_a26217749f42f25dc911b050a51716bf4}{u8CollectionDir}};\ \ \ \ \ \ }
+\DoxyCodeLine{00124\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_aa2027c5ca77e1b07a86fdb34cca63895}{MoveDirection\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_a142e964bab34dca8ef52c1fcc69480bc}{enuDirection}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00125\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a2afe575288b8acee68a1becb1049bc7e}{CollDir\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_aa27cec07a37be148ea9d1a7dbc04b2de}{enuCollDir}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00126\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5fa3a37acee822dbc7a2e0eee97d3be2}{DoorType\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_a876589949ec4ebb5834d2c8413268732}{enuDoorType}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00127\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a5a7a22c32559e733ee27c7b23365f665}{DoorState\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_a55939105b39d943ffa8b4c4427587809}{enuDoorState}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00128\ \ \ \ \ \doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{OperatingMode\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_a9c6c292ea1455598036e93e8d1e02d6b}{enuOperatingMode}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00129\ \ \ \ \ \doxymbox{\hyperlink{group___call_handler__gcfg_ga9ec797f02e093c7b190648e3ce85902e}{CallType\_t}}\ \doxymbox{\hyperlink{struct_elevator__t_afb66d16e051b8c3db5a5924049ed30cd}{aenuFloorCalls}}[cu8MAX\_FLOORS];\ }
+\DoxyCodeLine{00130\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_elevator__t_ab749f5ec239f0281b42c08470c724a28}{u16DoorTimer}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \doxymbox{\hyperlink{struct_elevator__t_aa691b794a24008d5a14475e7fd3e2cc2}{bEmergencyStop}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00132\ \}\ \doxymbox{\hyperlink{struct_elevator__t}{Elevator\_t}};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ELEVATOR\_CONTROLLER\_GCFG\_H}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00137\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00138\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00139\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00140\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

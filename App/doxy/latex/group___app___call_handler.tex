@@ -1,0 +1,67 @@
+\doxysubsection{Call\+Handler }
+\hypertarget{group___app___call_handler}{}\label{group___app___call_handler}\index{CallHandler@{CallHandler}}
+Collaboration diagram for Call\+Handler:\+
+% FIG 0
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___call_handler__gcfg}{Call\+Handler Global Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___call_handler_ga27bd537f1c94c0ce47f789e07e4ea710}{Call\+Handler\+\_\+vid\+Init}} (\doxymbox{\hyperlink{struct_elevator__t}{Elevator\+\_\+t}} \texorpdfstring{$\ast$}{*}pstr\+Elevator)
+\begin{DoxyCompactList}\small\item\em Initializes the Call\+Handler module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___call_handler_ga7587f1b27295913a2e6980e2b79e9aa5}{Call\+Handler\+\_\+vid\+Get\+Call}} (void)
+\begin{DoxyCompactList}\small\item\em Scans all call inputs and registers active calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app___call_handler_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app___call_handler_ga7587f1b27295913a2e6980e2b79e9aa5}\index{CallHandler@{CallHandler}!CallHandler\_vidGetCall@{CallHandler\_vidGetCall}}
+\index{CallHandler\_vidGetCall@{CallHandler\_vidGetCall}!CallHandler@{CallHandler}}
+\doxysubsubsubsection{\texorpdfstring{CallHandler\_vidGetCall()}{CallHandler\_vidGetCall()}}
+{\footnotesize\ttfamily \label{group___app___call_handler_ga7587f1b27295913a2e6980e2b79e9aa5} 
+void Call\+Handler\+\_\+vid\+Get\+Call (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Scans all call inputs and registers active calls. 
+
+Reads each floor button (internal and external) and updates the \doxylink{struct_elevator__t_afb66d16e051b8c3db5a5924049ed30cd}{aenu\+Floor\+Calls} array accordingly. Should be called periodically from the main operation loop.
+
+Scans all call inputs and registers active calls.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pstr\+Call} & struct holding call info. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+
+% FIG 1
+Here is the caller graph for this function:\+
+% FIG 2
+\Hypertarget{group___app___call_handler_ga27bd537f1c94c0ce47f789e07e4ea710}\index{CallHandler@{CallHandler}!CallHandler\_vidInit@{CallHandler\_vidInit}}
+\index{CallHandler\_vidInit@{CallHandler\_vidInit}!CallHandler@{CallHandler}}
+\doxysubsubsubsection{\texorpdfstring{CallHandler\_vidInit()}{CallHandler\_vidInit()}}
+{\footnotesize\ttfamily \label{group___app___call_handler_ga27bd537f1c94c0ce47f789e07e4ea710} 
+void Call\+Handler\+\_\+vid\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_elevator__t}{Elevator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{pstr\+Elevator}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the Call\+Handler module. 
+
+Must be called once during system startup before any call scanning is performed. Stores a reference to the shared elevator state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pstr\+Elevator} & Pointer to the shared \doxylink{struct_elevator__t}{Elevator\+\_\+t} state structure.\\
+\hline
+\end{DoxyParams}
+Initializes the Call\+Handler module. Here is the caller graph for this function:\+
+% FIG 3
+\input{group___call_handler__gcfg}

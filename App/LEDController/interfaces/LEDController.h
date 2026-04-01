@@ -25,6 +25,20 @@
 #ifndef LED_CONTROLLER_H
 #define LED_CONTROLLER_H
 
+/**
+ * @file LEDController.h
+ * @brief Public interface for the LEDController module.
+ *
+ * Manages the state and blink patterns of all floor indicator LEDs
+ * connected via two 74HC573 octal latches. Provides functions to
+ * set individual LED states, assign blink patterns, and run the
+ * periodic LED processing task.
+ *
+ * @defgroup App_LEDController LEDController
+ * @ingroup App
+ * @{
+ */
+
 /* ************************************************************************ */
 /* Header Inclusions                                                        */
 /* ************************************************************************ */
@@ -49,44 +63,59 @@
 /* Basic Services ********************************************************* */
 
 /**
- * @brief Initializes the LED Controller module.
- * 
+ * @brief Initializes the LEDController module.
+ *
+ * Configures the latch and data GPIO lines as outputs, clears all
+ * latch outputs, and resets internal LED state tracking.
  */
 void LEDController_vidInit(void);
 
 /**
- * @brief Sets the state of a specific LED.
- * 
- * @param u8LedId 
- * @param enuState 
+ * @brief Sets the instantaneous state of a specific LED.
+ *
+ * @param u8LedId   Logical LED index (0 to cu8MAX_FLOORS - 1).
+ * @param enuState  Desired state: @ref LED_STATE_OFF, @ref LED_STATE_ON,
+ *                  or @ref LED_STATE_BLINKING.
  */
 void LEDController_vidSetState(uint8_t u8LedId, LEDState_t enuState);
 
 /**
- * @brief Sets the state of all LEDs off
- * 
+ * @brief Turns all LEDs off immediately.
+ *
+ * Writes a cleared state to both latches and resets all internal
+ * active flags.
  */
 void LEDController_vidTurnAllOff(void);
+
 /**
- * @brief Sets the pattern of all LEDs to none
- * 
+ * @brief Clears the blink pattern for all LEDs.
+ *
+ * Sets every LED's pattern to @ref LED_PATTERN_NONE without changing
+ * the current physical on/off state.
  */
 void LEDController_vidSetPatAllOff(void);
 
 /**
- * @brief Sets the pattern of a specific LED
- * 
- * @param u8LedId 
- * @param enuPattern 
+ * @brief Assigns a blink pattern to a specific LED.
+ *
+ * The pattern determines the on/off timing applied when the LED is
+ * processed by @ref LEDController_vidProcess.
+ *
+ * @param u8LedId      Logical LED index (0 to cu8MAX_FLOORS - 1).
+ * @param enuPattern   Blink pattern to assign (see @ref LEDPattern_t).
  */
 void LEDController_vidSetPattern(uint8_t u8LedId, LEDPattern_t enuPattern);
 
 /**
- * @brief Processes the LED states and patterns
- * 
+ * @brief Periodic processing task for the LED controller.
+ *
+ * Updates blink timers and writes the resulting LED states to the
+ * hardware latches. Must be called every @ref cu8LED_CONTROLLER_PERIOD_MS
+ * milliseconds.
  */
 void LEDController_vidProcess(void);
 
+/** @} */
 
 #endif // LED_CONTROLLER_H
 

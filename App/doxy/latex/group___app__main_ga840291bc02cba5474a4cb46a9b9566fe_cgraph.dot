@@ -1,0 +1,56 @@
+digraph "main"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="main",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Application entry point."];
+  Node1 -> Node2 [id="edge26_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="ElevatorController\l_enuGetMode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga87a499f29800d03a3de918a20d284346",tooltip="Returns the current operating mode of the elevator controller."];
+  Node1 -> Node3 [id="edge27_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="ElevatorController_Init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#gae8acd373178a1f3baa26cfc884ba49b0",tooltip="This function initializes and starts the operation loop of the elevator controller."];
+  Node3 -> Node4 [id="edge28_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="elevator_hal_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#gab1b2d2f7d84b614ed36133f6bc7ae8c5",tooltip="Initializes the HAL layer used by the elevator controller."];
+  Node4 -> Node5 [id="edge29_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="CallHandler_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___call_handler.html#ga27bd537f1c94c0ce47f789e07e4ea710",tooltip="Initializes the CallHandler module."];
+  Node4 -> Node6 [id="edge30_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="LEDController_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#ga7023892e1e36dfee0e46dd50665aa1c9",tooltip="Initializes the LEDController module."];
+  Node4 -> Node7 [id="edge31_Node000004_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="Menu_Init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gaff621a5d86b469749f3429000de480c9",tooltip="Initializes the menu system."];
+  Node4 -> Node8 [id="edge32_Node000004_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="MotionController_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___motion_controller.html#gaff4d0a144b97f3c3a37362ed940c8a47",tooltip="Initializes the MotionController module."];
+  Node3 -> Node9 [id="edge33_Node000003_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="elevator_hal_vidTimer\l_start",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga120bf942b8a8918e1470eb74797fb96f",tooltip="Starts the HAL millisecond timer."];
+  Node3 -> Node10 [id="edge34_Node000003_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="Menu_Update",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gaf2b117dc5131d237881bc0049a7d7875",tooltip="Processes user input and updates the menu state."];
+  Node1 -> Node11 [id="edge35_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="ElevatorController\l_vidOperationLoop",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga09787f637b16ae577ae41c93c3ef1a60",tooltip="Main periodic operation loop of the elevator controller."];
+  Node11 -> Node12 [id="edge36_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="CallHandler_vidGetCall",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___call_handler.html#ga7587f1b27295913a2e6980e2b79e9aa5",tooltip="Scans all call inputs and registers active calls."];
+  Node12 -> Node13 [id="edge37_Node000012_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="ElevatorController\l_u8GetCurrentFloor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga3425566b84158ee6bfd17e28a3eede8e",tooltip="Retrieves the current floor position of the elevator."];
+  Node12 -> Node14 [id="edge38_Node000012_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="ElevatorController\l_u8GetSelectorCnt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga995de2c010191462d0560e03b8b12772",tooltip="Retrieves the selector pole count accumulated since the last reset."];
+  Node12 -> Node15 [id="edge39_Node000012_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="ElevatorController\l_vidStartLightTimer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga70aacb5129bb154b723d61c432be6e6a",tooltip="Starts (or restarts) the cabin light auto-off timer."];
+  Node12 -> Node16 [id="edge40_Node000012_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="LEDController_vidSetPattern",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#gaf2c9d7fa8b5c6c9f4c149ad0d21c6801",tooltip="Assigns a blink pattern to a specific LED."];
+  Node11 -> Node15 [id="edge41_Node000011_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node11 -> Node17 [id="edge42_Node000011_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="LEDController_vidProcess",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#gab2f34f31224f83409ca73df50edf7e7f",tooltip="Periodic processing task for the LED controller."];
+  Node11 -> Node18 [id="edge43_Node000011_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="LEDController_vidSetPatAllOff",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#gad017181a52174f8e459c08a5cf7791a0",tooltip="Clears the blink pattern for all LEDs."];
+  Node11 -> Node16 [id="edge44_Node000011_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node11 -> Node19 [id="edge45_Node000011_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node19 [id="Node000019",label="LEDController_vidTurnAllOff",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#ga52582159dd1a2680fe0b6b982bf854ec",tooltip="Turns all LEDs off immediately."];
+  Node1 -> Node20 [id="edge46_Node000001_Node000020",color="steelblue1",style="solid",tooltip=" "];
+  Node20 [id="Node000020",label="ElevatorController\l_vidProgrammingLoop",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#gafa6252cfe8a98bff5532a3a70cecd804",tooltip="Programming loop of the elevator controller."];
+  Node20 -> Node21 [id="edge47_Node000020_Node000021",color="steelblue1",style="solid",tooltip=" "];
+  Node21 [id="Node000021",label="Menu_Task",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gad548770a70948ea8b773edc7e34baff3",tooltip="Periodic task handler for the menu system."];
+  Node20 -> Node10 [id="edge48_Node000020_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node22 [id="edge49_Node000001_Node000022",color="steelblue1",style="solid",tooltip=" "];
+  Node22 [id="Node000022",label="ElevatorController\l_vidSplashScreen",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___elevator_controller.html#ga5dc43ba96c33f6876035b1cbe3236e39",tooltip="Displays the splash screen on the LCD at startup."];
+  Node22 -> Node23 [id="edge50_Node000022_Node000023",color="steelblue1",style="solid",tooltip=" "];
+  Node23 [id="Node000023",label="LEDController_vidSetState",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#ga289a64caa7f77895961590819ed77b01",tooltip="Sets the instantaneous state of a specific LED."];
+}

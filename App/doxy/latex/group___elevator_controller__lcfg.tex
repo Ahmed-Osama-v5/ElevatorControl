@@ -1,0 +1,453 @@
+\doxysubsubsection{Elevator\+Controller Local Config }
+\hypertarget{group___elevator_controller__lcfg}{}\label{group___elevator_controller__lcfg}\index{ElevatorController Local Config@{ElevatorController Local Config}}
+Collaboration diagram for Elevator\+Controller Local Config:\+
+% FIG 0
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga702e90fd71237e202f7ecf06528d281f}\label{group___elevator_controller__lcfg_ga702e90fd71237e202f7ecf06528d281f} 
+\+\#define {\bfseries DOOR\+\_\+\+OPEN\+\_\+\+TIME\+\_\+\+MS}~3000
+\begin{DoxyCompactList}\small\item\em Duration the door remains open before auto-\/close is triggered (ms). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga45f6ed02e52ea53c5cbba2c8c3459b04}{Collection\+Dir\+\_\+t}} \{ \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a177ad3eb3dc1e7dea4966c17d54c9793}{UP\+\_\+\+COLLECTIVE}} = 0
+, \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}{DOWN\+\_\+\+COLLECTIVE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Direction used for the collective call algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{EEPROM Default Values}
+Factory-\/default values written to EEPROM on first power-\/up. \begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga5a807c50943e1033a94025de8f64c37f}{cu8\+SLOW\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 7U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga249b53162a1a317daf895433efe4b8d9}{cu8\+FAST\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 18U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gaa9aa00650687dea6729945bdd7b3b8b8}{cu8\+CAM\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 3U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gacf1f4132e3eaad497bdb4c4b15e4393d}{cu8\+STOP\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 2U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga00053e5c9ca375e1eef76f83fc3be205}{cu8\+LIGHT\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 10U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga27d0774ae5382a5ee8bc00f309a9f08a}{cu8\+DOOR\+\_\+\+NUMBER\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 16U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gae47b6fb83e17ff5a0cd2de7b397eb224}{cu8\+DISPLAY\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga6e7f4d4c25684b5c3c4339d2e4e10ed8}{cu8\+FLOOR\+\_\+0\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gac9ee2487990a693cb279e67843533ebd}{cu8\+FLOOR\+\_\+1\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 1U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga24adb84b0cf75c61b3715d6b1d7eb215}{cu8\+FLOOR\+\_\+2\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 2U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga78c3f7542d80987fd7776dcff15298e6}{cu8\+FLOOR\+\_\+3\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 3U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga4e50f523b93125e70c1fbb39cea8553e}{cu8\+FLOOR\+\_\+4\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 4U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga06bf94ff74b3dec3bad0b0a009325a15}{cu8\+FLOOR\+\_\+5\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 5U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga3dee440939e0c6d40ba2662f5d86148c}{cu8\+FLOOR\+\_\+6\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 6U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gaebdee91063ee5f253208ffcb395288c5}{cu8\+FLOOR\+\_\+7\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 7U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga6a9667ce49ea8d3057793a2c10f1cb6b}{cu8\+FLOOR\+\_\+8\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 8U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga46d4943664ec54c724806520ad810cd4}{cu8\+FLOOR\+\_\+9\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 9U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga37a5742c25b3c89f6ca7d88eb947371e}{cu8\+FLOOR\+\_\+10\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 10U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga99c3d4accd7587e0b918c991d1495fc2}{cu8\+FLOOR\+\_\+11\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 11U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga7b285c21a30ccebcd7e1c41828a5df4b}{cu8\+FLOOR\+\_\+12\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 12U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gad20cfa325d313018d6825bf6d2e2c9a3}{cu8\+FLOOR\+\_\+13\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 13U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga8764b5127b2f4e12ba57f83f426b6ecf}{cu8\+FLOOR\+\_\+14\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 14U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga4975805b70f81e52ccfecbb65e1f6359}{cu8\+FLOOR\+\_\+15\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 15U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga7e3d9481e58c649c7d02f263b4606ba6}{cu8\+COLLECTION\+\_\+\+DIR\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}{DOWN\+\_\+\+COLLECTIVE}})
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga5f0fe46f9d636605979168c375a79af2}{cu8\+MNT\+\_\+\+SPEED\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gaff2ed51303b121ffc29842a55634769b}{cu8\+DOOR\+\_\+\+OPTIONS\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gab2563f2708b514b931d1480bc81f8145}{cu8\+PARKING\+\_\+\+FLOOR\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 19U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga2f73ecc7e0e63d38cb75ac666173300e}{cu8\+CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 9U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga7d485e478489910fe09b3615aea4375f}{cu8\+CABIN\+\_\+\+PW\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga55bf64795cc353026abb6f3ed313a10a}{cu8\+PHS\+\_\+\+SEQ\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gab88cf392f14e9fe550a4c43bba227127}{cu8\+PASSWORD\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gaff3f6ab748ff05d3f4019ec0ad79ae63}{cu8\+PASSWORD\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga3d5c9f688af38cf5134369e9a215e341}{cu8\+CURRENT\+\_\+\+FLOOR\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga2e0d3f58d7ea1adac7de742f57fddcfb}{cu8\+CURRENT\+\_\+\+TRAVEL\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga19412f3fedf572d24381377917ae1964}{cu8\+CURRENT\+\_\+\+TRAVEL\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga5aacd0bf03e0bc30cc41a3c2cc88bb12}{cu8\+STORED\+\_\+\+TRAVEL\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 10U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga2722dc782a49bffeabb9875b1b79a5c9}{cu8\+STORED\+\_\+\+TRAVEL\+\_\+\+USAGE\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_gad827aaaa7b22127246882294e2a7ab31}{cu8\+MASTER\+\_\+\+PASSWORD\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 158U)
+\item 
+\+\#define \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga1d29e75b0d34f5bd247af97981034327}{cu8\+MASTER\+\_\+\+PASSWORD\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE}}~((uint8\+\_\+t) 0U)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{EEPROM Minimum Values}
+Lower bounds enforced when saving parameters via the programming menu. \begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga5c6be9b49c1a6607b1568b8c5faa3c43}\label{group___elevator_controller__lcfg_ga5c6be9b49c1a6607b1568b8c5faa3c43} 
+\+\#define {\bfseries cu8\+SLOW\+\_\+\+TIMER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gacceccfc65735fd5fdfb84990c30fb4c0}\label{group___elevator_controller__lcfg_gacceccfc65735fd5fdfb84990c30fb4c0} 
+\+\#define {\bfseries cu8\+FAST\+\_\+\+TIMER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gab4f5bb54fcbfbb72cb3a34e5065f0910}\label{group___elevator_controller__lcfg_gab4f5bb54fcbfbb72cb3a34e5065f0910} 
+\+\#define {\bfseries cu8\+CAM\+\_\+\+TIMER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga4f61394b832e867e8a39c6bdb5c6331d}\label{group___elevator_controller__lcfg_ga4f61394b832e867e8a39c6bdb5c6331d} 
+\+\#define {\bfseries cu8\+STOP\+\_\+\+TIMER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga4032eec04a22708c08b6e265ed7f36e2}\label{group___elevator_controller__lcfg_ga4032eec04a22708c08b6e265ed7f36e2} 
+\+\#define {\bfseries cu8\+LIGHT\+\_\+\+TIMER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga6c9fe986ee2cb6b85550a202f6936f44}\label{group___elevator_controller__lcfg_ga6c9fe986ee2cb6b85550a202f6936f44} 
+\+\#define {\bfseries cu8\+DOOR\+\_\+\+NUMBER\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gae110efdcfe6d22715bb1f681ee694e0a}\label{group___elevator_controller__lcfg_gae110efdcfe6d22715bb1f681ee694e0a} 
+\+\#define {\bfseries cu8\+COLLECTION\+\_\+\+DIR\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}{DOWN\+\_\+\+COLLECTIVE}})
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga73503710f6d2c4e0c020f06e34b753bd}\label{group___elevator_controller__lcfg_ga73503710f6d2c4e0c020f06e34b753bd} 
+\+\#define {\bfseries cu8\+MNT\+\_\+\+SPEED\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga310303533605239367a16a436c221cea}\label{group___elevator_controller__lcfg_ga310303533605239367a16a436c221cea} 
+\+\#define {\bfseries cu8\+DOOR\+\_\+\+OPTIONS\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga42e28b2ddf0131a73da746ca93a6ce18}\label{group___elevator_controller__lcfg_ga42e28b2ddf0131a73da746ca93a6ce18} 
+\+\#define {\bfseries cu8\+PARKING\+\_\+\+FLOOR\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga8dcf00ff15fbc6f04e4f784f8a190791}\label{group___elevator_controller__lcfg_ga8dcf00ff15fbc6f04e4f784f8a190791} 
+\+\#define {\bfseries cu8\+CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga3be598e6599a591c1844c2de72d4253e}\label{group___elevator_controller__lcfg_ga3be598e6599a591c1844c2de72d4253e} 
+\+\#define {\bfseries cu8\+CABIN\+\_\+\+PW\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga5447bed459c692c3376d77654ac8e7a1}\label{group___elevator_controller__lcfg_ga5447bed459c692c3376d77654ac8e7a1} 
+\+\#define {\bfseries cu8\+PHS\+\_\+\+SEQ\+\_\+\+MIN\+\_\+\+VALUE}~((uint8\+\_\+t) 0U)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{EEPROM Maximum Values}
+Upper bounds enforced when saving parameters via the programming menu. \begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga731c02a5d0fef767370c69f7d9dae1f0}\label{group___elevator_controller__lcfg_ga731c02a5d0fef767370c69f7d9dae1f0} 
+\+\#define {\bfseries cu8\+SLOW\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 20U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gade261cb1caa55615b418149ff73b48cf}\label{group___elevator_controller__lcfg_gade261cb1caa55615b418149ff73b48cf} 
+\+\#define {\bfseries cu8\+FAST\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 30U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga1c1fa2389dafaa4f26e6cd2ec3f44e5b}\label{group___elevator_controller__lcfg_ga1c1fa2389dafaa4f26e6cd2ec3f44e5b} 
+\+\#define {\bfseries cu8\+CAM\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 20U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga5128cdf93a732ab2ac314401533e48af}\label{group___elevator_controller__lcfg_ga5128cdf93a732ab2ac314401533e48af} 
+\+\#define {\bfseries cu8\+STOP\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 10U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gae7c247837abe6f163d036dea1307b05f}\label{group___elevator_controller__lcfg_gae7c247837abe6f163d036dea1307b05f} 
+\+\#define {\bfseries cu8\+LIGHT\+\_\+\+TIMER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 20U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gae1a7a76abea9bfb5be905a62d3368ad7}\label{group___elevator_controller__lcfg_gae1a7a76abea9bfb5be905a62d3368ad7} 
+\+\#define {\bfseries cu8\+DOOR\+\_\+\+NUMBER\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 16U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga132d8b73d3a78b1c901b2bd64fd9f75d}\label{group___elevator_controller__lcfg_ga132d8b73d3a78b1c901b2bd64fd9f75d} 
+\+\#define {\bfseries cu8\+COLLECTION\+\_\+\+DIR\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 4U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga70888e16e8d896f6ea60915fb40c9cf0}\label{group___elevator_controller__lcfg_ga70888e16e8d896f6ea60915fb40c9cf0} 
+\+\#define {\bfseries cu8\+MNT\+\_\+\+SPEED\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_gae4dad464814e6cd25736a378ee7ca0dd}\label{group___elevator_controller__lcfg_gae4dad464814e6cd25736a378ee7ca0dd} 
+\+\#define {\bfseries cu8\+DOOR\+\_\+\+OPTIONS\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga90ebbc25c55ec8a5eab566158a211b73}\label{group___elevator_controller__lcfg_ga90ebbc25c55ec8a5eab566158a211b73} 
+\+\#define {\bfseries cu8\+PARKING\+\_\+\+FLOOR\+\_\+\+MAX\+\_\+\+VALUE}~(cu8\+DOOR\+\_\+\+NUMBER\+\_\+\+MAX\+\_\+\+VALUE)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga1b8fae557c2a65d0bb87dd8826802e04}\label{group___elevator_controller__lcfg_ga1b8fae557c2a65d0bb87dd8826802e04} 
+\+\#define {\bfseries cu8\+CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 20U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga9252a944586350eb2afadf35d1cd39f0}\label{group___elevator_controller__lcfg_ga9252a944586350eb2afadf35d1cd39f0} 
+\+\#define {\bfseries cu8\+CABIN\+\_\+\+PW\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\item 
+\Hypertarget{group___elevator_controller__lcfg_ga37afd0f70694c72f8582dfc4869985cd}\label{group___elevator_controller__lcfg_ga37afd0f70694c72f8582dfc4869985cd} 
+\+\#define {\bfseries cu8\+PHS\+\_\+\+SEQ\+\_\+\+MAX\+\_\+\+VALUE}~((uint8\+\_\+t) 1U)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group___elevator_controller__lcfg_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___elevator_controller__lcfg_ga7d485e478489910fe09b3615aea4375f}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CABIN\_PW\_DEF\_VALUE@{cu8CABIN\_PW\_DEF\_VALUE}}
+\index{cu8CABIN\_PW\_DEF\_VALUE@{cu8CABIN\_PW\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CABIN\_PW\_DEF\_VALUE}{cu8CABIN\_PW\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga7d485e478489910fe09b3615aea4375f} 
+\+\#define cu8\+CABIN\+\_\+\+PW\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default cabin password. \Hypertarget{group___elevator_controller__lcfg_ga2f73ecc7e0e63d38cb75ac666173300e}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CAM\_FAIL\_CNT\_DEF\_VALUE@{cu8CAM\_FAIL\_CNT\_DEF\_VALUE}}
+\index{cu8CAM\_FAIL\_CNT\_DEF\_VALUE@{cu8CAM\_FAIL\_CNT\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CAM\_FAIL\_CNT\_DEF\_VALUE}{cu8CAM\_FAIL\_CNT\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga2f73ecc7e0e63d38cb75ac666173300e} 
+\+\#define cu8\+CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 9U)}
+
+Default CAM failure count threshold. \Hypertarget{group___elevator_controller__lcfg_gaa9aa00650687dea6729945bdd7b3b8b8}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CAM\_TIMER\_DEF\_VALUE@{cu8CAM\_TIMER\_DEF\_VALUE}}
+\index{cu8CAM\_TIMER\_DEF\_VALUE@{cu8CAM\_TIMER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CAM\_TIMER\_DEF\_VALUE}{cu8CAM\_TIMER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gaa9aa00650687dea6729945bdd7b3b8b8} 
+\+\#define cu8\+CAM\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 3U)}
+
+Default CAM pulse timer. \Hypertarget{group___elevator_controller__lcfg_ga7e3d9481e58c649c7d02f263b4606ba6}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8COLLECTION\_DIR\_DEF\_VALUE@{cu8COLLECTION\_DIR\_DEF\_VALUE}}
+\index{cu8COLLECTION\_DIR\_DEF\_VALUE@{cu8COLLECTION\_DIR\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8COLLECTION\_DIR\_DEF\_VALUE}{cu8COLLECTION\_DIR\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga7e3d9481e58c649c7d02f263b4606ba6} 
+\+\#define cu8\+COLLECTION\+\_\+\+DIR\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) \doxymbox{\hyperlink{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}{DOWN\+\_\+\+COLLECTIVE}})}
+
+Default collection direction. \Hypertarget{group___elevator_controller__lcfg_ga3d5c9f688af38cf5134369e9a215e341}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CURRENT\_FLOOR\_DEF\_VALUE@{cu8CURRENT\_FLOOR\_DEF\_VALUE}}
+\index{cu8CURRENT\_FLOOR\_DEF\_VALUE@{cu8CURRENT\_FLOOR\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CURRENT\_FLOOR\_DEF\_VALUE}{cu8CURRENT\_FLOOR\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga3d5c9f688af38cf5134369e9a215e341} 
+\+\#define cu8\+CURRENT\+\_\+\+FLOOR\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default stored current floor. \Hypertarget{group___elevator_controller__lcfg_ga19412f3fedf572d24381377917ae1964}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE@{cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE}}
+\index{cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE@{cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE}{cu8CURRENT\_TRAVEL\_H\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga19412f3fedf572d24381377917ae1964} 
+\+\#define cu8\+CURRENT\+\_\+\+TRAVEL\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default travel counter high byte. \Hypertarget{group___elevator_controller__lcfg_ga2e0d3f58d7ea1adac7de742f57fddcfb}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE@{cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE}}
+\index{cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE@{cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE}{cu8CURRENT\_TRAVEL\_L\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga2e0d3f58d7ea1adac7de742f57fddcfb} 
+\+\#define cu8\+CURRENT\+\_\+\+TRAVEL\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default travel counter low byte. \Hypertarget{group___elevator_controller__lcfg_gae47b6fb83e17ff5a0cd2de7b397eb224}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8DISPLAY\_DEF\_VALUE@{cu8DISPLAY\_DEF\_VALUE}}
+\index{cu8DISPLAY\_DEF\_VALUE@{cu8DISPLAY\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8DISPLAY\_DEF\_VALUE}{cu8DISPLAY\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gae47b6fb83e17ff5a0cd2de7b397eb224} 
+\+\#define cu8\+DISPLAY\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default display setting. \Hypertarget{group___elevator_controller__lcfg_ga27d0774ae5382a5ee8bc00f309a9f08a}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8DOOR\_NUMBER\_DEF\_VALUE@{cu8DOOR\_NUMBER\_DEF\_VALUE}}
+\index{cu8DOOR\_NUMBER\_DEF\_VALUE@{cu8DOOR\_NUMBER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8DOOR\_NUMBER\_DEF\_VALUE}{cu8DOOR\_NUMBER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga27d0774ae5382a5ee8bc00f309a9f08a} 
+\+\#define cu8\+DOOR\+\_\+\+NUMBER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 16U)}
+
+Default number of doors /\+ floors. \Hypertarget{group___elevator_controller__lcfg_gaff2ed51303b121ffc29842a55634769b}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8DOOR\_OPTIONS\_DEF\_VALUE@{cu8DOOR\_OPTIONS\_DEF\_VALUE}}
+\index{cu8DOOR\_OPTIONS\_DEF\_VALUE@{cu8DOOR\_OPTIONS\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8DOOR\_OPTIONS\_DEF\_VALUE}{cu8DOOR\_OPTIONS\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gaff2ed51303b121ffc29842a55634769b} 
+\+\#define cu8\+DOOR\+\_\+\+OPTIONS\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default door options byte. \Hypertarget{group___elevator_controller__lcfg_ga249b53162a1a317daf895433efe4b8d9}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FAST\_TIMER\_DEF\_VALUE@{cu8FAST\_TIMER\_DEF\_VALUE}}
+\index{cu8FAST\_TIMER\_DEF\_VALUE@{cu8FAST\_TIMER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FAST\_TIMER\_DEF\_VALUE}{cu8FAST\_TIMER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga249b53162a1a317daf895433efe4b8d9} 
+\+\#define cu8\+FAST\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 18U)}
+
+Default fast (high-\/speed) timer. \Hypertarget{group___elevator_controller__lcfg_ga6e7f4d4c25684b5c3c4339d2e4e10ed8}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_0\_DEF\_VALUE@{cu8FLOOR\_0\_DEF\_VALUE}}
+\index{cu8FLOOR\_0\_DEF\_VALUE@{cu8FLOOR\_0\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_0\_DEF\_VALUE}{cu8FLOOR\_0\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga6e7f4d4c25684b5c3c4339d2e4e10ed8} 
+\+\#define cu8\+FLOOR\+\_\+0\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default floor 0 label. \Hypertarget{group___elevator_controller__lcfg_ga37a5742c25b3c89f6ca7d88eb947371e}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_10\_DEF\_VALUE@{cu8FLOOR\_10\_DEF\_VALUE}}
+\index{cu8FLOOR\_10\_DEF\_VALUE@{cu8FLOOR\_10\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_10\_DEF\_VALUE}{cu8FLOOR\_10\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga37a5742c25b3c89f6ca7d88eb947371e} 
+\+\#define cu8\+FLOOR\+\_\+10\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 10U)}
+
+Default floor 10 label. \Hypertarget{group___elevator_controller__lcfg_ga99c3d4accd7587e0b918c991d1495fc2}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_11\_DEF\_VALUE@{cu8FLOOR\_11\_DEF\_VALUE}}
+\index{cu8FLOOR\_11\_DEF\_VALUE@{cu8FLOOR\_11\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_11\_DEF\_VALUE}{cu8FLOOR\_11\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga99c3d4accd7587e0b918c991d1495fc2} 
+\+\#define cu8\+FLOOR\+\_\+11\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 11U)}
+
+Default floor 11 label. \Hypertarget{group___elevator_controller__lcfg_ga7b285c21a30ccebcd7e1c41828a5df4b}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_12\_DEF\_VALUE@{cu8FLOOR\_12\_DEF\_VALUE}}
+\index{cu8FLOOR\_12\_DEF\_VALUE@{cu8FLOOR\_12\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_12\_DEF\_VALUE}{cu8FLOOR\_12\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga7b285c21a30ccebcd7e1c41828a5df4b} 
+\+\#define cu8\+FLOOR\+\_\+12\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 12U)}
+
+Default floor 12 label. \Hypertarget{group___elevator_controller__lcfg_gad20cfa325d313018d6825bf6d2e2c9a3}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_13\_DEF\_VALUE@{cu8FLOOR\_13\_DEF\_VALUE}}
+\index{cu8FLOOR\_13\_DEF\_VALUE@{cu8FLOOR\_13\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_13\_DEF\_VALUE}{cu8FLOOR\_13\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gad20cfa325d313018d6825bf6d2e2c9a3} 
+\+\#define cu8\+FLOOR\+\_\+13\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 13U)}
+
+Default floor 13 label. \Hypertarget{group___elevator_controller__lcfg_ga8764b5127b2f4e12ba57f83f426b6ecf}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_14\_DEF\_VALUE@{cu8FLOOR\_14\_DEF\_VALUE}}
+\index{cu8FLOOR\_14\_DEF\_VALUE@{cu8FLOOR\_14\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_14\_DEF\_VALUE}{cu8FLOOR\_14\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga8764b5127b2f4e12ba57f83f426b6ecf} 
+\+\#define cu8\+FLOOR\+\_\+14\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 14U)}
+
+Default floor 14 label. \Hypertarget{group___elevator_controller__lcfg_ga4975805b70f81e52ccfecbb65e1f6359}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_15\_DEF\_VALUE@{cu8FLOOR\_15\_DEF\_VALUE}}
+\index{cu8FLOOR\_15\_DEF\_VALUE@{cu8FLOOR\_15\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_15\_DEF\_VALUE}{cu8FLOOR\_15\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga4975805b70f81e52ccfecbb65e1f6359} 
+\+\#define cu8\+FLOOR\+\_\+15\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 15U)}
+
+Default floor 15 label. \Hypertarget{group___elevator_controller__lcfg_gac9ee2487990a693cb279e67843533ebd}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_1\_DEF\_VALUE@{cu8FLOOR\_1\_DEF\_VALUE}}
+\index{cu8FLOOR\_1\_DEF\_VALUE@{cu8FLOOR\_1\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_1\_DEF\_VALUE}{cu8FLOOR\_1\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gac9ee2487990a693cb279e67843533ebd} 
+\+\#define cu8\+FLOOR\+\_\+1\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 1U)}
+
+Default floor 1 label. \Hypertarget{group___elevator_controller__lcfg_ga24adb84b0cf75c61b3715d6b1d7eb215}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_2\_DEF\_VALUE@{cu8FLOOR\_2\_DEF\_VALUE}}
+\index{cu8FLOOR\_2\_DEF\_VALUE@{cu8FLOOR\_2\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_2\_DEF\_VALUE}{cu8FLOOR\_2\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga24adb84b0cf75c61b3715d6b1d7eb215} 
+\+\#define cu8\+FLOOR\+\_\+2\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 2U)}
+
+Default floor 2 label. \Hypertarget{group___elevator_controller__lcfg_ga78c3f7542d80987fd7776dcff15298e6}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_3\_DEF\_VALUE@{cu8FLOOR\_3\_DEF\_VALUE}}
+\index{cu8FLOOR\_3\_DEF\_VALUE@{cu8FLOOR\_3\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_3\_DEF\_VALUE}{cu8FLOOR\_3\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga78c3f7542d80987fd7776dcff15298e6} 
+\+\#define cu8\+FLOOR\+\_\+3\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 3U)}
+
+Default floor 3 label. \Hypertarget{group___elevator_controller__lcfg_ga4e50f523b93125e70c1fbb39cea8553e}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_4\_DEF\_VALUE@{cu8FLOOR\_4\_DEF\_VALUE}}
+\index{cu8FLOOR\_4\_DEF\_VALUE@{cu8FLOOR\_4\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_4\_DEF\_VALUE}{cu8FLOOR\_4\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga4e50f523b93125e70c1fbb39cea8553e} 
+\+\#define cu8\+FLOOR\+\_\+4\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 4U)}
+
+Default floor 4 label. \Hypertarget{group___elevator_controller__lcfg_ga06bf94ff74b3dec3bad0b0a009325a15}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_5\_DEF\_VALUE@{cu8FLOOR\_5\_DEF\_VALUE}}
+\index{cu8FLOOR\_5\_DEF\_VALUE@{cu8FLOOR\_5\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_5\_DEF\_VALUE}{cu8FLOOR\_5\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga06bf94ff74b3dec3bad0b0a009325a15} 
+\+\#define cu8\+FLOOR\+\_\+5\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 5U)}
+
+Default floor 5 label. \Hypertarget{group___elevator_controller__lcfg_ga3dee440939e0c6d40ba2662f5d86148c}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_6\_DEF\_VALUE@{cu8FLOOR\_6\_DEF\_VALUE}}
+\index{cu8FLOOR\_6\_DEF\_VALUE@{cu8FLOOR\_6\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_6\_DEF\_VALUE}{cu8FLOOR\_6\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga3dee440939e0c6d40ba2662f5d86148c} 
+\+\#define cu8\+FLOOR\+\_\+6\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 6U)}
+
+Default floor 6 label. \Hypertarget{group___elevator_controller__lcfg_gaebdee91063ee5f253208ffcb395288c5}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_7\_DEF\_VALUE@{cu8FLOOR\_7\_DEF\_VALUE}}
+\index{cu8FLOOR\_7\_DEF\_VALUE@{cu8FLOOR\_7\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_7\_DEF\_VALUE}{cu8FLOOR\_7\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gaebdee91063ee5f253208ffcb395288c5} 
+\+\#define cu8\+FLOOR\+\_\+7\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 7U)}
+
+Default floor 7 label. \Hypertarget{group___elevator_controller__lcfg_ga6a9667ce49ea8d3057793a2c10f1cb6b}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_8\_DEF\_VALUE@{cu8FLOOR\_8\_DEF\_VALUE}}
+\index{cu8FLOOR\_8\_DEF\_VALUE@{cu8FLOOR\_8\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_8\_DEF\_VALUE}{cu8FLOOR\_8\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga6a9667ce49ea8d3057793a2c10f1cb6b} 
+\+\#define cu8\+FLOOR\+\_\+8\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 8U)}
+
+Default floor 8 label. \Hypertarget{group___elevator_controller__lcfg_ga46d4943664ec54c724806520ad810cd4}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8FLOOR\_9\_DEF\_VALUE@{cu8FLOOR\_9\_DEF\_VALUE}}
+\index{cu8FLOOR\_9\_DEF\_VALUE@{cu8FLOOR\_9\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8FLOOR\_9\_DEF\_VALUE}{cu8FLOOR\_9\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga46d4943664ec54c724806520ad810cd4} 
+\+\#define cu8\+FLOOR\+\_\+9\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 9U)}
+
+Default floor 9 label. \Hypertarget{group___elevator_controller__lcfg_ga00053e5c9ca375e1eef76f83fc3be205}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8LIGHT\_TIMER\_DEF\_VALUE@{cu8LIGHT\_TIMER\_DEF\_VALUE}}
+\index{cu8LIGHT\_TIMER\_DEF\_VALUE@{cu8LIGHT\_TIMER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8LIGHT\_TIMER\_DEF\_VALUE}{cu8LIGHT\_TIMER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga00053e5c9ca375e1eef76f83fc3be205} 
+\+\#define cu8\+LIGHT\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 10U)}
+
+Default cabin light auto-\/off timer. \Hypertarget{group___elevator_controller__lcfg_ga1d29e75b0d34f5bd247af97981034327}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8MASTER\_PASSWORD\_H\_DEF\_VALUE@{cu8MASTER\_PASSWORD\_H\_DEF\_VALUE}}
+\index{cu8MASTER\_PASSWORD\_H\_DEF\_VALUE@{cu8MASTER\_PASSWORD\_H\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8MASTER\_PASSWORD\_H\_DEF\_VALUE}{cu8MASTER\_PASSWORD\_H\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga1d29e75b0d34f5bd247af97981034327} 
+\+\#define cu8\+MASTER\+\_\+\+PASSWORD\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Master password high byte. \Hypertarget{group___elevator_controller__lcfg_gad827aaaa7b22127246882294e2a7ab31}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8MASTER\_PASSWORD\_L\_DEF\_VALUE@{cu8MASTER\_PASSWORD\_L\_DEF\_VALUE}}
+\index{cu8MASTER\_PASSWORD\_L\_DEF\_VALUE@{cu8MASTER\_PASSWORD\_L\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8MASTER\_PASSWORD\_L\_DEF\_VALUE}{cu8MASTER\_PASSWORD\_L\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gad827aaaa7b22127246882294e2a7ab31} 
+\+\#define cu8\+MASTER\+\_\+\+PASSWORD\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 158U)}
+
+Master password low byte. \Hypertarget{group___elevator_controller__lcfg_ga5f0fe46f9d636605979168c375a79af2}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8MNT\_SPEED\_DEF\_VALUE@{cu8MNT\_SPEED\_DEF\_VALUE}}
+\index{cu8MNT\_SPEED\_DEF\_VALUE@{cu8MNT\_SPEED\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8MNT\_SPEED\_DEF\_VALUE}{cu8MNT\_SPEED\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga5f0fe46f9d636605979168c375a79af2} 
+\+\#define cu8\+MNT\+\_\+\+SPEED\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default maintenance speed index. \Hypertarget{group___elevator_controller__lcfg_gab2563f2708b514b931d1480bc81f8145}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8PARKING\_FLOOR\_DEF\_VALUE@{cu8PARKING\_FLOOR\_DEF\_VALUE}}
+\index{cu8PARKING\_FLOOR\_DEF\_VALUE@{cu8PARKING\_FLOOR\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8PARKING\_FLOOR\_DEF\_VALUE}{cu8PARKING\_FLOOR\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gab2563f2708b514b931d1480bc81f8145} 
+\+\#define cu8\+PARKING\+\_\+\+FLOOR\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 19U)}
+
+Default parking floor (disabled = 19). \Hypertarget{group___elevator_controller__lcfg_gaff3f6ab748ff05d3f4019ec0ad79ae63}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8PASSWORD\_H\_DEF\_VALUE@{cu8PASSWORD\_H\_DEF\_VALUE}}
+\index{cu8PASSWORD\_H\_DEF\_VALUE@{cu8PASSWORD\_H\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8PASSWORD\_H\_DEF\_VALUE}{cu8PASSWORD\_H\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gaff3f6ab748ff05d3f4019ec0ad79ae63} 
+\+\#define cu8\+PASSWORD\+\_\+\+H\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default access password high byte. \Hypertarget{group___elevator_controller__lcfg_gab88cf392f14e9fe550a4c43bba227127}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8PASSWORD\_L\_DEF\_VALUE@{cu8PASSWORD\_L\_DEF\_VALUE}}
+\index{cu8PASSWORD\_L\_DEF\_VALUE@{cu8PASSWORD\_L\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8PASSWORD\_L\_DEF\_VALUE}{cu8PASSWORD\_L\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gab88cf392f14e9fe550a4c43bba227127} 
+\+\#define cu8\+PASSWORD\+\_\+\+L\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default access password low byte. \Hypertarget{group___elevator_controller__lcfg_ga55bf64795cc353026abb6f3ed313a10a}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8PHS\_SEQ\_DEF\_VALUE@{cu8PHS\_SEQ\_DEF\_VALUE}}
+\index{cu8PHS\_SEQ\_DEF\_VALUE@{cu8PHS\_SEQ\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8PHS\_SEQ\_DEF\_VALUE}{cu8PHS\_SEQ\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga55bf64795cc353026abb6f3ed313a10a} 
+\+\#define cu8\+PHS\+\_\+\+SEQ\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default phase sequence byte. \Hypertarget{group___elevator_controller__lcfg_ga5a807c50943e1033a94025de8f64c37f}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8SLOW\_TIMER\_DEF\_VALUE@{cu8SLOW\_TIMER\_DEF\_VALUE}}
+\index{cu8SLOW\_TIMER\_DEF\_VALUE@{cu8SLOW\_TIMER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8SLOW\_TIMER\_DEF\_VALUE}{cu8SLOW\_TIMER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga5a807c50943e1033a94025de8f64c37f} 
+\+\#define cu8\+SLOW\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 7U)}
+
+Default slow (decel) timer. \Hypertarget{group___elevator_controller__lcfg_gacf1f4132e3eaad497bdb4c4b15e4393d}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8STOP\_TIMER\_DEF\_VALUE@{cu8STOP\_TIMER\_DEF\_VALUE}}
+\index{cu8STOP\_TIMER\_DEF\_VALUE@{cu8STOP\_TIMER\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8STOP\_TIMER\_DEF\_VALUE}{cu8STOP\_TIMER\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_gacf1f4132e3eaad497bdb4c4b15e4393d} 
+\+\#define cu8\+STOP\+\_\+\+TIMER\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 2U)}
+
+Default stop phase timer. \Hypertarget{group___elevator_controller__lcfg_ga5aacd0bf03e0bc30cc41a3c2cc88bb12}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8STORED\_TRAVEL\_DEF\_VALUE@{cu8STORED\_TRAVEL\_DEF\_VALUE}}
+\index{cu8STORED\_TRAVEL\_DEF\_VALUE@{cu8STORED\_TRAVEL\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8STORED\_TRAVEL\_DEF\_VALUE}{cu8STORED\_TRAVEL\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga5aacd0bf03e0bc30cc41a3c2cc88bb12} 
+\+\#define cu8\+STORED\+\_\+\+TRAVEL\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 10U)}
+
+Default stored travel distance. \Hypertarget{group___elevator_controller__lcfg_ga2722dc782a49bffeabb9875b1b79a5c9}\index{ElevatorController Local Config@{ElevatorController Local Config}!cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE@{cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE}}
+\index{cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE@{cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE}{cu8STORED\_TRAVEL\_USAGE\_DEF\_VALUE}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga2722dc782a49bffeabb9875b1b79a5c9} 
+\+\#define cu8\+STORED\+\_\+\+TRAVEL\+\_\+\+USAGE\+\_\+\+DEF\+\_\+\+VALUE~((uint8\+\_\+t) 0U)}
+
+Default travel usage counter. 
+
+\label{doc-enum-members}
+\Hypertarget{group___elevator_controller__lcfg_doc-enum-members}
+\doxysubsubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___elevator_controller__lcfg_ga45f6ed02e52ea53c5cbba2c8c3459b04}\index{ElevatorController Local Config@{ElevatorController Local Config}!CollectionDir\_t@{CollectionDir\_t}}
+\index{CollectionDir\_t@{CollectionDir\_t}!ElevatorController Local Config@{ElevatorController Local Config}}
+\doxysubsubsubsubsection{\texorpdfstring{CollectionDir\_t}{CollectionDir\_t}}
+{\footnotesize\ttfamily \label{group___elevator_controller__lcfg_ga45f6ed02e52ea53c5cbba2c8c3459b04} 
+enum \doxymbox{\hyperlink{group___elevator_controller__lcfg_ga45f6ed02e52ea53c5cbba2c8c3459b04}{Collection\+Dir\+\_\+t}}}
+
+
+
+Direction used for the collective call algorithm. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UP\_COLLECTIVE@{UP\_COLLECTIVE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\index{ElevatorController Local Config@{ElevatorController Local Config}!UP\_COLLECTIVE@{UP\_COLLECTIVE}}
+}\Hypertarget{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a177ad3eb3dc1e7dea4966c17d54c9793}\label{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a177ad3eb3dc1e7dea4966c17d54c9793} 
+UP\+\_\+\+COLLECTIVE&Service calls in the upward direction first. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOWN\_COLLECTIVE@{DOWN\_COLLECTIVE}!ElevatorController Local Config@{ElevatorController Local Config}}
+\index{ElevatorController Local Config@{ElevatorController Local Config}!DOWN\_COLLECTIVE@{DOWN\_COLLECTIVE}}
+}\Hypertarget{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d}\label{group___elevator_controller__lcfg_gga45f6ed02e52ea53c5cbba2c8c3459b04a33253c02b23c7b9afd3a385a30b2090d} 
+DOWN\+\_\+\+COLLECTIVE&Service calls in the downward direction first. \\
+\hline
+
+\end{DoxyEnumFields}

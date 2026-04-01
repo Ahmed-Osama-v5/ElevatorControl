@@ -1,0 +1,29 @@
+\doxysection{Menu/\+interfaces/\+\+Menu.h File Reference}
+\hypertarget{_menu_8h}{}\label{_menu_8h}\index{Menu/interfaces/Menu.h@{Menu/interfaces/Menu.h}}
+
+
+Public interface for the Menu module.  
+
+
+{\ttfamily \+\#include "{}Menu\+\_\+gcfg.\+h"{}}\newline
+Include dependency graph for Menu.\+h:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group___app___menu_gaff621a5d86b469749f3429000de480c9}{Menu\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the menu system. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_gad548770a70948ea8b773edc7e34baff3}{Menu\+\_\+\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Periodic task handler for the menu system. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_gaf2b117dc5131d237881bc0049a7d7875}{Menu\+\_\+\+Update}} (void)
+\begin{DoxyCompactList}\small\item\em Processes user input and updates the menu state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_ga03496e1332c535cd9d706da21065c5ea}{Menu\+\_\+\+Set\+Item\+Data}} (\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} item\+Id, const char \texorpdfstring{$\ast$}{*}label, uint8\+\_\+t value, uint8\+\_\+t min\+Value, uint8\+\_\+t max\+Value, uint8\+\_\+t eeprom\+Address)
+\begin{DoxyCompactList}\small\item\em Configures a menu item with its label, default value, and bounds. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___menu_ga707d6d9764bb4e0047cead61402ad50b}{Menu\+\_\+\+Update\+Item\+Value}} (\doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} item\+Id, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Updates the stored value of an existing menu item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Public interface for the Menu module. 
+
+Provides an interactive LCD-\/based programming menu that allows technicians to view and modify elevator configuration parameters persisted in EEPROM. The menu is active only in \doxylink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09ac0bb14a1652af327eb3738cc6c78149e}{MODE\+\_\+\+PROGRAM}. 

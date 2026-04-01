@@ -1,0 +1,10 @@
+digraph "LEDController/interfaces/LEDController_gcfg.h"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="LEDController/interfaces\l/LEDController_gcfg.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Global configuration types and hardware mappings for the LEDController module."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="LEDController/interfaces\l/LEDController.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_l_e_d_controller_8h.html",tooltip="Public interface for the LEDController module."];
+}

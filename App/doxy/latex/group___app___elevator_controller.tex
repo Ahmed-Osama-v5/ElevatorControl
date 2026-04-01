@@ -1,0 +1,222 @@
+\doxysubsection{Elevator\+Controller }
+\hypertarget{group___app___elevator_controller}{}\label{group___app___elevator_controller}\index{ElevatorController@{ElevatorController}}
+Collaboration diagram for Elevator\+Controller:\+
+% FIG 0
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___elevator_controller__lcfg}{Elevator\+Controller Local Config}}
+\item 
+\doxymbox{\hyperlink{group___elevator_controller__gcfg}{Elevator\+Controller Global Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___app___elevator_controller_gae8acd373178a1f3baa26cfc884ba49b0}\label{group___app___elevator_controller_gae8acd373178a1f3baa26cfc884ba49b0} 
+void {\bfseries Elevator\+Controller\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em This function initializes and starts the operation loop of the elevator controller. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_ga09787f637b16ae577ae41c93c3ef1a60}{Elevator\+Controller\+\_\+vid\+Operation\+Loop}} (void)
+\begin{DoxyCompactList}\small\item\em Main periodic operation loop of the elevator controller. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_gafa6252cfe8a98bff5532a3a70cecd804}{Elevator\+Controller\+\_\+vid\+Programming\+Loop}} (void)
+\begin{DoxyCompactList}\small\item\em Programming loop of the elevator controller. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group___app___elevator_controller_ga3425566b84158ee6bfd17e28a3eede8e}{Elevator\+Controller\+\_\+u8\+Get\+Current\+Floor}} (void)
+\begin{DoxyCompactList}\small\item\em Retrieves the current floor position of the elevator. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group___app___elevator_controller_ga995de2c010191462d0560e03b8b12772}{Elevator\+Controller\+\_\+u8\+Get\+Selector\+Cnt}} (void)
+\begin{DoxyCompactList}\small\item\em Retrieves the selector pole count accumulated since the last reset. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_ga70aacb5129bb154b723d61c432be6e6a}{Elevator\+Controller\+\_\+vid\+Start\+Light\+Timer}} (void)
+\begin{DoxyCompactList}\small\item\em Starts (or restarts) the cabin light auto-\/off timer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_gab1b2d2f7d84b614ed36133f6bc7ae8c5}{elevator\+\_\+hal\+\_\+vid\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the HAL layer used by the elevator controller. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_ga8d36eec068cdb76c169e0f571fedcc55}\label{group___app___elevator_controller_ga8d36eec068cdb76c169e0f571fedcc55} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Motor\+\_\+up} (void)
+\begin{DoxyCompactList}\small\item\em Commands the motor to run in the upward direction. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_gad2e6af6024ee12556440e8687ffab4b2}\label{group___app___elevator_controller_gad2e6af6024ee12556440e8687ffab4b2} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Motor\+\_\+down} (void)
+\begin{DoxyCompactList}\small\item\em Commands the motor to run in the downward direction. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_gaa2c020978797586faa9205d16356663f}\label{group___app___elevator_controller_gaa2c020978797586faa9205d16356663f} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Motor\+\_\+stop} (void)
+\begin{DoxyCompactList}\small\item\em Commands the motor to stop. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_gaef97fd61543e196149483f78cbd78f32}\label{group___app___elevator_controller_gaef97fd61543e196149483f78cbd78f32} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Door\+\_\+open} (void)
+\begin{DoxyCompactList}\small\item\em Commands the door actuator to open. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_ga1696a203578a51e0a9e8ac95457471df}\label{group___app___elevator_controller_ga1696a203578a51e0a9e8ac95457471df} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Door\+\_\+close} (void)
+\begin{DoxyCompactList}\small\item\em Commands the door actuator to close. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_gadfd879d1b3633d9f6ea1a98c6dfa68ab}{elevator\+\_\+hal\+\_\+vid\+Display\+\_\+floor}} (uint8\+\_\+t u8\+Floor)
+\begin{DoxyCompactList}\small\item\em Updates the floor indicator display with the given floor number. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group___app___elevator_controller_ga878a4d2da7b22e8315dbf9283f5c19cc}{elevator\+\_\+hal\+\_\+vid\+Display\+\_\+status}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}cpu8\+Status)
+\begin{DoxyCompactList}\small\item\em Updates the status display with a text string. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_ga120bf942b8a8918e1470eb74797fb96f}\label{group___app___elevator_controller_ga120bf942b8a8918e1470eb74797fb96f} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Timer\+\_\+start} ()
+\begin{DoxyCompactList}\small\item\em Starts the HAL millisecond timer. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_gaeff25f64e7cc0b537f460701bd8cf5d1}\label{group___app___elevator_controller_gaeff25f64e7cc0b537f460701bd8cf5d1} 
+void {\bfseries elevator\+\_\+hal\+\_\+vid\+Timer\+\_\+stop} (void)
+\begin{DoxyCompactList}\small\item\em Stops the HAL millisecond timer. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group___app___elevator_controller_ga27c7272f64044c08b9b98048e259ad5e}{elevator\+\_\+hal\+\_\+u16\+Get\+\_\+time\+\_\+ms}} (void)
+\begin{DoxyCompactList}\small\item\em Returns the elapsed time in milliseconds since the timer was started. \end{DoxyCompactList}\item 
+\Hypertarget{group___app___elevator_controller_ga5dc43ba96c33f6876035b1cbe3236e39}\label{group___app___elevator_controller_ga5dc43ba96c33f6876035b1cbe3236e39} 
+void {\bfseries Elevator\+Controller\+\_\+vid\+Splash\+Screen} (void)
+\begin{DoxyCompactList}\small\item\em Displays the splash screen on the LCD at startup. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}} \doxymbox{\hyperlink{group___app___elevator_controller_ga87a499f29800d03a3de918a20d284346}{Elevator\+Controller\+\_\+enu\+Get\+Mode}} (void)
+\begin{DoxyCompactList}\small\item\em Returns the current operating mode of the elevator controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___app___elevator_controller_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___app___elevator_controller_ga27c7272f64044c08b9b98048e259ad5e}\index{ElevatorController@{ElevatorController}!elevator\_hal\_u16Get\_time\_ms@{elevator\_hal\_u16Get\_time\_ms}}
+\index{elevator\_hal\_u16Get\_time\_ms@{elevator\_hal\_u16Get\_time\_ms}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{elevator\_hal\_u16Get\_time\_ms()}{elevator\_hal\_u16Get\_time\_ms()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga27c7272f64044c08b9b98048e259ad5e} 
+uint16\+\_\+t elevator\+\_\+hal\+\_\+u16\+Get\+\_\+time\+\_\+ms (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the elapsed time in milliseconds since the timer was started. 
+
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t Elapsed time in milliseconds. 
+\end{DoxyReturn}
+\Hypertarget{group___app___elevator_controller_gadfd879d1b3633d9f6ea1a98c6dfa68ab}\index{ElevatorController@{ElevatorController}!elevator\_hal\_vidDisplay\_floor@{elevator\_hal\_vidDisplay\_floor}}
+\index{elevator\_hal\_vidDisplay\_floor@{elevator\_hal\_vidDisplay\_floor}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{elevator\_hal\_vidDisplay\_floor()}{elevator\_hal\_vidDisplay\_floor()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_gadfd879d1b3633d9f6ea1a98c6dfa68ab} 
+void elevator\+\_\+hal\+\_\+vid\+Display\+\_\+floor (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{u8\+Floor}{}\end{DoxyParamCaption})}
+
+
+
+Updates the floor indicator display with the given floor number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8\+Floor} & Floor number to show on the display (zero-\/based index). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___app___elevator_controller_ga878a4d2da7b22e8315dbf9283f5c19cc}\index{ElevatorController@{ElevatorController}!elevator\_hal\_vidDisplay\_status@{elevator\_hal\_vidDisplay\_status}}
+\index{elevator\_hal\_vidDisplay\_status@{elevator\_hal\_vidDisplay\_status}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{elevator\_hal\_vidDisplay\_status()}{elevator\_hal\_vidDisplay\_status()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga878a4d2da7b22e8315dbf9283f5c19cc} 
+void elevator\+\_\+hal\+\_\+vid\+Display\+\_\+status (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{cpu8\+Status}{}\end{DoxyParamCaption})}
+
+
+
+Updates the status display with a text string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpu8\+Status} & Pointer to a null-\/terminated status string. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___app___elevator_controller_gab1b2d2f7d84b614ed36133f6bc7ae8c5}\index{ElevatorController@{ElevatorController}!elevator\_hal\_vidInit@{elevator\_hal\_vidInit}}
+\index{elevator\_hal\_vidInit@{elevator\_hal\_vidInit}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{elevator\_hal\_vidInit()}{elevator\_hal\_vidInit()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_gab1b2d2f7d84b614ed36133f6bc7ae8c5} 
+void elevator\+\_\+hal\+\_\+vid\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the HAL layer used by the elevator controller. 
+
+Configures GPIO, timers, and peripheral drivers required by the elevator hardware abstraction layer. Here is the call graph for this function:\+
+% FIG 1
+Here is the caller graph for this function:\+
+% FIG 2
+\Hypertarget{group___app___elevator_controller_ga87a499f29800d03a3de918a20d284346}\index{ElevatorController@{ElevatorController}!ElevatorController\_enuGetMode@{ElevatorController\_enuGetMode}}
+\index{ElevatorController\_enuGetMode@{ElevatorController\_enuGetMode}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_enuGetMode()}{ElevatorController\_enuGetMode()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga87a499f29800d03a3de918a20d284346} 
+\doxymbox{\hyperlink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t}} Elevator\+Controller\+\_\+enu\+Get\+Mode (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the current operating mode of the elevator controller. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{_elevator_controller__gcfg_8h_a6ec00bb6b751b86924505702a0deef09}{Operating\+Mode\+\_\+t} Active operating mode. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+% FIG 3
+\Hypertarget{group___app___elevator_controller_ga3425566b84158ee6bfd17e28a3eede8e}\index{ElevatorController@{ElevatorController}!ElevatorController\_u8GetCurrentFloor@{ElevatorController\_u8GetCurrentFloor}}
+\index{ElevatorController\_u8GetCurrentFloor@{ElevatorController\_u8GetCurrentFloor}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_u8GetCurrentFloor()}{ElevatorController\_u8GetCurrentFloor()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga3425566b84158ee6bfd17e28a3eede8e} 
+uint8\+\_\+t Elevator\+Controller\+\_\+u8\+Get\+Current\+Floor (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the current floor position of the elevator. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Zero-\/based floor index where the cabin is located.
+\end{DoxyReturn}
+Retrieves the current floor position of the elevator. Here is the caller graph for this function:\+
+% FIG 4
+\Hypertarget{group___app___elevator_controller_ga995de2c010191462d0560e03b8b12772}\index{ElevatorController@{ElevatorController}!ElevatorController\_u8GetSelectorCnt@{ElevatorController\_u8GetSelectorCnt}}
+\index{ElevatorController\_u8GetSelectorCnt@{ElevatorController\_u8GetSelectorCnt}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_u8GetSelectorCnt()}{ElevatorController\_u8GetSelectorCnt()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga995de2c010191462d0560e03b8b12772} 
+uint8\+\_\+t Elevator\+Controller\+\_\+u8\+Get\+Selector\+Cnt (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the selector pole count accumulated since the last reset. 
+
+The selector pole count is used for floor position tracking via the selector sensor.
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t Current selector pole counter value.
+\end{DoxyReturn}
+Retrieves the selector pole count accumulated since the last reset.
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+
+% FIG 5
+\Hypertarget{group___app___elevator_controller_ga09787f637b16ae577ae41c93c3ef1a60}\index{ElevatorController@{ElevatorController}!ElevatorController\_vidOperationLoop@{ElevatorController\_vidOperationLoop}}
+\index{ElevatorController\_vidOperationLoop@{ElevatorController\_vidOperationLoop}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_vidOperationLoop()}{ElevatorController\_vidOperationLoop()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga09787f637b16ae577ae41c93c3ef1a60} 
+void Elevator\+Controller\+\_\+vid\+Operation\+Loop (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Main periodic operation loop of the elevator controller. 
+
+Must be called repeatedly in normal service mode. Handles call collection, motion control, door management, and LED updates. Here is the call graph for this function:\+
+% FIG 6
+Here is the caller graph for this function:\+
+% FIG 7
+\Hypertarget{group___app___elevator_controller_gafa6252cfe8a98bff5532a3a70cecd804}\index{ElevatorController@{ElevatorController}!ElevatorController\_vidProgrammingLoop@{ElevatorController\_vidProgrammingLoop}}
+\index{ElevatorController\_vidProgrammingLoop@{ElevatorController\_vidProgrammingLoop}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_vidProgrammingLoop()}{ElevatorController\_vidProgrammingLoop()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_gafa6252cfe8a98bff5532a3a70cecd804} 
+void Elevator\+Controller\+\_\+vid\+Programming\+Loop (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Programming loop of the elevator controller. 
+
+Executed when the system boots into programming mode. Allows the technician to configure persistent parameters (timers, floor count, door options, etc.) via the on-\/board menu. Here is the call graph for this function:\+
+% FIG 8
+Here is the caller graph for this function:\+
+% FIG 9
+\Hypertarget{group___app___elevator_controller_ga70aacb5129bb154b723d61c432be6e6a}\index{ElevatorController@{ElevatorController}!ElevatorController\_vidStartLightTimer@{ElevatorController\_vidStartLightTimer}}
+\index{ElevatorController\_vidStartLightTimer@{ElevatorController\_vidStartLightTimer}!ElevatorController@{ElevatorController}}
+\doxysubsubsubsection{\texorpdfstring{ElevatorController\_vidStartLightTimer()}{ElevatorController\_vidStartLightTimer()}}
+{\footnotesize\ttfamily \label{group___app___elevator_controller_ga70aacb5129bb154b723d61c432be6e6a} 
+void Elevator\+Controller\+\_\+vid\+Start\+Light\+Timer (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Starts (or restarts) the cabin light auto-\/off timer. 
+
+Call this whenever a cabin door or call button event occurs to keep the cabin light on for the configured duration.
+
+Starts (or restarts) the cabin light auto-\/off timer. Here is the caller graph for this function:\+
+% FIG 10
+\input{group___elevator_controller__lcfg}
+\input{group___elevator_controller__gcfg}

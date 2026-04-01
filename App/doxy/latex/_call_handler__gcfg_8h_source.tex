@@ -1,0 +1,87 @@
+\doxysection{Call\+Handler\+\_\+gcfg.\+h}
+\hypertarget{_call_handler__gcfg_8h_source}{}\label{_call_handler__gcfg_8h_source}\index{CallHandler/interfaces/CallHandler\_gcfg.h@{CallHandler/interfaces/CallHandler\_gcfg.h}}
+\doxymbox{\hyperlink{_call_handler__gcfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (C)\ Copyright\ 2026\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HexaMix\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ All\ rights\ reserved\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ This\ software\ is\ the\ exclusive\ property\ of\ HexaMix.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ It\ cannot\ be\ communicated\ or\ divulged\ to\ anybody\ without\ a\ previous\ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ written\ authorisation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ Any\ partial\ or\ complete\ copy\ of\ this\ program\ whether\ it\ is\ in\ its\ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ \ original\ shape\ or\ in\ its\ modified\ shape\ has\ to\ mention\ this\ copyright\ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ and\ its\ proprietor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00018\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ INCLUSION\ MANAGEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Protection\ against\ bad\ and\ multiple\ inclusions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ CALL\_HANDLER\_GCFG\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ CALL\_HANDLER\_GCFG\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}std\_types.h"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}SystemConfig.h"{}}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00045\ \textcolor{comment}{/*\ Export\ of\ CallHandler\ configuration\ settings\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00047\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \doxymbox{\hyperlink{group___call_handler__gcfg_gga9ec797f02e093c7b190648e3ce85902ea4410871ed6ab46ba498d2ebf473dd30d}{CALL\_NONE}},\ \ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \doxymbox{\hyperlink{group___call_handler__gcfg_gga9ec797f02e093c7b190648e3ce85902ea03d92933cf8a98c807b80c1ff3a5967c}{CALL\_INTERNAL}},\ }
+\DoxyCodeLine{00056\ \ \ \ \ \doxymbox{\hyperlink{group___call_handler__gcfg_gga9ec797f02e093c7b190648e3ce85902ea9908fb838d8ba77d93d62c0ea37693c3}{CALL\_EXTERNAL}}\ \ }
+\DoxyCodeLine{00057\ \}\ \doxymbox{\hyperlink{group___call_handler__gcfg_ga9ec797f02e093c7b190648e3ce85902e}{CallType\_t}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{/*typedef\ struct}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ uint8\_t\ u8Floor;\ \ \ \ \ \ \ \ \ //\ Floor\ number\ (0\ to\ MAX\_FLOORS\ -\/\ 1)}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ CallType\_t\ enuCallType;\ \ \ \ //\ Type\ of\ call\ (internal,\ external,\ or\ both)}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ uint16\_t\ u16Timestamp;\ \ \ \ \ //\ Timestamp\ of\ the\ call\ (in\ milliseconds)}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\}\ ElevatorCall\_t;}}
+\DoxyCodeLine{00065\ \textcolor{comment}{}}
+\DoxyCodeLine{00066\ \textcolor{comment}{typedef\ struct\ \{}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ ElevatorCall\_t\ strCalls[cu8CALL\_QUEUE\_SIZE];}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ uint8\_t\ u8Head;}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ uint8\_t\ u8Tail;}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ \ uint8\_t\ u8Size;}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\}\ CallQueue\_t;}}
+\DoxyCodeLine{00072\ \textcolor{comment}{}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ LED\ state\ tracking}}
+\DoxyCodeLine{00074\ \textcolor{comment}{typedef\ struct\ \{}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ boolean\ bIsBlinking;}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ \ uint16\_t\ u16LastToggle;}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ uint8\_t\ u8DutyPercent;}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ boolean\ bCurrentState;}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\}\ LedBlinkState\_t;}}
+\DoxyCodeLine{00080\ \textcolor{comment}{typedef\ struct\ \{}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ CallQueue\_t\ strUpCalls;}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ CallQueue\_t\ strDownCalls;}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ LedBlinkState\_t\ strLedStates[cu8CALL\_QUEUE\_SIZE];}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ uint16\_t\ u16LastProcessTime;}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\}\ CallHandler\_t;}}
+\DoxyCodeLine{00086\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CALL\_HANDLER\_GCFG\_H}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00093\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00094\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E\ N\ D\ \ \ O\ F\ \ \ F\ I\ L\ E\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00095\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+\DoxyCodeLine{00096\ \textcolor{comment}{/*\ ************************************************************************\ */}}
+
+\end{DoxyCode}

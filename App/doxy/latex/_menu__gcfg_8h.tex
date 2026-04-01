@@ -1,0 +1,57 @@
+\doxysection{Menu/\+interfaces/\+\+Menu\+\_\+gcfg.h File Reference}
+\hypertarget{_menu__gcfg_8h}{}\label{_menu__gcfg_8h}\index{Menu/interfaces/Menu\_gcfg.h@{Menu/interfaces/Menu\_gcfg.h}}
+
+
+Global configuration types for the Menu module.  
+
+
+{\ttfamily \+\#include "{}std\+\_\+types.\+h"{}}\newline
+Include dependency graph for Menu\+\_\+gcfg.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_menu_item__t}{Menu\+Item\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Data record for a single configurable menu item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define {\bfseries MENU\+\_\+\+MAX\+\_\+\+ITEMS}~((uint8\+\_\+t) 10U)
+\begin{DoxyCompactList}\small\item\em Maximum number of menu items allowed in the system. \end{DoxyCompactList}\item 
+\+\#define {\bfseries MENU\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS}~((uint16\+\_\+t) 20U)
+\begin{DoxyCompactList}\small\item\em Blink period for the selected menu item cursor (ms). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group___menu__gcfg_gaeb28e1c2d60e371196a792a08a55f94e}{Menu\+Item\+Id\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6767920fb4d382125ebfafc15e1643}{SLOW\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eae1058f693e716df5caad9e571a7314bb}{FAST\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eab3333ab1cdc7e30d1252faf5173e98da}{CAM\+\_\+\+TIMER\+\_\+\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead467f237a32a156b0e2ba2f8782b1944}{STOP\+\_\+\+TIMER\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea351026c32539d24b01cc55b59ec43ff4}{LIGHT\+\_\+\+TIMER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eac2740acc472f5d405e3801a4bbdf0e7a}{DOOR\+\_\+\+NUMBER\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ead15773d619cc26a91c9d4a82466db852}{COLLECTION\+\_\+\+DIR\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea3ee1134d6b4298cef872cfd47a8fecb1}{MNT\+\_\+\+SPEED\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1e572c442a809ba2c10053dfe3704290}{DOOR\+\_\+\+OPTIONS\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea2a03fa829ebffa895b27bc0fa4c471ce}{PARKING\+\_\+\+FLOOR\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eabec75bc896af5d0aa213f089bed4765f}{CAM\+\_\+\+FAIL\+\_\+\+CNT\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eaff6eb19be1fda0b1418500d808f79eea}{CABIN\+\_\+\+PW\+\_\+\+MID}}
+, \newline
+\doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94ea1f15ce88774ceeaa1ea3cce8af6908b7}{PHS\+\_\+\+SEQ\+\_\+\+MID}}
+, \doxymbox{\hyperlink{group___menu__gcfg_ggaeb28e1c2d60e371196a792a08a55f94eadc0fd1fd9660a4963e9f3ef1e4a2468c}{MENU\+\_\+\+ITEM\+\_\+\+COUNT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Unique identifiers for each configurable menu item. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group___menu__gcfg_ga20aa7d99dd2dfa0100576932adf0d053}{Menu\+Mode\+\_\+t}} \{ \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053ac1606ca5207f779cdc2594c204cd82e3}{MENU\+\_\+\+MODE\+\_\+\+NAVIGATE}}
+, \doxymbox{\hyperlink{group___menu__gcfg_gga20aa7d99dd2dfa0100576932adf0d053af6ca032114fa10beddc07ce0f09044da}{MENU\+\_\+\+MODE\+\_\+\+EDIT}}
+ \}
+\begin{DoxyCompactList}\small\item\em Operating mode of the menu navigation state machine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global configuration types for the Menu module. 
+
+Defines the menu item identifiers, operating modes, and the \doxylink{struct_menu_item__t}{Menu\+Item\+\_\+t} data structure used by the programming menu system. 

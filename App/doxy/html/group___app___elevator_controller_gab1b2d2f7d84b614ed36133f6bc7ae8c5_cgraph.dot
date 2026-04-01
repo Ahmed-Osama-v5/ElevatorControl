@@ -1,0 +1,17 @@
+digraph "elevator_hal_vidInit"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="elevator_hal_vidInit",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initializes the HAL layer used by the elevator controller."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="CallHandler_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___call_handler.html#ga27bd537f1c94c0ce47f789e07e4ea710",tooltip="Initializes the CallHandler module."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="LEDController_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___l_e_d_controller.html#ga7023892e1e36dfee0e46dd50665aa1c9",tooltip="Initializes the LEDController module."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Menu_Init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___menu.html#gaff621a5d86b469749f3429000de480c9",tooltip="Initializes the menu system."];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="MotionController_vidInit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$group___app___motion_controller.html#gaff4d0a144b97f3c3a37362ed940c8a47",tooltip="Initializes the MotionController module."];
+}
