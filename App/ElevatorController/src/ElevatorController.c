@@ -465,17 +465,6 @@ void ElevatorController_vidOperationLoop(void)
                     /* restore each led state */
                     LEDController_vidProcess();
 
-                    /* Process calls */
-                    if(bIsCallQueueEmpty() == TRUE)
-                    {
-                        /* Call queue is empty */
-                        strElevator.enuDirection = DIR_IDLE;
-                    }
-                    else
-                    {
-                        /* Process call queue */
-                    }
-
                     if((strElevator.u8CurrentFloor == strElevator.u8DestinationFloor) && (strElevator.enuDirection != DIR_IDLE))
                     {
                         strElevator.enuDirection = DIR_SLOWING;
@@ -510,15 +499,45 @@ void ElevatorController_vidOperationLoop(void)
                     }
                     else if(strElevator.enuDirection == DIR_STOPPING)
                     {
-                        /* Stop elevator */
+                        /* 1. Deactivate all motion relays */
                         RelayManager_vidDeActivateRelay(RELAY_HS);
                         RelayManager_vidDeActivateRelay(RELAY_LS);
                         RelayManager_vidDeActivateRelay(RELAY_UP);
                         RelayManager_vidDeActivateRelay(RELAY_DN);
 
-                        /* Indicate floor call has been served */
+                        /* 2. Clear aenuFloorCalls[DestinationFloor] = CALL_NONE */
                         strElevator.aenuFloorCalls[strElevator.u8DestinationFloor] = CALL_NONE;
+
+                        /* 3. Clear LED pattern for that floor */
                         LEDController_vidSetState(strElevator.u8DestinationFloor, LED_STATE_OFF);
+
+                        /* 4. Call vidProcessCallQueue(lastDirection) */
+                        CallHandler_vidProcessCallQueue();
+
+                        /* 5. If new destination found → start moving (DIR_UP or DIR_DOWN), else → DIR_IDLE */
+                        if(strElevator.u8DestinationFloor != strElevator.u8CurrentFloor)
+                        {
+                            if(strElevator.enuDirection == DIR_UP)
+                            {
+                                /* Move elevator up */
+                                RelayManager_vidActivateRelay(RELAY_HS);
+                                RelayManager_vidActivateRelay(RELAY_UP);
+                            }
+                            else if(strElevator.enuDirection == DIR_DOWN)
+                            {
+                                /* Move elevator down */
+                                RelayManager_vidActivateRelay(RELAY_HS);
+                                RelayManager_vidActivateRelay(RELAY_DN);
+                            }
+                            else
+                            {
+                                /* Do nothing */
+                            }
+                        }
+                        else
+                        {
+                            strElevator.enuDirection = DIR_IDLE;
+                        }
                     }
                     else
                     {
