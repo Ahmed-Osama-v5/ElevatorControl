@@ -11,7 +11,7 @@ uint8_t EEPROM_u8Read(uint8_t u8Address, uint8_t *pu8Data)
     if(u8Address > cu8EEPROM_SIZE){
 		return cu8EEPROM_INVALID_ADDR;
 	}
-	*pu8Data = eeprom_read_byte((uint8_t*)u8Address);
+	*pu8Data = eeprom_read_byte((const uint8_t*)u8Address);
 	return cu8EEPROM_OK;
 }
 
@@ -20,7 +20,7 @@ uint8_t EEPROM_u8Write(uint8_t u8Address, const uint8_t u8Data)
 	if(u8Address > cu8EEPROM_SIZE){
 		return cu8EEPROM_INVALID_ADDR;
 	}
-	eeprom_write_byte((uint8_t*)u8Address, u8Data);
+	eeprom_write_byte((const uint8_t*)u8Address, u8Data);
 	return cu8EEPROM_OK;
 }
 

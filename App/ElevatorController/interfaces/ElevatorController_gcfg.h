@@ -122,6 +122,7 @@ typedef struct
     uint8_t u8PhsSeq;             /**< Phase sequence configuration byte. */
     uint8_t u8CollectionDir;      /**< Raw collection direction byte. */
     MoveDirection_t enuDirection;             /**< Current movement direction state. */
+    MoveDirection_t enuLastTravelDir;         /**< only ever DIR_UP or DIR_DOWN. */
     CollDir_t enuCollDir;                     /**< Active call-collection direction. */
     DoorType_t enuDoorType;                   /**< Configured door type (manual or automatic). */
     DoorState_t enuDoorState;                 /**< Current door state. */

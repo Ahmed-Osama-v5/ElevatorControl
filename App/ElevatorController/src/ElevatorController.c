@@ -63,11 +63,6 @@
 
 
 /* ************************************************************************ */
-/* ************************************************************************ */
-/*                     LOCAL FUNCTIONS PROTOTYPES                           */
-/* ************************************************************************ */
-/* ************************************************************************ */
-
 
 #define cu8SELECTOR_CNT_CONF    ((uint8_t) 2U)
 
@@ -127,6 +122,11 @@ volatile boolean bLightTimerExpired = FALSE;
 
 Timer_cfg_t strBlinkTimer;
 
+/* ************************************************************************ */
+/* ************************************************************************ */
+/*                     LOCAL FUNCTIONS PROTOTYPES                           */
+/* ************************************************************************ */
+/* ************************************************************************ */
 
 /**
  * @brief Updates the menu items based on the current state
@@ -246,9 +246,7 @@ void ElevatorController_Init(void)
     /* Update values from EEPROM */
     EEPROM_LoadValues();
 
-#ifdef DEBUG_
-    UART_init(9600);
-    #endif
+    DBG_UART_INIT(9600);
 }
 
 // HAL initialization
@@ -350,6 +348,8 @@ void ElevatorController_vidSplashScreen(void)
         LCD_SetCursor(0, 0);
         LCD_WriteString("Initializing...");
         vidResetDefaults();
+        /* Update values from EEPROM */
+        EEPROM_LoadValues();
         _delay_ms(2000); // Display for 2 seconds
         LCD_SetCursor(1, 0);
         LCD_WriteString("               ");
@@ -456,8 +456,6 @@ void ElevatorController_vidOperationLoop(void)
 
 
                     /* Check call queue */
-                    /* turn off all LEDs */
-                    LEDController_vidTurnAllOff();
 
                     CallHandler_vidGetCall();
                     
@@ -472,8 +470,6 @@ void ElevatorController_vidOperationLoop(void)
                     {
                         /* Call queue is empty */
                         strElevator.enuDirection = DIR_IDLE;
-                        //LCD_SetCursor(1, 3);
-                        //LCD_WriteString("__");
                     }
                     else
                     {
@@ -522,7 +518,7 @@ void ElevatorController_vidOperationLoop(void)
 
                         /* Indicate floor call has been served */
                         strElevator.aenuFloorCalls[strElevator.u8DestinationFloor] = CALL_NONE;
-                        LEDController_vidSetPattern(strElevator.u8DestinationFloor, LED_PATTERN_NONE);
+                        LEDController_vidSetState(strElevator.u8DestinationFloor, LED_STATE_OFF);
                     }
                     else
                     {
@@ -984,49 +980,49 @@ uint16_t elevator_hal_u16Get_time_ms(void)
 static void vidResetDefaults(void)
 {
 	/* RESET_DEFAULT_VALUES */
-	(void) EEPROM_u8Write(cu8SLOW_TIMER_EE_ADD, cu8SLOW_TIMER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8SLOW_TIMER_EE_ADD, cu8SLOW_TIMER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8FAST_TIMER_EE_ADD, cu8FAST_TIMER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8FAST_TIMER_EE_ADD, cu8FAST_TIMER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CAM_TIMER_EE_ADD, cu8CAM_TIMER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CAM_TIMER_EE_ADD, cu8CAM_TIMER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8STOP_TIMER_EE_ADD, cu8STOP_TIMER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8STOP_TIMER_EE_ADD, cu8STOP_TIMER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8LIGHT_TIMER_EE_ADD, cu8LIGHT_TIMER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8LIGHT_TIMER_EE_ADD, cu8LIGHT_TIMER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8DOOR_NUMBER_EE_ADD, cu8DOOR_NUMBER_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8DOOR_NUMBER_EE_ADD, cu8DOOR_NUMBER_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8COLLECTION_DIR_EE_ADD, cu8COLLECTION_DIR_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8COLLECTION_DIR_EE_ADD, cu8COLLECTION_DIR_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8MNT_SPEED_EE_ADD, cu8MNT_SPEED_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8MNT_SPEED_EE_ADD, cu8MNT_SPEED_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8DOOR_OPTIONS_EE_ADD, cu8DOOR_OPTIONS_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8DOOR_OPTIONS_EE_ADD, cu8DOOR_OPTIONS_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8PARKING_FLOOR_EE_ADD, cu8PARKING_FLOOR_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8PARKING_FLOOR_EE_ADD, cu8PARKING_FLOOR_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CAM_FAIL_CNT_EE_ADD, cu8CAM_FAIL_CNT_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CAM_FAIL_CNT_EE_ADD, cu8CAM_FAIL_CNT_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CABIN_PW_EE_ADD, cu8CABIN_PW_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CABIN_PW_EE_ADD, cu8CABIN_PW_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8PHS_SEQ_EE_ADD, cu8PHS_SEQ_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8PHS_SEQ_EE_ADD, cu8PHS_SEQ_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8PASSWORD_L_EE_ADD, cu8PASSWORD_L_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8PASSWORD_L_EE_ADD, cu8PASSWORD_L_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8PASSWORD_H_EE_ADD, cu8PASSWORD_H_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8PASSWORD_H_EE_ADD, cu8PASSWORD_H_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CURRENT_FLOOR_EE_ADD, cu8CURRENT_FLOOR_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CURRENT_FLOOR_EE_ADD, cu8CURRENT_FLOOR_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CURRENT_TRAVEL_L_EE_ADD, cu8CURRENT_TRAVEL_L_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CURRENT_TRAVEL_L_EE_ADD, cu8CURRENT_TRAVEL_L_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8CURRENT_TRAVEL_H_EE_ADD, cu8CURRENT_TRAVEL_H_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8CURRENT_TRAVEL_H_EE_ADD, cu8CURRENT_TRAVEL_H_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8STORED_TRAVEL_EE_ADD, cu8STORED_TRAVEL_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8STORED_TRAVEL_EE_ADD, cu8STORED_TRAVEL_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8STORED_TRAVEL_USAGE_EE_ADD, cu8STORED_TRAVEL_USAGE_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8STORED_TRAVEL_USAGE_EE_ADD, cu8STORED_TRAVEL_USAGE_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8MASTER_PASSWORD_L_EE_ADD, cu8MASTER_PASSWORD_L_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8MASTER_PASSWORD_L_EE_ADD, cu8MASTER_PASSWORD_L_DEF_VALUE);
     _delay_ms(20);
-	(void) EEPROM_u8Write(cu8MASTER_PASSWORD_H_EE_ADD, cu8MASTER_PASSWORD_H_DEF_VALUE);
+	(void) EEPROM_u8Update(cu8MASTER_PASSWORD_H_EE_ADD, cu8MASTER_PASSWORD_H_DEF_VALUE);
     _delay_ms(20);
 }
 

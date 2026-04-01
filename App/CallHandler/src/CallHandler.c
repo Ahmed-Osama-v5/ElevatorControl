@@ -39,6 +39,7 @@
 #include "ElevatorController.h"
 #include "LEDController.h"
 #include "RelayManager.h"
+#include "debug_log.h"
 
 /* own header inclusions ************************************************** */
 
@@ -135,14 +136,13 @@ void CallHandler_vidGetCall(void)
         uint8_t u8FloorIndex = 0U;
         uint8_t u8CurrentFloor = ElevatorController_u8GetCurrentFloor();
 
-        /* TODO: remember to turn all LEDs off through "ElevatorController" */
-
         /* Scan Inner calls */
         u16CallResult = u16GetCall(CALL_INTERNAL);
 
         /* Process result */
         if(u16CallResult != 0U)
         {
+            DBG_PRINT_STRING("Processing inner call");
             for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
             {
                 if (u16CallResult & (1U << u8FloorIndex))
@@ -153,6 +153,8 @@ void CallHandler_vidGetCall(void)
 
                         /* Set led pattern to internal */
                         LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
+                        
+                        DBG_PRINT_STRING("switched call from external to internal");
                     }
 
                     /* Handle new call */
@@ -164,11 +166,14 @@ void CallHandler_vidGetCall(void)
                         {
                             /* Call is either to current floor or elevator is too close to the called floor */
                             /* Don't register the call */
+                            DBG_PRINT_STRING("inner Call already registered");
                         }
                         else
                         {
                             /* New valid call */
                             spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
+                            
+                            DBG_PRINT_STRING("New inner call");
 
                             /* Set led pattern to internal */
                             LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
@@ -196,6 +201,7 @@ void CallHandler_vidGetCall(void)
             /* Process result */
             if(u16CallResult != 0U)
             {
+            DBG_PRINT_STRING("Processing external call");
                 for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
                 {
                     if (u16CallResult & (1U << u8FloorIndex))
@@ -204,14 +210,17 @@ void CallHandler_vidGetCall(void)
                         if(spstrElevator->aenuFloorCalls[u8FloorIndex] != CALL_NONE)
                         {
                             /* Call already registered, discard new call */
+                            DBG_PRINT_STRING("outer Call already registered");
                         }
 
                         /* Handle new call */
                         else
                         {
+                            DBG_PRINT_STRING("New outer call");
                             /* check if call is made to current floor from external */
                             if((u8FloorIndex == spstrElevator->u8CurrentFloor) && (spstrElevator->enuDirection == DIR_IDLE))
                             {
+                                DBG_PRINT_STRING("Turn on cabin light");
                                 /* Turn on cabin lights */
                                 RelayManager_vidActivateRelay(RELAY_LIGHT);
 
@@ -249,6 +258,7 @@ void CallHandler_vidGetCall(void)
         }
         if(spstrElevator->enuDirection == DIR_STOPPING)
         {
+            DBG_PRINT_STRING("Processing call queue");
             vidProcessCallQueue();
         }
     }
@@ -443,12 +453,14 @@ static void vidProcessCallQueue(void)
 	uint8_t tmpFlag = 0, retVal = 0, i;
     if(spstrElevator->enuDirection == DIR_UP)
     {
+        DBG_PRINT_STRING("Processing call queue: DIR_UP");
         for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
         {
             if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] == CALL_INTERNAL))
             {
 				tmpFlag = 1;
                 retVal = i;
+                DBG_PRINT_STRING("Processing call queue: Call int");
 				break;
             }
             else
@@ -464,6 +476,7 @@ static void vidProcessCallQueue(void)
 				{
 					tmpFlag = 1;
 					retVal = i;
+                    DBG_PRINT_STRING("Processing call queue: Call != none");
 				}
 				else
 				{
@@ -483,28 +496,33 @@ static void vidProcessCallQueue(void)
         {
             if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
             {
+                DBG_PRINT_STRING("Processing call queue: Flip dire to DN");
                 spstrElevator->enuDirection = DIR_DOWN;
                 spstrElevator->u8DestinationFloor =  i;
             }
         }
         if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
         {
+            DBG_PRINT_STRING("Processing call queue: Flip dir to DN GND FL");
             spstrElevator->enuDirection = DIR_DOWN;
             spstrElevator->u8DestinationFloor =  0;
         }
     }
     else
     {
+        DBG_PRINT_STRING("Processing call queue: DIR_DN");
         /* Check if destination is down */
         for(i=spstrElevator->u8CurrentFloor;i>0;i--)
         {
             if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
             {
+                DBG_PRINT_STRING("Processing call queue: Call != none DN");
                 spstrElevator->u8DestinationFloor =  i;
             }
         }
         if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
         {
+            DBG_PRINT_STRING("Processing call queue: Call != none DN GND");
             spstrElevator->enuDirection = DIR_DOWN;
             spstrElevator->u8DestinationFloor =  0;
         }
@@ -513,6 +531,7 @@ static void vidProcessCallQueue(void)
         {
             if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
             {
+                DBG_PRINT_STRING("Processing call queue: Flip dire to UP");
                 spstrElevator->enuDirection = DIR_UP;
                 spstrElevator->u8DestinationFloor =  i;
             }
