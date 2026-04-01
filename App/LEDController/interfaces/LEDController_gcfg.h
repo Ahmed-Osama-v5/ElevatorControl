@@ -77,16 +77,13 @@ typedef struct {
  */
 #define cu16LED_INTERNAL_CALL_ON_TIME   ((uint16_t) 60000U) /**< Internal call LED on time (ms). */
 #define cu16LED_INTERNAL_CALL_OFF_TIME  ((uint16_t) 0U)     /**< Internal call LED off time (ms). */
-#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 5000U)  /**< External call LED on time (ms). */
-#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 5000U)  /**< External call LED off time (ms). */
+#define cu16LED_EXTERNAL_CALL_ON_TIME   ((uint16_t) 1U)  /**< External call LED on time (ms). */
+#define cu16LED_EXTERNAL_CALL_OFF_TIME  ((uint16_t) 1U)  /**< External call LED off time (ms). */
 #define cu16LED_MAINTENANCE_ON_TIME     ((uint16_t) 200U)   /**< Maintenance mode LED on time (ms). */
 #define cu16LED_MAINTENANCE_OFF_TIME    ((uint16_t) 200U)   /**< Maintenance mode LED off time (ms). */
 #define cu16LED_ERROR_ON_TIME           ((uint16_t) 100U)   /**< Error mode LED on time (ms). */
 #define cu16LED_ERROR_OFF_TIME          ((uint16_t) 100U)   /**< Error mode LED off time (ms). */
 /** @} */
-
-/** @brief Task period for the LED controller (ms). */
-#define cu8LED_CONTROLLER_PERIOD_MS   ((uint8_t) 10U)
 
 /**
  * @brief Classifies the call type associated with an LED.

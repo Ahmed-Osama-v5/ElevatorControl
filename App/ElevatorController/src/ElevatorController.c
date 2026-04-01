@@ -70,6 +70,8 @@
 
 static OperatingMode_t enuCurrentMode = MODE_INIT;
 
+static volatile uint16_t u16SystemMs = 0;
+
 Elevator_t strElevator = {0}; // Main elevator state
 
 OperatingMode_t enuPreviousMode = MODE_NORMAL;
@@ -456,13 +458,14 @@ void ElevatorController_vidOperationLoop(void)
 
 
                     /* Check call queue */
+                    LEDController_vidTurnAllOff();
 
                     CallHandler_vidGetCall();
                     
                     LCD_SetCursor(1, 3);
                     LCD_send_int(strElevator.u8DestinationFloor, 2);
 
-                    /* restore each led state */
+                    /* Process each led state */
                     LEDController_vidProcess();
 
                     if((strElevator.u8CurrentFloor == strElevator.u8DestinationFloor) && (strElevator.enuDirection != DIR_IDLE))
@@ -991,9 +994,9 @@ boolean elevator_hal_bTimer_elapsed(void)
     return FALSE;
 }
 
-uint16_t elevator_hal_u16Get_time_ms(void)
+uint16_t ElevatorController_u16GetSystemMs(void)
 {
-    return Timer_GetValue(SYSTEM_TIMER_CHANNEL);
+    return u16SystemMs;
 }
 
 static void vidResetDefaults(void)
@@ -1192,6 +1195,8 @@ static void blinkTimerCBK(void)
  */
 static void systemTimerCBK(void)
 {
+    u16SystemMs++;   // increment every overflow (~500ms with current setup)
+
     if (bSlowTimerActive) {
         u16SlowTimerCounter++;
         if (u16SlowTimerCounter >= (strElevator.u8SlowTimer * cu16SYSTEM_TIMER_OVFS_PER_S)) {

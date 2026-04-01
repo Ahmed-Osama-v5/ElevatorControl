@@ -168,7 +168,7 @@ void elevator_hal_vidTimer_stop(void);
  *
  * @return uint16_t  Elapsed time in milliseconds.
  */
-uint16_t elevator_hal_u16Get_time_ms(void);
+uint16_t ElevatorController_u16GetSystemMs(void);
 
 /**
  * @brief Displays the splash screen on the LCD at startup.
