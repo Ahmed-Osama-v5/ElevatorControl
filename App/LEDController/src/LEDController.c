@@ -34,7 +34,8 @@
 #include "Std_Types.h"
 
 /* other components of the project **************************************** */
-
+#include "ElevatorController.h"
+#include "debug_log.h"
 
 /* own header inclusions ************************************************** */
 
@@ -124,7 +125,7 @@ void LEDController_vidSetState(uint8_t u8LedId, LEDState_t enuState)
 {
     enuLedStatus[u8LedId].enuState = enuState;
     enuLedStatus[u8LedId].enuPattern = LED_PATTERN_NONE;
-    
+    enuLedStatus[u8LedId].bCurrentOutput = (enuState == LED_STATE_ON) ? TRUE : FALSE;
     vidLED_UpdateHardware(u8LedId, enuState ? TRUE : FALSE);
 }
 
@@ -163,8 +164,21 @@ void LEDController_vidSetPatAllOff(void)
 void LEDController_vidSetPattern(uint8_t u8LedId, LEDPattern_t enuPattern)
 {
     enuLedStatus[u8LedId].enuPattern = enuPattern;
-    enuLedStatus[u8LedId].enuState = LED_STATE_BLINKING;
     enuLedStatus[u8LedId].u16LastToggleTime = u16LED_GetCurrentTime();
+    if(enuPattern == LED_PATTERN_INTERNAL_CALL)
+    {
+        /* Internal call: steady ON, no blinking */
+        enuLedStatus[u8LedId].enuState = LED_STATE_ON;
+        enuLedStatus[u8LedId].bCurrentOutput = TRUE;
+        vidLED_UpdateHardware(u8LedId, TRUE);
+    }
+    else
+    {
+        /* External call and others: blink */
+        enuLedStatus[u8LedId].enuState = LED_STATE_BLINKING;
+        enuLedStatus[u8LedId].bCurrentOutput = FALSE;
+        vidLED_UpdateHardware(u8LedId, FALSE);  // ← sync hardware to initial blink state
+    }
 }
 
 /**
@@ -180,6 +194,10 @@ void LEDController_vidProcess(void)
     u16CurrentTime = u16LED_GetCurrentTime();
     
     for(u8I = 0; u8I < cu8MAX_FLOORS; u8I++) {
+        if(enuLedStatus[u8I].enuState == LED_STATE_ON)
+        {
+            vidLED_UpdateHardware(u8I, TRUE);
+        }
         if(enuLedStatus[u8I].enuState == LED_STATE_BLINKING) {
             /* Determine pattern timing */
             switch(enuLedStatus[u8I].enuPattern) {
@@ -209,18 +227,19 @@ void LEDController_vidProcess(void)
             
             /* Check if it's time to toggle */
             if(enuLedStatus[u8I].bCurrentOutput == TRUE) {
-                if((u16CurrentTime - enuLedStatus[u8I].u16LastToggleTime) >= u16OnTime) {
+                if(u16CurrentTime >= (enuLedStatus[u8I].u16LastToggleTime + u16OnTime)) {
                     enuLedStatus[u8I].bCurrentOutput = FALSE;
                     enuLedStatus[u8I].u16LastToggleTime = u16CurrentTime;
-                    if(enuLedStatus[u8I].enuPattern != LED_PATTERN_INTERNAL_CALL)
-                        vidLED_UpdateHardware(u8I, FALSE);
+                    vidLED_UpdateHardware(u8I, FALSE);
+                    DBG_PRINT_STRING("LED toggled OFF");
                 }
             }
             else {
-                if((u16CurrentTime - enuLedStatus[u8I].u16LastToggleTime) >= u16OffTime) {
+                if(u16CurrentTime >= (enuLedStatus[u8I].u16LastToggleTime + u16OffTime)) {
                     enuLedStatus[u8I].bCurrentOutput = TRUE;
                     enuLedStatus[u8I].u16LastToggleTime = u16CurrentTime;
                     vidLED_UpdateHardware(u8I, TRUE);
+                    DBG_PRINT_STRING("LED toggled ON");
                 }
             }
         }
@@ -290,7 +309,7 @@ static boolean bLED_ValidateId(uint8_t u8LedId)
 
 static uint16_t u16LED_GetCurrentTime(void) {
     /* This should be implemented based on your system's timing service */
-    return Timer_GetValue(TIMER_CH1);
+    return ElevatorController_u16GetSystemMs();
 }
 /* ************************************************************************ */
 

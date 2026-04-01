@@ -334,7 +334,6 @@ void Timer_Stop(TimerChan_t enuTimerCH)
   */
 uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
 {
-    uint16_t u16retVal = 0;
     uint16_t timerCount;
     uint32_t ticksPerMs = (F_CPU / Timer_GetPrescalerValue(TIMER1_PRESCALER)) / 1000;
     uint16_t milliseconds;
@@ -344,26 +343,21 @@ uint16_t Timer_GetValue(TimerChan_t enuTimerCH)
     case (TIMER_CH0):
         timerCount = TCNT0;
         milliseconds = timerCount / ticksPerMs;
-        u16retVal = milliseconds;
         break;
     case (TIMER_CH1):
         timerCount = TCNT1;
         milliseconds = timerCount / ticksPerMs;
-        u16retVal = milliseconds;
-        //u16retVal = TCNT1;
         break;
     case (TIMER_CH2):
         timerCount = TCNT2;
         milliseconds = timerCount / ticksPerMs;
-        u16retVal = milliseconds;
         break;
     default:
         timerCount = TCNT1;
         milliseconds = timerCount / ticksPerMs;
-        u16retVal = milliseconds;
         break;
     }
-    return u16retVal;
+    return milliseconds;
  }
 
  inline uint16_t Timer_GetPrescalerValue(TimerPre_t enuTimerPre)
