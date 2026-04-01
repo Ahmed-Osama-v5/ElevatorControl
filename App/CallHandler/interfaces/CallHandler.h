@@ -79,6 +79,11 @@ void CallHandler_vidInit(Elevator_t* pstrElevator);
  */
 void CallHandler_vidGetCall(void);
 
+/**
+ * @brief Process the call queue
+ */
+void CallHandler_vidProcessCallQueue(void);
+
 /** @} */
 
 #endif // CALL_HANDLER_H

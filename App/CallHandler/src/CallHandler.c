@@ -23,6 +23,8 @@
 /* ************************************************************************ */
 
 #include "CallHandler_gcfg.h"
+#include "ElevatorController_gcfg.h"
+#include "Std_Types.h"
 #define CallHandler_c
 
 /* ************************************************************************ */
@@ -48,6 +50,12 @@
 
 /* access to the modul's local configuration */
 #include "CallHandler_lcfg.h"
+
+/* ************************************************************************ */
+
+#define FLOOR_IS_CLOSE_WHILE_MOVING(floor, currentFloor) \
+    (((floor) == ((currentFloor) - 1U) || (floor) == ((currentFloor) + 1U)) \
+     && (ElevatorController_u8GetSelectorCnt() % 2U))
 
 /* ************************************************************************ */
 /* ************************************************************************ */
@@ -130,11 +138,11 @@ void CallHandler_vidInit(Elevator_t* pstrElevator)
 void CallHandler_vidGetCall(void)
 {
     // Implementation to scan call inputs and register a call
+    /* Phase 1 — Call Registration */
     if (spstrElevator != NULL)
     {
         uint16_t u16CallResult = 0U;
         uint8_t u8FloorIndex = 0U;
-        uint8_t u8CurrentFloor = ElevatorController_u8GetCurrentFloor();
 
         /* Scan Inner calls */
         u16CallResult = u16GetCall(CALL_INTERNAL);
@@ -147,119 +155,126 @@ void CallHandler_vidGetCall(void)
             {
                 if (u16CallResult & (1U << u8FloorIndex))
                 {
-                    if(spstrElevator->aenuFloorCalls[u8FloorIndex] == CALL_EXTERNAL)
+                    /* 
+                        if floor == currentFloor → discard (already there)
+                        if floor is proximity-close AND elevator moving → discard
+                        if already CALL_INTERNAL → discard (already registered)
+                    */
+                    if((u8FloorIndex == spstrElevator->u8CurrentFloor)
+                        || ((spstrElevator->enuDirection != DIR_IDLE) && FLOOR_IS_CLOSE_WHILE_MOVING(u8FloorIndex, spstrElevator->u8CurrentFloor))
+                        || (spstrElevator->aenuFloorCalls[u8FloorIndex] == CALL_INTERNAL))
                     {
+                        /* Don't register the call */
+                        DBG_PRINT_STRING("inner Call already registered / current floor / close to current floor");
+                    }
+                    /* if currently CALL_EXTERNAL → upgrade to CALL_INTERNAL, update LED */
+                    else if(spstrElevator->aenuFloorCalls[u8FloorIndex] == CALL_EXTERNAL)
+                    {
+                        DBG_PRINT_STRING("switched call from external to internal");
+
                         spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
 
                         /* Set led pattern to internal */
                         LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
                         
-                        DBG_PRINT_STRING("switched call from external to internal");
                     }
-
-                    /* Handle new call */
+                    /* else → register CALL_INTERNAL, update LED */
                     else
                     {
-                        /* Check if call is equal to current floor and discard it */
-                        if((u8FloorIndex == u8CurrentFloor)
-                         ||(((u8FloorIndex == (u8CurrentFloor - 1)) || (u8FloorIndex == (u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
-                        {
-                            /* Call is either to current floor or elevator is too close to the called floor */
-                            /* Don't register the call */
-                            DBG_PRINT_STRING("inner Call already registered");
-                        }
-                        else
-                        {
-                            /* New valid call */
-                            spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
-                            
-                            DBG_PRINT_STRING("New inner call");
+                        /* New valid call */
+                        DBG_PRINT_STRING("New inner call");
 
-                            /* Set led pattern to internal */
-                            LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
+                        spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_INTERNAL;
 
-                            if(spstrElevator->enuDirection == DIR_IDLE)
+                        /* Set led pattern to internal */
+                        LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_INTERNAL_CALL);
+
+                        if(spstrElevator->enuDirection == DIR_IDLE)
+                        {
+                            spstrElevator->u8DestinationFloor = u8FloorIndex;
+                            if(spstrElevator->u8CurrentFloor < u8FloorIndex)
                             {
-                                spstrElevator->u8DestinationFloor = u8FloorIndex;
-                                if(spstrElevator->u8CurrentFloor < u8FloorIndex)
-                                    spstrElevator->enuDirection = DIR_UP;
-                                else
-                                    spstrElevator->enuDirection = DIR_DOWN;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            u16CallResult = 0U;
-
-            /* Scan Outer calls */
-            u16CallResult = u16GetCall(CALL_EXTERNAL);
-            
-            /* Process result */
-            if(u16CallResult != 0U)
-            {
-            DBG_PRINT_STRING("Processing external call");
-                for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
-                {
-                    if (u16CallResult & (1U << u8FloorIndex))
-                    {
-                        /* Check if call is regestered */
-                        if(spstrElevator->aenuFloorCalls[u8FloorIndex] != CALL_NONE)
-                        {
-                            /* Call already registered, discard new call */
-                            DBG_PRINT_STRING("outer Call already registered");
-                        }
-
-                        /* Handle new call */
-                        else
-                        {
-                            DBG_PRINT_STRING("New outer call");
-                            /* check if call is made to current floor from external */
-                            if((u8FloorIndex == spstrElevator->u8CurrentFloor) && (spstrElevator->enuDirection == DIR_IDLE))
-                            {
-                                DBG_PRINT_STRING("Turn on cabin light");
-                                /* Turn on cabin lights */
-                                RelayManager_vidActivateRelay(RELAY_LIGHT);
-
-                                /* Activate cabin lights timeout */
-                                ElevatorController_vidStartLightTimer();
-                            }
-                            /* Check if call is equal to current floor and discard it */
-                            if((u8FloorIndex == spstrElevator->u8CurrentFloor)
-                            ||((spstrElevator->enuDirection != DIR_IDLE) && ((u8FloorIndex == (spstrElevator->u8CurrentFloor - 1)) || (u8FloorIndex == (spstrElevator->u8CurrentFloor + 1))) && (ElevatorController_u8GetSelectorCnt() % 2)))
-                            {
-                                /* Call is either to current floor or elevator is too close to the called floor */
-                                /* Don't register the call */
+                                spstrElevator->enuDirection = DIR_UP;
+                                spstrElevator->enuLastTravelDir = DIR_UP;
                             }
                             else
                             {
-                                /* New valid call */
-                                spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_EXTERNAL;
-
-                                /* Set led pattern to internal */
-                                LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_EXTERNAL_CALL);
-
-                                if(spstrElevator->enuDirection == DIR_IDLE)
-                                {
-                                    spstrElevator->u8DestinationFloor = u8FloorIndex;
-                                    if(spstrElevator->u8CurrentFloor < u8FloorIndex)
-                                        spstrElevator->enuDirection = DIR_UP;
-                                    else
-                                        spstrElevator->enuDirection = DIR_DOWN;
-                                }
+                                spstrElevator->enuDirection = DIR_DOWN;
+                                spstrElevator->enuLastTravelDir = DIR_DOWN;
                             }
                         }
                     }
                 }
             }
         }
-        if(spstrElevator->enuDirection == DIR_STOPPING)
+        u16CallResult = 0U;
+
+        /* Scan Outer calls */
+        u16CallResult = u16GetCall(CALL_EXTERNAL);
+        
+        /* Process result */
+        if(u16CallResult != 0U)
         {
-            DBG_PRINT_STRING("Processing call queue");
-            vidProcessCallQueue();
+            DBG_PRINT_STRING("Processing external call");
+            for(u8FloorIndex = 0U; u8FloorIndex < spstrElevator->u8FloorCount; u8FloorIndex++)
+            {
+                /*
+                    if floor == currentFloor AND DIR_IDLE → activate light, don't register
+                    if floor == currentFloor → discard
+                    if proximity-close AND elevator moving → discard
+                    if aenuFloorCalls[floor] != CALL_NONE → discard (already registered)
+                    else → register CALL_EXTERNAL, update LED
+                */
+                if (u16CallResult & (1U << u8FloorIndex))
+                {
+                    /* if floor == currentFloor AND DIR_IDLE → activate light, don't register */
+                    if((u8FloorIndex == spstrElevator->u8CurrentFloor) && (spstrElevator->enuDirection == DIR_IDLE))
+                    {
+                        DBG_PRINT_STRING("Turn on cabin light");
+                        /* Turn on cabin lights */
+                        RelayManager_vidActivateRelay(RELAY_LIGHT);
+
+                        /* Activate cabin lights timeout */
+                        ElevatorController_vidStartLightTimer();
+                    }
+                    /* 
+                        if floor == currentFloor → discard
+                        if proximity-close AND elevator moving → discard
+                        if aenuFloorCalls[floor] != CALL_NONE → discard (already registered)
+                    */
+                    else if((u8FloorIndex == spstrElevator->u8CurrentFloor)
+                    ||FLOOR_IS_CLOSE_WHILE_MOVING(u8FloorIndex, spstrElevator->u8CurrentFloor)
+                    || (spstrElevator->aenuFloorCalls[u8FloorIndex] != CALL_NONE))
+                    {
+                        /* Call is either to current floor or elevator is too close to the called floor */
+                        /* Don't register the call */
+                    }
+                    else
+                    {
+                        /* New valid call */
+                        DBG_PRINT_STRING("New outer call");
+                        spstrElevator->aenuFloorCalls[u8FloorIndex] = CALL_EXTERNAL;
+
+                        /* Set led pattern to internal */
+                        LEDController_vidSetPattern(u8FloorIndex, LED_PATTERN_EXTERNAL_CALL);
+
+                        if(spstrElevator->enuDirection == DIR_IDLE)
+                        {
+                            spstrElevator->u8DestinationFloor = u8FloorIndex;
+                            if(spstrElevator->u8CurrentFloor < u8FloorIndex)
+                            {
+                                spstrElevator->enuDirection = DIR_UP;
+                                spstrElevator->enuLastTravelDir = DIR_UP;
+                            }
+                            else
+                            {
+                                spstrElevator->enuDirection = DIR_DOWN;
+                                spstrElevator->enuLastTravelDir = DIR_DOWN;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     else
@@ -446,173 +461,157 @@ static uint16_t u16GetCall(CallType_t enuCallType)
 
 /**
  * @brief Process the call queue
- * @param bIsQueueEmpty Indicates if the call queue is empty
  */
-static void vidProcessCallQueue(void)
+void CallHandler_vidProcessCallQueue(void)
 {
-	uint8_t tmpFlag = 0, retVal = 0, i;
-    if(spstrElevator->enuDirection == DIR_UP)
+	uint8_t i;
+    boolean bDestFound = FALSE;
+    if(spstrElevator->enuLastTravelDir == DIR_UP)
     {
-        DBG_PRINT_STRING("Processing call queue: DIR_UP");
-        for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
-        {
-            if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] == CALL_INTERNAL))
-            {
-				tmpFlag = 1;
-                retVal = i;
-                DBG_PRINT_STRING("Processing call queue: Call int");
-				break;
-            }
-            else
-			{
-				/* Do nothing */
-			}
-        }
-		if(! tmpFlag)
-		{
-			for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
-			{
-				if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
-				{
-					tmpFlag = 1;
-					retVal = i;
-                    DBG_PRINT_STRING("Processing call queue: Call != none");
-				}
-				else
-				{
-					/* Do nothing */
-				}
-			}
-			if(tmpFlag)
-				spstrElevator->u8DestinationFloor =  retVal;
-		}
-		else
-		{
-			spstrElevator->u8DestinationFloor =  retVal;
-		}
+        DBG_PRINT_STRING("Processing call queue: last DIR_UP");
 
-        /* Check if destination is down */
-        for(i=spstrElevator->u8CurrentFloor;i>0;i--)
+        /* 1. Scan floors above currentFloor for nearest CALL_INTERNAL → candidate_up_int */
+        for(i=spstrElevator->u8CurrentFloor+1U;i<spstrElevator->u8FloorCount;i++)
         {
-            if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+            /* if candidate_up_int exists → Dest = candidate_up_int, Dir = DIR_UP */
+            if(spstrElevator->aenuFloorCalls[i] == CALL_INTERNAL)
             {
-                DBG_PRINT_STRING("Processing call queue: Flip dire to DN");
-                spstrElevator->enuDirection = DIR_DOWN;
-                spstrElevator->u8DestinationFloor =  i;
+                spstrElevator->u8DestinationFloor = i;
+                spstrElevator->enuDirection = DIR_UP;
+                spstrElevator->enuLastTravelDir = DIR_UP;
+                bDestFound = TRUE;
+                break;
             }
         }
-        if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
+        /* 2. Scan floors above currentFloor for nearest CALL_ANY     → candidate_up_any */
+        if(! bDestFound)
         {
-            DBG_PRINT_STRING("Processing call queue: Flip dir to DN GND FL");
-            spstrElevator->enuDirection = DIR_DOWN;
-            spstrElevator->u8DestinationFloor =  0;
+            for(i=spstrElevator->u8CurrentFloor+1U;i<spstrElevator->u8FloorCount;i++)
+            {
+                /* elif candidate_up_any exists → Dest = candidate_up_any, Dir = DIR_UP */
+                if(spstrElevator->aenuFloorCalls[i] != CALL_NONE)
+                {
+                    spstrElevator->u8DestinationFloor = i;
+                    spstrElevator->enuDirection = DIR_UP;
+                    spstrElevator->enuLastTravelDir = DIR_UP;
+                    bDestFound = TRUE;
+                    break;
+                }
+            }
+        }
+        /* 3. Scan floors below currentFloor for nearest CALL_ANY     → candidate_dn_any */
+        if(! bDestFound)
+        {
+            if(spstrElevator->u8CurrentFloor > 0U)
+            {
+                for(i=spstrElevator->u8CurrentFloor-1U;i>0U;i--)
+                {
+                    /* elif candidate_dn_any exists → Dest = candidate_dn_any, Dir = DIR_DOWN */
+                    if(spstrElevator->aenuFloorCalls[i] != CALL_NONE)
+                    {
+                        spstrElevator->u8DestinationFloor = i;
+                        spstrElevator->enuDirection = DIR_DOWN;
+                        spstrElevator->enuLastTravelDir = DIR_DOWN;
+                        bDestFound = TRUE;
+                        break;
+                    }
+                }
+                /* loop stops at i=1, floor 0 must be checked explicitly */
+                if(!bDestFound && spstrElevator->aenuFloorCalls[0] != CALL_NONE)
+                {
+                    spstrElevator->u8DestinationFloor = 0U;
+                    spstrElevator->enuDirection = DIR_DOWN;
+                    spstrElevator->enuLastTravelDir = DIR_DOWN;
+                    bDestFound = TRUE;
+                }
+            }
+            /* else: already at floor 0, no floors below → bDestFound stays FALSE → DIR_IDLE */
+        }
+        /* else → Dir = DIR_IDLE */
+        if(! bDestFound)
+        {
+            spstrElevator->enuDirection = DIR_IDLE;
         }
     }
     else
     {
-        DBG_PRINT_STRING("Processing call queue: DIR_DN");
-        /* Check if destination is down */
-        for(i=spstrElevator->u8CurrentFloor;i>0;i--)
+        DBG_PRINT_STRING("Processing call queue: last DIR_DN");
+        
+        bDestFound = FALSE;
+        /* 1. Scan floors below currentFloor for nearest CALL_INTERNAL → candidate_dn_int */
+        
+        if(spstrElevator->u8CurrentFloor > 0U)
         {
-            if((i < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
+            for(i=spstrElevator->u8CurrentFloor-1U;i>0U;i--)
             {
-                DBG_PRINT_STRING("Processing call queue: Call != none DN");
-                spstrElevator->u8DestinationFloor =  i;
-            }
-        }
-        if((0 < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[0] != CALL_NONE))
-        {
-            DBG_PRINT_STRING("Processing call queue: Call != none DN GND");
-            spstrElevator->enuDirection = DIR_DOWN;
-            spstrElevator->u8DestinationFloor =  0;
-        }
-
-        for(i=spstrElevator->u8CurrentFloor;i<spstrElevator->u8FloorCount;i++)
-        {
-            if((i > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[i] != CALL_NONE))
-            {
-                DBG_PRINT_STRING("Processing call queue: Flip dire to UP");
-                spstrElevator->enuDirection = DIR_UP;
-                spstrElevator->u8DestinationFloor =  i;
-            }
-        }
-    }
-
-    #if 0
-    /* Process call queue and set destination floor */
-    uint8_t u8Index = 0;
-    for(u8Index=0;u8Index<spstrElevator->u8FloorCount;u8Index++)
-    {
-        if((u8Index > spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[u8Index] != CALL_NONE))
-        {
-            /* Check collection direction */
-            if(spstrElevator->enuCollDir == COLLECTION_UP)
-            {
-                /* Check motion direction */
-                if(spstrElevator->enuDirection == DIR_UP)
+                /* if candidate_dn_int exists → Dest = candidate_dn_int, Dir = DIR_DOWN */
+                if(spstrElevator->aenuFloorCalls[i] == CALL_INTERNAL)
                 {
-                    spstrElevator->u8DestinationFloor = u8Index;
+                    spstrElevator->u8DestinationFloor = i;
+                    spstrElevator->enuDirection = DIR_DOWN;
+                    spstrElevator->enuLastTravelDir = DIR_DOWN;
+                    bDestFound = TRUE;
                     break;
                 }
             }
-            else
+            /* loop stops at i=1, floor 0 must be checked explicitly */
+            if(!bDestFound && spstrElevator->aenuFloorCalls[0] == CALL_INTERNAL)
             {
-                /* Collection down */
-
-                /* Check motion direction */
-                if(spstrElevator->enuDirection == DIR_UP)
+                spstrElevator->u8DestinationFloor = 0U;
+                spstrElevator->enuDirection = DIR_DOWN;
+                spstrElevator->enuLastTravelDir = DIR_DOWN;
+                bDestFound = TRUE;
+            }
+        }
+        /* 2. Scan floors below currentFloor for nearest CALL_ANY      → candidate_dn_any */
+        if(! bDestFound)
+        {
+            if(spstrElevator->u8CurrentFloor > 0U)
+            {
+                for(i=spstrElevator->u8CurrentFloor-1U;i>0U;i--)
                 {
-                    /* If call is internal */
-                    if(spstrElevator->aenuFloorCalls[u8Index] == CALL_INTERNAL)
+                    /* elif candidate_dn_any exists → Dest = candidate_dn_any, Dir = DIR_DOWN */
+                    if(spstrElevator->aenuFloorCalls[i] != CALL_NONE)
                     {
-                        spstrElevator->u8DestinationFloor = u8Index;
+                        spstrElevator->u8DestinationFloor = i;
+                        spstrElevator->enuDirection = DIR_DOWN;
+                        spstrElevator->enuLastTravelDir = DIR_DOWN;
+                        bDestFound = TRUE;
                         break;
                     }
                 }
-                else
+                /* loop stops at i=1, floor 0 must be checked explicitly */
+                if(!bDestFound && spstrElevator->aenuFloorCalls[0] != CALL_NONE)
                 {
-                    /* Do nothing */
+                    spstrElevator->u8DestinationFloor = 0U;
+                    spstrElevator->enuDirection = DIR_DOWN;
+                    spstrElevator->enuLastTravelDir = DIR_DOWN;
+                    bDestFound = TRUE;
                 }
             }
         }
-        else if((u8Index < spstrElevator->u8CurrentFloor) && (spstrElevator->aenuFloorCalls[u8Index] != CALL_NONE))
+        /* 3. Scan floors above currentFloor for nearest CALL_ANY      → candidate_up_any */
+        if(! bDestFound)
         {
-            /* Check collection direction */
-            if(spstrElevator->enuCollDir == COLLECTION_UP)
+            for(i=spstrElevator->u8CurrentFloor+1;i<spstrElevator->u8FloorCount;i++)
             {
-                /* Check motion direction */
-                if(spstrElevator->enuDirection == DIR_DOWN)
+                /* elif candidate_up_any exists → Dest = candidate_up_any, Dir = DIR_UP */
+                if(spstrElevator->aenuFloorCalls[i] != CALL_NONE)
                 {
-                    /* If call is internal */
-                    if(spstrElevator->aenuFloorCalls[u8Index] == CALL_INTERNAL)
-                    {
-                        spstrElevator->u8DestinationFloor = u8Index;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                /* Collection down */
-
-                /* Check motion direction */
-                if(spstrElevator->enuDirection == DIR_DOWN)
-                {
-                    spstrElevator->u8DestinationFloor = u8Index;
+                    spstrElevator->u8DestinationFloor = i;
+                    spstrElevator->enuDirection = DIR_UP;
+                    spstrElevator->enuLastTravelDir = DIR_UP;
+                    bDestFound = TRUE;
                     break;
                 }
-                else
-                {
-                    /* Do nothing */
-                }
             }
         }
-        else
+        /* else → Dir = DIR_IDLE */
+        if(! bDestFound)
         {
-            /* Do nothing */
+            spstrElevator->enuDirection = DIR_IDLE;
         }
     }
-        #endif
 }
 /* ************************************************************************ */
 
