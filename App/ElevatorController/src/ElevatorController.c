@@ -24,8 +24,7 @@
 
 #define ElevatorController_c
 
-//#define _DEBUG
-#define _TEST
+#define TEST_
 
 /* ************************************************************************ */
 /* Header Inclusions                                                        */
@@ -52,10 +51,7 @@
 #include "EepD.h"
 #include "Menu.h"
 
-#ifdef _DEBUG
-#include "uart.h"
-#endif
-
+#include "debug_log.h"   // ← only this, never uart.h directly
 
 /* own header inclusions ************************************************** */
 
@@ -250,7 +246,7 @@ void ElevatorController_Init(void)
     /* Update values from EEPROM */
     EEPROM_LoadValues();
 
-#ifdef _DEBUG
+#ifdef DEBUG_
     UART_init(9600);
     #endif
 }
@@ -394,9 +390,7 @@ void ElevatorController_vidOperationLoop(void)
     // Initialize elevator state
     uint8_t u8Index = 0;
 
-#ifdef _DEBUG
-    UART_Send_String("Operation loop");
-    #endif
+    DBG_PRINT_STRING("Operation loop started");
     
     while(1)
     {
@@ -704,7 +698,7 @@ void ElevatorController_vidOperationLoop(void)
 
         }
 
-        #ifdef _TEST
+        #ifdef TEST_
         if(strElevator.enuOperatingMode == MODE_NORMAL)
         {
             LCD_SetCursor(0, 13);
@@ -745,7 +739,7 @@ void ElevatorController_vidOperationLoop(void)
             LCD_SetCursor(1, 13);
             LCD_WriteString("IDL");
         }
-        #endif // _DEBUG
+        #endif // TEST_
 
         /* Counting floors */
         if( (strElevator.enuOperatingMode == MODE_NORMAL) ||

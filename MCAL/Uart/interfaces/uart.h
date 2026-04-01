@@ -5,8 +5,8 @@
  *      Author: Ahmed
  */
 
-#ifndef INC_UART_H_
-#define INC_UART_H_
+#ifndef UART_H
+#define UART_H
 
 #include "std_types.h"
 
@@ -17,4 +17,4 @@ void UART_Send_String(char *Data);
 void UART_Send_Variable(uint8_t var);
 void UART_Send_Character(char data);
 
-#endif /* INC_UART_H_ */
+#endif /* UART_H */

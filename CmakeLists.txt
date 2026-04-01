@@ -11,8 +11,8 @@ set(CMAKE_OBJCOPY avr-objcopy CACHE STRING "avr-objcopy" FORCE)
 #set(CMAKE_C_FLAGS "-mmcu=${MCU_NAME} -Os -DF_CPU=${MCU_FREQUENCY}")
 ##################################################################################
 # Separate flags for Debug and Release
-set(CMAKE_C_FLAGS_DEBUG "-mmcu=${MCU_NAME} -O1 -g -DF_CPU=${MCU_FREQUENCY}")
-set(CMAKE_C_FLAGS_RELEASE "-mmcu=${MCU_NAME} -Os -DF_CPU=${MCU_FREQUENCY}")
+set(CMAKE_C_FLAGS_DEBUG "-mmcu=${MCU_NAME} -O1 -g -DF_CPU=${MCU_FREQUENCY} -DDEBUG_")
+set(CMAKE_C_FLAGS_RELEASE "-mmcu=${MCU_NAME} -Os -DF_CPU=${MCU_FREQUENCY} -ffunction-sections -fdata-sections")
 
 # Default to Release if not specified
 if(NOT CMAKE_BUILD_TYPE)
@@ -21,6 +21,9 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 ##################################################################################
 project(ElevatorControl)
+
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-Wl,--gc-sections")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.map")
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.h)
 
@@ -50,7 +53,9 @@ add_subdirectory(HAL/SegmentDriver)
 add_subdirectory(MCAL/Dio)
 add_subdirectory(MCAL/EepD)
 add_subdirectory(MCAL/Timer)
-add_subdirectory(MCAL/Uart)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_subdirectory(MCAL/Uart)
+endif()
 
 add_executable(${PROJECT_NAME}-${CMAKE_BUILD_TYPE}.elf ${SOURCES})
 
